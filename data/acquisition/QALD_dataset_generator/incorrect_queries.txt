@@ -1,0 +1,2306 @@
+text_query                 Give me all female Russian astronauts.
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 0, dtype: object
+text_query                Gib mir alle russischen Astronautinnen.
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 1, dtype: object
+text_query      Who is the daughter of Ingrid Bergman married to?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 4, dtype: object
+text_query      Mit wem ist die Tochter von Ingrid Bergman ver...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 5, dtype: object
+text_query      How many monarchical countries are there in Eu...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 8, dtype: object
+text_query                 Wieviele Monarchien gibt es in Europa?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 9, dtype: object
+text_query      Which states of Germany are governed by the So...
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 14, dtype: object
+text_query      Welche Bundesländer in Deutschland werden von ...
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 15, dtype: object
+text_query               Which U.S. states possess gold minerals?
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 16, dtype: object
+text_query           In welchen US-Staaten gibt es Goldvorkommen?
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 17, dtype: object
+text_query                  In which country does the Nile start?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 18, dtype: object
+text_query                    In welchem Land entspringt der Nil?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 19, dtype: object
+text_query                 Which classis do tree frogs belong to?
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 24, dtype: object
+text_query                 Welcher Klasse gehören Laubfrösche an?
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 25, dtype: object
+text_query       Give me the capitals of all countries in Africa.
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 30, dtype: object
+text_query      Gib mir die Haupstädte von allen Ländern in Af...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 31, dtype: object
+text_query      Give me all cities in New Jersey with more tha...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 32, dtype: object
+text_query      Gib mir alle Städte in New Jersey, die mehr al...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 33, dtype: object
+text_query               Is Egypts largest city also its capital?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 36, dtype: object
+text_query       Ist Ägyptens größte Stadt auch seine Hauptstadt?
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 37, dtype: object
+text_query          Was U.S. president Jackson involved in a war?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 52, dtype: object
+text_query      War US-Präsident Jackson in einen Krieg verwic...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 53, dtype: object
+text_query      Which European countries have a constitutional...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 54, dtype: object
+text_query      Welche europäischen Länder haben eine konstitu...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 55, dtype: object
+text_query                        Which awards did WikiLeaks win?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 56, dtype: object
+text_query                  Welche Preise hat WikiLeaks gewonnen?
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 57, dtype: object
+text_query      Which state of the USA has the highest populat...
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 58, dtype: object
+text_query      Welcher Staat in den USA hat die höchste Bevöl...
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 59, dtype: object
+text_query      Which countries in the European Union adopted ...
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 62, dtype: object
+text_query      Welche Länder in der Europäischen Union haben ...
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 63, dtype: object
+text_query                 Who is the owner of Universal Studios?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 68, dtype: object
+text_query                     Wem gehören die Universal Studios?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 69, dtype: object
+text_query      Through which countries does the Yenisei river...
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 70, dtype: object
+text_query                Durch welche Länder fließt der Yenisei?
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 71, dtype: object
+text_query                           When did Latvia join the EU?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 72, dtype: object
+text_query                  Wann ist Lettland der EU beigetreten?
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 73, dtype: object
+text_query      Which monarchs of the United Kingdom were marr...
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 74, dtype: object
+text_query      Welche Monarchen des Vereinigten Königreichs w...
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 75, dtype: object
+text_query                     When was the Battle of Gettysburg?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 76, dtype: object
+text_query           Wann fand die Schlacht von Gettysburg statt?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 77, dtype: object
+text_query                     Who is the mayor of New York City?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 84, dtype: object
+text_query           Wer ist der Bürgermeister von New York City?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 85, dtype: object
+text_query                What is the highest place of Karakoram?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 92, dtype: object
+text_query             Was ist die höhchste Stelle des Karakorum?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 93, dtype: object
+text_query                        What did Bruce Carver die from?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 98, dtype: object
+text_query                      Woran ist Bruce Carver gestorben?
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 99, dtype: object
+text_query                              Give me all school types.
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 100, dtype: object
+text_query                               Gib mir alle Schultypen.
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 101, dtype: object
+text_query           Give me all presidents of the United States.
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 104, dtype: object
+text_query      Gib mir alle Präsidenten der Vereinigten Staaten.
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 105, dtype: object
+text_query            What is the official website of Tom Cruise?
+language                                                       en
+sparql_query    \nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\nP...
+Name: 110, dtype: object
+text_query         Was ist die offizielle Website von Tom Cruise?
+language                                                       de
+sparql_query    \nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\nP...
+Name: 111, dtype: object
+text_query      List all episodes of the first season of the H...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 112, dtype: object
+text_query      Liste alle Episoden der ersten Staffel der HBO...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 113, dtype: object
+text_query              Give me all people with first name Jimmy.
+language                                                       en
+sparql_query    \nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\nP...
+Name: 116, dtype: object
+text_query      Gib mir alle Personen, die den Vornamen Jimmy ...
+language                                                       de
+sparql_query    \nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\nP...
+Name: 117, dtype: object
+text_query                                 Who created Wikipedia?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 122, dtype: object
+text_query                           Wer hat Wikipedia gegründet?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 123, dtype: object
+text_query       Give me all actors starring in Last Action Hero.
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 124, dtype: object
+text_query      Gib mir alle Schauspieler, die in Last Action ...
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 125, dtype: object
+text_query      Which software has been developed by organizat...
+language                                                       en
+sparql_query    \nPREFIX rdf: <http://www.w3.org/1999/02/22-rd...
+Name: 126, dtype: object
+text_query      Welche Softwareprodukte wurde von Unternehmen ...
+language                                                       de
+sparql_query    \nPREFIX rdf: <http://www.w3.org/1999/02/22-rd...
+Name: 127, dtype: object
+text_query      Which companies work in the aerospace industry...
+language                                                       en
+sparql_query    \nPREFIX dbo:  <http://dbpedia.org/ontology/>\...
+Name: 128, dtype: object
+text_query      Welche Unternehmen sind sowohl in der Luft- un...
+language                                                       de
+sparql_query    \nPREFIX dbo:  <http://dbpedia.org/ontology/>\...
+Name: 129, dtype: object
+text_query                                         Who owns Aldi?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 144, dtype: object
+text_query                                       Wem gehört Aldi?
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 145, dtype: object
+text_query      Which capitals in Europe were host cities of t...
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 146, dtype: object
+text_query      In welchen europäischen Hauptstädten fanden ol...
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 147, dtype: object
+text_query      Who has been the 5th president of the United S...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 148, dtype: object
+text_query      Wer war der 5. Präsident der Vereinigten Staat...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 149, dtype: object
+text_query                 Give me all female German chancellors.
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 170, dtype: object
+text_query                   Gib mir alle deutschen Kanzlerinnen.
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 171, dtype: object
+text_query         Was Natalie Portman born in the United States?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 184, dtype: object
+text_query      Wurde Natalie Portman in den Vereinigten Staat...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 185, dtype: object
+text_query              Who was the successor of John F. Kennedy?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 2, dtype: object
+text_query            Wer war der Nachfolger von John F. Kennedy?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 3, dtype: object
+text_query                            Who is the mayor of Berlin?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 4, dtype: object
+text_query                  Wer ist der Bürgermeister von Berlin?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 5, dtype: object
+text_query      How many students does the Free University in ...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 6, dtype: object
+text_query      Wieviele Studenten hat die Freie Universität i...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 7, dtype: object
+text_query      Give me all professional skateboarders from Sw...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 10, dtype: object
+text_query           Gib mir alle Profiskateboarder aus Schweden.
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 11, dtype: object
+text_query      What is the total amount of men and women serv...
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 18, dtype: object
+text_query      Wieviele Männer und Frauen arbeiten in der New...
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 19, dtype: object
+text_query      Who is the youngest player in the Premier League?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 24, dtype: object
+text_query      Wer ist der jüngste Spieler in der Premier Lea...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 25, dtype: object
+text_query      Does the new Battlestar Galactica series have ...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 30, dtype: object
+text_query      Hat die neue Battlestar-Galactica-Serie mehr E...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 31, dtype: object
+text_query                        Who is the governor of Wyoming?
+language                                                       en
+sparql_query    \nPREFIX res:  <http://dbpedia.org/resource/>\...
+Name: 40, dtype: object
+text_query                    Wer ist der Gouverneur von Wyoming?
+language                                                       de
+sparql_query    \nPREFIX res:  <http://dbpedia.org/resource/>\...
+Name: 41, dtype: object
+text_query      Do Prince Harry and Prince William have the sa...
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 42, dtype: object
+text_query      Haben Prinz Harry und Prinz William dieselbe M...
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 43, dtype: object
+text_query             Which U.S. state has been admitted latest?
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 46, dtype: object
+text_query      Welcher US-Bundesstaat wurde zuletzt aufgenommen?
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 47, dtype: object
+text_query      Sean Parnell is the governor of which U.S. state?
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 50, dtype: object
+text_query      Von welchem US-Bundesstaat ist Sean Parnell de...
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 51, dtype: object
+text_query      Give me all actors starring in movies directed...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 54, dtype: object
+text_query      Gib mir alle Schauspieler von Filmen, in denen...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 55, dtype: object
+text_query        Give me all current Methodist national leaders.
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 58, dtype: object
+text_query      Gib mir alle aktuellen Staatsoberhäupter, die ...
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 59, dtype: object
+text_query                How many inhabitants does Maribor have?
+language                                                       en
+sparql_query    \nPREFIX dbo:  <http://dbpedia.org/ontology/>\...
+Name: 72, dtype: object
+text_query                        Wieviele Einwohner hat Maribor?
+language                                                       de
+sparql_query    \nPREFIX dbo:  <http://dbpedia.org/ontology/>\...
+Name: 73, dtype: object
+text_query                                     Who founded Intel?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 78, dtype: object
+text_query                               Wer hat Intel gegründet?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 79, dtype: object
+text_query                   Who is the husband of Amanda Palmer?
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 80, dtype: object
+text_query                    Wer ist der Mann von Amanda Palmer?
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 81, dtype: object
+text_query              Which cities does the Weser flow through?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 84, dtype: object
+text_query                  Durch welche Städte fließt die Weser?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 85, dtype: object
+text_query            Which countries are connected by the Rhine?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 86, dtype: object
+text_query                     Welche Länder verbindet der Rhein?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 87, dtype: object
+text_query      Which professional surfers were born on the Ph...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 88, dtype: object
+text_query      Welche Profisurfer wurden auf den Philippinen ...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 89, dtype: object
+text_query      In which UK city are the headquarters of the MI6?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 92, dtype: object
+text_query      In welcher Stadt im Vereinigten Königreich ist...
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 93, dtype: object
+text_query      Which other weapons did the designer of the Uz...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 94, dtype: object
+text_query      Welche anderen Waffen hat der Erfinder der Uzi...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 95, dtype: object
+text_query      Was the Cuban Missile Crisis earlier than the ...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 96, dtype: object
+text_query       War die Kubakrise vor der Schweinebuchtinvasion?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 97, dtype: object
+text_query      Give me all Frisian islands that belong to the...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 98, dtype: object
+text_query      Gib mir alle friesischen Inseln, die zu den Ni...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 99, dtype: object
+text_query                    What is the ruling party in Lisbon?
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 102, dtype: object
+text_query                     Welche Partei regiert in Lissabon?
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 103, dtype: object
+text_query          Which Greek goddesses dwelt on Mount Olympus?
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 106, dtype: object
+text_query      Welche griechischen Göttinnen bewohnten den Ol...
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 107, dtype: object
+text_query      Which U.S. states are in the same timezone as ...
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 114, dtype: object
+text_query      Welche US-Bundesstaaten liegen in derselben Ze...
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 115, dtype: object
+text_query                Which instruments did John Lennon play?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 126, dtype: object
+text_query           Welche Instrumente hat John Lennon gespielt?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 127, dtype: object
+text_query      Who are the parents of the wife of Juan Carlos I?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 130, dtype: object
+text_query        Wer sind die Eltern der Frau von Juan Carlos I?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 131, dtype: object
+text_query                   How many employees does Google have?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 132, dtype: object
+text_query                       Wieviele Angestellte hat Google?
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 133, dtype: object
+text_query                Did Tesla win a nobel prize in physics?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 134, dtype: object
+text_query          Hat Tesla den Nobelpreis für Physik gewonnen?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 135, dtype: object
+text_query      Which daughters of British earls died in the s...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 146, dtype: object
+text_query      Welche Töchter von britischen Grafen starben a...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 147, dtype: object
+text_query                               Who was called Scarface?
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 150, dtype: object
+text_query                            Wer wurde Scarface genannt?
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 151, dtype: object
+text_query                       Was Margaret Thatcher a chemist?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 152, dtype: object
+text_query                      War Margaret Thatcher Chemikerin?
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 153, dtype: object
+text_query                               Was Dutch Schultz a jew?
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 154, dtype: object
+text_query                            War Dutch Schultz ein Jude?
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 155, dtype: object
+text_query             Give me a list of all American inventions.
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 160, dtype: object
+text_query      Gib mir eine Liste aller amerikanischen Erfind...
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 161, dtype: object
+text_query                         How high is the Mount Everest?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 162, dtype: object
+text_query                        Wie hoch ist der Mount Everest?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 163, dtype: object
+text_query           Who composed the music for Harold and Maude?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 170, dtype: object
+text_query      Wer hat die Musik für Harold und Maude komponi...
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 171, dtype: object
+text_query      In which city was the former Dutch queen Julia...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 174, dtype: object
+text_query      In welcher Stadt wurde die ehemalige niederlän...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 175, dtype: object
+text_query              Which U.S. state has the abbreviation MN?
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 178, dtype: object
+text_query           Welcher US-Bundesstaat hat die Abkürzung MN?
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 179, dtype: object
+text_query       Which movies did Kurosawa direct after Rashomon?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 182, dtype: object
+text_query       Welche Filme hat Kurosawa nach Rashomon gedreht?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 183, dtype: object
+text_query      What is the founding year of the brewery that ...
+language                                                       en
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 184, dtype: object
+text_query      In welchem Jahr wurde die Brauerei gegründet, ...
+language                                                       de
+sparql_query    \nPREFIX dbp: <http://dbpedia.org/property/>\n...
+Name: 185, dtype: object
+text_query                    Give me all B-sides of the Ramones.
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 188, dtype: object
+text_query                     Gib mir alle B-Seiten der Ramones.
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 189, dtype: object
+text_query      Which country does the creator of Miffy come f...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 192, dtype: object
+text_query       Aus welchem Land kommt der Erfinder von Nijntje?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 193, dtype: object
+text_query                                 Who produces Orangina?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 196, dtype: object
+text_query                               Wer stellt Orangina her?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 197, dtype: object
+text_query                            Give me all ESA astronauts.
+language                                                       en
+sparql_query     \nPREFIX rdf: <http://www.w3.org/1999/02/22-r...
+Name: 0, dtype: object
+text_query                          Gib mir alle ESA-Astronauten.
+language                                                       de
+sparql_query     \nPREFIX rdf: <http://www.w3.org/1999/02/22-r...
+Name: 1, dtype: object
+text_query               Who is the oldest child of Meryl Streep?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 18, dtype: object
+text_query             Wer ist das älteste Kind von Meryl Streep?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 19, dtype: object
+text_query                                Who killed John Lennon?
+language                                                       en
+sparql_query    \nPREFIX rdf: <http://www.w3.org/1999/02/22-rd...
+Name: 20, dtype: object
+text_query                           Wer hat John Lennon getötet?
+language                                                       de
+sparql_query    \nPREFIX rdf: <http://www.w3.org/1999/02/22-rd...
+Name: 21, dtype: object
+text_query      Which frequent flyer program has the most airl...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/> \...
+Name: 22, dtype: object
+text_query      Welches Vielfliegerprogramm hat die meisten Fl...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/> \...
+Name: 23, dtype: object
+text_query      Which artists were born on the same date as Ra...
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 26, dtype: object
+text_query      Welche Künstler sind am gleichen Tag wie Rache...
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 27, dtype: object
+text_query      How many scientists graduated from an Ivy Leag...
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 28, dtype: object
+text_query      Wieviele Wissenschaftler haben einen Abschluss...
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 29, dtype: object
+text_query                     Who is the manager of Real Madrid?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/> \...
+Name: 34, dtype: object
+text_query                   Wer ist der Manager von Real Madrid?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/> \...
+Name: 35, dtype: object
+text_query      How many companies were founded by the founder...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 40, dtype: object
+text_query      Wieviele Firmen hat der Gründer von Facebook g...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 41, dtype: object
+text_query      Which subsidiary of Lufthansa serves both Dort...
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 44, dtype: object
+text_query      Welche Tochtergesellschaft von Lufthansa flieg...
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 45, dtype: object
+text_query             Give me all spacecrafts that flew to Mars.
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 48, dtype: object
+text_query      Zeig mir alle Raumschiffe, die zum Mars geflog...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 49, dtype: object
+text_query                    When did the Ming dynasty dissolve?
+language                                                       en
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 62, dtype: object
+text_query                         Wann endete die Ming-Dynastie?
+language                                                       de
+sparql_query    \nPREFIX res: <http://dbpedia.org/resource/>\n...
+Name: 63, dtype: object
+text_query              Desserts from which country contain fish?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/> \...
+Name: 68, dtype: object
+text_query       Nachspeisen aus welchen Ländern enthalten Fisch?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/> \...
+Name: 69, dtype: object
+text_query      What is the height difference between Mount Ev...
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 76, dtype: object
+text_query      Was ist der Höhenunterschied zwischen dem Moun...
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 77, dtype: object
+text_query                         Who is the mayor of Rotterdam?
+language                                                       en
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 78, dtype: object
+text_query               Wer ist der Bürgermeister von Rotterdam?
+language                                                       de
+sparql_query    \nPREFIX dbo: <http://dbpedia.org/ontology/>\n...
+Name: 79, dtype: object
+text_query      Are Taiko a kind of Japanese musical instruments?
+language                                                       en
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 84, dtype: object
+text_query       Sind Taiko eine Art japanische Musikinstrumente?
+language                                                       de
+sparql_query    \nPREFIX yago: <http://dbpedia.org/class/yago/...
+Name: 85, dtype: object
+text_query                In which country does the Ganges start?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 2, dtype: object
+text_query                 In welchem Land entspringt der Ganges?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 3, dtype: object
+text_query              Who was John F. Kennedy's vice president?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 8, dtype: object
+text_query       Wer war der Vizepräsident unter John F. Kennedy?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 9, dtype: object
+text_query                            Who is the mayor of Berlin?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 10, dtype: object
+text_query                  Wer ist der Bürgermeister von Berlin?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 11, dtype: object
+text_query      How many students does the Free University in ...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 12, dtype: object
+text_query      Wieviele Studenten hat die Freie Universität i...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 13, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Mountain . ?uri dbo:elevation ?elevation . } ORDER BY DESC(?elevation) OFSET 1 LIMIT 1 \n"
+text_query          What is the second highest mountain on Earth?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 14, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Mountain . ?uri dbo:elevation ?elevation . } ORDER BY DESC(?elevation) OFSET 1 LIMIT 1 \n"
+text_query                Was ist der zweithöchste Berg der Erde?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 15, dtype: object
+text_query      Give me all professional skateboarders from Sw...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 16, dtype: object
+text_query           Gib mir alle Profiskateboarder aus Schweden.
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 17, dtype: object
+text_query                 When was Alberta admitted as province?
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 18, dtype: object
+text_query              Wann wurde die Provinz Alberta gegründet?
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 19, dtype: object
+text_query      What is the total amount of men and women serv...
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 26, dtype: object
+text_query      Wieviele Männer und Frauen arbeiten in der New...
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 27, dtype: object
+text_query                                 Who produces Orangina?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 28, dtype: object
+text_query                               Wer stellt Orangina her?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 29, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:FormulaOneRacer . ?uri dbo:races ?x . } ORDER BY DESC(?x) OFSET 0 LIMIT 1 \n"
+text_query      Who is the Formula 1 race driver with the most...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 30, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:FormulaOneRacer . ?uri dbo:races ?x . } ORDER BY DESC(?x) OFSET 0 LIMIT 1 \n"
+text_query      Wer ist der Formel-1-Fahrer mit den meisten Re...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 31, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at '^' before 'xsd:integer'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbp: <http://dbpedia.org/property/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX xsd: <http://w.w3.org/201/XMLSchema#> SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:WorldHeritageSite . { ?uri dbp:year '2013'^xsd:integer . } UNION { ?uri dbp:year '2014'^xsd:integer . } \n"
+text_query      Give me all world heritage sites designated wi...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 32, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at '^' before 'xsd:integer'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbp: <http://dbpedia.org/property/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX xsd: <http://w.w3.org/201/XMLSchema#> SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:WorldHeritageSite . { ?uri dbp:year '2013'^xsd:integer . } UNION { ?uri dbp:year '2014'^xsd:integer . } \n"
+text_query      Gib mir alle Welterbestätten, die in den verga...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 33, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> SELECT DISTINCT ?uri WHERE { ?uri dbo:team ?x . ?x dbo:league res:Premier_League . ?uri dbo:birthDate ?y . } ORDER BY DESC(?y) OFSET 0 LIMIT 1 \n"
+text_query      Who is the youngest player in the Premier League?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 34, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> SELECT DISTINCT ?uri WHERE { ?uri dbo:team ?x . ?x dbo:league res:Premier_League . ?uri dbo:birthDate ?y . } ORDER BY DESC(?y) OFSET 0 LIMIT 1 \n"
+text_query      Wer ist der jüngste Spieler in der Premier Lea...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 35, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbp: <http://dbpedia.org/property/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:River . { ?uri dbo:length ?l . } UNION { ?uri dbp:length ?l . } } ORDER BY DESC(?l) OFSET 0 LIMIT 1 \n"
+text_query                             What is the longest river?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 38, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX dbp: <http://dbpedia.org/property/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:River . { ?uri dbo:length ?l . } UNION { ?uri dbp:length ?l . } } ORDER BY DESC(?l) OFSET 0 LIMIT 1 \n"
+text_query                             Was ist der längste Fluss?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 39, dtype: object
+text_query      Does Breaking Bad have more episodes than Game...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 40, dtype: object
+text_query      Hat Breaking Bad mehr Episoden als Game of Thr...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 41, dtype: object
+text_query                        Who is the governor of Wyoming?
+language                                                       en
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 54, dtype: object
+text_query                    Wer ist der Gouverneur von Wyoming?
+language                                                       de
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 55, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> ASKWHERE { <http://dbpedia.org/resource/Prince_Wiliam,_Duke_of_Cambridge> dbo:parent ?x . <http://dbpedia.org/resource/Prince_Hary> dbo:parent ?x .} \n"
+text_query      Do Prince Harry and Prince William have the sa...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> AS...
+Name: 56, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> ASKWHERE { <http://dbpedia.org/resource/Prince_Wiliam,_Duke_of_Cambridge> dbo:parent ?x . <http://dbpedia.org/resource/Prince_Hary> dbo:parent ?x .} \n"
+text_query      Haben Prinz Harry und Prinz William dieselben ...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> AS...
+Name: 57, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbp: <http://dbpedia.org/property/> PREFIX yago: <http://dbpedia.org/clas/yago/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uri WHERE { ?uri rdf:type yago:StatesOfTheUnitedStates . ?uri dbp:admitancedate ?x . } ORDER BY DESC(?x) OFSET 0 LIMIT 1 \n"
+text_query             Which U.S. state has been admitted latest?
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 60, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbp: <http://dbpedia.org/property/> PREFIX yago: <http://dbpedia.org/clas/yago/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uri WHERE { ?uri rdf:type yago:StatesOfTheUnitedStates . ?uri dbp:admitancedate ?x . } ORDER BY DESC(?x) OFSET 0 LIMIT 1 \n"
+text_query      Welcher US-Bundesstaat wurde zuletzt aufgenommen?
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 61, dtype: object
+text_query         How many languages are spoken in Turkmenistan?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 62, dtype: object
+text_query      Wieviele Sprachen werden in Turkmenistan gespr...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 63, dtype: object
+text_query      Sean Parnell is the governor of which U.S. state?
+language                                                       en
+sparql_query     PREFIX yago: <http://dbpedia.org/clas/yago/> ...
+Name: 64, dtype: object
+text_query      Von welchem US-Bundesstaat ist Sean Parnell de...
+language                                                       de
+sparql_query     PREFIX yago: <http://dbpedia.org/clas/yago/> ...
+Name: 65, dtype: object
+text_query                    Are tree frogs a type of amphibian?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 70, dtype: object
+text_query                            Sind Laubfrösche Amphibien?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 71, dtype: object
+text_query                     Give me all Methodist politicians.
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 74, dtype: object
+text_query          Gib mir alle Politiker, die Methodisten sind.
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 75, dtype: object
+text_query                How many inhabitants does Maribor have?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 88, dtype: object
+text_query                        Wieviele Einwohner hat Maribor?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 89, dtype: object
+text_query                                     Who founded Intel?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 96, dtype: object
+text_query                               Wer hat Intel gegründet?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 97, dtype: object
+text_query                   Who is the husband of Amanda Palmer?
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 98, dtype: object
+text_query                    Wer ist der Mann von Amanda Palmer?
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 99, dtype: object
+text_query         Give me all breeds of the German Shepherd dog.
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 100, dtype: object
+text_query                        Gib mir alle Schäferhundrassen.
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 101, dtype: object
+text_query              Which cities does the Weser flow through?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 102, dtype: object
+Failed to send query to SPARQL endpoint. Error: <urlopen error [Errno 104] Connection reset by peer>
+text_query                  Durch welche Städte fließt die Weser?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 103, dtype: object
+text_query            Which countries are connected by the Rhine?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 104, dtype: object
+text_query                     Welche Länder verbindet der Rhein?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 105, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> SELECT DISTINCT ?uri WHERE { ?uri dbo:occupation res:Surfing . { ?uri dbo:birthPlace res:Australia . } UNION { ?uri dbo:birthPlace ?x . ?x dbo:country res:Australia . } \n'
+text_query      Which professional surfers were born in Austra...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 106, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\n PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> SELECT DISTINCT ?uri WHERE { ?uri dbo:occupation res:Surfing . { ?uri dbo:birthPlace res:Australia . } UNION { ?uri dbo:birthPlace ?x . ?x dbo:country res:Australia . } \n'
+text_query       Welche Profisurfer wurden in Australien geboren?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 107, dtype: object
+text_query      In which UK city are the headquarters of the MI6?
+language                                                       en
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 110, dtype: object
+text_query      In welcher Stadt im Vereinigten Königreich ist...
+language                                                       de
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 111, dtype: object
+text_query      Which other weapons did the designer of the Uz...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 112, dtype: object
+text_query      Welche anderen Waffen hat der Erfinder der Uzi...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 113, dtype: object
+text_query      Was the Cuban Missile Crisis earlier than the ...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 116, dtype: object
+text_query       War die Kubakrise vor der Schweinebuchtinvasion?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 117, dtype: object
+text_query                    What is the ruling party in Lisbon?
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 122, dtype: object
+text_query                     Welche Partei regiert in Lissabon?
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 123, dtype: object
+text_query          Which Greek goddesses dwelt on Mount Olympus?
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 126, dtype: object
+text_query      Welche griechischen Göttinnen bewohnten den Ol...
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 127, dtype: object
+text_query      Which U.S. states are in the same time zone as...
+language                                                       en
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 134, dtype: object
+text_query      Welche US-Bundesstaaten liegen in derselben Ze...
+language                                                       de
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 135, dtype: object
+text_query       Give me the capitals of all countries in Africa.
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 136, dtype: object
+text_query      Gib mir die Haupstädte von allen Ländern in Af...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 137, dtype: object
+text_query       How many missions does the Soyuz programme have?
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 140, dtype: object
+text_query         Wieviele Missionen umfasst das Soyuz-Programm?
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 141, dtype: object
+text_query                      Did Socrates influence Aristotle?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 142, dtype: object
+text_query                  Hat Sokrates Aristoteles beeinflusst?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 143, dtype: object
+text_query               Which instruments does Cat Stevens play?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 148, dtype: object
+text_query                 Welche Instrumente spielt Cat Stevens?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 149, dtype: object
+text_query      Who are the parents of the wife of Juan Carlos I?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 152, dtype: object
+text_query        Wer sind die Eltern der Frau von Juan Carlos I?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 153, dtype: object
+text_query                   How many employees does Google have?
+language                                                       en
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 154, dtype: object
+text_query                       Wieviele Angestellte hat Google?
+language                                                       de
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 155, dtype: object
+text_query                Did Tesla win a nobel prize in physics?
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 156, dtype: object
+text_query          Hat Tesla den Nobelpreis für Physik gewonnen?
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 157, dtype: object
+text_query      Give me all cities in New Jersey with more tha...
+language                                                       en
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 158, dtype: object
+text_query      Gib mir alle Städte in New Jersey, die mehr al...
+language                                                       de
+sparql_query     PREFIX dbo: <http://dbpedia.org/ontology/> PR...
+Name: 159, dtype: object
+text_query                  When was the Statue of Liberty built?
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 162, dtype: object
+text_query                 Wann wurde die Freiheitsstatue erbaut?
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> PR...
+Name: 163, dtype: object
+text_query                         Who was called Frank The Tank?
+language                                                       en
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> SE...
+Name: 174, dtype: object
+text_query                      Wer wurde Frank The Tank genannt?
+language                                                       de
+sparql_query     PREFIX dbp: <http://dbpedia.org/property/> SE...
+Name: 175, dtype: object
+text_query                       Was Margaret Thatcher a chemist?
+language                                                       en
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 176, dtype: object
+text_query                      War Margaret Thatcher Chemikerin?
+language                                                       de
+sparql_query     PREFIX res: <http://dbpedia.org/resource/> PR...
+Name: 177, dtype: object
+text_query                                Was Marc Chagall a jew?
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 178, dtype: object
+text_query                             War Marc Chagall ein Jude?
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 179, dtype: object
+text_query      Which books by Kerouac were published by Vikin...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 184, dtype: object
+text_query      Welche Bücher von Kerouac wurden von Viking Pr...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 185, dtype: object
+text_query             Give me a list of all American inventions.
+language                                                       en
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 186, dtype: object
+text_query      Gib mir eine Liste aller amerikanischen Erfind...
+language                                                       de
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 187, dtype: object
+text_query                         How high is the Mount Everest?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 188, dtype: object
+text_query                        Wie hoch ist der Mount Everest?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 189, dtype: object
+text_query           Who composed the music for Harold and Maude?
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 196, dtype: object
+text_query      Wer hat die Musik für Harold und Maude komponi...
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 197, dtype: object
+text_query      In which city was the former Dutch queen Julia...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 200, dtype: object
+text_query      In welcher Stadt wurde die ehemalige niederlän...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 201, dtype: object
+text_query               Is Egypts largest city also its capital?
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 202, dtype: object
+text_query       Ist Ägyptens größte Stadt auch seine Hauptstadt?
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 203, dtype: object
+text_query              Which U.S. state has the abbreviation MN?
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 206, dtype: object
+text_query           Welcher US-Bundesstaat hat die Abkürzung MN?
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 207, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Bad character '&' (0x26) in SPARQL expression at '&'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>PREFIX xsd: <http://w.w3.org/201/XMLSchema#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Song . ?uri dbo:artist res:Bruce_Springsteen . ?uri dbo:releaseDate ?date . FILTER (?date >= '1980-01-01'^xsd:date & ?date <= '190-12-31'^xsd:date)}\n"
+text_query      Show me all songs from Bruce Springsteen relea...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 208, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Bad character '&' (0x26) in SPARQL expression at '&'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>PREFIX xsd: <http://w.w3.org/201/XMLSchema#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Song . ?uri dbo:artist res:Bruce_Springsteen . ?uri dbo:releaseDate ?date . FILTER (?date >= '1980-01-01'^xsd:date & ?date <= '190-12-31'^xsd:date)}\n"
+text_query      Zeige mir alle Lieder von Bruce Springsteen, d...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 209, dtype: object
+text_query      What is the founding year of the brewery that ...
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 212, dtype: object
+text_query      In welchem Jahr wurde die Brauerei gegründet, ...
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 213, dtype: object
+text_query                    Give me all B-sides of the Ramones.
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 216, dtype: object
+text_query                     Gib mir alle B-Seiten der Ramones.
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 217, dtype: object
+text_query           Who painted The Storm on the Sea of Galilee?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 218, dtype: object
+text_query      Wer malte Christus im Sturm auf dem See von Ga...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 219, dtype: object
+text_query      Which country does the creator of Miffy come f...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 220, dtype: object
+text_query       Aus welchem Land kommt der Erfinder von Nijntje?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 221, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?x rdf:type dbo:Album . ?x dbo:artist res:Elvis_Presley . ?x dbo:releaseDate ?y . ?x dbo:recordLabel ?uri .}ORDER BY ASC(?y) OFSET 0 LIMIT 1\n"
+text_query      For which label did Elvis record his first album?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 222, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?x rdf:type dbo:Album . ?x dbo:artist res:Elvis_Presley . ?x dbo:releaseDate ?y . ?x dbo:recordLabel ?uri .}ORDER BY ASC(?y) OFSET 0 LIMIT 1\n"
+text_query      Welche Plattenfirma hat Elvis' erstes Album au...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 223, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { res:Annapurna dbo:elevation ?elevation . ?uri rdf:type dbo:Mountain . ?uri dbo:elevation ?otherelevation . FILTER (?otherelevation < ?elevation) .} ORDER BY DESC(?otherelevation) OFSET 0 LIMIT 1\n"
+text_query      Which mountain is the highest after the Annapu...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 234, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { res:Annapurna dbo:elevation ?elevation . ?uri rdf:type dbo:Mountain . ?uri dbo:elevation ?otherelevation . FILTER (?otherelevation < ?elevation) .} ORDER BY DESC(?otherelevation) OFSET 0 LIMIT 1\n"
+text_query           Was ist der höchste Berg nach dem Annapurna?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 235, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Bad character '&' (0x26) in SPARQL expression at '&'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Bridge . ?uri dbp:design ?design . res:Manhattan_Bridge dbp:design ?mdesign . FILTER (?design = ?mdesign & ?uri != res:Manhattan_Bridge) . }\n"
+text_query      Which bridges are of the same type as the Manh...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 238, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Bad character '&' (0x26) in SPARQL expression at '&'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Bridge . ?uri dbp:design ?design . res:Manhattan_Bridge dbp:design ?mdesign . FILTER (?design = ?mdesign & ?uri != res:Manhattan_Bridge) . }\n"
+text_query      Welche Brücken sind vom gleichen Typ wie die M...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 239, dtype: object
+text_query          Was U.S. president Jackson involved in a war?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 240, dtype: object
+text_query      War US-Präsident Jackson in einen Krieg verwic...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 241, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Country . { ?uri dbo:governmentType res:Communism . } UNION { ?uri dbo:governmentType res:Communist_state . }\n'
+text_query                       Give me all communist countries.
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 242, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Country . { ?uri dbo:governmentType res:Communism . } UNION { ?uri dbo:governmentType res:Communist_state . }\n'
+text_query                   Gib mir alle kommunistischen Länder.
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 243, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX yago: <http://dbpedia.org/clas/yago/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type yago:StatesOfTheUnitedStates . ?uri dbp:densityrank ?rank .} ORDER BY ASC(?rank) OFSET 0 LIMIT 1\n"
+text_query      Which U.S. state has the highest population de...
+language                                                       en
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 248, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX yago: <http://dbpedia.org/clas/yago/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type yago:StatesOfTheUnitedStates . ?uri dbp:densityrank ?rank .} ORDER BY ASC(?rank) OFSET 0 LIMIT 1\n"
+text_query      Welcher Staat in den USA hat die höchste Bevöl...
+language                                                       de
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 249, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbp: <http://dbpedia.org/property/>PREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Country . { ?uri dbo:currency res:Euro . } UNION { ?uri dbp:curencyCode 'EUR'@en . }\n"
+text_query                      Which countries adopted the Euro?
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 252, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbp: <http://dbpedia.org/property/>PREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Country . { ?uri dbo:currency res:Euro . } UNION { ?uri dbp:curencyCode 'EUR'@en . }\n"
+text_query               Welche Länder haben den Euro übernommen?
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 253, dtype: object
+Failed to send query to SPARQL endpoint. Error: EndPointInternalError: The endpoint returned the HTTP status code 500. 
+
+Response:
+b'Virtuoso 37000 Error SQ200: Aggregate function not allowed in context\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Country . ?uri dbo:officialLanguage ?language .} GROUP BY ?uriHAVING (COUNT(?language) > 2)\n'
+text_query      Which countries have more than two official la...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 256, dtype: object
+Failed to send query to SPARQL endpoint. Error: EndPointInternalError: The endpoint returned the HTTP status code 500. 
+
+Response:
+b'Virtuoso 37000 Error SQ200: Aggregate function not allowed in context\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Country . ?uri dbo:officialLanguage ?language .} GROUP BY ?uriHAVING (COUNT(?language) > 2)\n'
+text_query        Welche Länder haben mehr als zwei Amtssprachen?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 257, dtype: object
+text_query      Through which countries does the Yenisei river...
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 260, dtype: object
+text_query                Durch welche Länder fließt der Yenisei?
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 261, dtype: object
+text_query                           When did Latvia join the EU?
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 262, dtype: object
+text_query                  Wann ist Lettland der EU beigetreten?
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 263, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Monarch . ?uri dbo:spouse ?spouse . { ?spouse dbo:birthPlace res:Germany. } UNION { ?spouse dbo:birthPlace ?p . ?p dbo:country res:Germany. }\n'
+text_query               Which monarchs were married to a German?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 264, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Monarch . ?uri dbo:spouse ?spouse . { ?spouse dbo:birthPlace res:Germany. } UNION { ?spouse dbo:birthPlace ?p . ?p dbo:country res:Germany. }\n'
+text_query      Welche Monarchen waren mit jemand deutschem ve...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 265, dtype: object
+text_query                     When was the Battle of Gettysburg?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 266, dtype: object
+text_query           Wann fand die Schlacht von Gettysburg statt?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 267, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Mountain . ?uri dbo:locatedInArea res:Australia . ?uri dbo:elevation ?elevation .} ORDER BY DESC(?elevation) OFSET 0 LIMIT 1\n"
+text_query             What is the highest mountain in Australia?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 270, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Mountain . ?uri dbo:locatedInArea res:Australia . ?uri dbo:elevation ?elevation .} ORDER BY DESC(?elevation) OFSET 0 LIMIT 1\n"
+text_query                Was ist der höchste Berg in Australien?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 271, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:SoccerClub . { ?uri dbo:ground res:Spain . } UNION { ?uri dbp:ground ?ground . FILTER (regex(?ground,'Spain') }\n"
+text_query                     Give me all soccer clubs in Spain.
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 272, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:SoccerClub . { ?uri dbo:ground res:Spain . } UNION { ?uri dbp:ground ?ground . FILTER (regex(?ground,'Spain') }\n"
+text_query                Gib mir alle Fußballvereine in Spanien.
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 273, dtype: object
+text_query                          Who is the mayor of Tel Aviv?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 276, dtype: object
+text_query                Wer ist der Bürgermeister von Tel Aviv?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 277, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT COUNT(DISTINCT ?uri)WHERE { \t ?uri rdf:type dbo:Organisation . { ?uri dbo:industry res:Telecommunication . } UNION { ?uri dbp:industry ?industry . FILTER (regex(?industry,'Telecomunications') . } { ?uri dbo:location res:Belgium. } UNION { ?uri dbp:locationCountry 'Belgium'@en . }\n"
+text_query      Which telecommunications organizations are loc...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 280, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT COUNT(DISTINCT ?uri)WHERE { \t ?uri rdf:type dbo:Organisation . { ?uri dbo:industry res:Telecommunication . } UNION { ?uri dbp:industry ?industry . FILTER (regex(?industry,'Telecomunications') . } { ?uri dbo:location res:Belgium. } UNION { ?uri dbp:locationCountry 'Belgium'@en . }\n"
+text_query      Welche Telekommunikationsunternehmen haben ihr...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 281, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>ASK WHERE { OPTIONAL { res:Frank_Herbert dbo:deathDate ?date . } FILTER (!BOUND(?date)}\n"
+text_query                          Is Frank Herbert still alive?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 282, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>ASK WHERE { OPTIONAL { res:Frank_Herbert dbo:deathDate ?date . } FILTER (!BOUND(?date)}\n"
+text_query                               Lebt Frank Herbert noch?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 283, dtype: object
+text_query                           Who is the editor of Forbes?
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 286, dtype: object
+text_query                    Wer ist der Herausgeber von Forbes?
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 287, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbp: <http://dbpedia.org/property/>PREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT COUNT(DISTINCT ?uri)WHERE { ?uri rdf:type dbo:Company . { ?uri dbo:industry res:Advertising } UNION { ?uri dbo:industry ?industry . FILTER regex(?industry,'advertising','i') . }\n"
+text_query      Give me all companies in the advertising indus...
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 288, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbp: <http://dbpedia.org/property/>PREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT COUNT(DISTINCT ?uri)WHERE { ?uri rdf:type dbo:Company . { ?uri dbo:industry res:Advertising } UNION { ?uri dbo:industry ?industry . FILTER regex(?industry,'advertising','i') . }\n"
+text_query      Gib mir alle Unternehmen, die in der Werbebran...
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 289, dtype: object
+text_query                How many countries are there in Europe?
+language                                                       en
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 290, dtype: object
+text_query                     Wieviele Länder gibt es in Europa?
+language                                                       de
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 291, dtype: object
+text_query                        What did Bruce Carver die from?
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 292, dtype: object
+text_query                      Woran ist Bruce Carver gestorben?
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 293, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbp: <http://dbpedia.org/property/>PREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Person . { ?uri dbo:office 'Chancelor of Germany' . } UNION { ?uri dbp:ofice res:Chancellor_of_Germany . }\n"
+text_query            Give me all federal chancellors of Germany.
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 298, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbp: <http://dbpedia.org/property/>PREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Person . { ?uri dbo:office 'Chancelor of Germany' . } UNION { ?uri dbp:ofice res:Chancellor_of_Germany . }\n"
+text_query                            Gib mir alle Bundeskanzler.
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 299, dtype: object
+text_query            What is the official website of Tom Cruise?
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 304, dtype: object
+text_query         Was ist die offizielle Website von Tom Cruise?
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 305, dtype: object
+text_query      List all episodes of the first season of the H...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 306, dtype: object
+text_query      Liste alle Episoden der ersten Staffel der HBO...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 307, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?film rdf:type dbo:Film . ?film dbo:producer ?uri .} ORDER BY DESC(COUNT(?film) OFSET 0 LIMIT 1\n"
+text_query                           Who produced the most films?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 308, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?film rdf:type dbo:Film . ?film dbo:producer ?uri .} ORDER BY DESC(COUNT(?film) OFSET 0 LIMIT 1\n"
+text_query                  Wer hat die meisten Filme produziert?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 309, dtype: object
+text_query              Give me all people with first name Jimmy.
+language                                                       en
+sparql_query    PREFIX foaf: <http://xmlns.com/foaf/0.1/>PREFI...
+Name: 310, dtype: object
+text_query      Gib mir alle Personen, die den Vornamen Jimmy ...
+language                                                       de
+sparql_query    PREFIX foaf: <http://xmlns.com/foaf/0.1/>PREFI...
+Name: 311, dtype: object
+text_query             Is there a video game called Battle Chess?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 314, dtype: object
+text_query        Gibt es ein Videospiel, das Battle Chess heißt?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 315, dtype: object
+text_query                                 Who created Wikipedia?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 318, dtype: object
+text_query                           Wer hat Wikipedia gegründet?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 319, dtype: object
+text_query      Which software has been developed by organizat...
+language                                                       en
+sparql_query    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-...
+Name: 322, dtype: object
+text_query      Welche Softwareprodukte wurde von Unternehmen ...
+language                                                       de
+sparql_query    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-...
+Name: 323, dtype: object
+text_query      Which companies work in the aerospace industry...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 324, dtype: object
+text_query      Welche Unternehmen sind sowohl in der Luft- un...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 325, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>ASKWHERE { res:Velvet_Goldmine dbo:starring res:Christian_Bale .}\n"
+text_query         Is Christian Bale starring in Velvet Goldmine?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 326, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>ASKWHERE { res:Velvet_Goldmine dbo:starring res:Christian_Bale .}\n"
+text_query          Spielt Christian Bale in Velvet Goldmine mit?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 327, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Actor . { ?uri dbo:birthPlace res:Germany . } UNION { ?uri dbo:birthPlace ?place . ?place dbo:country res:Germany . }\n'
+text_query                     Which actors were born in Germany?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 330, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Actor . { ?uri dbo:birthPlace res:Germany . } UNION { ?uri dbo:birthPlace ?place . ?place dbo:country res:Germany . }\n'
+text_query      Welche Schauspieler wurden in Deutschland gebo...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 331, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdfs: <http://w.w3.org/20/01/rdf-schema#>ASK WHERE { res:Abraham_Lincoln dbo:spouse ?spouse . ?spouse rdfs:label ?name . FILTER(regex(?name,'Mary') }\n"
+text_query         Was the wife of president Lincoln called Mary?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 334, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdfs: <http://w.w3.org/20/01/rdf-schema#>ASK WHERE { res:Abraham_Lincoln dbo:spouse ?spouse . ?spouse rdfs:label ?name . FILTER(regex(?name,'Mary') }\n"
+text_query              Hieß die Frau von Präsident Lincoln Mary?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 335, dtype: object
+text_query      Which capitals in Europe were host cities of t...
+language                                                       en
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 344, dtype: object
+text_query      In welchen europäischen Hauptstädten fanden ol...
+language                                                       de
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 345, dtype: object
+text_query       Who was the 16th president of the United States?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 346, dtype: object
+text_query      Wer war der 16. Präsident der Vereinigten Staa...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 347, dtype: object
+text_query      Which music albums contain the song Last Chris...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 350, dtype: object
+text_query      Auf welchen Musikalben ist das Lied Last Chris...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 351, dtype: object
+text_query      Which states of Germany are governed by the So...
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 356, dtype: object
+text_query      Welche Bundesländer in Deutschland werden von ...
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 357, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Country . ?uri dbp:oficialLanguages ?language .} ORDER BY DESC(COUNT(?language) OFSET 0 LIMIT 1\n"
+text_query         Which country has the most official languages?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 360, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Country . ?uri dbp:oficialLanguages ?language .} ORDER BY DESC(COUNT(?language) OFSET 0 LIMIT 1\n"
+text_query             Welches Land hat die meisten Amtssprachen?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 361, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at '.'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Film . ?uri dbo:starring res:Julia_Roberts . ?uri dbo:starring res:Richard_Gere..}\n"
+text_query      In which films did Julia Roberts as well as Ri...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 368, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at '.'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Film . ?uri dbo:starring res:Julia_Roberts . ?uri dbo:starring res:Richard_Gere..}\n"
+text_query      In welchen Filmen spielen sowohl Julia Roberts...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 369, dtype: object
+text_query         In which U.S. state is Mount McKinley located?
+language                                                       en
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 378, dtype: object
+text_query      In welchem US-Bundesstaat befindet sich der Mo...
+language                                                       de
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/>PR...
+Name: 379, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Mountain . ?uri dbo:elevation ?elevation .} ORDER BY DESC(?elevation) OFSET 0 LIMIT 1\n"
+text_query                          What is the highest mountain?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 384, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Mountain . ?uri dbo:elevation ?elevation .} ORDER BY DESC(?elevation) OFSET 0 LIMIT 1\n"
+text_query                              Was ist der höchste Berg?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 385, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>ASK WHERE { { res:Natalie_Portman dbo:birthPlace res:United_States . } UNION { res:Natalie_Portman dbo:birthPlace ?city . ?city dbo:country res:United_States . }\n'
+text_query         Was Natalie Portman born in the United States?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 386, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>ASK WHERE { { res:Natalie_Portman dbo:birthPlace res:United_States . } UNION { res:Natalie_Portman dbo:birthPlace ?city . ?city dbo:country res:United_States . }\n'
+text_query      Wurde Natalie Portman in den Vereinigten Staat...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 387, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/> PREFIX res: <http://dbpedia.org/resource/>ASKWHERE { res:Abraham_Lincoln dbo:deathPlace ?p . ?p dbp:website ?w . }\n"
+text_query      Does Abraham Lincoln's death place have a webs...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 416, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/> PREFIX res: <http://dbpedia.org/resource/>ASKWHERE { res:Abraham_Lincoln dbo:deathPlace ?p . ?p dbp:website ?w . }\n"
+text_query          Hat Abraham Lincolns Sterbeort eine Webseite?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 417, dtype: object
+text_query                               How deep is Lake Placid?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>SELE...
+Name: 418, dtype: object
+text_query                              Wie tief ist Lake Placid?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>SELE...
+Name: 419, dtype: object
+text_query                Give me the grandchildren of Bruce Lee.
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 420, dtype: object
+text_query                       Gib mir die Enkel von Bruce Lee.
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 421, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:DartsPlayer . ?uri dbo:birthDate ?date .}ORDER BY DESC(?date)OFSET 0 LIMIT 1\n"
+text_query                      Who is the youngest Darts player?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 422, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:DartsPlayer . ?uri dbo:birthDate ?date .}ORDER BY DESC(?date)OFSET 0 LIMIT 1\n"
+text_query                       Wer ist der jüngste Dartspieler?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 423, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>SELECT DISTINCT ?xWHERE { ?uri dbo:deathCause ?x . }ORDER BY DESC(COUNT(DISTINCT ?uri) OFSET 0 LIMIT 1\n"
+text_query              What is the most frequent cause of death?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>SELE...
+Name: 430, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>SELECT DISTINCT ?xWHERE { ?uri dbo:deathCause ?x . }ORDER BY DESC(COUNT(DISTINCT ?uri) OFSET 0 LIMIT 1\n"
+text_query                    Was ist die häufigste Todesursache?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>SELE...
+Name: 431, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>ASKWHERE { ?x dbo:inflow res:Isar . ?x rdf:type dbo:Lake . }\n"
+text_query                        Does the Isar flow into a lake?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 432, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>ASKWHERE { ?x dbo:inflow res:Isar . ?x rdf:type dbo:Lake . }\n"
+text_query                          Fließt die Isar in einen See?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 433, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Bridge . ?uri dbo:mainspan ?s . } ORDER BY DESC(?s) OFSET 0 LIMIT 1\n"
+text_query              What is the bridge with the longest span?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 442, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Bridge . ?uri dbo:mainspan ?s . } ORDER BY DESC(?s) OFSET 0 LIMIT 1\n"
+text_query              Welche Brücke hat die längste Spannweite?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 443, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX foaf: <http://xmlns.com/foaf/0.1/>SELECT DISTINCT ?uriWHERE { ?uri foaf:surname 'Baldwin'@en . { ?uri dbo:occupation res:Actor . } UNION { ?uri rdf:type dbo:Actor . }\n"
+text_query                     Give me all actors called Baldwin.
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 444, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX foaf: <http://xmlns.com/foaf/0.1/>SELECT DISTINCT ?uriWHERE { ?uri foaf:surname 'Baldwin'@en . { ?uri dbo:occupation res:Actor . } UNION { ?uri rdf:type dbo:Actor . }\n"
+text_query         Gib mir alle Schauspieler, die Baldwin heißen.
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 445, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>SELECT DISTINCT ?uri WHERE { ?uri dbo:team res:Atlanta_Falcons . ?uri dbo:height ?h .} ORDER BY DESC(?h) OFSET 0 LIMIT 1\n"
+text_query      Who is the tallest player of the Atlanta Falcons?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 446, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>SELECT DISTINCT ?uri WHERE { ?uri dbo:team res:Atlanta_Falcons . ?uri dbo:height ?h .} ORDER BY DESC(?h) OFSET 0 LIMIT 1\n"
+text_query        Wer ist der größte Spieler der Atlanta Falcons?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 447, dtype: object
+text_query                  How many James Bond movies are there?
+language                                                       en
+sparql_query    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-...
+Name: 450, dtype: object
+text_query                     Wieviele James-Bond-Filme gibt es?
+language                                                       de
+sparql_query    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-...
+Name: 451, dtype: object
+text_query                     Which pope succeeded John Paul II?
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 454, dtype: object
+text_query             Welcher Papst folgte auf Johannes Paul II?
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 455, dtype: object
+text_query                    Give me all Swedish oceanographers.
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 460, dtype: object
+text_query               Gib mir alle Schwedischen Ozeanographen.
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 461, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri dbo:occupation res:Poet . ?x dbo:author ?uri . ?x rdf:type dbo:Book .}ORDER BY DESC(COUNT(?x)OFSET 0 LIMIT 1\n"
+text_query                       Which poet wrote the most books?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 466, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri dbo:occupation res:Poet . ?x dbo:author ?uri . ?x rdf:type dbo:Book .}ORDER BY DESC(COUNT(?x)OFSET 0 LIMIT 1\n"
+text_query      Welcher Dichter hat die meisten Bücher geschri...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 467, dtype: object
+text_query             How many languages are spoken in Colombia?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 468, dtype: object
+text_query      Wieviele Sprachen werden in Kolumbien gesprochen?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 469, dtype: object
+text_query      Give me the capitals of all countries that the...
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 474, dtype: object
+text_query      Gib mir die Haupstädte aller Länder, über die ...
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 475, dtype: object
+Failed to send query to SPARQL endpoint. Error: EndPointInternalError: The endpoint returned the HTTP status code 500. 
+
+Response:
+b'Virtuoso 37000 Error SQ200: index of column in order by out of range\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>SELECT DISTINCT ?uri WHERE { ?uri dbo:director res:Tim_Burton . ?uri dbo:budget ?b .}ORDER BY ?bOFSET 0 LIMIT 1\n'
+text_query      Which of Tim Burton's films had the highest bu...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 484, dtype: object
+Failed to send query to SPARQL endpoint. Error: EndPointInternalError: The endpoint returned the HTTP status code 500. 
+
+Response:
+b'Virtuoso 37000 Error SQ200: index of column in order by out of range\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>SELECT DISTINCT ?uri WHERE { ?uri dbo:director res:Tim_Burton . ?uri dbo:budget ?b .}ORDER BY ?bOFSET 0 LIMIT 1\n'
+text_query      Welcher von Tim Burtons Filmen hatte das höchs...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 485, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>SELECT DISTINCT ?nWHERE { ?uri dbp:sateliteOf res:Jupiter . ?uri dbo:mas ?n .}ORDER BY ASC(?n)OFSET 0 LIMIT 1\n"
+text_query                  How heavy is Jupiter's lightest moon?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 486, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>SELECT DISTINCT ?nWHERE { ?uri dbp:sateliteOf res:Jupiter . ?uri dbo:mas ?n .}ORDER BY ASC(?n)OFSET 0 LIMIT 1\n"
+text_query              Wie schwer ist Jupiters leichtester Mond?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 487, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Actor . ?f rdf:type dbo:Film . ?f dbo:starring ?uri .} ORDER BY DESC(COUNT(DISTINCT(?f) OFSET 0 LIMIT 1\n"
+text_query             Which actor was casted in the most movies?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 488, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Actor . ?f rdf:type dbo:Film . ?f dbo:starring ?uri .} ORDER BY DESC(COUNT(DISTINCT(?f) OFSET 0 LIMIT 1\n"
+text_query      Welcher Schauspieler spielte in den meisten Fi...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 489, dtype: object
+text_query                                 Is James Bond married?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 490, dtype: object
+text_query                            Ist James Bond verheiratet?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 491, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Band . ?uri dbo:genre res:Metalcore . { ?uri dbo:hometown res:Australia . } UNION { ?uri dbo:hometown ?h . ?h dbo:country res:Australia . }\n'
+text_query                Give me all Australian metalcore bands.
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 492, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Band . ?uri dbo:genre res:Metalcore . { ?uri dbo:hometown res:Australia . } UNION { ?uri dbo:hometown ?h . ?h dbo:country res:Australia . }\n'
+text_query            Gib mir alle australischen Metalcore-Bands.
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 493, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Actor . ?uri dbo:birthPlace res:Paris . ?uri dbo:birthDate ?date . FILTER ( ?date >= xsd:dateTime('1950-12-31T0:0:0Z') }\n"
+text_query      Give me all actors who were born in Paris afte...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 494, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 0: Parentheses are not balanced at '}'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Actor . ?uri dbo:birthPlace res:Paris . ?uri dbo:birthDate ?date . FILTER ( ?date >= xsd:dateTime('1950-12-31T0:0:0Z') }\n"
+text_query      Gib mir alle Schauspieler, die nach 1950 in Pa...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 495, dtype: object
+text_query                          When was Carlo Giuliani shot?
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 496, dtype: object
+text_query                  Wann wurde Carlo Giuliani erschossen?
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/>PREF...
+Name: 497, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:BasketballPlayer . ?uri dbo:birthDate ?date. ?uri dbp:highlights ?h . FILTER regex(?h,'MVP')} ORDER BY DESC(?date) OFSET 0 LIMIT 4\n"
+text_query      Who are the four youngest MVP basketball players?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 498, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX dbp: <http://dbpedia.org/property/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:BasketballPlayer . ?uri dbo:birthDate ?date. ?uri dbp:highlights ?h . FILTER regex(?h,'MVP')} ORDER BY DESC(?date) OFSET 0 LIMIT 4\n"
+text_query      Wer sind die vier jüngsten MVP Baskettballspie...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 499, dtype: object
+text_query                               Who was called Rodzilla?
+language                                                       en
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/> SEL...
+Name: 504, dtype: object
+text_query                            Wer wurde Rodzilla genannt?
+language                                                       de
+sparql_query    PREFIX dbp: <http://dbpedia.org/property/> SEL...
+Name: 505, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:City . ?uri dbo:populationTotal ?pop . }ORDER BY DESC(?pop)OFSET 0 LIMIT 1\n"
+text_query                   Which city has the most inhabitants?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/> PRE...
+Name: 510, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:City . ?uri dbo:populationTotal ?pop . }ORDER BY DESC(?pop)OFSET 0 LIMIT 1\n"
+text_query                Welche Stadt hat die meisten Einwohner?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/> PRE...
+Name: 511, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:City . ?uri dbo:populationTotal ?pop . }ORDER BY ASC(?pop)OFSET 0 LIMIT 1\n"
+text_query                  Which city has the least inhabitants?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/> PRE...
+Name: 512, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/> PREFIX res: <http://dbpedia.org/resource/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:City . ?uri dbo:populationTotal ?pop . }ORDER BY ASC(?pop)OFSET 0 LIMIT 1\n"
+text_query              Welche Stadt hat die wenigsten Einwohner?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/> PRE...
+Name: 513, dtype: object
+text_query                            Who wrote The Hunger Games?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/> PRE...
+Name: 516, dtype: object
+text_query             Wer hat Die Tribute von Panem geschrieben?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/> PRE...
+Name: 517, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>ASKWHERE { res:Che_Guevara dbo:child ?uri . }\n"
+text_query                         Did Che Guevara have children?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 526, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'ASKWHERE' before '{'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>ASKWHERE { res:Che_Guevara dbo:child ?uri . }\n"
+text_query                              Hatte Che Guevara Kinder?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 527, dtype: object
+text_query                        When was the Titanic completed?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 532, dtype: object
+text_query                 Wann wurde die Titanic fertiggestellt?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 533, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Book . ?uri dbo:numberOfPages ?n .}ORDER BY DESC(?n)OFSET 0 LIMIT 1\n"
+text_query                         Which book has the most pages?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 542, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?uriWHERE { ?uri rdf:type dbo:Book . ?uri dbo:numberOfPages ?n .}ORDER BY DESC(?n)OFSET 0 LIMIT 1\n"
+text_query                   Welches Buch hat die meisten Seiten?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 543, dtype: object
+text_query      Who is the mayor of the capital of French Poly...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 546, dtype: object
+text_query      Wer ist der Bürgermeister der Hauptstadt von F...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 547, dtype: object
+text_query      Who was the pope that founded the Vatican Tele...
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/> PRE...
+Name: 554, dtype: object
+text_query      Welcher Papst hat das Vatikanische Fernsehen g...
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/> PRE...
+Name: 555, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX res: <http://dbpedia.org/resource/>PREFIX dbp: <http://dbpedia.org/property/> PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Airline . { ?uri dbp:aliance res:SkyTeam . } UNION { ?uri dbo:Alliance res:SkyTeam . }\n'
+text_query        What airlines are part of the SkyTeam alliance?
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 556, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX res: <http://dbpedia.org/resource/>PREFIX dbp: <http://dbpedia.org/property/> PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Airline . { ?uri dbp:aliance res:SkyTeam . } UNION { ?uri dbo:Alliance res:SkyTeam . }\n'
+text_query      Welche Fluggesellschaften sind Teil der SkyTea...
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 557, dtype: object
+text_query      Which scientist is known for the Manhattan Pro...
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 568, dtype: object
+text_query      Welcher Wissenschaftler ist bekannt für das Ma...
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 569, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>PREFIX yago: <http://dbpedia.org/clas/yago/> SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Volcano . ?uri dbo:locatedInArea ?area . ?area rdf:type yago:AfricanCountries . ?uri dbo:elevation ?elevation .}ORDER BY DESC(?elevation) OFSET 0 LIMIT 1\n"
+text_query                 What is the highest volcano in Africa?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 570, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b"Virtuoso 37000 Error SP030: SPARQL compiler, line 2: syntax error at 'OFSET' before '0'\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>PREFIX yago: <http://dbpedia.org/clas/yago/> SELECT DISTINCT ?uri WHERE { ?uri rdf:type dbo:Volcano . ?uri dbo:locatedInArea ?area . ?area rdf:type yago:AfricanCountries . ?uri dbo:elevation ?elevation .}ORDER BY DESC(?elevation) OFSET 0 LIMIT 1\n"
+text_query                  Was ist der höchste Vulkan in Afrika?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 571, dtype: object
+text_query                      Which beer originated in Ireland?
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 572, dtype: object
+text_query                         Welches Bier kommt aus Irland?
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 573, dtype: object
+text_query                          Who is the owner of Facebook?
+language                                                       en
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 576, dtype: object
+text_query                                   Wem gehört Facebook?
+language                                                       de
+sparql_query    PREFIX dbo: <http://dbpedia.org/ontology/>PREF...
+Name: 577, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX res: <http://dbpedia.org/resource/>PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX yago: <http://dbpedia.org/clas/yago/> SELECT DISTINCT ?uriWHERE { res:Lovesick dbo:starring ?uri . { ?uri dbo:birthPlace res:England . } UNION { ?uri rdf:type yago:EnglishFilmActors . }\n'
+text_query           Give me English actors starring in Lovesick.
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 584, dtype: object
+Failed to send query to SPARQL endpoint. Error: QueryBadFormed: A bad request has been sent to the endpoint: probably the SPARQL query is badly formed. 
+
+Response:
+b'Virtuoso 37000 Error SP030: SPARQL compiler, line 3: syntax error\n\nSPARQL query:\n#output-format:application/sparql-results+json\nPREFIX res: <http://dbpedia.org/resource/>PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX yago: <http://dbpedia.org/clas/yago/> SELECT DISTINCT ?uriWHERE { res:Lovesick dbo:starring ?uri . { ?uri dbo:birthPlace res:England . } UNION { ?uri rdf:type yago:EnglishFilmActors . }\n'
+text_query      Gib mir britische Schauspieler, die in Lovesic...
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 585, dtype: object
+text_query                 Give me all types of eating disorders.
+language                                                       en
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/> P...
+Name: 586, dtype: object
+text_query                  Zeig mir alle Arten von Essstörungen.
+language                                                       de
+sparql_query    PREFIX yago: <http://dbpedia.org/clas/yago/> P...
+Name: 587, dtype: object
+text_query          What is the timezone in San Pedro de Atacama?
+language                                                       en
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 596, dtype: object
+text_query        In welcher Zeitzone liegt San Pedro de Atacama?
+language                                                       de
+sparql_query    PREFIX res: <http://dbpedia.org/resource/>PREF...
+Name: 597, dtype: object
+236

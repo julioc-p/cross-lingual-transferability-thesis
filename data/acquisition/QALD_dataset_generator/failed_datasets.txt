@@ -1,0 +1,5 @@
+Failed to parse XML file with url https://raw.githubusercontent.com/ag-sc/QALD/master/3/data/musicbrainz-train-answers.xml. Error: 'NoneType' object has no attribute 'strip'
+Failed to parse XML file with url https://raw.githubusercontent.com/ag-sc/QALD/master/5/data/qald-5_test_questions.xml. Error: 'NoneType' object has no attribute 'strip'
+Failed to parse XML file with url https://raw.githubusercontent.com/ag-sc/QALD/master/7/data/qald-7-train-multilingual.xml. Error: 'NoneType' object has no attribute 'strip'
+Failed to parse XML file with url https://raw.githubusercontent.com/ag-sc/QALD/master/5/data/qald-5_train_raw.xml. Error: mismatched tag: line 8003, column 2
+Failed to parse XML file with url https://raw.githubusercontent.com/ag-sc/QALD/master/5/data/qald-5_test.xml. Error: 'NoneType' object has no attribute 'strip'

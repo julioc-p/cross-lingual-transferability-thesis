@@ -1,0 +1,27 @@
+Brotli @ file:///home/conda/feedstock_root/build_artifacts/brotli-split_1725267488082/work
+certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1734380492396/work/certifi
+cffi @ file:///home/conda/feedstock_root/build_artifacts/cffi_1725560564262/work
+charset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/charset-normalizer_1735929714516/work
+colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1733218098505/work
+h2 @ file:///home/conda/feedstock_root/build_artifacts/h2_1733298745555/work
+hpack @ file:///home/conda/feedstock_root/build_artifacts/hpack_1733299205993/work
+hyperframe @ file:///home/conda/feedstock_root/build_artifacts/hyperframe_1733298771451/work
+idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1733211830134/work
+isodate @ file:///home/conda/feedstock_root/build_artifacts/isodate_1733230734792/work
+numpy @ file:///home/conda/feedstock_root/build_artifacts/numpy_1734904243940/work/dist/numpy-2.2.1-cp311-cp311-linux_x86_64.whl#sha256=3a0afd54adb701902a6d758412aeedf73585c5f75c40f27ab5a4514473176efa
+pandas @ file:///home/conda/feedstock_root/build_artifacts/pandas_1726878443020/work
+pycparser @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_pycparser_1733195786/work
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1735698276679/work
+PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1733217236728/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1733215673016/work
+pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1706886791323/work
+ratelimit @ file:///home/conda/feedstock_root/build_artifacts/ratelimit_1611101535282/work
+rdflib @ file:///home/conda/feedstock_root/build_artifacts/rdflib_1736623214383/work/dist
+requests @ file:///home/conda/feedstock_root/build_artifacts/requests_1733217035951/work
+requests-cache==0.4.13
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1733380938961/work
+SPARQLWrapper @ file:///home/conda/feedstock_root/build_artifacts/sparqlwrapper_1669072955217/work
+tqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1735661334605/work
+tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1733235305708/work
+urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1734859416348/work
+zstandard==0.23.0
