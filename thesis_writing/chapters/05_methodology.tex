@@ -1,0 +1,35 @@
+\section{Methodology}\label{section::methodology}
+
+\subsection{Data Collection}
+\todo{Which datasets did we draw from?}
+
+Data is drawn from all of the QALD (Question Answering over Linked Data) challenges until now, from the first edition to the tenth edition. The goal of this challenge is for teams to compete to extract information from knowledge graphs in the most accurate way \cite{LOPEZ20133}, aligning well with the first goal of creating a multilingual dataset for text-to-SPARQL generation.
+
+The data from the QALD challenges were combined with most of the different datasets gathered by Jian et al. \cite{jiang2022knowledge} from different challenges regarding question-answering over knowledge graphs. Specifically, the challenges drawn upon are those from Talmor et al. \cite{Talmor2018TheWA}, Cui et al. \cite{2021arXiv210803509C}, Gu et al. \cite{gu2021beyond}, Su et al. \cite{su-etal-2016-generating, s}, Trivedi et al. \cite{trivedi2017lc}, Dubey et al. \cite{dubey2017lc2}, Kaffee et al. \cite{DBLP:conf/kcap/KaffeeESV19}, Korablinov et al. \cite{2020arXiv200510659K}, Rybin et al. \cite{rybin2021rubq} and Yih et al. \cite{yih-etal-2016-value}. The datasets in consideration meet the basic requirement of having the following properties available or easily inferable for each question: question in natural language, SPARQL query, language and knowledge graph referenced.
+
+For the QALD datasets, a script was made to scrape the main QALD repository (https://github.com/ag-sc/QALD/tree/master), which has the QALD challenges from 1 to 9, with the data of all challenges, to check that the schema meets the basic requirements for the task, and merge them into the standardized schema with the following columns: text\_query, language, sparql\_query and knowledge\_graphs. Since the datasets in the rest of the challenges, with the exception of QALD 10, had much more varied forms, each dataset had to be manually examined to check the schema and a custom script was made to extract all of its partitions, adapt the schema, and combine with the previously merged dataset.
+
+\subsection{Data Analysis}
+
+\todo{Numbers. How big were the QALD datasets in total, how big were the others, were some of them particularly big?}
+
+The QALD datasets sum up to about 16000 data points, while the rest make up around 620000. One dataset stands out because of its size, the Multilingual Compositional Wikidata Questions dataset by Cui et al. \cite{2021arXiv210803509C} with around 100000 questions in each of the following languages: English, Hebrew, Kannada and Chinese. It is worth pointing out that the non-English questions were translated from English using Google Translation.
+
+Regarding the data quality, the QALD 10 dataset stands out for being a multilingual dataset curated by native speakers, It provides 806 questions, each one in Chinese (Mandarin), English, German and Russian with the corresponding SPARQL query for the knowledge graph Wikidata.
+
+\todo{common small errors and where do they come from}
+\iffalse
+There were some small orthographic errors as for example the word character written as "charcter" in the following question: "In the film that has a charcter named Rev. Jackson P. Sayer, who played Michael Myers?" from the dataset Complex Web Questions by Talmor et al. 
+\fi
+
+\iffalse
+Some of the questions are incomplete like the question in french "Quel est le" in the QALD 5 dataset which would be translated in English as "What is the"
+\fi
+\todo{talk about the length of the queries and its relationship with the quality and which dataset had the higher quality}
+
+\iffalse
+In regards of data quality, the QALD 10 dataset stands out for being a multilingual dataset curated by native speakers. It provides 806 questions, each question in Chinese (Mandarin), English, German and Russian with the corresponding SPARQL query on the knowledge graph Wikidata. 
+\fi
+
+
+\todo{How does the final dataset look like: size, how many languages, which knowledge graphs, how is the length of the text queries? was there some relationship between the data quality and the length of text queries?}

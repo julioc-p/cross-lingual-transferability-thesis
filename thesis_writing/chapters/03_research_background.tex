@@ -1,0 +1,33 @@
+but\section{Research Background}\label{section::research_background}
+
+\subsection{Transfer Learning}
+
+Although the idea of leveraging the knowledge of previous training in new ones was already introduced in neural networks in the 1970s \cite{bozinovski2020reminder}, the first successful case of using it in NLP in the context of pre-trained LLMs was in 2015 \cite{HAN2021225}.
+
+With the introduction of GPT-3, it was shown to be possible to train an LLM on a "general-purpose text generation" downstream task, typically called fine-tuning \cite{WANG202351}. Since then, transformer-based LLMs have been gaining in popularity and in performance because of the flexibility and relatively small set of data required to effectively train for the downstream tasks.
+
+Different methods have been developed to cater to small datasets and low hardware resources, by lowering the tunable parameters and the model's precision \cite{parthasarathy2024ultimate}.
+\subsection{Cross-Lingual Transfer}
+
+% general cross lingual transfer
+
+Before the rise in popularity of llms, Cross-lingual transfer had been continually studied within neural networks in the context of NLP for specific tasks, such as part-of-speech tagging \cite{kim-etal-2017-cross}.
+
+One of the most common challenges in NLP is improving performance in low-resource languages (languages with small amounts of training data). Usual approaches include tackling the model at the word embedding level leveraging high resource languages, translating training data \cite{schuster2018cross} and changing the model architecture \cite{pfeiffer2020mad}.
+
+With the rise of LLms, cross-lingual transfer kept being studied within its context, focusing initially on specific tasks such as part-of-speech tagging with zero-shot learning (no training samples) \cite{adelani2024comparing}.
+
+Architectural approaches such as adding adapter layers (trainable layers) to transformer-based models and training them are one of the popular techniques to improve zero-shot cross-lingual transfer \cite{10.1145/3581783.3611992} along with previously researched word embedding approaches that increase the similarity of word embeddings between languages \cite{efimov2023impact}.
+
+Factors surrounding the degree of cross-lingual transfer developed by LLMs with multilingual pre-training have been studied before \cite{fujinuma2022match}, and a surge in interest in it has been showing recently in current research \cite{wang2024probing}.
+
+
+\subsection{Text-to-SPARQL}
+
+There are in general three approaches used for LLMs to extract knowledge from data in RDF format to answer questions in natural language \cite{avila2024experiments}.
+
+The first one is to provide the dataset to the LLM along with the question, so that it answers the questions directly \cite{avila2024experiments}.
+
+The second approach is to translate the question from natural language to a SPARQL query that then gets executed in the corresponding engine. This approach often relies on prompt engineering \cite{zahera2024generating} (structuring of prompt to leverage Llm capabilities \cite{aws_prompt_engineering}).
+
+The third approach is a combination of the first two. It involves getting the right parts of the data to feed them to the LLM to generate the SPARQL query with prompt engineering \cite{emonet2024llm}.

@@ -1,0 +1,147 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%_TEMPLATE_PACKAGES_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[
+	a4paper,
+	pagesize,
+	pdftex,
+	12pt,
+	% twoside,    % + BCOR darunter: für doppelseitigen Druck aktivieren, sonst beide deaktivieren
+	% BCOR=5mm,   % Dicke der Bindung berücksichtigen (Copyshop fragen, wie viel das ist)
+	ngerman,
+	fleqn,
+	final,
+	]{scrartcl}
+    
+% PACKAGES FOR THE INSTITUTSVORLAGE
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{listofitems} % for \readlist to create arrays
+\usepackage[unicode=true]{hyperref} % label, references, websites and crosslinks in PDF
+\usepackage{setspace} % für Elemente der Titelseite
+\usepackage{tikz} % für Elemente der Titelseite
+\usepackage{tabularx} % für Elemente der Titelseite
+\usepackage[draft=false,babel,tracking=true,kerning=true,spacing=true]{microtype} % optischer Randausgleich
+% PACKAGES FOR USING THIS PREBUILD STUCTURE
+\usepackage{csquotes}   % better quote style for biblatex
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%_YOUR_PACKAGES_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% UTILITY PACKAGES
+% \usepackage{cite}
+\usepackage[sorting=none]{biblatex}
+\addbibresource{library/citations.bib}
+\usepackage{comment} % enables block comments via \begin{comment} ... \end{comment} environment
+\usepackage{amsthm} % for definitions, lemmas, etc. - also for defining your own stuff, eg below:
+    %\theoremstyle{definition}  % defines a new theorem called definition
+    %\newtheorem{definition}{Definition}[section]   % definition setup and call
+\usepackage{todonotes}
+% IMAGE PACKAGES
+\usepackage{wrapfig}    % create figures with wrapped text around it
+\usepackage{caption}    % better captions for figures
+\usepackage{subcaption} % captions for subfigures
+% PRESENTATION PACKAGES
+\usepackage{booktabs} % for professional tables
+\usepackage{longtable} % for tables over multiple pages
+\usepackage{pdflscape} % enables landscape mode for multiple pages in PDF (with longtable)
+\usepackage{afterpage} % clears current page by flushing all floats
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsmath} % for aligned
+\usepackage{listofitems} % for \readlist to create arrays
+\usetikzlibrary{arrows.meta} % for arrow size
+\usepackage[outline]{contour} % glow around text
+\usepackage{graphicx}
+\usetikzlibrary{calc}
+
+\usepackage{caption}
+
+\graphicspath{ {./images/} }
+\DeclareUnicodeCharacter{0308}{HERE!HERE!}
+
+% STYLES
+\tikzset{
+  >=latex, % for default LaTeX arrow head
+  node/.style={thick,circle,draw=myblue,minimum size=22,inner sep=0.5,outer sep=0.6},
+  node in/.style={node,green!20!black,draw=mygreen!30!black,fill=mygreen!25},
+  node hidden/.style={node,blue!20!black,draw=myblue!30!black,fill=myblue!20},
+  node convol/.style={node,orange!20!black,draw=myorange!30!black,fill=myorange!20},
+  node out/.style={node,red!20!black,draw=myred!30!black,fill=myred!20},
+  connect/.style={thick,mydarkblue}, %,line cap=round
+  connect arrow/.style={-{Latex[length=4,width=3.5]},thick,mydarkblue,shorten <=0.5,shorten >=1},
+  node 1/.style={node in}, % node styles, numbered for easy mapping with \nstyle
+  node 2/.style={node hidden},
+  node 3/.style={node out}
+}
+\def\nstyle{int(\lay<\Nnodlen?min(2,\lay):3)} % map layer number onto 1, 2, or 3
+
+% COLORS
+\usepackage{xcolor}
+\colorlet{myred}{red!80!black}
+\colorlet{myblue}{blue!80!black}
+\colorlet{mygreen}{green!60!black}
+\colorlet{myorange}{orange!70!red!60!black}
+\colorlet{mydarkred}{red!30!black}
+\colorlet{mydarkblue}{blue!40!black}
+\colorlet{mydarkgreen}{green!30!black}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%_TITLE_PAGE_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Beispielhafte Nutzung der Vorlage für die Titelseite (bitte anpassen):
+\input{Institutsvorlage}
+
+\titel{Impact of Continual Multilingual Pre-training on Cross-Lingual
+Transferability for Source Languages} % Titel der Arbeit
+\typ{Master Thesis} % Typ der Arbeit:  Diplomarbeit, Masterarbeit, Bachelorarbeit
+\grad{Master of Science (M. Sc.)} % erreichter Akademischer Grad
+    % z.B.: Master of Science (M. Sc.), Master of Education (M. Ed.), Bachelor of Science (B. Sc.), Bachelor of Arts (B. A.)
+\autor{Julio Perez} % Autor der Arbeit, mit Vor- und Nachname
+\advisor{Fabio Barth}
+\gutachter{Prof. Dr. Sebastian Möller}{Prof. Dr. Georg Rehm} % Erst- und Zweitgutachter der Arbeit
+\makeTitel
+
+\begin{abstract}
+	\textbf{Abstract.} Write your abstract here.
+\end{abstract}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%_TABLE_OF_CONTENTS_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{gobble}  % page numbers invisible for TOC and filler pages
+\tableofcontents
+\cleardoublepage    % deactivate for one-sided printing
+%\newpage           % activate for one-sided printing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%_CHAPTERS_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{arabic}  % start regular page numbers from here
+% insert and call your designated chapters here from chapters/... folder
+
+\input{chapters/01_introduction}
+
+\input{chapters/02_theoretical_background}
+
+\input{chapters/03_research_background}
+
+\input{chapters/04_contribution}
+
+\input{chapters/05_methodology}
+
+\input{chapters/06_experimental_setup}
+
+\input{chapters/07_results}
+
+\input{chapters/08_discussion}
+
+\input{chapters/09_conclusion}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%_BIBLIOGRAPHY_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% create your bibliography based on your files in library/...
+% remember to edit \addbibresource in the TEMPLATE_PACKAGSES area above!
+\newpage
+\pagenumbering{roman} % start roman page numbers from here (optional)
+% \bibliographystyle{abbrv}
+% \bibliography{library/citations.bib}
+\printbibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%_APPENDIX_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Appendix} \label{Appendix}
+\addcontentsline{toc}{section}{Appendix}    % adds entry to table of contents
+\declarationofintegrity{\today}
+%\input{chapters/xxx}                       % add in case you have additional images/tables
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
