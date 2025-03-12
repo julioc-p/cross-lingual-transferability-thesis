@@ -257,12 +257,60 @@ There are typically two stages in a training loop: forward pass and backpropagat
 
 \textbf{Forward Pass}
 
-Defines the process of a set of inputs, called batches in the context of training, going from the input layer to the output layer, which is essentially the prediction process.
+The forward pass is the process where input data propagates through the neural network layer by layer until it reaches the output. Each neuron in a layer takes inputs from the previous layer, applies weights and biases, and then passes the result through an activation function.  
 
-\textbf{Backpropagation}
+In training, this step generates predictions based on the current model parameters. The key steps are:  
+\begin{itemize}
+    \item The input layer receives raw data (e.g., images, text, or numerical values).  
+    \item The data is transformed as it moves through hidden layers, where each layer extracts increasingly abstract features.  
+    \item The final layer produces an output, which could be a probability distribution (for classification) or a numerical value (for regression).  
+\end{itemize}  
 
-An algorithm to update weights in all layers using gradient descent following the chain rule in order to propagate from the last layer to the first hidden layer.
-    % \todo{Lastly introduce natural language processing as one of the fields in which neural networks and deep learning are largely used}
+After the forward pass, the model's predicted output is compared to the true label or value using a \textbf{loss function}, which quantifies the error. The computed loss serves as feedback for weight updates through backpropagation.  
+
+\bigskip  
+
+\textbf{Backpropagation} 
+
+Backpropagation is an optimization algorithm that updates the weights of the neural network using gradient descent. It computes the gradient of the loss function with respect to each weight in the network, starting from the output layer and propagating backward through the network. This process relies on the chain rule of calculus.  
+
+The key steps in backpropagation are as follows:
+
+\begin{enumerate}
+    \item \textbf{Compute the loss:}
+    The difference between the predicted output and the true value is measured using a loss function \( L \).  
+    \item \textbf{Calculate the gradient at the output layer:}  
+    \begin{equation}
+        \frac{\partial L}{\partial a^{(L)}}
+    \end{equation}
+    This represents how much the loss changes concerning the output of the last layer.
+    \item \textbf{Propagate the gradients backward:}  
+    Using the chain rule, the gradient of the loss with respect to the weighted input of the last layer is computed as:
+    \begin{equation}
+        \frac{\partial L}{\partial z^{(L)}} = \frac{\partial L}{\partial a^{(L)}} \odot \sigma'(z^{(L)})
+    \end{equation}
+    where \( \sigma'(z^{(L)}) \) is the derivative of the activation function.  
+
+    The weight and bias gradients for layer \( L \) are given by:
+    \begin{equation}
+        \frac{\partial L}{\partial W^{(L)}} = \frac{\partial L}{\partial z^{(L)}} a^{(L-1)T}
+    \end{equation}
+    \begin{equation}
+        \frac{\partial L}{\partial b^{(L)}} = \frac{\partial L}{\partial z^{(L)}}
+    \end{equation}
+
+    These gradients are recursively propagated backward through each layer.
+    \item \textbf{Update the weights using gradient descent:}  
+    \begin{equation}
+        W^{(l)} = W^{(l)} - \eta \frac{\partial L}{\partial W^{(l)}}
+    \end{equation}
+    \begin{equation}
+        b^{(l)} = b^{(l)} - \eta \frac{\partial L}{\partial b^{(l)}}
+    \end{equation}
+    where \( \eta \) is the learning rate.
+\end{enumerate}
+
+This process of forward pass, loss computation, backpropagation, and weight update is repeated iteratively until the network converges to a set of parameters that minimize the loss function or after a set number of iterations.
 
 \subsection{Natural Language Processing}
 
