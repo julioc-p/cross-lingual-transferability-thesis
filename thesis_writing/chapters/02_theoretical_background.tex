@@ -312,29 +312,36 @@ The key steps in backpropagation are as follows:
 
 This process of forward pass, loss computation, backpropagation, and weight update is repeated iteratively until the network converges to a set of parameters that minimize the loss function or after a set number of iterations.
 
-\subsection{Natural Language Processing}
+\subsubsection{Natural Language Processing}
 
 \begin{definition}
     Natural language processing (NLP) is the use of human languages, such as
 English or French, by a computer \cite[p.461]{goodfellow2016deep}. 
 \end{definition}
 
-The field is largely viewed as a subfield of machine learning since the most common approach used in modern Natural Language Processing (NLP) is deep learning.
-
-\subsubsection{Embeddings}
-Since the operations involved in training and prediction of neural networks are only defined with numerical data, a two-way representation between natural language and tensors of numbers is needed. The numerical representation is usually called embedding.
-
-The first step to process input text is breaking it up into tokens, which in modern approaches are usually sub-words, averaging about 4 characters in length in the English language \cite{OpenAITokens}.
-
-These tokens are then usually mapped to IDs through the vocabulary, which is a look-up table mapping text tokens to numeric IDs.
-
-Finally, additional contextual information is embedded into the IDS during training of most modern models in NLP. They are updated based on surrounding tokens and relative position. For example the token "how" could have different embeddings in the sentences "How are you?" and "That is how you do it".
+The field involves analyzing natural language and sometimes predicting from it \cite{goodfellow2016deep} and is largely viewed as a subfield of machine learning since the most common approach used in modern NLP is deep learning \cite[Preface, p. xi]{zhang2021natural}.
 
 \subsection{Large Language Models}
+This section is based on the book Deep Learning by Ian Goodfellow \cite{goodfellow2016deep} unless stated otherwise.
 
 Refer to deep learning models focusing on NLP, mainly on text. They have a large number of parameters, which gives them their name and are currently the state-of-the-art solution in the field of Natural Language Processing. They are the current answer to the high complexity posed by natural language, such as cultural references, syntax, semantics, and nuance.
 
 The current most used architecture is called the Transformer Architecture and it aims to tackle the lack of parallelization possible in the previous models, sequential in essence \cite{vaswani2017attention}. It reduces training time significantly, in a task like translation between languages, from several days \cite{bahdanau2014neural} to as little as twelve hours.
+
+\subsubsection{Embeddings}
+
+Since the operations involved in training and prediction of neural networks are only defined with numerical data, a two-way representation between natural language and tensors of numbers is needed. One type of such numerical representation is called embeddings.
+
+\begin{definition}
+    Embeddings are vector representations of natural language usually learned by deep learning models, that encode semantic knowledge about words and concepts \cite{goodfellow2016deep}.
+\end{definition}
+A token is a discrete unit of text, such as a word, a sub-word or even a character.
+
+The first step to process input text is breaking it up into tokens, which in modern approaches are usually sub-words, averaging about 4 characters in length in the English language in the SOTA model family of GPT are about 4 characters \cite{OpenAITokens}.
+
+These tokens are then usually mapped to IDs through the vocabulary, which is a look-up table mapping text tokens to numeric IDs.
+
+Finally, additional contextual information is embedded into the IDS during training of most modern models in NLP. They are updated based on surrounding tokens and relative position. For example the token "how" could have different embeddings in the sentences "How are you?" and "That is how you do it".
 
 
 \subsection{Transformer Architecture}
