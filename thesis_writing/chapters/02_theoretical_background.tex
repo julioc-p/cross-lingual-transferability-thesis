@@ -322,11 +322,18 @@ English or French, by a computer \cite[p.461]{goodfellow2016deep}.
 The field involves analyzing natural language and sometimes predicting from it \cite{goodfellow2016deep} and is largely viewed as a subfield of machine learning since the most common approach used in modern NLP is deep learning \cite[Preface, p. xi]{zhang2021natural}.
 
 \subsection{Large Language Models}
-This section is based on the book Deep Learning by Ian Goodfellow \cite{goodfellow2016deep} unless stated otherwise.
+\textit{This section is based on the book Designing Large Language Model Applications by Suhas Pai \cite{pai2025designing} unless stated otherwise.}
 
-Refer to deep learning models focusing on NLP, mainly on text. They have a large number of parameters, which gives them their name and are currently the state-of-the-art solution in the field of Natural Language Processing. They are the current answer to the high complexity posed by natural language, such as cultural references, syntax, semantics, and nuance.
+A model is a mathematical representation of a system designed to perform tasks related to the underlying concepts of that system. In the field of NLP, this usually involves machine translation, text classification, and text completion. 
 
-The current most used architecture is called the Transformer Architecture and it aims to tackle the lack of parallelization possible in the previous models, sequential in essence \cite{vaswani2017attention}. It reduces training time significantly, in a task like translation between languages, from several days \cite{bahdanau2014neural} to as little as twelve hours.
+Large Language Models (LLMs) are deep learning models pre-trained on vast amounts of text data \cite{AWS_LLM}. 
+These models leverage these datasets to capture linguistic structures, cultural references, and nuances. Through their specific architecture and contextual embeddings, they recognize complex relationships between words, enabling a deeper understanding of syntax and semantic.
+
+There is no universally accepted definition of what qualifies a language model as ``large''. The threshold for this classification has evolved over time as models have increased in size. Models that were previously considered large, such as GPT-2 with its 1.5 billion parameters, are now considered small \cite{vannguyen2024surveysmalllanguagemodels}. In his book, \textit{Designing Large Language Model Applications}, Suhai Pai defines ``large'' as having over a billion parameters. However, in this work, a language model is considered large starting from the size of the first BERT model (110 million parameters), as it was the first general-purpose language model that could be fine-tuned for various NLP tasks without architectural changes, representing a turning point in the field of NLP \cite{devlin2019bert}. This characteristic, along with their vast knowledge base derived from massive training corpora, is what makes them the state-of-the-art solution in NLP.
+
+The term ``vast amounts of data'' used to describe the size of training corpora is also vague. Typically, these models are trained on datasets containing hundreds of millions to billions of words. For example, BERT was trained on the BooksCorpus (800 million words) and English Wikipedia (2.5 billion words) \cite{devlin2019bert}, while the Common Crawl dataset, used for training GPT-3 and the LLAMA family of models, contains nearly a trillion words \cite{brown2020languagemodelsfewshotlearners,touvron2023llamaopenefficientfoundation}.
+
+The current most used architecture is called the transformer architecture and it aims to tackle the lack of parallelization possible in the previous models, sequential in essence \cite{vaswani2017attention}. It reduces training time significantly, in a task like translation between languages, from several days \cite{bahdanau2014neural} to as little as twelve hours.
 
 \subsubsection{Embeddings}
 
@@ -335,6 +342,7 @@ Since the operations involved in training and prediction of neural networks are 
 \begin{definition}
     Embeddings are vector representations of natural language usually learned by deep learning models, that encode semantic knowledge about words and concepts \cite{goodfellow2016deep}.
 \end{definition}
+
 A token is a discrete unit of text, such as a word, a sub-word or even a character.
 
 The first step to process input text is breaking it up into tokens, which in modern approaches are usually sub-words, averaging about 4 characters in length in the English language in the SOTA model family of GPT are about 4 characters \cite{OpenAITokens}.
@@ -366,6 +374,3 @@ It consists mainly of the careful selection of a learning rate to minimize the l
 An initiative to make web content machine-readable by standardizing it \cite{pellegrini2006semantic}.
 
 Resource Description Framework (RDF) is one of the most popular frameworks for standardizing and representing web content. It was first introduced and encouraged by the World Wide Web Consortium (Organization developing the standards of the Web) in 1999 \cite{dataeuropa_rdf_sparql}, proposing a graph structure linking web contents making the relationships between contents machine-readable, with SPARQL being the standard query language for this format.
-
-
-
