@@ -1,4 +1,3 @@
-
 import json
 import torch
 from datasets import load_dataset
@@ -35,9 +34,7 @@ model = MistralForCausalLM.from_pretrained(
 ).to(device)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-tokenizer.pad_token = (
-    tokenizer.eos_token
-) 
+tokenizer.pad_token = tokenizer.eos_token
 
 dataset = load_dataset("julioc-p/Question-Sparql", split="validation")
 
@@ -47,13 +44,13 @@ def extract_sparql(text):
         r"(SELECT|ASK|CONSTRUCT|DESCRIBE).*?\}", text, re.DOTALL | re.IGNORECASE
     )
     if match:
-        return match.group(0).strip() 
-    return "" 
+        return match.group(0).strip()
+    return ""
 
 
 output_data = []
 
-batch_size = 64 
+batch_size = 64
 
 for batch in dataset.iter(batch_size=batch_size):
     batch_prompts = []
