@@ -155,6 +155,7 @@ for i in range(0, len(dataset), BATCH_SIZE):
                     "knowledge_graph": kg,
                     "gold_sparql": gold,
                     "generated_sparql": cleaned_sparql,
+                    "raw_answer": gen_text,
                 }
             )
         print(output_data)
