@@ -21,7 +21,6 @@ BASE_REPOS = [
 EXTENSIONS = ["xml", "json"]
 OUTPUT_PATH = "sources/qald_urls.json"
 
-# Cache requests for 7 days
 requests_cache.install_cache("github_cache", expire_after=604800)
 
 
@@ -32,7 +31,6 @@ def get_all_data_files(repo_url):
     urls = get_urls(repo_url)
     for ext in urls:
         for url in urls[ext]:
-            # if "data" is not in path ignore
             if "data" not in url:
                 continue
             if ext[-4:] == "json":
@@ -167,6 +165,5 @@ if __name__ == "__main__":
         xml_urls_repo = list(set(xml_urls_repo))
         json_urls.extend(json_urls_repo)
         xml_urls.extend(xml_urls_repo)
-    # print(json_urls, xml_urls)
     with open(OUTPUT_PATH, "w") as f:
         json.dump({"json": json_urls, "xml": xml_urls}, f)

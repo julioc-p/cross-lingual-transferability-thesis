@@ -30,7 +30,6 @@ def parse_xml_to_dataframe(xml_content):
 
 
 def check_language(language):
-    # return language in ["en", "de"]
     return True
 
 
@@ -42,7 +41,7 @@ def parse_json_to_dataframe(json_content):
         sparql_query = question.get("query", "<SPARQL_QUERY_NOT_AVAILABLE>")
         for body in question.get("body", []):
             language = body.get("language", "en")
-            if check_language(language):  # Filter for English and German entries
+            if check_language(language): 
                 text_query = body.get("string", "").strip()
                 rows.append(
                     {

@@ -1,0 +1,48 @@
+\section{Experimental Setup}\label{section::experimental_setup}
+
+\subsection{Data Processing}
+\iffalse
+We did the following data processing steps:
+first we trimmed off the rows whose text queries had less than 4 characters since they were mostly mistakes coming from other datasets.
+then we took a model, the gemma 27b it model \cite{team2024gemma} and using the quantized version 8 bit (lower precision because of gpu ram available) we basically used prompt engineering to ask if the text query was a statement or not.
+and if it was a statement instead of a query we took it out. things like "The sky is blue"
+Btw, we tried first using bert large for one shot classification but it could not really distinguish very well between texts that were asking for information even if not directly questions and 100% non sensical statements. we used this model :"https://huggingface.co/facebook/bart-large-mnli"
+Then we just put together some common non sensical data from the text queries and filter manually: "invalid_texts = ["not applicable", "redox is whom?", "Describe to me", "i have no idea", "does not apply", "ni idea"]"
+and finally we used the nous research model \cite{teknium2024hermes} in 4 bit precision since we saw in a benchmark of translation that is was one of the best free available models for translations
+and google translation and deepl all we cannot use their api to translate hundreds of thousands of data points
+finally this added about 200k more rows in german language. though we found out the quality for longer texts was pretty bad so we trimmed those.
+For example: "Hatte der Goldrausch Charlie Chaplin bearbeitet, geschrieben und für Charlie Chaplin, Charlie Chaplin Charlie Chaplin und Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie ..."/
+like in this example that it keeps hanging
+\fi
+The following data processing steps were applied to ensure the quality and relevance of the text queries:
+
+\begin{enumerate}
+    \item \textbf{Filtering Short Queries:}  
+    We removed all rows where the text queries contained fewer than four characters, as these were mostly errors originating from different datasets.
+    
+    \item \textbf{Classifying Statements vs. Queries:}  
+    To distinguish between statements and valid queries, we employed the \textit{Gemma 27B IT model} \cite{team2024gemma} using its quantized 8-bit version to accommodate GPU memory limitations. We applied prompt engineering techniques to determine whether a given text was a statement rather than a query. If a query was classified as a statement (e.g., "The sky is blue"), it was removed from the dataset.
+    
+    \item \textbf{Initial Model Testing:}  
+    Initially, we attempted to use \textit{BERT Large} for one-shot classification to differentiate between queries seeking information and nonsensical statements. However, this model struggled to reliably make this distinction.
+    
+    \item \textbf{Manual Filtering of Nonsensical Data:}  
+    To further refine the dataset, we manually identified and removed commonly occurring nonsensical queries. Examples of such invalid queries include:  
+    \begin{quote}
+    \texttt{"not applicable", "redox is whom?", "Describe to me", "I have no idea", "does not apply", "ni idea"}
+    \end{quote}
+    
+    \item \textbf{Translation and Expansion of the Dataset:}  
+    For translation purposes, we used the \textit{Nous Research Model} \cite{teknium2024hermes} in 4-bit precision. This model was selected based on translation benchmarks, where it ranked among the best freely available models. Due to API limitations, we did not use commercial translation services such as Google Translate or DeepL, as they were not feasible for translating hundreds of thousands of data points.
+    
+    \item \textbf{Addition of German Data and Quality Filtering:}  
+    The translation process added approximately 200,000 additional rows in the German language. However, we observed that longer translated queries often suffered from poor quality, requiring further filtering. For instance, some translations exhibited excessive repetition, as seen in the following example:  
+    \begin{quote}
+    "Hatte der Goldrausch Charlie Chaplin bearbeitet, geschrieben und für Charlie Chaplin, Charlie Chaplin Charlie Chaplin und Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie ..."
+    \end{quote}
+    Due to such issues, we applied length-based filtering to remove problematic translations.
+\end{enumerate}
+
+These preprocessing steps significantly improved the overall quality of the dataset by removing incomplete, irrelevant, and low-quality queries while expanding it with translated data.
+\subsection{Training}
+

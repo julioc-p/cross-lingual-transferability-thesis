@@ -1,0 +1,596 @@
+\section{Theoretical Background}\label{section::theoretical_background}
+
+\subsection{Machine Learning}
+\footnote{
+Note that this section is based on the lecture materials of \textit{6.036 Introduction to Machine Learning} course by MIT \cite{MITx6.036}, unless stated otherwise.}
+
+Machine Learning is largely regarded as a subfield of AI. As its name suggests, the central concept is learning from data, through a process called training. Although the techniques are abundant, they all mostly draw their foundations from the fields of optimization and probabilistic inference. 
+
+When describing a machine learning system, there are some foundational concepts which they all share:
+
+\begin{itemize}
+    \item \textbf{Problem Class:}
+    Refers to the type of problem we are trying to solve. Some of the most common problem classes are: classification, prediction, clustering, dimensionality reduction, summarization, and translation. This will all be encompassed by the word "prediction" and the verb "predict" from this point onwards.
+    \item \textbf{Assumptions:}
+    It is assumed that previous data, or a subset of the data will help us to learn patterns from it that generalize to unseen data. More formally, we assume that the data we use for the learning algorithm (training data), and the rest of the data were sampled from the same probability distribution. Other assumptions that could be made depending on the problem are independence of features (characteristics of the data) and linear relationships.
+    \item \textbf{Generalization:}
+    As mentioned previously, the algorithm should perform well on non-training data. This is called generalization.
+    \item \textbf{Learning Algorithm:}
+    The learning algorithm is used to learn from data and make predictions, strongly linked to the problem class and the nature of the available training data like quantity.
+    \item \textbf{Parameters:}
+    Refers to the learnable part of the system. It is the piece that is used for the prediction after training, along with the architecture of the system. This vector is also called the weights of the model.
+    \item \textbf{Hyperpameters:}
+    These refer to adjustable values used in the learning function. Their tuning to perform better is highly coupled with the training data and the problem class. This process is usually called hyperparameter tuning.
+    \item \textbf{Loss Function:}
+    A mathematical function that quantifies the difference between model predictions and actual target values. It guides the training process by providing a measure to minimize.
+    
+    \item \textbf{Model:}
+    Refers to the mathematical model comprising the architecture, and the parameters.
+    
+    \item \textbf{Evaluation Function:}
+    Similar to the loss function, it receives the output of the model for a subset of data points (non-training data) and the target values, outputting a number signifying the distance between them. It is used to assess the performance of the model on unseen data. Some of the most common evaluation functions are the F1-score and the BLEU score, commonly used in binary classification tasks \cite{lipton2014thresholding} and translations \cite{ghassemiazghandi2024evaluation} respectively.
+
+    The F1-score  is based on precision and recall, which are defined as follows \cite{lipton2014thresholding}:
+
+    \begin{equation}
+    \text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}
+    \end{equation}
+
+    \begin{equation}
+    \text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}
+    \end{equation}
+
+    The F1-score is given by:
+
+    \begin{equation}
+    F_1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+    \end{equation}
+
+    The F1-score is useful because it penalizes imbalances between precision and recall, ensuring that a model is not rewarded for excelling in one while failing in the other. For example, a classifier that labels all instances as positive may achieve high recall but low precision, making it ineffective. The F1-score prevents such misleading results by considering both metrics together.
+
+    \item \textbf{Overfitting:}
+    This is the opposite of generalizing. When a model overfits, it means it performs well on the training data, but not on unseen data. It is conventionally said that the model memorized the training data.
+
+    \item \textbf{Underfitting:}
+    The model does not perform well on the training data or unseen data. It is usually assumed that the model either needs further training, or the nature of the data is more complex than what the model can capture (e.g., using a linear separator to classify non-linearly separable data).
+    
+\end{itemize}
+    Approaches in the field for training models can usually be categorized into supervised learning, unsupervised learning, semi-supervised learning and reinforcement learning. Supervised learning is the method used in this work and its core is using the labels of the data in the training process to continuously reduce the output of the loss function.
+    
+    One of the most common models in machine learning is the neural network. Because of their high number of parameters, they provide great flexibility for complex tasks, a characteristic that also makes them usually require greater volumes of data than other classical machine learning algorithms such as Naive Bayes \cite{osisanwo2017supervised}, a statistical model based on the Bayes Theorem \cite{webb2010naive},
+
+\subsection{Deep Learning}
+\footnote{
+Note that this section is based on the lecture materials of \textit{6.036 Introduction to Machine Learning} course by MIT \cite{MITx6.036}, unless stated otherwise.}
+
+As explained in \textit{Deep Learning} \cite{goodfellow2016deep}, modern deep learning is defined as a class of machine learning algorithms that construct complex architectures by composing simpler structures. However, most contemporary interpretations focus on neural networks \cite{goodfellow2016deep}.
+     
+    Neural networks, because of their aforementioned properties, are suitable for learning patterns from complex high-dimensional data. Before starting with them, some machine learning concepts need to be defined more formally:
+
+    \textbf{Data point}
+
+    A mapping from data point to vector is needed for neural networks since most operations involve vector products. There are several ways to do this, but to illustrate this concept, and the next ones, a data point x with D features will be mapped to ${\mathbb{R} ^ {D, 1}}$ (i.e. a column vector with D dimensions).
+
+    \textbf{Loss Function}
+
+A loss function measures the discrepancy between the predicted output and the true label. Formally, a loss function for one data point is defined as:
+
+\begin{equation}
+    \mathcal{L}: \mathbb{R}^{D, 1} \times \mathbb{R}^{D, 1} \rightarrow \mathbb{R}
+\end{equation}
+
+where \( D \) is the dimension of the data and the labels.
+
+One of the most commonly used loss functions for classification tasks is the cross-entropy loss, which measures the difference between the predicted probabilities for each class and the actual class labels. Cross-entropy is especially useful in tasks where the model outputs a probability distribution over multiple classes.
+
+In the multiclass setting, the cross-entropy loss is defined as:
+\begin{equation}
+    L_{\text{CE}} = - \sum_{c=1}^{C} y_c \log(p_c)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( C \) is the total number of classes,
+    \item \( y_c \) is a binary indicator (0 or 1) that denotes whether class \( c \) is the true label for the input, and
+    \item \( p_c \) is the predicted probability that the input belongs to class \( c \).
+\end{itemize}
+
+For binary classification, where the task is to distinguish between two classes (e.g., positive and negative), the cross-entropy loss simplifies to:
+\begin{equation}
+L_{\text{CE}}(p, y) = - \left( y \log(p) + (1 - y) \log(1 - p) \right)
+\end{equation}
+
+
+where:
+\begin{itemize}
+    \item \( y \in \{0, 1\} \) is the actual label (0 for the negative class and 1 for the positive class),
+    \item \( p \) is the predicted probability for the positive class.
+\end{itemize}
+
+    
+    \textbf{Parameters}
+    
+    They are learned from data by the learning algorithm and are the main characters in making predictions after training. From this point on, every time the parameters are mentioned, it refers to a vector $\theta \in \mathbb{R} ^ {D, 1}$, with D being the dimension of the data point.
+    
+    \textbf{Gradient Descent}
+
+    An optimization algorithm, in which the gradient of the loss function is used to update the parameters to minimize the loss (output of the loss function). It can be pictured as going in the opposite direction of the gradient (the steepest descent). More formally, having  $\nabla_\theta \mathcal{L}$, the update of the parameters can be thought of as 
+    \begin{equation}
+        \theta \coloneq \theta - \eta \nabla_\theta \mathcal{L}
+    \end{equation}
+    with \(\eta\) being a hyperparameter of the learning algorithm called the learning rate, which determines how big the update of $\theta$ will be.
+
+
+    \subsection{Neural Networks}
+    This section is based on the book \textit{Deep Learning} by Ian Goodfellow \cite{goodfellow2016deep} unless stated otherwise. 
+
+    Neural Networks or Artificial Neural Networks are a machine learning model, whose architecture is inspired by the human brain.
+
+    \subsubsection{Feed Forward Neural Network (FNN)}
+
+    In this section we introduce one of the simplest neural network which is the precursor for the more complex ones introduced in the following subchapters.
+    
+    The architecture looks like the figure \ref{fig:ffnn} and the figure \ref{fig:simulation_brain} is a computer simulation of the neural network structure in the brain. Both pictures show neurons or nodes propagating information.
+
+
+\noindent
+% \begin{minipage}[c]{0.5\textwidth}
+% \centering
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=1, x=2.2cm,y=1.4cm ]
+  \message{^^JNeural network without text}
+  \readlist\Nnod{4,5,5,5,3} % array of number of nodes per layer
+  
+  \message{^^J  Layer}
+  \foreachitem \N \in \Nnod{ % loop over layers
+    \def\lay{\Ncnt} % alias of index of current layer
+    \pgfmathsetmacro\prev{int(\Ncnt-1)} % number of previous layer
+    \message{\lay,}
+    \foreach \i [evaluate={\y=\N/2-\i; \x=\lay; \n=\nstyle;}] in {1,...,\N}{ % loop over nodes
+      
+      % NODES
+      \node[node \n] (N\lay-\i) at (\x,\y) {};
+      
+      % CONNECTIONS
+      \ifnum\lay>1 % connect to previous layer
+        \foreach \j in {1,...,\Nnod[\prev]}{ % loop over nodes in previous layer
+          \draw[connect,white,line width=1.2] (N\prev-\j) -- (N\lay-\i);
+          \draw[connect] (N\prev-\j) -- (N\lay-\i);
+          %\draw[connect] (N\prev-\j.0) -- (N\lay-\i.180); % connect to left
+        }
+      \fi % else: nothing to connect first layer
+      
+    }
+  }
+  
+  % LABELS
+  \node[above=0.5,align=center,mygreen!60!black] at (N1-1.90) {input\\[-0.2em]layer};
+  \node[above=0.5,align=center,myblue!60!black] at (N3-1.90) {hidden layer};
+  \node[above=0.7,align=center,myred!60!black] at (N\Nnodlen-1.90) {output\\[-0.2em]layer};
+  
+\end{tikzpicture}
+% \captionof{figure}{Simple Neural Network \cite{mit_neural_networks}} 
+\caption{Feed Forward Neural Network \cite{tikz_neural_networks}}
+\label{fig:ffnn}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{neural_networks_brain.png}
+    \caption{Brain Neural Network Simulation \cite{plos_computational_biology_2010}}
+    \label{fig:simulation_brain}
+\end{figure}
+
+The central component of a neural network is the artificial neural neuron (See Figure \ref{fig:ANN}), whose inspiration in the human brain comes from the nerve cells (See Figure \ref{fig:HN}).
+
+\begin{figure}
+    \centering
+     \includegraphics[scale=0.4]{neural_network_mit.png}
+    \caption{Artificial Neural Neuron \cite{mit_neural_networks}}
+    \label{fig:ANN}
+\end{figure}
+
+\begin{figure}
+    \centering
+    % Second image (your external PNG)
+    \includegraphics[scale=0.25]{Neuron.png}
+    \caption{Human Neuron \cite{seer_neurons}}
+    \label{fig:HN}
+\end{figure}
+The neuron is the processing unit in the architecture. One of the earliest models of such a unit is the perceptron, introduced by Frank Rosenblatt \cite{rosenblatt1958perceptron}, which performs a weighted sum of inputs. It is a linear classifier for binary classification that computes the sum:
+
+\begin{equation}
+z = \sum w_i x_i + b
+\end{equation}
+
+where \( w_i \) are the weights, \( x_i \) are the inputs, and \( b \) is the bias term, which prevents the decision boundary from being constrained to pass through the origin. The output is then determined by the function:
+
+\begin{equation}
+f(z) =
+\begin{cases} 
+1, & \text{if } z \geq 0 \\
+0, & \text{if } z < 0
+\end{cases}
+\end{equation}
+
+
+The neurons are arranged in layers. Each layer uses the previous layer's outputs for its calculations and then forwards its outputs to the next layer.
+
+Neurons are arranged in layers. Each layer uses the previous layer's outputs for its calculations and then forwards its outputs to the next layer.  For a given layer \( l \), the computation follows:
+
+\begin{equation}
+    z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}
+\end{equation}
+
+\begin{equation}
+    a^{(l)} = \sigma(z^{(l)})
+\end{equation}
+
+where \( W^{(l)} \) is the weight matrix, \( a^{(l-1)} \) represents the outputs (activations) from the previous layer, \( b^{(l)} \) is the bias vector, and \( \sigma(\cdot) \) is the activation function. 
+
+There are typically three kinds of layers:
+
+\textbf{Input Layer}
+
+The input layer is a symbolic name since it refers to the input data points, with each node in the layer usually representing a feature of the data points. There is just one input layer.
+
+\textbf{Hidden Layer} 
+
+This is where the bulk of operations take place. They usually compose the majority of the layers.
+
+\textbf{Output Layer}
+
+Aggregates the inputs of the last hidden layer making sense of the data to get an output, which should be interpretable as a result of the specific task (regression, classification).
+
+
+For complex tasks usually many hidden layers are required in neural networks, which define and give the name to the field of deep learning.
+
+\textbf{Training}
+
+The following explanation refers specifically to supervised training and we take the Feed Forward Neural Network architecture as a reference for brevity, although the process with slight modifications is also applied with the next neural networks architectures presented.
+
+Training a model can be viewed as a minimization problem where the goal is to minimize this loss function over time. This process of minimization is what enables the model to improve its predictions.
+
+There are typically two stages in a training loop: forward pass and backpropagation.
+
+\textbf{Forward Pass}
+
+The forward pass is the process where input data propagates through the neural network layer by layer until it reaches the output. Each neuron in a layer takes inputs from the previous layer, applies weights and biases, and then passes the result through an activation function.  
+
+In training, this step generates predictions based on the current model parameters. The key steps are:  
+\begin{itemize}
+    \item The input layer receives raw data (e.g., images, text, or numerical values).  
+    \item The data is transformed as it moves through hidden layers, where each layer extracts increasingly abstract features.  
+    \item The final layer produces an output, which could be a probability distribution (for classification) or a numerical value (for regression).  
+\end{itemize}  
+
+After the forward pass, the model's predicted output is compared to the true label or value using a loss function, which quantifies the error. The computed loss serves as feedback for weight updates through backpropagation.  
+
+\bigskip  
+
+\textbf{Backpropagation}
+
+Training a neural network requires adjusting its weights to minimize a loss function. This is achieved through gradient descent, which updates weights based on the gradient of the loss function. The gradient can be computed using batch gradient descent, which sums gradients over all data points, or stochastic gradient descent (SGD), which updates weights with a subset of the data.
+
+For a given training example \((x, y)\), with x being the prediction and y being the actual value, we compute the gradient of the loss function with respect to the weights:
+
+\begin{equation}
+\nabla_W \text{Loss}(NN(x; W), y),
+\end{equation}
+
+where \( W \) includes all weight matrices \( W^l \) in layers \( l = 1, \dots, L \). Using the chain rule, the gradient for the final layer \( L \) is:
+
+\begin{equation}
+\frac{\partial \text{Loss}}{\partial W^L} = \frac{\partial \text{Loss}}{\partial A^L} \cdot \frac{\partial A^L}{\partial Z^L} \cdot \frac{\partial Z^L}{\partial W^L}.
+\end{equation}
+
+Since \( Z^L = W^L A^{L-1} \), it follows that:
+
+\begin{equation}
+\frac{\partial Z^L}{\partial W^L} = A^{L-1}.
+\end{equation}
+
+Rewriting we have:
+
+\begin{equation}
+\frac{\partial \text{Loss}}{\partial W^L} =
+\frac{\partial \text{Loss}}{\partial A^L}
+\cdot
+ \frac{\partial A^L}{\partial Z^L} 
+\cdot
+A^{L-1}.
+\end{equation}
+
+For an arbitrary layer \( l \), we use the recursive property:
+
+\begin{equation}
+\frac{\partial \text{Loss}}{\partial W^l} =
+A^{l-1} \cdot \frac{\partial \text{Loss}}{\partial Z^l}.
+\end{equation}
+
+To compute \( \frac{\partial \text{Loss}}{\partial Z^l} \), we first note that from the forward propagation equation:
+
+\begin{equation}
+Z^{l+1} = W^{l+1} A^l + b^{l+1},
+\end{equation}
+
+differentiating both sides with respect to \( A^l \) gives:
+
+\begin{equation}
+\frac{\partial Z^{l+1}}{\partial A^l} = W^{l+1}.
+\end{equation}
+
+So, from:
+\begin{equation}
+    \frac{\partial \text{Loss}}{\partial Z^l} =
+    \frac{\partial A^l}{\partial Z^l} \cdot \frac{\partial Z^{l+1}}{\partial A^l} \cdot \frac{\partial \text{Loss}}{\partial Z^{l+1}}.
+\end{equation}
+
+we get:
+
+\begin{equation}
+\frac{\partial \text{Loss}}{\partial Z^l} =
+\frac{\partial A^l}{\partial Z^l} \cdot W^{l+1} \cdot \frac{\partial \text{Loss}}{\partial Z^{l+1}}.
+\end{equation}
+
+
+Expanding this equation all the way down to the first layer:
+
+\begin{equation}
+\frac{\partial \text{Loss}}{\partial Z^1} =
+\frac{\partial \text{Loss}}{\partial A^L}
+\cdot
+\frac{\partial A^L}{\partial Z^L}
+\cdot
+\frac{\partial Z^L}{\partial A^{L-1}}
+\cdot
+\frac{\partial A^{L-1}}{\partial Z^{L-1}}
+\cdots
+\frac{\partial A^2}{\partial Z^2}
+\cdot
+\frac{\partial Z^2}{\partial A^1}
+\cdot
+\frac{\partial A^1}{\partial Z^1}.
+\end{equation}
+
+And for an arbitrary layer l we have:
+
+\begin{equation}
+\frac{\partial \text{Loss}}{\partial Z^l} =
+\frac{\partial A^l}{\partial Z^l}
+\cdot
+W^{l+1}
+\cdot
+\frac{\partial A^{l+1}}{\partial Z^{l+1}}
+\cdots
+\cdot
+\frac{\partial A^{L-1}}{\partial Z^{L-1}}
+\cdot
+W^L
+\cdot
+\frac{\partial A^L}{\partial Z^L}
+\cdot
+\frac{\partial \text{Loss}}{\partial A^L}.
+\end{equation}
+
+\textbf{Vanishing and Exploding Gradients}  
+
+As backpropagation propagates gradients from the output layer to the input layer, the repeated multiplication of weight matrices can lead to two major issues:  
+
+\begin{itemize}
+    \item \textbf{Vanishing Gradients:} When the gradient values become exponentially small as they are backpropagated through layers, the earlier layers receive almost no meaningful updates. This slows learning in deep networks.
+    \item \textbf{Exploding Gradients:} If the weight updates become excessively large, gradients can grow exponentially, causing disproportionately big updates and oscillations instead of convergence.
+\end{itemize}
+
+One of the most common techniques to tackle these problems is dynamically adjusting the learning rate based on the layer and iteration \cite[Chapter 8]{MITx6.036}, a strategy commonly implemented in the widely used Adam optimizer \cite{kingma2014adam}.
+
+\subsubsection{Recurrent Neural Network (RNN)}
+
+\begin{definition}  
+    Recurrent neural networks are a family of neural networks for processing sequential data.
+\end{definition}  
+    
+    Unlike FNNs, which process inputs independently, RNNs introduce loops within the network to allow information persistence. This structure enables them to model temporal dependencies, making them suitable for tasks such as time-series forecasting, speech recognition, and in general tasks depending on previous states such as machine translation.
+    RNNs are in its core state machines of FNNs \ref{fig:RNN}.
+
+
+    \begin{figure}
+        \centering
+        \includegraphics{recurrent_neural_network.png}
+        \caption{Recurrent Neural Network Architecture \cite[Chapter 12]{MITx6.036}}
+        \label{fig:RNN}
+    \end{figure} 
+    
+    A simple RNN consists of an input layer, a recurrent hidden layer, and an output layer. The key difference from FNNs is that the hidden layer maintains a state across time steps. At each time step \( t \), the hidden state \( s_t \) is updated based on the previous hidden state \( s_{t-1} \) and the current input \( x_t \):  
+    
+    \begin{equation}  
+    s_t = f(W_h s_{t-1} + W_x x_t + b_h)  
+    \end{equation}
+    
+    where:  
+    \begin{itemize}
+        \item \( W_h \) is the weight matrix for the hidden state,  
+        \item \( W_x \) is the weight matrix for the input,  
+        \item \( b_h \) is the bias term,
+        \item \( f \) is an activation function.  
+    \end{itemize}
+    
+    The output \( y_t \) is computed as:  
+    
+    \begin{equation}
+    y_t = W_y s_t + b_y
+    \end{equation}
+    
+    This recurrence allows RNNs to retain context from earlier inputs. 
+    
+    \bigskip
+    
+    Just as FNNs, RNNs face challenge of vanishing and exploding gradients. However, this problem is often even more pronounced in RNNs due to their additional temporal dependencies, where the same weights are shared across time steps, and thus not entirely addressable by methods such as the aforementioned adative step size \cite{MITx6.036}.
+
+    To address this further, gated mechanisms were introduced, allowing the model to selectively update or forget certain parts of the hidden state. These gating mechanisms improved the performance of RNNs, especially for handling longer sequences. One such notable architecture is the Long Short-Term Memory (LSTM) network \cite[Chapter 8]{MITx6.036}, which is one of the precursors of current contemporary language models \cite{vaswani2017attention}.
+
+    Next, we will explore the concept of a simple gated recurrent neural network.
+    \bigskip
+
+    \subsubsection{Simple Gated Recurrent Neural Network}
+    This section is based on Chapter 8 of the notes from the MIT course \textit{Introduction to Machine Learning} \cite[Chapter 12]{MITx6.036}, unless stated otherwise.
+    
+    In simple gated recurrent networks, we want to control which parts of the last state we keep and in what proportion. Therefore, a new term, the gating value, is introduced, along with a new way of calculating the states. At each time step \( t \), the gating value \( g_t \) is computed as:
+    
+    \begin{equation}
+    g_t = \sigma(W_{gx} x_t + W_{gs} s_{t-1}),
+    \end{equation}
+    \footnote{It could also have an offset, but this is omitted for conciseness.}
+    
+    where:
+    \begin{itemize}
+        \item \( g_t \) is an \( m \times 1 \) vector,
+        \item \( W_{gx} \) is an \( m \times l \) weight matrix for the input \( x_t \),
+        \item \( W_{gs} \) is an \( m \times m \) weight matrix for the previous state \( s_{t-1} \),
+        \item \( \sigma \) denotes the sigmoid activation function, which squashes the values between 0 and 1. It is defined as:
+        \begin{equation}
+            \sigma(z) = \frac{1}{1 + e^{-z}},
+        \end{equation}
+        where
+        \begin{equation}
+            z = W_{gx} x_t + W_{gs} s_{t-1}.
+        \end{equation}
+    \end{itemize}
+    
+    This gating mechanism regulates how much and which components of the state \( s_{t-1} \) should be carried over from the previous time step and how much should be updated based on the current input. The new state \( s_t \) is computed as follows:
+    
+    \begin{equation}
+        s_t = (1 - g_t) \cdot s_{t-1} + g_t \cdot f_1(W_{sx} x_t + W_{ss} s_{t-1} + W_{ss}^0),
+    \end{equation}
+
+    Adding a new way for the network to regulate ``forgetting'' and ``remembering'' makes the network work better against vanishing and exploding gradients.
+    
+    \subsubsection{Long Short-Term Memory}
+   
+
+The core idea is that LSTMs introduce a dedicated memory cell, essentially another state vector, along with three gating mechanisms. This new state vector preserves long term dependencies.
+
+\begin{itemize}
+    \item The \textbf{input gate} determines which components of the memory cell are updated with new values.
+    \item The \textbf{forget gate} decides which components of the memory cell should decay towards zero.
+    \item The \textbf{output gate} controls which parts of the memory cell contribute to the network’s output.
+\end{itemize}
+
+Like simple gated recurrent networks, these gating mechanisms perform weighted selection, allowing the network to regulate information flow effectively. LSTMs have been widely used in tasks such as language translation and speech recognition, being the stat-of-the-art solution for handling long-range dependencies in 2015.
+The architecture as a reference is \ref{fig:LSTM}
+  
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.5]{LSTM_recurrent_Cell.png}
+        \caption{Long Short-Term Memory Architecture \cite[Chapter 10.10]{goodfellow2016deep}}
+        \label{fig:LSTM}
+    \end{figure}
+    \bigskip
+
+
+\subsection{Natural Language Processing}
+
+\begin{definition}
+    Natural language processing (NLP) is the use of human languages, such as
+English or French, by a computer \cite[p.461]{goodfellow2016deep}. 
+\end{definition}
+
+The field involves analyzing natural language and sometimes predicting from it \cite{goodfellow2016deep} and is largely viewed as a subfield of machine learning since the most common approach used in modern NLP is deep learning \cite[Preface, p. xi]{zhang2021natural}.
+
+\subsubsection{Semantic Web}
+
+\begin{definition}
+    Semantic Web is an initiative to make web content machine-readable by standardizing it \cite{pellegrini2006semantic}.
+\end{definition}
+Resource Description Framework (RDF) is one of the most popular frameworks for standardizing and representing web content. It was first introduced and encouraged by the World Wide Web Consortium (Organization developing the standards of the Web) in 1999 \cite{dataeuropa_rdf_sparql}, proposing a graph structure linking web contents making the relationships between contents machine-readable, with SPARQL being the standard query language for this format.
+\subsection{Large Language Models}
+\textit{This section is based on the book Designing Large Language Model Applications by Suhas Pai \cite{pai2025designing} unless stated otherwise.}
+
+A model is a mathematical representation of a system designed to perform tasks related to the underlying concepts of that system. In the field of NLP, this usually involves machine translation, text classification, and text completion. 
+
+Large Language Models (LLMs) are deep learning models pre-trained on vast amounts of text data \cite{AWS_LLM}. 
+These models leverage these datasets to capture linguistic structures, cultural references, and nuances. Through their specific architecture and contextual embeddings, they recognize complex relationships between words, enabling a deeper understanding of syntax and semantic.
+
+There is no universally accepted definition of what qualifies a language model as ``large''. The threshold for this classification has evolved over time as models have increased in size. Models that were previously considered large, such as GPT-2 with its 1.5 billion parameters, are now considered small \cite{vannguyen2024surveysmalllanguagemodels}. In his book, \textit{Designing Large Language Model Applications}, Suhai Pai defines ``large'' as having over a billion parameters. However, in this work, a language model is considered large starting from the size of the first BERT model (110 million parameters), as it was the first general-purpose language model that could be fine-tuned for various NLP tasks without architectural changes, representing a turning point in the field of NLP \cite{devlin2019bert}. This characteristic, along with their vast knowledge base derived from massive training corpora, is what makes them the state-of-the-art solution in NLP.
+
+The term ``vast amounts of data'' used to describe the size of training corpora is also vague. Typically, these models are trained on datasets containing hundreds of millions to billions of words. For example, BERT was trained on the BooksCorpus (800 million words) and English Wikipedia (2.5 billion words) \cite{devlin2019bert}, while the Common Crawl dataset, used for training GPT-3 and the LLAMA family of models, contains nearly a trillion words \cite{brown2020languagemodelsfewshotlearners,touvron2023llamaopenefficientfoundation}.
+
+The current most used architecture is called the transformer architecture and it aims to tackle the lack of parallelization possible in the previous models, such as RNNS and LSTMs, sequential in essence \cite{vaswani2017attention}. It reduces training time significantly, in a task like translation between languages, from several days \cite{bahdanau2014neural} to as little as twelve hours.
+
+\subsubsection{Embeddings}
+
+Since the operations involved in training and prediction of neural networks are only defined with numerical data, a two-way representation between natural language and tensors of numbers is needed. One type of such numerical representation is called embeddings.
+
+\begin{definition}
+    Embeddings are vector representations of natural language usually learned by deep learning models, that encode semantic knowledge about words and concepts \cite{goodfellow2016deep}.
+\end{definition}
+
+A token is a discrete unit of text, such as a word, a sub-word or even a character.
+
+The first step to process input text is breaking it up into tokens, which in modern approaches are usually sub-words, averaging about 4 characters in length in the English language in the SOTA model family of GPT are about 4 characters \cite{OpenAITokens}.
+
+These tokens are then usually mapped to IDs through the vocabulary, which is a look-up table mapping text tokens to numeric IDs.
+
+Finally, additional contextual information is embedded into the IDS during training of most modern models in NLP. They are updated based on surrounding tokens and relative position. For example the token "how" could have different embeddings in the sentences "How are you?" and "That is how you do it".
+
+
+\subsection{Transformer Architecture}
+This section is entirely based on the paper \textit{Attention is All You Need} by Vaswani et al. \cite{vaswani2017attention} unless stated otherwise.
+
+\begin{figure}
+    \centering
+    \includegraphics{transformer_architecture.png}
+    \caption{Transformer Architecture \cite{vaswani2017attention}}
+    \label{fig:transformer}
+\end{figure}
+The Transformer architecture consists of two main components: the encoder and the decoder. The overall structure is illustrated in Figure \ref{fig:transformer}.
+
+\textbf{Encoder}:
+The encoder is composed of 6 identical layers. Each encoder layer consists of two sublayers:  
+
+\begin{itemize}
+    \item \textbf{Multi-Head Self-Attention}: This mechanism allows each token in the input sequence to attend to all other tokens, enabling global context awareness.  
+    \item \textbf{Feed-Forward Neural Network (FFN)}: A position-wise fully connected network applied independently to each token.  
+\end{itemize}
+
+Each sublayer has a residual (skip) connection followed by layer normalization. This residual connection helps mitigate the vanishing gradient problem by preserving gradient flow during backpropagation.
+
+\textbf{Decoder}:
+The decoder also consists of 6 layers, each containing three sublayers:  
+
+\begin{itemize}
+    \item \textbf{Masked Multi-Head Self-Attention}: Unlike the encoder, self-attention in the decoder is masked to ensure that the prediction for a given position can only depend on previously generated tokens. This prevents information from future tokens from leaking.  
+    \item \textbf{Multi-Head Cross-Attention}: This sublayer processes the encoder’s output along with the decoders output of the first masked attention sublayer, allowing the decoder to leverage the full context of the input sequence.  
+    \item \textbf{Feed-Forward Neural Network (FFN)}: Similar to the encoder, a position-wise feed-forward network is applied.  
+\end{itemize}
+
+Each sublayer in both the encoder and the decoder is followed by an add-and-normalize operation, which means adding the output of the residual connection (input of the sublayer) with the ouput of the FNN or the attention mechanism to then normalize it across the features.
+
+After the final decoder layer, a linear transformation projects the output into the vocabulary space. A softmax function then converts this output into a probability distribution over possible next tokens.
+
+Unlike recurrent neural networks (RNNs), which process input sequentially, Transformers process all input tokens in parallel. To preserve positional information, positional encodings are added to the input embeddings before passing them through the encoder.
+
+The main new breakthrough coming with the transformer architecture is the ability to process tokens in parallel while also keeping the dependencies of the ones far apart in the text input and leveraging this information. This provides both a significant speed up in training as well as an increase in performance in certain tasks such as machine translation from English to German \cite{vaswani2017attention}.
+
+\subsection{Transfer Learning}
+\begin{definition}
+    Transfer learning refer to the situation where what has been
+learned in one setting (i.e., distribution P1) is exploited to improve generalization
+in another setting (say distribution P2) \cite{goodfellow2016deep}.
+\end{definition}
+
+In simple terms, it involves leveraging training from one task to improve a machine learning model’s performance on another task.
+
+A special kind of transfer learning, called cross-lingual transfer, revolves around leveraging training in one language to improve the results of training in another language \cite{cross_lingual_transfer}.
+
+Although the idea of transfer learning was already introduced in neural networks in the 1970s \cite{bozinovski2020reminder}, the first successful case of using it in NLP in the context of pre-trained LLMs was in 2015 \cite{HAN2021225}.
+
+In 2018, the introduction of BERT and GPT-1 demonstrated that it was possible to train a general-purpose LLM for various downstream tasks with minimal architectural modifications \cite{devlin2019bert,lee2018pre}. Since then, transformer-based LLMs have been gaining in popularity and in performance because of the flexibility and relatively small set of data required to effectively train for the downstream tasks.
+
+Different methods have been developed to cater to small datasets and low hardware resources, by lowering the tunable parameters and the model's precision \cite{parthasarathy2024ultimate}.
+
+\subsection{Continual Pre-training of Large Language Models}
+Refers to the addition of new data as knowledge base to an already trained large language model without merging the old dataset and the new one to start the training from scratch \cite{gupta2023continual}.
+
+A key aspect of this process is selecting an appropriate learning rate that minimizes loss on new data while preserving performance on the original data. This is vital since further training on new data, which may follow a different distribution than the original dataset, can introduce a distribution shift. This shift can lead to a decrease in performance on previously learned data. Research indicates that the right parameters might make continual pre-training better performing than training from scratch on the whole data \cite{gupta2023continual}.

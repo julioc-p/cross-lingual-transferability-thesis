@@ -1,0 +1,2 @@
+question: "Write a SPARQL query that answers this request: 'Was Google founded by Bill Gates?' from the knowledge graph Wikidata"
+response: "ASK WHERE { wd:Q95 wdt:P112 wd:Q2283 }"

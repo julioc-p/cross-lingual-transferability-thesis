@@ -1,0 +1,116 @@
+\section{Methodology}\label{section::methodology}
+
+\subsection{Data Collection}
+
+Data is drawn from all of the QALD (Question Answering over Linked Data) challenges until now, from the first edition to the tenth edition. The goal of this challenge is for teams to compete to extract information from knowledge graphs in the most accurate way \cite{LOPEZ20133}, aligning well with the first goal of creating a multilingual dataset for text-to-SPARQL generation.
+
+The data from the QALD challenges were combined with most of the different datasets gathered by Jian et al. \cite{jiang2022knowledge} from different challenges regarding question-answering over knowledge graphs. Specifically, the challenges drawn upon are those from Talmor et al. \cite{Talmor2018TheWA}, Cui et al. \cite{2021arXiv210803509C}, Gu et al. \cite{gu2021beyond}, Su et al. \cite{su-etal-2016-generating, s}, Trivedi et al. \cite{trivedi2017lc}, Dubey et al. \cite{dubey2017lc2}, Kaffee et al. \cite{DBLP:conf/kcap/KaffeeESV19}, Korablinov et al. \cite{2020arXiv200510659K}, Rybin et al. \cite{rybin2021rubq} and Yih et al. \cite{yih-etal-2016-value}. The datasets in consideration meet the basic requirement of having the following properties available or easily inferable for each question: question in natural language, SPARQL query, language and knowledge graph referenced.
+
+For the QALD datasets, several scripts were created to scrape the main QALD repository (See code at \cite{QALDRepo}), which contains the QALD challenges from 1 to 9. These datasets were then standardized into a schema with the following columns: text\_query, language, sparql\_query, and knowledge\_graphs.
+Since the datasets in the rest of the challenges, with the exception of QALD 10, had much more varied forms, each dataset had to be manually examined to check the schema and a custom script was made to extract all of its partitions, adapt the schema, and combine with the previously merged dataset.
+
+\subsection{Data Analysis}
+
+The QALD datasets sum up to about 16000 data points, while the rest make up around 620000. One dataset stands out because of its size, the Multilingual Compositional Wikidata Questions dataset by Cui et al. \cite{2021arXiv210803509C} with around 100000 questions in each of the following languages: English, Hebrew, Kannada and Chinese. It is worth pointing out that the non-English questions were translated from English using Google Translation.
+
+Regarding the data quality, the QALD 10 dataset stands out for being a multilingual dataset curated by native speakers. It provides 806 questions, each one in Chinese (Mandarin), English, German and Russian with the corresponding SPARQL query for the knowledge graph Wikidata.
+
+\subsubsection{Data Quality Issues}
+The datasets contains several types of data quality issues that were identified during the analysis.
+
+First, there were minor orthographic errors, such as the word "character" being misspelled as "charcter" in the following question from the Complex Web Questions dataset by Talmor et al. \cite{Talmor2018TheWA}:
+
+\begin{quote}
+"In the film that has a charcter named Rev. Jackson P. Sayer, who played Michael Myers?"
+\end{quote}
+
+Additionally, some questions were incomplete. For example, in the QALD-5 dataset, a question in French appears as:
+
+\begin{quote}
+"Quel est le"
+\end{quote}
+
+which translates to English as "What is the" \cite{DBLP:conf/clef/UngerFLNCCW15}.
+
+Another common issue was the presence of statements that did not resemble questions. For instance, the RuBQ v2 dataset contained the entry:
+
+\begin{quote}
+"A post takes time."
+\end{quote}
+
+\cite{rybin2021rubq}.
+
+Low-quality translations were also observed, such as the question from QALD Challenge 3:
+
+\begin{quote}
+"Por qué río cruza la Brooklyn Bridge"
+\end{quote}
+
+which is grammatically incorrect in Spanish \cite{10.1007/978-3-642-40802-1_30}.
+
+Some entries were unintelligible due to their structure. A notable example from the Multilingual Compositional Wikidata Questions dataset is:
+
+\begin{quote}
+"Was Akira Kurosawa a film producer that Akira Kurosawa was executive produced by, edited by, and directed by?"
+\end{quote}
+
+\cite{2021arXiv210803509C}.
+
+There were also cases where entries contained only a single letter as a sentence.
+
+Finally, incomplete data was present, such as SPARQL queries with null values. There is for example a question from the RuBQ v2 dataset that does not have a corresponding SPARQL query:
+\begin{quote}
+"In what year was the Jaguar E-type discontinued?"
+\end{quote}
+
+\cite{rybin2021rubq}.
+
+We also noticed that data quality significantly diminished at the extreme lengths of text queries.
+\begin{itemize}
+  \item In the lower range, we found many data points consisting of a single letter or an incomplete sentence, as mentioned earlier.
+  \item In the higher range, many entries were not questions at all but rather statements or entirely unintelligible due to their structure. An example of this is: 
+  \begin{quote}
+    what is the source for quotation enter through the narrow gate. the gate that leads to damnation is wide, the road is clear, and many choose to travel it. but how narrow is the gate that leads to life, how rough the road, and how few there are who find it. -- mathew 7:13-14?
+  \end{quote}
+\end{itemize}
+
+In general, datasets with a higher number of data points tended to have lower quality. The QALD datasets, each containing fewer than 1,000 data points, maintained very good quality, particularly in English.  
+
+Furthermore, the translations in the QALD-10 dataset were performed by native speakers, making their quality exceptionally high compared to other datasets. However, we cannot comment on the Russian translations since the author does not speak that language.
+
+\subsubsection{Data Compilation}
+
+After gathering and merging the data from all of these sources, we compiled the datasets into a single large dataset. For some entries, the language was explicitly provided, while for others, we inferred the language based on context, particularly for English queries.
+
+The final dataset is structured with the following columns: \texttt{text\_query}, \texttt{language}, \texttt{sparql\_query}, and \texttt{knowledge\_graphs}. We believe that the inclusion of the \texttt{knowledge\_graphs} column is essential, as it provides valuable context to understand the questions better and also helps in determining whether a question is answerable based on the referenced knowledge graph.
+
+The resulting dataset contains 638,098 data points across 13 languages and 15 distinct knowledge graphs. This dataset, made available on Huggingface \url{https://huggingface.co/datasets/julioc-p/Question-Sparql}, is, to the best of our knowledge, the largest multilingual dataset for text-to-SPARQL generation in one single ``place''.
+
+The \texttt{text\_query} entries in the dataset vary significantly in length, ranging from short queries like \textquotedblleft Wo ist Rom?\textquotedblright{} (11 characters) to much longer and more complex questions that span up to 956 characters.
+
+In terms of \texttt{sparql\_query} complexity, the dataset includes a variety of complex SPARQL queries, using different relationships and entities. For example, consider the following SPARQL query:
+
+\begin{verbatim}
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://rdf.freebase.com/ns/>
+
+SELECT (?x0 AS ?value) WHERE {
+    SELECT DISTINCT ?x0 WHERE {
+        ?x0 :type.object.type :book.poem .
+        ?x1 :type.object.type :book.author .
+        VALUES ?x2 { :m.048g2cm }
+        ?x1 :book.author.works_written ?x0 .
+        ?x2 :media_common.quotation.author ?x1 .
+        FILTER ( ?x0 != ?x1 && ?x0 != ?x2 && ?x1 != ?x2 )
+    }
+}
+\end{verbatim}
+
+This query was generated for the question:
+
+\begin{quote}
+\textquotedblleft Which poem was composed by the author of republics abound in young civilians who believe that the laws make the city, that grave modifications of the policy and modes of living and employments of the population, that commerce, education and religion may be voted in or out; and that any measure, though it were absurd, may be imposed on a people if only you can get sufficient voices to make it a law. But the wise know that foolish legislation is a rope of sand which perishes in the twisting; that the state must follow and not lead the character and progress of the citizen; that the form of government which prevails is the expression of what cultivation exists in the population which permits it. The law is only a memorandum?\textquotedblright{}
+\end{quote}
+
+This is just one example of the rich and diverse nature of the queries within the dataset, demonstrating both the complexity and the breadth of the information being asked from the knowledge graphs.
