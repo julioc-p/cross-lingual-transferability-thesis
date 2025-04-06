@@ -188,7 +188,6 @@ peft_config = LoraConfig(
         "gate_proj",
         "up_proj",
         "down_proj",
-        "lm_head",
     ],
     bias="none",
     task_type="CAUSAL_LM",
