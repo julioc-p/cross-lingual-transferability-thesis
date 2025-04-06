@@ -1,4 +1,4 @@
-Total Queries: 391
-Valid Queries: 366
-Correct Answers: 23
+Total Queries: 391                                                                                                                                  
+Valid Queries: 372                                                                                                                                  
+Correct Answers: 23                                                                                                                                 
 Partial Answers: 0

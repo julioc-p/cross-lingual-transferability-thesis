@@ -1,20 +1,19 @@
-
 import json
-from memory_profiler import profile
 import requests
 import argparse
 import concurrent.futures
 import matplotlib.pyplot as plt
 import logging
 import time
-import requests_cache
+
+# import requests_cache
 from typing import Dict, Any, Tuple, Set, Optional
 
 SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
 HEADERS = {"User-Agent": "SPARQLValidatorBot/1.0 (mailto:your_email@example.com)"}
 MAX_WORKERS = 10
 RETRY_ATTEMPTS = 3
-RETRY_DELAY = 2 
+RETRY_DELAY = 2
 
 
 logging.basicConfig(level=logging.INFO)

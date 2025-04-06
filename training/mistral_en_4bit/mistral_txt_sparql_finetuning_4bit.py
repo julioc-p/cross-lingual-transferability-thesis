@@ -1,4 +1,3 @@
-
 import os
 
 HF_TOKEN = os.getenv("HF_TOKEN")
@@ -40,12 +39,10 @@ ds_en["text_query"]
 ds_en = ds_en.shuffle(seed=42).select(range(35000))
 
 
+new_model = "/netscratch/jperez/mistralai-sparql-en-Instruct-txt-sparql_4bit"
 
 
-new_model = "/netscratch/jperez/mistralai-sparql-en-Instruct-txt-sparql_4bit" 
-
-
-lora_r = 64
+lora_r = 16
 
 lora_alpha = 16
 
@@ -125,8 +122,6 @@ base_model.config.pretraining_tp = 1
 tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
 tokenizer.pad_token = tokenizer.eos_token
 tokenizer.padding_side = "right"
-
-
 
 
 def create_text_row(txt, sparql_query, knowledge_graph):
@@ -223,7 +218,7 @@ trainer = SFTTrainer(
     train_dataset=train_dataset,
     peft_config=peft_config,
     dataset_text_field="text",
-    max_seq_length=max_seq_length, 
+    max_seq_length=max_seq_length,
     tokenizer=tokenizer,
     args=training_arguments,
     packing=packing,
