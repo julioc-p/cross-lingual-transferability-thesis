@@ -30,6 +30,7 @@ ds = load_dataset("julioc-p/Question-Sparql", split="train")
 ds_en = ds.filter(
     lambda x: x["language"] == "en"
     and x["sparql_query"].lower() not in ["out of scope", "none"]
+    and "Wikidata" in x["knowledge_graphs"]
 )
 
 
