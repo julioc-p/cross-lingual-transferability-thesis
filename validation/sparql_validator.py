@@ -110,7 +110,7 @@ def process_entry(entry: Dict[str, Any]) -> Tuple[int, int, int]:
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         future_gold = executor.submit(execute_sparql, gold_query)
         future_gen = executor.submit(execute_sparql, safe_add_limit(generated_query))
-        gold_result = extract_results(future_gold.result())
+        gold_result = extract_results(future_gen.result())
         gen_result = extract_results(future_gold.result())
 
     exact_match = gold_result == gen_result
