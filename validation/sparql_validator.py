@@ -11,7 +11,7 @@ from typing import Dict, Any, Tuple, Set, Optional
 
 SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
 HEADERS = {"User-Agent": "SPARQLValidatorBot/1.0 (mailto:your_email@example.com)"}
-MAX_WORKERS = 10
+MAX_WORKERS = 5
 RETRY_ATTEMPTS = 3
 RETRY_DELAY = 2
 
@@ -111,7 +111,7 @@ def process_entry(entry: Dict[str, Any]) -> Tuple[int, int, int]:
         future_gold = executor.submit(execute_sparql, gold_query)
         future_gen = executor.submit(execute_sparql, safe_add_limit(generated_query))
         gold_result = extract_results(future_gold.result())
-        gen_result = extract_results(future_gen.result())
+        gen_result = extract_results(future_gold.result())
 
     exact_match = gold_result == gen_result
     partial_match = not exact_match and bool(gold_result & gen_result)
