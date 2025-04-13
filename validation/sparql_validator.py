@@ -23,6 +23,9 @@ questions_to_ignore = [
     "How many international airports are located within the city of Hamburg ?",
     "How many paintings of Pablo Picasso were ever in a museum?",
     "What event killed the most people in the years 1910 to 1920?",
+    "Wieviele internationale Flugh\u00e4fen gibt es in der Stadt Hamburg?",
+    "Wieviele Gem\u00e4lde von Pablo Picasso waren jemals in einem Museum?",
+    "Welches Ereignis zwischen 1910 und 1920 t\u00f6tete die meisten Menschen?",
 ]
 
 
@@ -110,8 +113,8 @@ def process_entry(entry: Dict[str, Any]) -> Tuple[int, int, int]:
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         future_gold = executor.submit(execute_sparql, gold_query)
         future_gen = executor.submit(execute_sparql, safe_add_limit(generated_query))
-        gold_result = extract_results(future_gen.result())
-        gen_result = extract_results(future_gold.result())
+        gold_result = extract_results(future_gold.result())
+        gen_result = extract_results(future_gen.result())
 
     exact_match = gold_result == gen_result
     partial_match = not exact_match and bool(gold_result & gen_result)
