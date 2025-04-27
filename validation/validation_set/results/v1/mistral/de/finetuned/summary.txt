@@ -1,0 +1,5 @@
+--- Evaluation Summary ---
+Total Queries Evaluated: 3500
+Executable Queries: 3119 (89.11%)
+Exact Match Answers: 346 (9.89% of total, 11.09% of executable)
+Partial Match Answers: 3 (0.09% of total)
