@@ -1,4 +1,0 @@
-Total Queries: 391
-Valid Queries: 381
-Correct Answers: 16
-Partial Answers: 0
