@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 import os
+
 os.environ["HF_HUB_CACHE"] = "/netscratch/jperez/huggingface"
 os.environ["HF_HOME"] = "/netscratch/jperez/huggingface"
 os.environ["TRANSFORMERS_CACHE"] = "/netscratch/jperez/huggingface"
-HF_TOKEN = os.getenv(
-    "HF_TOKEN"
-)
+HF_TOKEN = os.getenv("HF_TOKEN")
 import json
 import torch
 from datasets import load_dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import re
 from tqdm.auto import tqdm
+
 use_4bit = True
 bnb_4bit_compute_dtype = "float16"
 bnb_4bit_quant_type = "nf4"
@@ -42,11 +42,8 @@ dataset_full = load_dataset("julioc-p/Question-Sparql", split="train")
 ds_en = dataset_full.filter(
     lambda x: x["language"] == "en"
     and x["sparql_query"] is not None
-    and x["sparql_query"].lower().strip()
-    not in ["out of scope", "none", ""]
-    and isinstance(
-        x["knowledge_graphs"], str
-    )
+    and x["sparql_query"].lower().strip() not in ["out of scope", "none", ""]
+    and isinstance(x["knowledge_graphs"], str)
     and "Wikidata" in x["knowledge_graphs"]
 )
 print(f"Filtered dataset size: {len(ds_en)}")
@@ -68,11 +65,15 @@ if start_index < end_index:
 else:
     print("Error: Invalid start/end index range after filtering. No data selected.")
     dataset = None
+
+
 def extract_sparql(text):
     try:
         return text.split("[/INST]")[1].split("```")[1].split("sparql")[1].strip()
     except:
         return ""
+
+
 output_data = []
 batch_size = 128
 max_new_tokens_generate = 512
@@ -105,9 +106,7 @@ else:
             max_length=model.config.max_position_embeddings
             - max_new_tokens_generate
             - 10,
-        ).to(
-            device
-        )
+        ).to(device)
         with torch.no_grad():
             output_ids = model.generate(
                 input_ids=inputs["input_ids"],
