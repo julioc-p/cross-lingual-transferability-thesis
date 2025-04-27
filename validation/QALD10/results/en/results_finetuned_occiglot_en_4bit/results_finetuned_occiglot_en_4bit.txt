@@ -1,4 +1,5 @@
-Total Queries: 394
-Valid Queries: 343
-Correct Answers: 7
-Partial Answers: 1
+--- Evaluation Summary ---
+Total Queries Evaluated: 391
+Executable Queries: 374 (95.65%)
+Exact Match Answers: 17 (4.35% of total, 4.55% of executable)
+Partial Match Answers: 1 (0.26% of total)

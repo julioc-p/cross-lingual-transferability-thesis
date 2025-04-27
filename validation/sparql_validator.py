@@ -292,9 +292,9 @@ def plot_results(total: int, valid: int, correct: int, partial: int):
     correct_perc_of_valid = (correct / valid * 100) if valid else 0
     print("\n--- Evaluation Summary ---")
     print(f"Total Queries Evaluated: {total}")
-    print(f"Syntactically Valid Queries: {valid} ({valid_perc:.2f}%)")
+    print(f"Executable Queries: {valid} ({valid_perc:.2f}%)")
     print(
-        f"Exact Match Answers: {correct} ({correct_perc:.2f}% of total, {correct_perc_of_valid:.2f}% of valid)"
+        f"Exact Match Answers: {correct} ({correct_perc:.2f}% of total, {correct_perc_of_valid:.2f}% of executable)"
     )
     print(f"Partial Match Answers: {partial} ({partial_perc:.2f}% of total)")
     print("--------------------------")

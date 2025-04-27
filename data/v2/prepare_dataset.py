@@ -2,12 +2,16 @@ from datasets import load_dataset
 import argparse
 
 
-def create_conversation(sample, system_message):
+def create_conversation(sample, system_message, language):
+    complete_language = "English" if language == "en" else "German"
     return {
         "messages": [
             {
                 "role": "system",
-                "content": system_message.format(context=sample["context"]),
+                "content": system_message.format(
+                    context=sample["context"],
+                    complete_language=complete_language,
+                ),
             },
             {"role": "user", "content": sample["text_query"]},
             {"role": "assistant", "content": sample["sparql_query"]},
@@ -16,7 +20,7 @@ def create_conversation(sample, system_message):
 
 
 def process_dataset(language, base_name, output_dir="/netscratch/jperez"):
-    system_message = """You are an expert text to SparQL query translator. Users will ask you questions in English and you will generate a SparQL query based on the provided context.
+    system_message = """You are an expert text to SparQL query translator. Users will ask you questions in {complete_language} and you will generate a SparQL query based on the provided context.
 CONTEXT:
 {context}"""
 
@@ -33,7 +37,7 @@ CONTEXT:
 
     # Convert dataset to OAI messages
     dataset = dataset.map(
-        lambda x: create_conversation(x, system_message),
+        lambda x: create_conversation(x, system_message, language),
         remove_columns=dataset.features,
         batched=False,
     )
