@@ -10,7 +10,6 @@ from tqdm import tqdm
 import math
 
 
-
 SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
 HEADERS = {"User-Agent": "SPARQLValidatorBot/1.0 (mailto:your_real_email@example.com)"}
 MAX_WORKERS = 5
@@ -278,7 +277,6 @@ def calculate_metrics_for_entry(
         )
         return (0.0, 0.0, 0.0, True)
 
-
     gold_results = extract_results(gold_json)
     gen_results = extract_results(gen_json)
 
@@ -333,10 +331,7 @@ def evaluate_queries(file_path: str) -> Tuple[int, int, float, float, float]:
 
     original_count = len(data)
     filtered_data = [
-        entry
-        for entry in data
-        if entry.get("question") not in questions_to_ignore
-        and entry.get("generated_sparql", "").strip()
+        entry for entry in data if entry.get("question") not in questions_to_ignore
     ]
     total_evaluated = len(filtered_data)
     logger.info(
