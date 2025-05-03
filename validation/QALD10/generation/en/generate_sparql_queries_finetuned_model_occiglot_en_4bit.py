@@ -42,9 +42,7 @@ model = AutoModelForCausalLM.from_pretrained(
 ).to(device)
 tokenizer = AutoTokenizer.from_pretrained(base_model)
 
-tokenizer.pad_token = (
-    tokenizer.eos_token
-) 
+tokenizer.pad_token = tokenizer.eos_token
 
 dataset = load_dataset("julioc-p/Question-Sparql", split="validation")
 
@@ -54,16 +52,16 @@ def extract_sparql(text):
         r"(SELECT|ASK|CONSTRUCT|DESCRIBE).*?\}", text, re.DOTALL | re.IGNORECASE
     )
     if match:
-        return match.group(0).strip() 
-    return "" 
+        return match.group(0).strip()
+    return ""
 
 
 output_data = []
 
 for example in dataset:
-    question = example["text_query"] 
-    gold_sparql = example["sparql_query"] 
-    knowledge_graph = example["knowledge_graphs"] 
+    question = example["text_query"]
+    gold_sparql = example["sparql_query"]
+    knowledge_graph = example["knowledge_graphs"]
 
     prompt = [
         {
@@ -97,6 +95,7 @@ for example in dataset:
             "knowledge_graph": knowledge_graph,
             "gold_sparql": gold_sparql,
             "generated_sparql": cleaned_sparql,
+            "raw_answer": generated_text,
         }
     )
 
