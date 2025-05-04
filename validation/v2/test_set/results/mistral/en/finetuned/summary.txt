@@ -1,0 +1,31 @@
+--- Evaluation Summary ---
+Total Entries Loaded: 10000
+Filtered (Ignored Question): 0
+Total Entries Attempted Evaluation: 10000
+
+--- Result Categories ---
+(Percentages based on 10000 entries attempted after ignoring questions)
+  Correct (Exact Match)                   :  7455 ( 74.55%)
+  Correct (Both Empty)                    :   818 (  8.18%)
+  Correct (Partial Match)                 :    28 (  0.28%)
+  Incorrect (Gen Empty, Gold Not)         :   815 (  8.15%)
+  Incorrect (Gold Empty, Gen Not)         :    22 (  0.22%)
+  Incorrect (No Overlap)                  :   825 (  8.25%)
+  Failure: Generated Query Execution      :    26 (  0.26%)
+  Failure: Empty Generated Query String   :    11 (  0.11%)
+
+--- Derived Counts ---
+  Generated Query Non-Empty & Executable:  9963 ( 99.63%)
+  Failure - Empty Generated Query       :    11 (  0.11%)
+  Failure - Generated Query Execution   :    26 (  0.26%)
+  Failure - Gold Query Execution        :     0 (  0.00%)
+  Correct (Exact + Both Empty)      :  8273 ( 82.73%)
+  Correct (Partial Match)           :    28 (  0.28%)
+
+--- Macro Averaged Metrics (QALD Variant) ---
+(Calculated over all 10000 attempted entries)
+(Empty queries & execution failures contribute 0.0 to scores)
+Macro Precision: 0.91036957
+Macro Recall:    0.82922628
+Macro F1-Score:  0.82845563
+--------------------------
