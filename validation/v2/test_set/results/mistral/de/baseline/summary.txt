@@ -1,31 +1,31 @@
 --- Evaluation Summary ---
 Total Entries Loaded: 10000
 Filtered (Ignored Question): 0
-Filtered (Empty Gen. Query): 541
-Total Entries Attempted Evaluation: 9459
+Total Entries Attempted Evaluation: 10000
 
 --- Result Categories ---
-(Percentages based on 10000 entries processed/filtered after ignoring questions)
+(Percentages based on 10000 entries attempted after ignoring questions)
   Correct (Exact Match)                   :    75 (  0.75%)
   Correct (Both Empty)                    :   342 (  3.42%)
   Correct (Partial Match)                 :    26 (  0.26%)
-  Incorrect (Gen Empty, Gold Not)         :  3262 ( 32.62%)
+  Incorrect (Gen Empty, Gold Not)         :  3263 ( 32.63%)
   Incorrect (Gold Empty, Gen Not)         :    28 (  0.28%)
   Incorrect (No Overlap)                  :   320 (  3.20%)
-  Failure: Generated Query Execution      :  5406 ( 54.06%)
-  Filtered (Empty Generated Query)        :   541 (  5.41%)
+  Failure: Generated Query Execution      :  5405 ( 54.05%)
+  Failure: Empty Generated Query String   :   541 (  5.41%)
 
 --- Derived Counts ---
-  Generated Query Executable          :  4053 ( 40.53%)
-  Generated Query Failed Execution    :  5406 ( 54.06%)
-  Gold Query Failed (Gen OK)        :     0
+  Generated Query Non-Empty & Executable:  4054 ( 40.54%)
+  Failure - Empty Generated Query       :   541 (  5.41%)
+  Failure - Generated Query Execution   :  5405 ( 54.05%)
+  Failure - Gold Query Execution        :     0 (  0.00%)
   Correct (Exact + Both Empty)      :   417 (  4.17%)
   Correct (Partial Match)           :    26 (  0.26%)
 
 --- Macro Averaged Metrics (QALD Variant) ---
-(Calculated over 9459 attempted non-empty entries)
-(Entries failing execution contribute 0.0 to scores)
-Macro Precision: 0.38949377
-Macro Recall:    0.04607995
-Macro F1-Score:  0.04464012
+(Calculated over all 10000 attempted entries)
+(Empty queries & execution failures contribute 0.0 to scores)
+Macro Precision: 0.36852216
+Macro Recall:    0.04358703
+Macro F1-Score:  0.04222509
 --------------------------
