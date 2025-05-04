@@ -179,6 +179,7 @@ cython_debug/
 *.pdf
 
 *test*
+!test_set
 
 *cache
 
