@@ -1,0 +1,35 @@
+Evaluation finished in 3256.45 seconds.
+
+--- Evaluation Summary ---
+Total Entries Loaded: 10000
+Filtered (Ignored Question): 0
+Total Entries Attempted Evaluation: 10000
+*** Internal Processing Errors: 2 ***
+
+--- Result Categories ---
+(Percentages based on 10000 entries attempted after ignoring questions)
+  Correct (Exact Match)                   :    13 (  0.13%)
+  Correct (Both Empty)                    :   206 (  2.06%)
+  Correct (Partial Match)                 :     5 (  0.05%)
+  Incorrect (Gen Empty, Gold Not)         :  1670 ( 16.70%)
+  Incorrect (Gold Empty, Gen Not)         :    15 (  0.15%)
+  Incorrect (No Overlap)                  :   181 (  1.81%)
+  Failure: Generated Query Execution      :  7830 ( 78.30%)
+  Failure: Empty Generated Query String   :    78 (  0.78%)
+  Failure: Internal Processing Error      :     2 (  0.02%)
+
+--- Derived Counts ---
+  Generated Query Non-Empty & Executable:  2090 ( 20.90%)
+  Failure - Empty Generated Query       :    78 (  0.78%)
+  Failure - Generated Query Execution   :  7830 ( 78.30%)
+  Failure - Gold Query Execution        :     0 (  0.00%)
+  Correct (Exact + Both Empty)      :   219 (  2.19%)
+  Correct (Partial Match)           :     5 (  0.05%)
+
+--- Macro Averaged Metrics (QALD Variant) ---
+(Calculated over all 10000 attempted entries)
+(Empty queries & execution failures contribute 0.0 to scores)
+Macro Precision: 0.18891875
+Macro Recall:    0.02230606
+Macro F1-Score:  0.02193267
+--------------------------
