@@ -1,4 +1,5 @@
 import os
+
 os.environ["HF_HUB_CACHE"] = "/netscratch/jperez/huggingface"
 os.environ["HF_HOME"] = "/netscratch/jperez/huggingface"
 os.environ["TRANSFORMERS_CACHE"] = "/netscratch/jperez/huggingface"
@@ -9,8 +10,10 @@ import pandas as pd
 import re
 
 if not HF_TOKEN:
-    raise ValueError("Hugging Face token (HF_TOKEN) not found in environment variables. "
-                     "Llama 3.3 requires authentication.")
+    raise ValueError(
+        "Hugging Face token (HF_TOKEN) not found in environment variables. "
+        "Llama 3.3 requires authentication."
+    )
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from huggingface_hub import login
@@ -61,11 +64,12 @@ dataset = load_dataset("julioc-p/Question-Sparql")
 df = dataset["train"].to_pandas()
 
 df_filtered = df[
-    (df["language"] == "de") &
-    (df["sparql_query"].notna()) &
-    (df["knowledge_graphs"].str.contains("Wikidata", case=False, na=False))
+    (df["language"] == "de")
+    & (df["sparql_query"].notna())
+    & (df["knowledge_graphs"].str.contains("Wikidata", case=False, na=False))
 ].copy()
 print(f"Filtered DataFrame shape: {df_filtered.shape}")
+
 
 def build_prompt(question, sparql):
     """Builds the prompt string using the tokenizer's chat template for Llama 3.3 Instruct."""
@@ -94,7 +98,7 @@ def build_prompt(question, sparql):
     "Executive Producer": "P1431",
     "Staatsangehörigkeit": "P27"
   }
-}"""
+}""",
         },
         {
             "question": "Hat die United States Army einen Ehepartner eines Charakters angestellt?",
@@ -109,7 +113,7 @@ def build_prompt(question, sparql):
     "Arbeitgeber": "P108",
     "Instanz von": "P31"
   }
-}"""
+}""",
         },
         {
             "question": "Hat der männliche Schauspieler des Herzogs von Mantua Adua Veroni geheiratet?",
@@ -125,28 +129,34 @@ def build_prompt(question, sparql):
     "Geschlecht": "P21",
     "Rolle": "P453"
   }
-}"""
-        }
+}""",
+        },
     ]
 
     messages = [{"role": "system", "content": system_prompt}]
 
     for ex in examples:
-        messages.append({"role": "user", "content": f"Question: {ex['question']}\nSPARQL: {ex['sparql']}"})
-        messages.append({"role": "assistant", "content": ex['answer'].strip()})
+        messages.append(
+            {
+                "role": "user",
+                "content": f"Question: {ex['question']}\nSPARQL: {ex['sparql']}",
+            }
+        )
+        messages.append({"role": "assistant", "content": ex["answer"].strip()})
 
-    messages.append({"role": "user", "content": f"Question: {question}\nSPARQL: {sparql}"})
+    messages.append(
+        {"role": "user", "content": f"Question: {question}\nSPARQL: {sparql}"}
+    )
 
     try:
         prompt = tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=True
+            messages, tokenize=False, add_generation_prompt=True
         )
         return prompt
     except Exception as e:
         print(f"Error applying chat template: {e}")
         return None
+
 
 def extract_entities_batch(prompts):
     """
@@ -156,14 +166,18 @@ def extract_entities_batch(prompts):
         return []
 
     tokenizer.padding_side = "left"
-    tokenized_batch = tokenizer(prompts, return_tensors="pt", padding=True, truncation=False)
+    tokenized_batch = tokenizer(
+        prompts, return_tensors="pt", padding=True, truncation=False
+    )
 
     input_ids = tokenized_batch.input_ids.to(model.device)
     attention_mask = tokenized_batch.attention_mask.to(model.device)
 
     input_seq_len = input_ids.shape[1]
 
-    print(f"Running generation for batch size: {len(prompts)}, input sequence length: {input_seq_len}")
+    print(
+        f"Running generation for batch size: {len(prompts)}, input sequence length: {input_seq_len}"
+    )
     with torch.no_grad():
         outputs = model.generate(
             input_ids=input_ids,
@@ -180,16 +194,18 @@ def extract_entities_batch(prompts):
     for i in range(len(prompts)):
         generated_tokens = outputs[i][input_seq_len:]
 
-        decoded_text = tokenizer.decode(generated_tokens, skip_special_tokens=True).strip()
+        decoded_text = tokenizer.decode(
+            generated_tokens, skip_special_tokens=True
+        ).strip()
 
         try:
-            start_idx = decoded_text.find('{')
-            end_idx = decoded_text.rfind('}')
+            start_idx = decoded_text.find("{")
+            end_idx = decoded_text.rfind("}")
 
             if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
                 json_str = decoded_text[start_idx : end_idx + 1]
-                json_str = re.sub(r'^```json\s*', '', json_str, flags=re.IGNORECASE)
-                json_str = re.sub(r'\s*```$', '', json_str)
+                json_str = re.sub(r"^```json\s*", "", json_str, flags=re.IGNORECASE)
+                json_str = re.sub(r"\s*```$", "", json_str)
                 json_str = json_str.strip()
                 parsed_json = json.loads(json_str)
                 results.append(parsed_json)
@@ -198,13 +214,18 @@ def extract_entities_batch(prompts):
                 print(f"Could not find valid JSON boundaries for batch item {i}")
                 results.append(None)
         except json.JSONDecodeError as e:
-            print(f"JSON Decode Error for batch item {i}: {e}\nContent (first 100 chars): {decoded_text[:100]}")
+            print(
+                f"JSON Decode Error for batch item {i}: {e}\nContent (first 100 chars): {decoded_text[:100]}"
+            )
             results.append(None)
         except Exception as e:
-            print(f"Unexpected error processing output for batch item {i}: {e}\nContent (first 100 chars): {decoded_text[:100]}")
+            print(
+                f"Unexpected error processing output for batch item {i}: {e}\nContent (first 100 chars): {decoded_text[:100]}"
+            )
             results.append(None)
 
     return results
+
 
 batch_size = 32
 checkpoint_path = "/netscratch/jperez/wikidata_extraction_checkpoint_de_llama33.csv"
@@ -214,7 +235,7 @@ checkpoint_interval = 5000
 if os.path.exists(checkpoint_path):
     try:
         checkpoint_df = pd.read_csv(checkpoint_path)
-        results = checkpoint_df.to_dict('records')
+        results = checkpoint_df.to_dict("records")
         print(f"Resuming from checkpoint with {len(results)} processed rows.")
     except Exception as e:
         print(f"Error loading checkpoint: {e}. Starting from scratch.")
@@ -251,13 +272,14 @@ for i in range(start_index, len(df_filtered), batch_size):
         for original_idx, context in zip(prompt_indices, extracted_contexts):
             batch_contexts[original_idx] = context
 
-
     batch_results_list = []
     for idx, (_, row) in enumerate(batch_df.iterrows()):
         context = batch_contexts[idx]
         result_dict = {
             **row.to_dict(),
-            "context": json.dumps(context, ensure_ascii=False) if context is not None else None
+            "context": (
+                json.dumps(context, ensure_ascii=False) if context is not None else None
+            ),
         }
         batch_results_list.append(result_dict)
 
@@ -282,25 +304,29 @@ except Exception as e:
 
 
 print("\nMerging results back into the original dataset structure...")
-result_map = {(res['text_query'], res['sparql_query']): res['context'] for res in results}
+result_map = {
+    (res["text_query"], res["sparql_query"]): res["context"] for res in results
+}
+
 
 def get_context(row):
-    return result_map.get((row['text_query'], row['sparql_query']), None)
+    return result_map.get((row["text_query"], row["sparql_query"]), None)
+
 
 original_dataset = load_dataset("julioc-p/Question-Sparql")
 original_df = original_dataset["train"].to_pandas()
 
-if 'context' not in original_df.columns:
-    original_df['context'] = None
+if "context" not in original_df.columns:
+    original_df["context"] = None
 
-original_df['context'] = original_df.apply(get_context, axis=1)
+original_df["context"] = original_df.apply(get_context, axis=1)
 
 print("Sample of updated DataFrame with context:")
-print(original_df[original_df['context'].notna()].head())
+print(original_df[original_df["context"].notna()].head())
 
 try:
     updated_dataset = Dataset.from_pandas(original_df)
-    original_dataset['train'] = updated_dataset
+    original_dataset["train"] = updated_dataset
 
     print("Pushing updated dataset to Hugging Face Hub...")
     original_dataset.push_to_hub("julioc-p/Question-Sparql", token=HF_TOKEN)
