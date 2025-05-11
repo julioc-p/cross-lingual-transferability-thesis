@@ -7,9 +7,15 @@ import os
 
 def parse_summary_file(file_path):
     """
-    Parses a summary.txt file to extract Macro Precision, Recall, and F1-score.
+    Parses a summary.txt file to extract Macro Precision, Recall, F1-score,
+    and Executable Query Percentage.
     """
-    metrics = {"precision": None, "recall": None, "f1": None}
+    metrics = {
+        "precision": None,
+        "recall": None,
+        "f1": None,
+        "executable_percentage": None,
+    }
     try:
         if not os.path.exists(file_path):
             print(f"Warning: File not found during parsing - {file_path}")
@@ -21,6 +27,10 @@ def parse_summary_file(file_path):
         precision_match = re.search(r"Macro Precision:\s*([\d.]+)", content)
         recall_match = re.search(r"Macro Recall:\s*([\d.]+)", content)
         f1_match = re.search(r"Macro F1-Score:\s*([\d.]+)", content)
+        executable_match = re.search(
+            r"Generated Query Non-Empty & Executable:\s*\d+\s*\(\s*([\d.]+)\s*%\)",
+            content,
+        )
 
         if precision_match:
             metrics["precision"] = float(precision_match.group(1))
@@ -28,12 +38,22 @@ def parse_summary_file(file_path):
             metrics["recall"] = float(recall_match.group(1))
         if f1_match:
             metrics["f1"] = float(f1_match.group(1))
+        if executable_match:
+            metrics["executable_percentage"] = float(executable_match.group(1))
 
         if all(v is None for v in metrics.values()):
             return None
-        if any(v is None for v in metrics.values()):
+        if any(
+            v is None
+            for v in [
+                metrics["precision"],
+                metrics["recall"],
+                metrics["f1"],
+                metrics["executable_percentage"],
+            ]
+        ):
             print(
-                f"Warning: Some macro metrics might be missing in {file_path}. Found: {metrics}"
+                f"Warning: Some macro metrics or executable percentage might be missing in {file_path}. Found: {metrics}"
             )
         return metrics
     except Exception as e:
@@ -147,6 +167,7 @@ def main():
                             and metrics.get("f1") is not None
                             and metrics.get("precision") is not None
                             and metrics.get("recall") is not None
+                            and metrics.get("executable_percentage") is not None
                         ):
                             parsed_files_count += 1
                             data.append(
@@ -158,13 +179,16 @@ def main():
                                     "Precision": metrics["precision"],
                                     "Recall": metrics["recall"],
                                     "F1-Score": metrics["f1"],
+                                    "Executable Queries (%)": metrics[
+                                        "executable_percentage"
+                                    ],
                                     "Category": f"{parsed_info['dataset_name']} {parsed_info['dataset_version']} - {parsed_info['language'].upper()} - {parsed_info['training_status']}",
                                     "_source_path": relative_path,
                                 }
                             )
                         elif metrics:
                             print(
-                                f"Note: Metrics parsed for {file_path} but F1, Precision, or Recall might be missing/invalid. Metrics: {metrics}. Skipping."
+                                f"Note: Metrics parsed for {file_path} but F1, Precision, Recall, or Executable Queries (%) might be missing/invalid. Metrics: {metrics}. Skipping."
                             )
                         else:
                             pass
@@ -200,7 +224,7 @@ def main():
 
     df = df.sort_values(by=["Dataset", "Language", "Training", "Model"])
 
-    metrics_to_plot = ["F1-Score", "Precision", "Recall"]
+    metrics_to_plot = ["F1-Score", "Precision", "Recall", "Executable Queries (%)"]
     for metric in metrics_to_plot:
         plot_grid = sns.catplot(
             x="Category",
@@ -232,7 +256,9 @@ def main():
 
         plot_grid.tight_layout()
 
-        output_filename = f"{metric.lower().replace('-', '_')}_comparison.png"
+        output_filename_metric_part = metric.lower().replace("-", "_").replace(" ", "_")
+        output_filename_metric_part = re.sub(r"[^\w_]", "", output_filename_metric_part)
+        output_filename = f"{output_filename_metric_part}_comparison.png"
         try:
             plot_grid.savefig(output_filename, dpi=300)
             print(f"Saved plot: {output_filename}")
