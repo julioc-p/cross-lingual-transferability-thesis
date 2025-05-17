@@ -1,6 +1,12 @@
 \section{Contribution}\label{section::contribution}
 
-\todo{largest multilingual dataset compilation, cleaned, standardized, structured, augmented and easily reachable in huggingface}
+A primary contribution of this thesis is the development and public release of a large-scale multilingual dataset specifically structured for the task of text-to-SPARQL generation.
+Comprising approximately 895,954 examples, this dataset spans 12 languages and is derived from established knowledge extraction benchmarks, including the known QALD series \cite{usbeck2024qald}, alongside other relevant challenges.
+The creation process involved meticulous data compilation from these diverse sources, followed by cleaning to remove inconsistencies and noise often present in aggregated datasets.
+Furthermore, the data was standardized into a consistent question-SPARQL query format and structured to facilitate efficient supervised fine-tuning of Large Language Models.
+A significant aspect of this dataset is its augmentation, particularly through the generation of German translations for existing English questions and the integration of Wikidata entity and relationship mappings.
+This augmentation not only expands the linguistic coverage but also provides explicit grounding crucial for the entity linking sub-task, a known challenge in text-to-SPARQL systems \cite{brei2024leveraging}.
+To promote reproducibility and further research within the community, the complete dataset and the scripts used for its generation, have been made publicly available on the Hugging Face Hub \cite{lhoest2021datasets} and Github respectively.
 
 \todo{scripts to replicate the whole data extraction, transform, loading process, partly automated given a repo by scraping}
 
