@@ -1,42 +1,39 @@
 \section{Contribution}\label{section::contribution}
 
-A primary contribution of this thesis is the development and public release of a large-scale multilingual dataset specifically structured for the task of text-to-SPARQL generation.
-Comprising approximately 895,954 examples, this dataset spans 12 languages and is derived from established knowledge extraction benchmarks, including the known QALD series \cite{usbeck2024qald}, alongside other relevant challenges.
-The creation process involved meticulous data compilation from these diverse sources, followed by cleaning to remove inconsistencies and noise often present in aggregated datasets.
-Furthermore, the data was standardized into a consistent question-SPARQL query format and structured to facilitate efficient supervised fine-tuning of Large Language Models.
+The contributions of this thesis span dataset creation, model development, evaluation methodologies, and experimental analysis, collectively aiming to provide a robust foundation for future research in this domain.
+
+A cornerstone of this work is the development and public release of a large-scale multilingual dataset, structured for the task of text-to-SPARQL generation.
+Comprising approximately 895,954 examples, this dataset spans 12 languages and is derived from established knowledge extraction challenges, including the well-known QALD series \cite{usbeck2024qald}. 
+The creation process involved careful data compilation from these diverse sources, followed by leaning to remove inconsistencies and noise often present in aggregated datasets.
+Furthermore, the data was standardized into a consistent question-SPARQL query format and structured to facilitate efficient supervised fine-tuning of LLMs.
 A significant aspect of this dataset is its augmentation, particularly through the generation of German translations for existing English questions and the integration of Wikidata entity and relationship mappings.
 This augmentation not only expands the linguistic coverage but also provides explicit grounding crucial for the entity linking sub-task, a known challenge in text-to-SPARQL systems \cite{brei2024leveraging}.
-To promote reproducibility and further research within the community, the complete dataset has been made publicly available on the Hugging Face Hub \cite{lhoest2021datasets}.
+To promote reproducibility and foster further research within the community, the complete dataset has been made publicly available on the Hugging Face Hub \cite{lhoest2021datasets}.
 
-Complementing the dataset, a further contribution lies in the provision of the comprehensive suite of scripts that automate and document the entire data lifecycle.
-These scripts facilitate the extraction of data from diverse sources, including the automated recursive scraping of repositories with datasets spread on nested folders like the QALD repository \cite{QALD_repository} and the integration of data from other knowledge graph question-answering challenges \cite{jiang2022knowledge}.
-The transformation phase is addressed through procedures for data cleaning, standardization into the consistent question-SPARQL schema, and the application of augmentations such as German translations and Wikidata entity/relationship mappings, as detailed in Section \ref{section::methodology}.
-The public availability of this ETL (Extract, Transform, Load) toolkit on GitHub for knowledge graph datasets offers a transparent and replicable methodology for the dataset's creation and adaptation.
-This enhances the utility of the primary dataset by enabling researchers to understand, verify, and potentially extend the data generation process.
+Complementing this primary dataset, a further significant contribution lies in the provision of a suite of scripts that automate and document the entire data lifecycle.
+These scripts facilitate the extraction of data from diverse sources, including the automated recursive scraping of repositories with datasets spread across nested folders, such as the QALD repository \cite{QALD_repository}, and the integration of data from other knowledge graph question-answering challenges \cite{jiang2022knowledge}.
+The transformation phase is addressed through procedures for data cleaning, standardization into the consistent question-SPARQL schema, and the application of augmentations like German translations and Wikidata entity/relationship mappings, as detailed in Section~\ref{section::methodology}.
+The public availability of this ETL (Extract, Transform, Load) toolkit on GitHub for knowledge graph datasets offers a transparent and replicable methodology for the dataset's creation and adaptation, thereby enhancing the utility of the primary dataset by enabling researchers to understand, verify, improve, and potentially extend the data generation process.
 
-The second main contribution of this thesis is the release of eight fine-tuned models in the Huggingface Hub.
-Each base model, Mistral 7B v0.1 and Occiglot-7b-eu, was fine-tuned for both English and German. 
-For each language and base model combination, two distinct versions were trained: one without the inclusion of entity/relationship mappings during fine-tuning (referred to as v1 experiments), and another where these mappings were integrated into the training input (v2 experiments).
-As detailed in Section \ref{section::results}, the v2 models are competitive with the state-of-the-art models in the text-to-SPARQL generation task, achieving an F1 score of around 0.25 for the challenging QALD-10 benchmark, which will shall be published in the near future.
+Beyond these data-centric contributions, this thesis also presents the release of eight fine-tuned LLM variants on the Hugging Face Hub. 
+Each base model, Mistral 7B v0.1 and Occiglot-7b-eu5, was fine-tuned for both English and German.
+For each language and base model combination, two distinct versions were trained: one without the inclusion of entity/relationship mappings during fine-tuning (referred to as v1), and another where these mappings were integrated into the training input (v2).
+As detailed in Section~\ref{section::results}, the v2 models demonstrate performance competitive with state-of-the-art systems in the text-to-SPARQL generation task, achieving an F1 score of around 0.25 on the challenging QALD-10 benchmark.
+The intention is to formally publish these models and their benchmark results in the near future.
 
-Furthermore, this thesis not only describes the training specifics of the final models, but also details the incremental changes and strategies along the way that increased (or decreased) performance in section \ref{section::experimental_setup}, each of which is documented in the Github repository.
-This should lay out a path of reproducibility for future researchers, allowing them to understand the decisions made during the training process, and avoid some pitfalls that were encountered.
+Furthermore, to increase usefulness and share insights from the development process, this thesis not only describes the training specifics of the final models but also details the incremental changes and strategies explored along the way that influenced performance, as documented in Section~\ref{section::experimental_setup} and the accompanying GitHub repository.
+This documentation aims to provide a path for future researchers, allowing them to understand the decisions made during the training process and to avoid the pitfalls that were faced here.
 
-To assess the performance of the results of the output of the fine-tuned models,
-this work leaves an evaluation framework in the form of a custom Python script,
-\texttt{sparql\_validator.py} (publicly available in the project's
-\texttt{validation} directory on GitHub, as detailed in Appendix~\ref{appendix:github_repository}),
-designed for the execution and comparison of generated SPARQL queries against
-gold standard queries.
+To facilitate rigorous evaluation of the generated SPARQL queries, this work introduces a custom Python evaluation framework, \texttt{sparql\_validator.py}.
+This script, publicly available in the project's \texttt{validation} directory on GitHub (see Appendix~\ref{appendix:github_repository}), is designed for the execution of generated SPARQL queries against gold standard queries and their comparison.
+A key feature of this script is its direct interaction with the live Wikidata SPARQL endpoint (\url{https://query.wikidata.org/}), thereby evaluating queries based on their real execution and the actual data retrieved.
+The evaluation script employs a slightly modified version of the macro precision, recall, and F1 score, as described by Usbeck et al.~\cite{usbeck2019benchmarking}, to appropriately weight in the executability of queries.
+To manage practical challenges, it incorporates threading and caching to accelerate the evaluation process, alongside retry logic to accommodate endpoint rate limits.
+Moreover, the script categorizes query outcomes (e.g., exact match, partial match, execution failure, empty query generated), offering a detailed breakdown of model behavior.
+The detailed metrics and categorizations produced by this script provide the quantitative foundation for the performance analysis presented in Section~\ref{section::results} and enable the generation of comparative performance plots (e.g., using \texttt{plot\_performance\_comparison.py} from the same directory).
 
-A key feature of this script is its direct interaction with the live Wikidata SPARQL endpoint \url{https://query.wikidata.org/}, thereby evaluating queries based on their real execution and the actual data retrieved.
-The evaluation script uses a slightly modified version of the macro precision, recall and f1 score described by Usbeck et. al \cite{usbeck2019benchmarking} to give weight for the executability of queries.
-Furthermore, it uses threading and caching to speed up the evaluation process and retry logic to accommodate endpoint limits.
-Furthermore, the script categorizes query outcomes (e.g., exact match, partial match, execution failure, empty query generated), offering a detailed breakdown of model behavior.
-The detailed metrics and categorizations produced by this script provide the quantitative foundation for the performance analysis presented in Section \ref{section::results}, and enable the generation of comparative performance plots (e.g., using \texttt{plot\_performance\_comparison.py} from the same directory).
+Finally, a core contribution of this thesis is the presentation and in-depth analysis of experimental results for the eight fine-tuned model variants across three distinct benchmarks.
+Firstly, all models were evaluated on the challenging QALD-10 benchmark \cite{usbeck2024qald}, providing a standardized comparison against existing systems in the text-to-SPARQL domain.
+Secondly, to assess performance on the specific data distribution and linguistic characteristics of the primary dataset developed in this work, models were evaluated on two held-out test splits from this large-scale multilingual corpus, covering both English and German.
 
-A further significant contribution of this thesis is the presentation and analysis of experimental results for the eight fine-tuned model variants across three distinct benchmarks.
-Firstly, all models were evaluated on the challenging QALD-10 benchmark \cite{usbeck2024qald}, providing a standardized comparison against existing systems in the text-to-SPARQL domain. 
-Secondly, to assess performance on the specific data distribution and linguistic characteristics of the primary dataset developed in this work, models were evaluated on two held-out test splits from this large-scale multilingual corpus, covering both English and German languages.
-
-With the insights, errors and surprises documented, this works serves as an initial base to further explore the effects of multilingual pre-training in this domain.
+Collectively, with the insights, errors, and surprising findings documented throughout this research, this work serves as an initial yet solid foundation to further explore the effects of multilingual pre-training in this domain.
