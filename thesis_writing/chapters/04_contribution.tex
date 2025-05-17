@@ -35,7 +35,9 @@ Furthermore, it uses threading and caching to speed up the evaluation process an
 Furthermore, the script categorizes query outcomes (e.g., exact match, partial match, execution failure, empty query generated), offering a detailed breakdown of model behavior.
 The detailed metrics and categorizations produced by this script provide the quantitative foundation for the performance analysis presented in Section \ref{section::results}, and enable the generation of comparative performance plots (e.g., using \texttt{plot\_performance\_comparison.py} from the same directory).
 
-\todo{results for 3 different benchmarks}
+A further significant contribution of this thesis is the presentation and analysis of experimental results for the eight fine-tuned model variants across three distinct benchmarks.
+Firstly, all models were evaluated on the challenging QALD-10 benchmark \cite{usbeck2024qald}, providing a standardized comparison against existing systems in the text-to-SPARQL domain. 
+Secondly, to assess performance on the specific data distribution and linguistic characteristics of the primary dataset developed in this work, models were evaluated on two held-out test splits from this large-scale multilingual corpus, covering both English and German languages.
 
 \todo{insights into why we get what we are getting}
 
