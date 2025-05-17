@@ -43,10 +43,12 @@ The Occiglot project provides a pertinent example, where the Mistral 7B model wa
 
 It is also noteworthy that much of the existing research on cross-lingual transferability tends to focus on evaluating performance on target languages, often without delving deeply into the nuances of how different source language combinations or pre-training strategies affect specific linguistic phenomena in the target languages \cite{singh2024threeprongedapproachcrosslingualadaptation, rathore-etal-2023-zgul, yamaguchi2024effectivelyexpandvocabularyllms}.
 
-
-
-\todo{introduce semantic web as an old concept. use right now? why do we need access to them? How could llms help us with different source languages}
-
-\todo{what is the aim of the thesis. what is some sneak peak, saying it is nuanced and not so straight forward as more languages more performance in every language}
-
-
+The task chosen to explore some of these nuances in this thesis, text-to-SPARQL generation, interfaces with the principles of the Semantic Web.
+The Semantic Web initiative, envisioned as an extension of the current web, aims to make online data machine-readable and interoperable, thereby enabling more intelligent data discovery, integration, and reuse \cite{lassila2001semantic, vanharmelen2004semantic}.
+Central to this vision are technologies like the Resource Description Framework (RDF) for data modeling and the SPARQL Protocol and RDF Query Language (SPARQL) for querying this structured data \cite{dataeuropa_rdf_sparql}.
+Knowledge Graphs, one of the main characters in the Semantic Web technologies, represent vast networks of interconnected entities and relationships, offering rich, structured information sources across diverse domains \cite{hogan2021knowledge}.
+While the Semantic Web provides powerful mechanisms for data representation and access, querying this data directly using SPARQL requires specialized knowledge, creating a barrier for non-expert users \cite{KAUFMANN2010377}. LLMs present a promising avenue to democratize access to this structured data by translating natural language questions, potentially from various source languages, into formal SPARQL queries. This capability is particularly relevant as the web contains a wealth of information in numerous languages, and enabling users to query knowledge graphs in their native tongue significantly lowers the barrier to information access.
+The primary aim of this thesis is to investigate the impact of continual multilingual pre-training on the cross-lingual transferability and task-specific performance of LLMs, specifically for generating SPARQL queries from natural language questions in English and German. This research compares the Occiglot-7b-eu5 model, which underwent continual pre-training on several European languages including German, against its base model, Mistral 7B v0.1.
+With this, we want to expand the work of by Rangel et al. in a multilingual setting leaving many new artifacts as a base for current research such as a large multilingual dataset.
+An initial hypothesis is that the more languages we pre-train a model with, the better performance we will have in those languages.
+We will see that the results are more nuanced than that hinting at structural and lexical complexities being a major factor in the performance.
