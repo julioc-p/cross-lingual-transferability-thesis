@@ -10,7 +10,6 @@
 	fleqn,
 	final,
 	]{scrartcl}
-    
 % PACKAGES FOR THE INSTITUTSVORLAGE
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -108,7 +107,7 @@ This work compares Occiglot-7b-eu5, a model resulting from continually pretraini
 
 The findings indicate that continual multilingual pre-training significantly benefits Occiglot's performance in German when contextual mappings are absent (v1), indicating the significant improvement gap given the new multilingual pretraining. However, providing German entity/relationship mappings to Mistral (v2) substantially reduces this performance gap. Conversely, for English, while Occiglot maintained comparable or better executable query rates, Mistral significantly outperformed Occiglot when both were provided with English contextual mappings (v2) in terms of F1 score. This suggests a potential trade-off where multilingual adaptation might slightly diminish handling nuance in the original language.
 
-A primary bottleneck identified in v1 models is entity/relationship linking, with performance increasing approximately fourfold when contextual mappings are supplied (v2). Interestingly, this improvement was less pronounced on the QALD10 validation set, suggesting that its inherent query complexity also poses a second significant challenge, largely not present in the other test sets. Nevertheless, by incorporating contextual mappings, competitive F1-scores were achieved on QALD10 (~ 0.25), comparable to systems in the QALD-10 benchmark (0.1-0.5 F1) \cite{usbeck2024qald}. This result also suggests that direct pre-training on Wikidata entity/relationship identifiers, a hypothesis considered, might yield similar outcomes to providing them as explicit context.
+A primary bottleneck identified in v1 models is entity/relationship linking, with performance increasing approximately fourfold when contextual mappings are supplied (v2). Interestingly, this improvement was less pronounced on the QALD10 validation set, suggesting that its inherent query complexity also poses a second significant challenge, largely not present in the other test sets. Nevertheless, by incorporating contextual mappings, competitive F1-scores were achieved on QALD10 (\~ 0.25), comparable to systems in the QALD-10 benchmark (0.1-0.5 F1) \cite{usbeck2024qald}. This result also suggests that direct pre-training on Wikidata entity/relationship identifiers, a hypothesis considered, might yield similar outcomes to providing them as explicit context.
 Finally, Occiglot generally demonstrated superior percentage of executable query generation in English in comparison to Mistral, hinting at benefits of multilingual exposure for correct syntax generation in other languages.
 \end{abstract}
 \newpage
@@ -151,6 +150,16 @@ Finally, Occiglot generally demonstrated superior percentage of executable query
 \printbibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%_APPENDIX_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Appendix} \label{Appendix}
+\subsection*{Github Repository} \label{appendix:github_repository}
+This appendix provides the link to the GitHub repository containing the complete source code, datasets, and configuration files. The repository is organized to allow for replication of the results presented.
+
+Repository Details:
+-------------------
+Author: Julio Perez (julioc-p)
+Repository Name: cross-lingual-transferability-thesis
+URL: https://github.com/julioc-p/cross-lingual-transferability-thesis
+
+
 \addcontentsline{toc}{section}{Appendix}    % adds entry to table of contents
 \declarationofintegrity{\today}
 %\input{chapters/xxx}                       % add in case you have additional images/tables
