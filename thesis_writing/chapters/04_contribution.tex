@@ -6,9 +6,13 @@ The creation process involved meticulous data compilation from these diverse sou
 Furthermore, the data was standardized into a consistent question-SPARQL query format and structured to facilitate efficient supervised fine-tuning of Large Language Models.
 A significant aspect of this dataset is its augmentation, particularly through the generation of German translations for existing English questions and the integration of Wikidata entity and relationship mappings.
 This augmentation not only expands the linguistic coverage but also provides explicit grounding crucial for the entity linking sub-task, a known challenge in text-to-SPARQL systems \cite{brei2024leveraging}.
-To promote reproducibility and further research within the community, the complete dataset and the scripts used for its generation, have been made publicly available on the Hugging Face Hub \cite{lhoest2021datasets} and Github respectively.
+To promote reproducibility and further research within the community, the complete dataset has been made publicly available on the Hugging Face Hub \cite{lhoest2021datasets}.
 
-\todo{scripts to replicate the whole data extraction, transform, loading process, partly automated given a repo by scraping}
+Complementing the dataset, a further contribution lies in the provision of the comprehensive suite of scripts that automate and document the entire data lifecycle.
+These scripts facilitate the extraction of data from diverse sources, including the automated recursive scraping of repositories with datasets spread on nested folders like the QALD repository \cite{QALD_repository} and the integration of data from other knowledge graph question-answering challenges \cite{jiang2022knowledge}.
+The transformation phase is addressed through procedures for data cleaning, standardization into the consistent question-SPARQL schema, and the application of augmentations such as German translations and Wikidata entity/relationship mappings, as detailed in Section \ref{section::methodology}.
+The public availability of this ETL (Extract, Transform, Load) toolkit on GitHub for knowledge graph datasets offers a transparent and replicable methodology for the dataset's creation and adaptation.
+This enhances the utility of the primary dataset by enabling researchers to understand, verify, and potentially extend the data generation process.
 
 \todo{8 finetuned models, one for each language and training approach.}
 
