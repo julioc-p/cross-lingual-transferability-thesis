@@ -1,19 +1,6 @@
 \section{Experimental Setup}\label{section::experimental_setup}
 
 \subsection{Data Processing}
-\iffalse
-We did the following data processing steps:
-first we trimmed off the rows whose text queries had less than 4 characters since they were mostly mistakes coming from other datasets.
-then we took a model, the gemma 27b it model \cite{team2024gemma} and using the quantized version 8 bit (lower precision because of gpu ram available) we basically used prompt engineering to ask if the text query was a statement or not.
-and if it was a statement instead of a query we took it out. things like "The sky is blue"
-Btw, we tried first using bert large for one shot classification but it could not really distinguish very well between texts that were asking for information even if not directly questions and 100% non sensical statements. we used this model :"https://huggingface.co/facebook/bart-large-mnli"
-Then we just put together some common non sensical data from the text queries and filter manually: "invalid_texts = ["not applicable", "redox is whom?", "Describe to me", "i have no idea", "does not apply", "ni idea"]"
-and finally we used the nous research model \cite{teknium2024hermes} in 4 bit precision since we saw in a benchmark of translation that is was one of the best free available models for translations
-and google translation and deepl all we cannot use their api to translate hundreds of thousands of data points
-finally this added about 200k more rows in german language. though we found out the quality for longer texts was pretty bad so we trimmed those.
-For example: "Hatte der Goldrausch Charlie Chaplin bearbeitet, geschrieben und für Charlie Chaplin, Charlie Chaplin Charlie Chaplin und Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie ..."/
-like in this example that it keeps hanging
-\fi
 The following data processing steps were applied to ensure the quality and relevance of the text queries:
 
 \begin{enumerate}
