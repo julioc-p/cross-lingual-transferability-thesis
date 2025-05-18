@@ -87,7 +87,15 @@ The training environment was containerized using NVIDIA's Enroot container platf
 Within this containerized environment, all necessary Python libraries and dependencies required by the training scripts were installed using their latest stable versions available at the time of the experiments.
 
 
-\todo{use of lora finetuning, 4bit quantization}
+\subsubsection{Fine-tuning}
+
+To efficiently fine-tune the selected models within the available computational constraints, all experiments leveraged the Hugging Face ecosystem, particularly the Parameter-Efficient Fine-tuning (PEFT) library \cite{peft} and its integration of Quantized Low-Rank Adaptation (QLoRA) \cite{dettmers2023qlora}.
+This integration implies the interplay of the BitsAndBytes, transformers and peft libraries \cite{hf_blog_4bit_qlora_2023}.
+
+The decision to employ 4-bit quantization was primarily driven by the 32 GB memory capacity of the V100 GPUs.
+While Mistral models require approximately 14-15 GB of GPU RAM in their native bfloat16 precision, loading the model, its optimizer states, and the training data batches for fine-tuning necessitates further memory optimization.
+On the other hand the Occiglot model requires about 25 GB of GPU RAM, in which case is more easy to argue the use of quantization.
+Quantization to 4-bit precision reduces the model's memory requirement substantially, allowing for the accommodation of larger batch sizes and longer sequence lengths, and ensuring that the training data vectors and gradients could fit within the GPU memory.
 
 \todo{outline hyperparameters used and why we started with those}
 \todo{explain first iteration of v1 model with the whole dataset}
