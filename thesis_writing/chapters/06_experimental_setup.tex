@@ -32,12 +32,50 @@ The following data processing steps were applied to ensure the quality and relev
 
 These preprocessing steps significantly improved the overall quality of the dataset by removing incomplete, irrelevant, and low-quality queries while expanding it with translated data.
 \subsection{Training}
+\subsubsection{Training Overview and Model Versions}
 
-\todo{explained every model was trained and evaluated 3 times each and training images refer to one representative one, most were very similar between training}
+The fine-tuning experiments in this thesis centered on two primary base models: Mistral 7B v0.1 \cite{jiang2023mistral7b} and Occiglot-7b-eu5 \cite{avramidis-etal-2024-occiglot}.
+The training process and the resultant fine-tuned models can be broadly categorized into two main iterations, designated as v1 and v2.
+However, it is important to note that the development was an incremental process, with insights from earlier experiments informing subsequent refinements.
 
-\todo{explain which models exactly we trained and their reference in huggingface}
+The v1 iteration itself comprised two sub-versions (v1.0 and v1.1), leading to a total of twelve distinct, functional fine-tuned models when considering all languages and variations throughout variations v1 and v2.
+For clarity and conciseness, when "v1" is referenced throughout this thesis without further specification, it pertains to the final v1.1 models, which demonstrated slightly improved performance compared to v1.0 as will be described in this chapter.
+The earlier v1.0 models and their configurations can be accessed through the commit history of the respective model repositories on the Hugging Face Hub (See Appendix \ref{appendix:v1_huggingface}).
+
+The v1 set of experiments served primarily an exploratory purpose: to establish a baseline understanding of the general efficacy of fine-tuning these models for the text-to-SPARQL task with the dataset, and to identify initial challenges.
+Consequently, the optimization was less of a focus in v1, particularly in the v1.0 stage.
+
+The v2 iteration was developed to address the limitations observed in v1 and to achieve higher performance.
+A significant distinction was the incorporation of Wikidata entity and relationship ID mappings directly into the training input for the v2 models as context.
+This approach was adopted not to supply them with the necessary explicit grounding for entities and relationships mentioned in the natural language queries.
+The rationale was that if a model has not encountered specific token-to-ID mappings during its pre-training, it cannot be expected to generate them correctly.
+Ideally, such mappings would have been part of the pre-training data; however, given the resource constraints of this thesis, providing them during fine-tuning and evaluation was an attempt to emulate the knowledge state of a model that had been pre-trained with this information.
+This also allowed for an investigation into the hypothesis that the base Mistral model might have already been exposed to such mappings.
+As will be discuss later, the performance increase (approximately fourfold in F1 score) suggest this exposure was likely minimal or incidental, something that cannot be asserted since by public statements from the Mistral AI team, the specifics of their training data are not disclosed due to the competitive nature of the field \cite{Arthurmensch_HF_MistralData_2023}.
+
+Another key difference in the v2 experiments was the use of the base, non-instruction-tuned versions of the LLMs.
+This decision was made to allow for greater control over the input format, specifically to enable the inclusion of a custom system prompt for Mistral, as its instruction-tuned variant does not natively support it, and it was hypothesized that a well-crafted system prompt could guide the model more effectively during inference.
+In contrast, the v1 experiments utilized the instruction-tuned versions of both models.
+
+The v2 experiments also incorporated more best practices and advanced training techniques, such as an evaluation loop with the BLEU metric, early stopping criteria, NEFTune noise injection, and more targeted hyperparameter adjustments based on relevant literature, all of which will be detailed further in this chapter.
+
+To ensure clarity and facilitate replication, the specific Hugging Face model identifiers used are as follows:
+\begin{itemize}
+    \item \textbf{v1 Experiments (Instruction-Tuned Models):}
+    \begin{itemize}
+        \item Mistral: \texttt{mistralai/Mistral-7B-Instruct-v0.1}
+        \item Occiglot: \texttt{occiglot/occiglot-7b-eu5-instruct}
+    \end{itemize}
+    \item \textbf{v2 Experiments (Base/Raw Models):}
+    \begin{itemize}
+        \item Mistral: \texttt{mistralai/Mistral-7B-v0.1}
+        \item Occiglot: \texttt{occiglot/occiglot-7b-eu5}
+    \end{itemize}
+\end{itemize}
+
 
 \todo{describe setup, hpc cluster, slurm, docker, which types of gpus used}
+
 \todo{use of lora finetuning, 4bit quantization}
 
 \todo{outline hyperparameters used and why we started with those}
@@ -64,8 +102,6 @@ These preprocessing steps significantly improved the overall quality of the data
 
 \todo{refer to the better stability observed during training}
 
-
-\todo{text}
 
 \subsection{Evaluation}
 
