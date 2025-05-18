@@ -74,7 +74,18 @@ To ensure clarity and facilitate replication, the specific Hugging Face model id
 \end{itemize}
 
 
-\todo{describe setup, hpc cluster, slurm, docker, which types of gpus used}
+\subsubsection{Computational Resources and Environment}
+
+All model fine-tuning experiments were conducted on a High-Performance Computing (HPC) cluster provided by the German Research Center for Artificial Intelligence (DFKI).
+The cluster offered access to a diverse range of NVIDIA GPUs, including A100, H100, and V100 models.
+Due to high demand and consequently longer queue times for the A100 and H100 resources, NVIDIA V100 GPUs with 32 GB of GPU RAM were consistently utilized for all training runs to ensure timely and predictable access.
+Each training job was allocated approximately 60 GB of system RAM, which proved sufficient for the chosen model sizes and batch configurations.
+
+For simplicity and given that the model sizes were manageable on a single GPU, distributed training across multiple nodes or GPUs was not employed; all experiments were run on a single-node, single-GPU basis.
+Job submission and management on the HPC cluster were handled using the Slurm Workload Manager.
+The training environment was containerized using NVIDIA's Enroot container platform. The base Docker image for all training environments was \texttt{nvcr.io/nvidia/cuda:11.8.0-devel-ubuntu20.04}.
+Within this containerized environment, all necessary Python libraries and dependencies required by the training scripts were installed using their latest stable versions available at the time of the experiments.
+
 
 \todo{use of lora finetuning, 4bit quantization}
 
