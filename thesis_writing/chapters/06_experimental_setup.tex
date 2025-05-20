@@ -38,12 +38,12 @@ The fine-tuning experiments in this thesis centered on two primary base models: 
 The training process and the resultant fine-tuned models can be broadly categorized into two main iterations, designated as v1 and v2.
 However, it is important to note that the development was an incremental process, with insights from earlier experiments informing subsequent refinements.
 
-The v1 iteration itself comprised two sub-versions (v1.0 and v1.1), leading to a total of twelve distinct, functional fine-tuned models when considering all languages and variations throughout variations v1 and v2.
+The v1 iteration itself comprised two sub-versions (v1.0 and v1.1), leading to a total of 10 distinct, functional fine-tuned models when considering all languages and variations throughout variations v1 and v2.
 For clarity and conciseness, when "v1" is referenced throughout this thesis without further specification, it pertains to the final v1.1 models, which demonstrated slightly improved performance compared to v1.0 as will be described in this chapter.
 The earlier v1.0 models and their configurations can be accessed through the commit history of the respective model repositories on the Hugging Face Hub (See Appendix \ref{appendix:v1_huggingface}).
 
 The v1 set of experiments served primarily an exploratory purpose: to establish a baseline understanding of the general efficacy of fine-tuning these models for the text-to-SPARQL task with the dataset, and to identify initial challenges.
-Consequently, the optimization was less of a focus in v1, particularly in the v1.0 stage.
+Consequently, the optimization was less of a focus in v1, particularly in the v1.0 stage which were only fine-tuned in English.
 
 The v2 iteration was developed to address the limitations observed in v1 and to achieve higher performance.
 A significant distinction was the incorporation of Wikidata entity and relationship ID mappings directly into the training input for the v2 models as context.
@@ -90,14 +90,84 @@ Within this containerized environment, all necessary Python libraries and depend
 \subsubsection{Fine-tuning}
 
 To efficiently fine-tune the selected models within the available computational constraints, all experiments leveraged the Hugging Face ecosystem, particularly the Parameter-Efficient Fine-tuning (PEFT) library \cite{peft} and its integration of Quantized Low-Rank Adaptation (QLoRA) \cite{dettmers2023qlora}.
-This integration implies the interplay of the BitsAndBytes, transformers and peft libraries \cite{hf_blog_4bit_qlora_2023}.
+This integration implies the interplay of the BitsAndBytes, transformers, trl and peft libraries \cite{hf_blog_4bit_qlora_2023}.
 
 The decision to employ 4-bit quantization was primarily driven by the 32 GB memory capacity of the V100 GPUs.
-While Mistral models require approximately 14-15 GB of GPU RAM in their native bfloat16 precision, loading the model, its optimizer states, and the training data batches for fine-tuning necessitates further memory optimization.
-On the other hand the Occiglot model requires about 25 GB of GPU RAM, in which case is more easy to argue the use of quantization.
+While both models require approximately 14-15 GB of GPU RAM in their native bfloat16 precision, loading the model, its optimizer states, and the training data batches for fine-tuning necessitates further memory optimization.
 Quantization to 4-bit precision reduces the model's memory requirement substantially, allowing for the accommodation of larger batch sizes and longer sequence lengths, and ensuring that the training data vectors and gradients could fit within the GPU memory.
 
-\todo{outline hyperparameters used and why we started with those}
+\textbf{Initial parameters (v1.0)}
+
+The first fine-tuning experiments commenced with a set of baseline hyperparameters for the LoRA configuration and the general training arguments.
+
+The initial LoRA setup was guided by a combination of values showcased in the hyperparameter search of the QLoRA paper \cite{dettmers2023qlora}.
+The first choice of layers  (specifically, \texttt{q\_proj, k\_proj, v\_proj, o\_proj, gate\_proj, up\_proj, down\_proj, lm\_head}) was mainly driven by the huggingface community suggestions on finetuning Mistral 7B models like \cite{roggendorff2024finetuning}.
+The configuration applied to the target modules was as follows:
+\begin{itemize}
+    \item \texttt{r} (LoRA rank): 64
+    \item \texttt{lora\_alpha} (LoRA alpha, scaling factor): 16
+    \item \texttt{lora\_dropout} (Dropout probability for LoRA layers): 0.1
+    \item \texttt{bias}: "none"
+    \item \texttt{task\_type}: "CAUSAL\_LM"
+\end{itemize}
+
+For the main training arguments, the initial settings were largely adapted from the parameters reported for the continual pre-training of the Occiglot models \cite{occiglot2024occiglot7b}, under the rationale that these had proven effective for adapting the base Mistral architecture.
+However, significant adjustments were necessary to accommodate the single-GPU fine-tuning setup and the specific constraints of the available V100 hardware, particularly concerning batch size.
+The key training arguments for the v1 experiments were:
+
+\begin{itemize}
+    \item \texttt{num\_train\_epochs}: 5
+    \item \texttt{per\_device\_train\_batch\_size}: 1
+    \item \texttt{per\_device\_eval\_batch\_size}: 1
+    \item \texttt{gradient\_accumulation\_steps}: 8 (to achieve an effective batch size of 8)
+    \item \texttt{gradient\_checkpointing}: True (to save memory)
+    \item \texttt{optim}: "paged\_adamw\_32bit"
+    \item \texttt{learning\_rate}: 1e-5
+    \item \texttt{weight\_decay}: 0.05
+    \item \texttt{bf16}: False (NVIDIA V100 does not support bfloat16 \cite{meng2024bfloat16})
+    \item \texttt{max\_grad\_norm}: 1.0
+    \item \texttt{max\_steps}: -1 (i.e., driven by \texttt{num\_train\_epochs})
+    \item \texttt{warmup\_ratio}: 0.01
+    \item \texttt{lr\_scheduler\_type}: "cosine"
+    \item \texttt{group\_by\_length}: True (to optimize padding and speed up training)
+    \item \texttt{max\_seq\_length}: None (allowing the model to handle variable sequence lengths up to its inherent limit, typically 2048 or 4096 tokens for these models)
+    \item \texttt{packing}: False
+    \item \texttt{device\_map}: \{"": 0\} (to ensure the model is loaded onto the primary GPU)
+\end{itemize}
+
+For the BitsAndBytes configuration for 4-bit quantization was set to dequantize for computations to float16.
+
+A crucial adaptation from the Occiglot pre-training setup was the batch size.
+Due to GPU memory limitations when fine-tuning the models, a \texttt{per\_device\_train\_batch\_size} of 1 was used. 
+To compensate for this small physical batch size and simulate a larger effective batch size for more stable gradient updates, \texttt{gradient\_accumulation\_steps} was set to 8.
+
+For these initial v1.0 fine-tuning runs, the full dataset (comprising nearly 900,000 examples) was not used.
+Instead, for only English, a subset of 35,000 randomly sampled examples was selected for training.
+This was done to expedite the exploratory phase and allow for quicker iteration cycles.
+It is important to note that this training subset still contained a diverse range of queries originating from approximately 15 different knowledge graphs.
+While SPARQL is a standardized query language, the specific entities, relationships, naming conventions, and structural query patterns can vary considerably across these different knowledge graphs.
+This initial training took about 19 hours.
+The training loss can be seen in Figure \ref{fig:v1_0_training_loss_en}.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{loss_mistral_en_v1_0.png}
+        \caption{Mistral 7B v0.1 (English) v1.0}
+        \label{fig:loss_mistral_en_v1_0}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{loss_occiglot_en_v1_0.png} 
+        \caption{Occiglot-7b-eu5 (English) v1.0}
+        \label{fig:loss_occiglot_en_v1_0}
+    \end{subfigure}
+    \caption{Training loss curves for the initial v1.0 fine-tuning experiments with smoothing factor of 0.6 on a 35,000 example subset of the English data.}
+    \label{fig:v1_0_training_loss_en}
+\end{figure}
+
 \todo{explain first iteration of v1 model with the whole dataset}
 \todo{show the training logs picture for loss}
 
