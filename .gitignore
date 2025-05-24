@@ -184,3 +184,17 @@ cython_debug/
 *cache*
 
 *sqlite*)
+
+# Latex output
+
+thesis_writing/main.aux
+thesis_writing/main.bbl
+thesis_writing/main.blg
+thesis_writing/main.log
+thesis_writing/main.out
+thesis_writing/main.toc
+thesis_writing/main.fls
+thesis_writing/main.fdb_latexmk
+thesis_writing/main.synctex.gz
+thesis_writing/main.run.xml
+thesis_writing/main.bcf
