@@ -5,27 +5,27 @@ Total Entries Attempted Evaluation: 3500
 
 --- Result Categories ---
 (Percentages based on 3500 entries attempted after ignoring questions)
-  Correct (Exact Match)                   :  1174 ( 33.54%)
-  Correct (Both Empty)                    :   243 (  6.94%)
-  Correct (Partial Match)                 :    65 (  1.86%)
-  Incorrect (Gen Empty, Gold Not)         :  1746 ( 49.89%)
-  Incorrect (Gold Empty, Gen Not)         :    20 (  0.57%)
-  Incorrect (No Overlap)                  :   182 (  5.20%)
-  Failure: Generated Query Execution      :    37 (  1.06%)
+  Correct (Exact Match)                   :   802 ( 22.91%)
+  Correct (Both Empty)                    :   233 (  6.66%)
+  Correct (Partial Match)                 :    56 (  1.60%)
+  Incorrect (Gen Empty, Gold Not)         :  2027 ( 57.91%)
+  Incorrect (Gold Empty, Gen Not)         :    34 (  0.97%)
+  Incorrect (No Overlap)                  :   299 (  8.54%)
+  Failure: Generated Query Execution      :    16 (  0.46%)
   Failure: Empty Generated Query String   :    33 (  0.94%)
 
 --- Derived Counts ---
-  Generated Query Non-Empty & Executable:  3430 ( 98.00%)
+  Generated Query Non-Empty & Executable:  3451 ( 98.60%)
   Failure - Empty Generated Query       :    33 (  0.94%)
-  Failure - Generated Query Execution   :    37 (  1.06%)
+  Failure - Generated Query Execution   :    16 (  0.46%)
   Failure - Gold Query Execution        :     0 (  0.00%)
-  Correct (Exact + Both Empty)      :  1417 ( 40.49%)
-  Correct (Partial Match)           :    65 (  1.86%)
+  Correct (Exact + Both Empty)      :  1035 ( 29.57%)
+  Correct (Partial Match)           :    56 (  1.60%)
 
 --- Macro Averaged Metrics (QALD Variant) ---
 (Calculated over all 3500 attempted entries)
 (Empty queries & execution failures contribute 0.0 to scores)
-Macro Precision: 0.91513016
-Macro Recall:    0.41540885
-Macro F1-Score:  0.41277133
+Macro Precision: 0.88268555
+Macro Recall:    0.30649885
+Macro F1-Score:  0.30208426
 --------------------------
