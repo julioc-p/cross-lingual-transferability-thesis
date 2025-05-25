@@ -4,7 +4,7 @@
 The following data processing steps were applied to ensure the quality and relevance of the text queries:
 
 \begin{enumerate}
-    \item \textbf{Filtering Short Queries:}  
+    \item \textbf{Filtering Short Queries:}
     We removed all rows where the text queries contained fewer than four characters, as these were mostly errors originating from different datasets.
     
     \item \textbf{Classifying Statements vs. Queries:}  
@@ -87,7 +87,7 @@ The training environment was containerized using NVIDIA's Enroot container platf
 Within this containerized environment, all necessary Python libraries and dependencies required by the training scripts were installed using their latest stable versions available at the time of the experiments.
 
 
-\subsubsection{Fine-tuning}
+\subsubsection{Initial Fine-tuning}
 
 To efficiently fine-tune the selected models within the available computational constraints, all experiments leveraged the Hugging Face ecosystem, particularly the Parameter-Efficient Fine-tuning (PEFT) library \cite{peft} and its integration of Quantized Low-Rank Adaptation (QLoRA) \cite{dettmers2023qlora}.
 This integration implies the interplay of the BitsAndBytes, transformers, trl and peft libraries \cite{hf_blog_4bit_qlora_2023}.
@@ -168,28 +168,134 @@ The training loss can be seen in Figure \ref{fig:v1_0_training_loss_en}.
     \label{fig:v1_0_training_loss_en}
 \end{figure}
 
-\todo{explain quick parameter search done in the beginning}
+\subsubsection{Iterative Refinement and Observations}\label{sec:v1_iterations}
 
-\todo{explain first iteration of v1 model with the whole dataset}
-\todo{show the training logs picture for loss}
+Following the initial v1.0 fine-tuning runs on the 35,000-sample English subset (which, as detailed in the last section, included data from approximately 15 knowledge graphs), several key observations emerged that guided subsequent refinements.
 
-\todo{training duration}
+\paragraph{Initial Challenges: Knowledge Graph Ambiguity and Output Formatting}\mbox{}\\
+A primary challenge observed in the v1.0 models was their difficulty in consistently generating SPARQL syntax appropriate for the specified target knowledge graph.
+The input prompt for the Mistral model was structured as:
+\begin{lstlisting}[breaklines]
+Write a SparQL query that answers this request: <txt> from the knowledge graph <knowledge_graph>
+\end{lstlisting}
 
-\todo{address the gradient instability}
+For the Occiglot model, a system prompt was added to provide general guidance:
+\begin{lstlisting}[breaklines]
 
-\todo{explain why we moved to only wikidata}
+System prompt: "You are an expert in SPARQL query generation. Generate the SPARQL query that answers the user's question"
+\end{lstlisting}
+Despite including the target \texttt{knowledge\_graph} in the prompt, when these v1.0 models were evaluated on the QALD-10 benchmark (which exclusively targets Wikidata), they often generated SPARQL queries incorporating \texttt{PREFIX} declarations or syntactic styles more characteristic of other KGs present in the mixed training data. 
+For instance, none of the Wikidata queries in the training set utilize \texttt{PREFIX} declarations, yet the model would generate them, or use syntax more common to other knowledge graphs in the training set.
+An example of such output, where the generated SPARQL for a Wikidata question included extraneous or misapplied prefixes and clauses, is shown below (raw model output often contained repeated query fragments and non-standard clauses):
+\begin{lstlisting}[breaklines]
+{
+    "question": "What is the boiling point of water?",
+    "knowledge_graph": "Wikidata",
+    "generated_sparql_v1_0_mixed_kg": "SELECT ?obj WHERE { wd:Q283 p:P2102 ?s . ?s ps:P2102 ?obj . ?s pq:P459 wd:Q16523 }",
+    "raw_answer_v1_0_mixed_kg": "SELECT ?obj WHERE { wd:Q283 p:P2102 ?s . ?s ps:P2102 ?obj . ?s pq:P459 wd:Q16523 } \nORDER BY DESC(?obj)\nLIMIT 1\nOFFSET 0\nCOMPACT \
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> ..." 
+    % Further prefixes and repeated query parts omitted for brevity
+}
+\end{lstlisting}
+To extract the primary query from potentially noisy model outputs, a regular expression was employed:
+\begin{verbatim}
+import re
+def extract_sparql(text):
+    match = re.search(
+        r"(SELECT|ASK|CONSTRUCT|DESCRIBE).*?\}", text, re.DOTALL | re.IGNORECASE
+    )
+    if match:
+        return match.group(0).strip()
+    return ""
+\end{verbatim}
+This regex targets common SPARQL query keywords and extracts content up to the first closing curly brace.
 
-\todo{explain the second version of the v1 models}
+\paragraph{Refinement 1: Lora Ranking Adjustment for Mistral (v1.0.1)}
+As seen in \ref{fig:v1_0_training_loss_en}, the training loss in Mistral has a very high variability.
+Thus, it was experimented with a lower LoRA Ranking from 64 to 16 to tackle the hypothesis that this could be caused by the high number of parameters in LoRA adjusting to the noise in the training data.
+It seems this was the case since the loss was far stabler \ref{fig:loss_mistral_en_v1_0_1} and the rest of the parameters and the training set were left as is.
+And the results for the QALD english test set show a slight improvement in generating executable queries going from 366 to 372.
 
-\todo{show the training logs picture for loss}
-\todo{training duration}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{loss_mistral_en_v1_0_1.png}
+    \caption{Mistral 7B v0.1 (English) v1.0.1}
+    \label{fig:loss_mistral_en_v1_0_1}
+\end{figure}
 
-\todo{address the gradient instability}
+Next refinements were applied all at once for the last v1 (v1.1) version referred in other sections.
+
+\paragraph{Refinement 2: Focusing on a Single Knowledge Graph (Wikidata)}
+To mitigate the KG generation confusion the next training focused on a 35,000-sample English subset filtered to include only Wikidata-related queries.
+
+\paragraph{Refinement 3: SPARQL Query Standardization}
+Further analysis of the model outputs revealed a tendency to generate extraneous newlines, comments, and other non-executable artifacts within the SPARQL queries, as illustrated:
+\begin{lstlisting}[breaklines]
+{
+    "question": "How many General Secretaries of the CPSU were there before Leonid Brezhnev?",
+    "knowledge_graph": "Wikidata",
+    "raw_answer_v1_0_wikidata_only": "SELECT ?value WHERE { wd:Q229728 p:P1037 ?s . ?s ps:P1037 wd:Q36769 . ?s pq:P1366 ?value} \n\nLIMIT 20 \n\nFILTER ( ?value < 1804-6-17 ) \n\nWORK BENCHMARK {\nbsd:0 P1306 ?value } \n\n#R 268 \n\n#sourceLanguage: en \n\n 34 \n\n 41 \n \n 58 \n\n 85 \n\n 111"
+}
+\end{lstlisting}
+To address this, a SPARQL standardization step was incorporated into the data pre-processing pipeline for the training data. This step, applied to the entire $\approx 900,000$ example dataset, involved removing newlines and redundant whitespace from all SPARQL queries:
+\begin{verbatim}
+def standardize_sparql(query):
+    query = query.replace("\n", " ")
+    query = re.sub(r"\s+", " ", query).strip()
+    query = re.sub(r'#.*', '', query).strip() 
+    return query
+\end{verbatim}
+Interestingly, Occiglot models generally produced cleaner queries with fewer such artifacts compared to Mistral before these changes, potentially due to Occiglot's continual pre-training on code \cite{avramidis-etal-2024-occiglot} and the use of a system prompt during its fine-tuning.
+However, this did not translate to a higher number of executable or correct queries for Occiglot in these early v1 iterations.
+
+For the Mistral English model, the  \texttt{lm\_head} was removed from the target modules for LoRA.
+The hypothesis was that the previously seen sensitivity from the training set might have been partially caused by the aggresive adaptation of the last linear layer of Mistral architecture mapping to the vocabulary space.
+This, along with the standardization of queries and only using the knowledge graph Wikidata resulted in a marginal increase in the number of valid queries generated on QALD-10 (e.g., from 366 to 372 for Mistral English), though the number of correct answers remained unchanged at this stage. 
+
+After these refinements, the generated queries were also visibly cleaner:
+\begin{lstlisting}[breaklines]
+{
+    "question": "How many General Secretaries of the CPSU were there before Leonid Brezhnev?",
+    "knowledge_graph": "Wikidata",
+    "generated_sparql_v1_1": "SELECT ?value WHERE { wd:Q154569 p:P39 ?s . ?s ps:P39 wd:Q51471 . ?s pq:P155 ?value} ORDER BY DESC(?value)LIMIT 50"
+}
+\end{lstlisting}
+
+\paragraph{Training Observations for v1.1 Models}
+The training duration for each v1.1 model on the 35,000-sample subset was approximately 19-20 hours for 5 epochs. The training loss curves for the v1.1 models are presented in Figure~\ref{fig:train_loss_v1_1}.
+These curves generally show a more stable downward trend compared to the initial v1.0 runs (e.g., Figure~\ref{fig:loss_mistral_en_v1_0}), suggesting that the data standardization and refined LoRA configuration contributed to a more consistent learning process.
+The Occiglot models (English and German) typically exhibited smoother loss curves from the outset.
+Mistral fine-tuned on German data appeared to struggle more, reflected in a higher and more fluctuating loss, which aligns with its relative performance in the v1 evaluations.
+
+\begin{figure}[htbp]
+    \centering
+    % Make sure 'train_loss_v1_1_with_legend.png' (or .pdf) is in your images path
+    \includegraphics[width=0.8\textwidth]{train_loss_v1_1_with_legend.png} 
+    \caption{Training loss curves for the v1.1 models on the 35,000-sample Wikidata-only subset. Smoothing factor of 0.6 applied.}
+    \label{fig:train_loss_v1_1} % You can keep the same label
+\end{figure}
+
+
+The gradient norm during training for the v1.1 models, as shown in Figure~\ref{fig:train_grad_norm_v1_1}, also reflects this relative stability. 
+While the german variant of Mistral shows higher variability in gradient norms, the English variant and the Occiglot models maintain more consistent gradient magnitudes throughout training.
+
+% Combined figure for v1.1 gradient norms
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{train_grad_norm_v1_1_with_legend.png}
+    \caption{Training gradient norm curves for the v1.1 models}
+    \label{fig:train_grad_norm_v1_1}
+\end{figure}
+
+An incidental finding during this writing in the v1.1 training was that the Occiglot German model was unintentionally first trained for 10 epochs instead of the standard 5 epochs used for all other v1.1 models (which were set conservatively to avoid overfitting in the absence of an early stopping mechanism). 
+Interestingly, this extended training did not yield a significant performance difference on the QALD-10 benchmark compared to the 5-epoch run (the one showcased previously), but it did result in a higher F1 score on the held-out test split from our primary dataset (from 0.4 to 0.3).
+This observation hints at potential overfitting to the training set distribution with prolonged training.
 
 \todo{explain changes in v2, adding bleu metric for evaluation loop with stop loss, changing hyperparameters e.g higher ranking/lower ranking matrix in lora, neft noise}
 \todo{show the training logs picture for training and validation loss}
 
 \todo{training duration}
+
 
 \todo{refer to the better stability observed during training}
 
