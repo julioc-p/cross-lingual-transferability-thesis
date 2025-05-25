@@ -210,7 +210,7 @@ def extract_sparql(text):
 \end{verbatim}
 This regex targets common SPARQL query keywords and extracts content up to the first closing curly brace.
 
-\paragraph{Refinement 1: Lora Ranking Adjustment for Mistral (v1.0.1)}
+\paragraph{Refinement 1: Lora Ranking Adjustment for Mistral (v1.0.1)} \mbox{}\\
 As seen in \ref{fig:v1_0_training_loss_en}, the training loss in Mistral has a very high variability.
 Thus, it was experimented with a lower LoRA Ranking from 64 to 16 to tackle the hypothesis that this could be caused by the high number of parameters in LoRA adjusting to the noise in the training data.
 It seems this was the case since the loss was far stabler \ref{fig:loss_mistral_en_v1_0_1} and the rest of the parameters and the training set were left as is.
@@ -225,10 +225,10 @@ And the results for the QALD english test set show a slight improvement in gener
 
 Next refinements were applied all at once for the last v1 (v1.1) version referred in other sections.
 
-\paragraph{Refinement 2: Focusing on a Single Knowledge Graph (Wikidata)}
+\paragraph{Refinement 2: Focusing on a Single Knowledge Graph (Wikidata)} \mbox{}\\
 To mitigate the KG generation confusion the next training focused on a 35,000-sample English subset filtered to include only Wikidata-related queries.
 
-\paragraph{Refinement 3: SPARQL Query Standardization}
+\paragraph{Refinement 3: SPARQL Query Standardization} \mbox{}\\
 Further analysis of the model outputs revealed a tendency to generate extraneous newlines, comments, and other non-executable artifacts within the SPARQL queries, as illustrated:
 \begin{lstlisting}[breaklines]
 {
@@ -261,7 +261,7 @@ After these refinements, the generated queries were also visibly cleaner:
 }
 \end{lstlisting}
 
-\paragraph{Training Observations for v1.1 Models}
+\paragraph{Training Observations for v1.1 Models} \mbox{}\\
 The training duration for each v1.1 model on the 35,000-sample subset was approximately 19-20 hours for 5 epochs. The training loss curves for the v1.1 models are presented in Figure~\ref{fig:train_loss_v1_1}.
 These curves generally show a more stable downward trend compared to the initial v1.0 runs (e.g., Figure~\ref{fig:loss_mistral_en_v1_0}), suggesting that the data standardization and refined LoRA configuration contributed to a more consistent learning process.
 The Occiglot models (English and German) typically exhibited smoother loss curves from the outset.
@@ -291,14 +291,105 @@ An incidental finding during this writing in the v1.1 training was that the Occi
 Interestingly, this extended training did not yield a significant performance difference on the QALD-10 benchmark compared to the 5-epoch run (the one showcased previously), but it did result in a higher F1 score on the held-out test split from our primary dataset (from 0.4 to 0.3).
 This observation hints at potential overfitting to the training set distribution with prolonged training.
 
-\todo{explain changes in v2, adding bleu metric for evaluation loop with stop loss, changing hyperparameters e.g higher ranking/lower ranking matrix in lora, neft noise}
-\todo{show the training logs picture for training and validation loss}
+\subsubsection{v2: Addressing v1 Limitations}\label{sec:v2_methodology}
+
+The v1 experiments provided valuable initial insights and also highlighted critical areas for improvement, primarily the models' pronounced difficulty with accurate entity and relationship ID mapping for Wikidata. 
+This section details the methodological enhancements and refined configurations adopted for the v2 fine-tuning iteration, which aimed to address these shortcomings and achieve superior performance.
+
+\paragraph{The Entity Linking Bottleneck in v1} \mbox{}\\
+A consistent observation across all v1 model variants was a significant deficiency in mapping textual entities and relationships to their correct Wikidata identifiers, despite often generating structurally valid SPARQL queries. 
+For instance, evaluation of v1 Mistral English models on the QALD-10 test set revealed a macro recall score of approximately 0.069 (see example evaluation summary below). 
+A substantial portion of the queries classified as "correct" achieved this status because both the generated query and the gold standard query correctly returned an empty result set, rather than through accurate data retrieval (5 of 27 correct matches).
+\begin{verbatim}
+--- Evaluation Summary (Example from v1.0 Mistral English on QALD-10) ---
+Total Entries Attempted Evaluation: 391
+Correct (Exact Match)             :   22 (  5.63%)
+Correct (Both Empty)              :    5 (  1.28%)
+Incorrect (Gen Empty, Gold Not)   :  248 ( 63.43%)
+Incorrect (No Overlap)            :  110 ( 28.13%)
+...
+Macro Recall:     0.06905371
+Macro F1-Score:   0.06905371
+--------------------------
+\end{verbatim}
+The hypothesis that guided the changes in this version of the model was that this low recall mainly driven by the models' inability to correctly link entities.
+For example, an early v1.0 Occiglot English model, when prompted with "Was Google founded by Bill Gates?" (targeting Wikidata), generated:
+\texttt{ASK WHERE \{ wd:Q95 wdt:P112 wd:Q2283 \}}.
+While correctly identifying Google (\texttt{wd:Q95}) and the "founded by" relationship (\texttt{wdt:P112}), it erroneously mapped "Bill Gates" to Microsoft's Wikidata ID (\texttt{wd:Q2283}). 
+Similarly, an early v1.0 Mistral English model for "Was Lionel Messi Italian?" produced:
+\texttt{ASK WHERE \{ wd:Q5421 wdt:P27 wd:Q38 \}}.
+Here, the first ID (\texttt{wd:Q5421}) corresponds to the year 1233, not Lionel Messi. 
+These mapping errors persisted across all v1 iterations, even after data standardization and cleaning efforts. 
+
+\paragraph{Data Preparation and Prompting for v2} \mbox{}\\
+Significant changes were implemented in data preparation and prompting for the v2 models:
+\begin{itemize}
+    \item \textbf{Base Model Selection:} The base (non-instruction-tuned) versions of Mistral 7B v0.1 and Occiglot-7b-eu5 were used. This decision facilitated the use of custom system prompts, which was hypothesized to be beneficial, in particular for Mistral, as its instruction-tuned version lacks native system prompt support.
+    \item \textbf{Dataset Construction:} For each language (English and German), a dataset of 100,000 examples was randomly sampled (using a consistent seed of 42) from the master dataset. This was then partitioned into 80,000 examples for training, 10,000 for validation, and 10,000 for testing.
+    \item \textbf{Prompt Formatting with Context:} The ChatML format \cite{openai_python_v0_28_0}, also utilized by Occiglot, was adopted for structuring the input. 
+    Crucially, the system prompt for v2 models was designed to include the Wikidata entity and relationship ID mappings extracted for the given natural language query.
+     An example of the input structure is as follows:
+\begin{lstlisting}[breaklines]
+[
+  {
+    "role": "system",
+    "content": "You are an expert text to SparQL query translator. Users will ask you questions in English and you will generate a SparQL query based on the provided context enclosed in ```sparql <response_query>```.\nCONTEXT:\n{\"entities\": {\"Barnard College\": \"Q167733\", \"American\": \"Q30\", \"female\": \"Q6581072\", \"employee\": \"Q5\"}, \"relationships\": {\"instance of\": \"P31\", \"employer\": \"P108\", \"gender\": \"P21\", \"country of citizenship\": \"P27\"}}"
+  },
+  {
+    "role": "user",
+    "content": "Who was Barnard College 's American female employee"
+  },
+]
+
+\end{lstlisting}
+    The Hugging Face tokenizer was configured to apply this ChatML template to format the inputs appropriately for both Mistral and Occiglot models.
+\end{itemize}
+
+\paragraph{Revised LoRA Configuration for v2} \mbox{}\\
+The LoRA configuration for v2 experiments was revised based on insights from v1 and further consultation of relevant literature:
+\begin{itemize}
+    \item \texttt{r} (LoRA rank): 256
+    \item \texttt{lora\_alpha}: 128
+    \item \texttt{lora\_dropout}: 0.05
+    \item \texttt{target\_modules}: "all-linear" (targeting all linear layers, as recommended in QLoRA implementations \cite{artidoro_qlora_2023})
+\end{itemize}
+A higher LoRA rank (\texttt{r=256}) was chosen to provide greater model capacity for this complex generation task. 
+The \texttt{lora\_alpha} was set to 128. 
+It is worth mentioning that a common heuristic suggests \texttt{lora\_alpha} should be twice the rank \cite{Raschka2023PracticalTips}.
+In this training the opposite is the case because of a mistake from the author which was found at the time of this writing.
+It was maintained that way since the comparison between both models would still be fair. 
+Comparisons between models are not confounded by this specific ratio choice, and the selected rank is within ranges explored in foundational QLoRA research \cite{dettmers2023qlora}. 
+The \texttt{lora\_dropout} was adjusted to 0.05, a value found effective for 7B and 13B models in the QLoRA paper \cite{dettmers2023qlora}.
+
+
+\paragraph{Revised Training Arguments for v2}
+The general training arguments were also updated, drawing from best practices and the QLoRA paper \cite{dettmers2023qlora}:
+\begin{itemize}
+    \item \texttt{num\_train\_epochs}: 3. This was reduced from v1's 5 epochs, considering the larger 80,000-sample training set and indications from the QLoRA paper that further epochs yield marginal gains.
+    \item Effective batch size: 6 (achieved with \texttt{per\_device\_train\_batch\_size=1} and \texttt{gradient\_accumulation\_steps=6}).
+    \item \texttt{optim}: "adamw\_torch\_fused" was selected for potential training speed enhancements.
+    \item \texttt{fp16}: True. This was enabled in the `TrainingArguments` to leverage mixed-precision for activations and gradients, which can improve throughput and reduce memory for these components, while the QLoRA setup managed the 4-bit precision of the base model.
+    \item \texttt{learning\_rate}: 2e-4 (aligned with QLoRA paper settings for similar-sized models).
+    \item \texttt{max\_grad\_norm}: 0.3 (aligned with QLoRA paper).
+    \item \texttt{warmup\_ratio}: 0.03 (aligned with QLoRA paper).
+    \item \texttt{lr\_scheduler\_type}: (aligned with QLoRA paper)).
+\end{itemize}
+
+\paragraph{Enhanced Training Loop Features for v2}
+To further refine the training process and model selection, the following techniques were integrated:
+\begin{itemize}
+    \item \textbf{Validation with BLEU Score:} A validation loop was incorporated, evaluating the models on the 10,000-sample validation set at regular intervals. The BLEU (Bilingual Evaluation Understudy) score \cite{papineni2002bleu} was employed as the evaluation metric. Given that text-to-SPARQL generation shares similarities with translation tasks (translating natural language to a formal language), BLEU was chosen as a practical proxy for generation quality. Real-time query execution against a SPARQL endpoint for validation was deemed too resource-intensive for frequent evaluation during training.
+    \item \textbf{Early Stopping and Best Model Selection:} Early stopping with a patience of 3 was implemented based on the validation BLEU score. If the BLEU score did not improve for three consecutive evaluation checkpoints, training was halted. The \texttt{load\_best\_model\_at\_end=True} argument ensured that the model checkpoint corresponding to the highest validation BLEU score was saved as the final v2 model.
+    \item \textbf{NEFTune for Regularization:} Noisy Embedding Fine-Tuning (NEFTune) \cite{jain2023neftune} was applied by setting a \texttt{noise\_alpha} value (5). NEFTune introduces noise to the embedding vectors during training, acting as a regularizer. This technique, though often highlighted for instruction tuning, was incorporated with the rationale that it could improve model generalization and mitigate sensitivity to the training data, an issue observed particularly with Mistral in v1 experiments, technique also explored by Yang et al. in a non uniquely instruction tuning context \cite{10.1145/3675249.3675339}.
+\end{itemize}
 
 \todo{training duration}
 
+\todo{show the training logs picture for training and validation loss}
 
 \todo{refer to the better stability observed during training}
 
+\todo{refer to challenges in output and possible packing consequence}
 
 \subsection{Evaluation}
 
