@@ -5,28 +5,28 @@ Total Entries Attempted Evaluation: 394
 
 --- Result Categories ---
 (Percentages based on 394 entries attempted after ignoring questions)
-  Correct (Exact Match)                   :    61 ( 15.48%)
-  Correct (Both Empty)                    :     4 (  1.02%)
-  Correct (Partial Match)                 :     8 (  2.03%)
-  Incorrect (Gen Empty, Gold Not)         :   118 ( 29.95%)
-  Incorrect (Gold Empty, Gen Not)         :     3 (  0.76%)
-  Incorrect (No Overlap)                  :   108 ( 27.41%)
-  Failure: Generated Query Execution      :    17 (  4.31%)
+  Correct (Exact Match)                   :    66 ( 16.75%)
+  Correct (Both Empty)                    :     6 (  1.52%)
+  Correct (Partial Match)                 :     5 (  1.27%)
+  Incorrect (Gen Empty, Gold Not)         :   157 ( 39.85%)
+  Incorrect (Gold Empty, Gen Not)         :     2 (  0.51%)
+  Incorrect (No Overlap)                  :   154 ( 39.09%)
+  Failure: Generated Query Execution      :     1 (  0.25%)
   Failure: Gold Query Execution (Generated OK):     1 (  0.25%)
-  Failure: Empty Generated Query String   :    74 ( 18.78%)
+  Failure: Empty Generated Query String   :     2 (  0.51%)
 
 --- Derived Counts ---
-  Generated Query Non-Empty & Executable:   303 ( 76.90%)
-  Failure - Empty Generated Query       :    74 ( 18.78%)
-  Failure - Generated Query Execution   :    17 (  4.31%)
+  Generated Query Non-Empty & Executable:   391 ( 99.24%)
+  Failure - Empty Generated Query       :     2 (  0.51%)
+  Failure - Generated Query Execution   :     1 (  0.25%)
   Failure - Gold Query Execution        :     1 (  0.25%)
-  Correct (Exact + Both Empty)      :    65 ( 16.50%)
-  Correct (Partial Match)           :     8 (  2.03%)
+  Correct (Exact + Both Empty)      :    72 ( 18.27%)
+  Correct (Partial Match)           :     5 (  1.27%)
 
 --- Macro Averaged Metrics (QALD Variant) ---
 (Calculated over all 394 attempted entries)
 (Empty queries & execution failures contribute 0.0 to scores)
-Macro Precision: 0.47367419
-Macro Recall:    0.18034808
-Macro F1-Score:  0.17348154
+Macro Precision: 0.58902284
+Macro Recall:    0.19434373
+Macro F1-Score:  0.19055542
 --------------------------

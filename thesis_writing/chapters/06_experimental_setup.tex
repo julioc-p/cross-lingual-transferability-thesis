@@ -269,10 +269,9 @@ Mistral fine-tuned on German data appeared to struggle more, reflected in a high
 
 \begin{figure}[htbp]
     \centering
-    % Make sure 'train_loss_v1_1_with_legend.png' (or .pdf) is in your images path
     \includegraphics[width=0.8\textwidth]{train_loss_v1_1_with_legend.png} 
     \caption{Training loss curves for the v1.1 models on the 35,000-sample Wikidata-only subset. Smoothing factor of 0.6 applied.}
-    \label{fig:train_loss_v1_1} % You can keep the same label
+    \label{fig:train_loss_v1_1}
 \end{figure}
 
 
@@ -362,7 +361,7 @@ Comparisons between models are not confounded by this specific ratio choice, and
 The \texttt{lora\_dropout} was adjusted to 0.05, a value found effective for 7B and 13B models in the QLoRA paper \cite{dettmers2023qlora}.
 
 
-\paragraph{Revised Training Arguments for v2}
+\paragraph{Revised Training Arguments for v2} \mbox{}\\
 The general training arguments were also updated, drawing from best practices and the QLoRA paper \cite{dettmers2023qlora}:
 \begin{itemize}
     \item \texttt{num\_train\_epochs}: 3. This was reduced from v1's 5 epochs, considering the larger 80,000-sample training set and indications from the QLoRA paper that further epochs yield marginal gains.
@@ -375,12 +374,12 @@ The general training arguments were also updated, drawing from best practices an
     \item \texttt{lr\_scheduler\_type}: (aligned with QLoRA paper)).
 \end{itemize}
 
-\paragraph{Enhanced Training Loop Features for v2}
+\paragraph{Enhanced Training Loop Features for v2} \mbox{}\\
 To further refine the training process and model selection, the following techniques were integrated:
 \begin{itemize}
     \item \textbf{Validation with BLEU Score:} A validation loop was incorporated, evaluating the models on the 10,000-sample validation set at regular intervals. The BLEU (Bilingual Evaluation Understudy) score \cite{papineni2002bleu} was employed as the evaluation metric. Given that text-to-SPARQL generation shares similarities with translation tasks (translating natural language to a formal language), BLEU was chosen as a practical proxy for generation quality. Real-time query execution against a SPARQL endpoint for validation was deemed too resource-intensive for frequent evaluation during training.
     \item \textbf{Early Stopping and Best Model Selection:} Early stopping with a patience of 3 was implemented based on the validation BLEU score. If the BLEU score did not improve for three consecutive evaluation checkpoints, training was halted. The \texttt{load\_best\_model\_at\_end=True} argument ensured that the model checkpoint corresponding to the highest validation BLEU score was saved as the final v2 model.
-    \item \textbf{NEFTune for Regularization:} Noisy Embedding Fine-Tuning (NEFTune) \cite{jain2023neftune} was applied by setting a \texttt{noise\_alpha} value (5). NEFTune introduces noise to the embedding vectors during training, acting as a regularizer. This technique, though often highlighted for instruction tuning, was incorporated with the rationale that it could improve model generalization and mitigate sensitivity to the training data, an issue observed particularly with Mistral in v1 experiments, technique also explored by Yang et al. in a non uniquely instruction tuning context \cite{10.1145/3675249.3675339}.
+    \item \textbf{NEFTune for Regularization:} Noisy Embedding Fine-Tuning (NEFTune) \cite{jain2023neftunenoisyembeddingsimprove} was applied by setting a \texttt{noise\_alpha} value (5). NEFTune introduces noise to the embedding vectors during training, acting as a regularizer. This technique, though often highlighted for instruction tuning, was incorporated with the rationale that it could improve model generalization and mitigate sensitivity to the training data, an issue observed particularly with Mistral in v1 experiments, technique also explored by Yang et al. in a non uniquely instruction tuning context \cite{10.1145/3675249.3675339}.
 \end{itemize}
 
 \todo{training duration}
@@ -389,7 +388,49 @@ To further refine the training process and model selection, the following techni
 
 \todo{refer to the better stability observed during training}
 
+\subsubsection{v2 Training Dynamics and Observations}\label{sec:v2_training_dynamics_revised}
+
+\paragraph{Training Durations} \mbox{}\\
+The training duration for the v2 models varied. The Mistral 7B v0.1 models required approximately 19-20 hours to complete training on a single NVIDIA V100 GPU.
+The Occiglot-7b-eu5 models exhibited different training times: the German variant completed in approximately 6 hours, and the English variant in approximately 8 hours.
+
+\paragraph{Training Loss and Validation BLEU Scores} \mbox{}\\
+The training loss curves for all four final v2 models are presented in Figure~\ref{fig:train_loss_v2_all_final}. 
+All models demonstrate a clear learning trend, with training losses generally commencing between 0.6 and 0.7 and steadily decreasing to a range of approximately 0.5 to 0.6 by the end.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{train_loss_v2.png}
+    \caption{Training loss curves for all final v2 models}
+    \label{fig:train_loss_v2_all_final}
+\end{figure}
+
+The validation BLEU scores, monitored during training for early stopping, are shown in Figure~\ref{fig:eval_bleu_v2_all_final}. 
+All models exhibited an increase in BLEU score. 
+The Mistral German v2 model showed a particularly notable improvement in its validation BLEU score.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{blue_score_v2.png}
+    \caption{Validation BLEU scores during v2 fine-tuning for all final models (smoothing factor 0.6)}
+    \label{fig:eval_bleu_v2_all_final}
+\end{figure}
+
+\paragraph{Gradient Norm Observations} \mbox{}\\
+The training gradient norms for the final v2 models are displayed in Figure~\ref{fig:train_grad_norm_v2_all_final}. 
+Generally, the gradient magnitudes remained within a stable range throughout training for all models, without indications of widespread vanishing or exploding gradient issues in these final runs, eventhough an upward trend is noted.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{grad_norm_training_v2.png}
+    \caption{Training gradient norm curves for v2 models.}
+    \label{fig:train_grad_norm_v2_all_final}
+\end{figure}
+
 \todo{refer to challenges in output and possible packing consequence}
 
+\iffalse
+
+\fi
 \subsection{Evaluation}
 
