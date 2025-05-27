@@ -111,7 +111,22 @@
 \noindent\makebox[10cm]{\dotfill} \\ % Dotted line for the signature
 Unterschrift
 
-\clearpage % End this page and ensure subsequent content starts on a new page
+\clearpage
+
+\thispagestyle{empty}
+\begin{center}
+    \vspace*{2cm}
+    \Large\textbf{Zusammenfassung}
+    \vspace{1.5cm}
+\end{center}
+Diese Arbeit untersucht die Auswirkungen von kontinuierlichem mehrsprachigem Vortraining auf die sprachübergreifende Übertragbarkeit und Leistung eines LLM für die Text-zu-SPARQL-Generierung, wobei der Schwerpunkt auf den Ausgangssprachen Englisch und Deutsch liegt.
+Diese Arbeit vergleicht Occiglot-7b-eu5, ein Modell, das aus dem kontinuierlichen Vortraining von Mistral 7B v0.1 in fünf wichtigen europäischen Sprachen (Englisch, Spanisch, Deutsch, Italienisch, Französisch) hervorgegangen ist \cite{avramidis-etal-2024-occiglot}, mit dem ursprünglichen Mistral-Modell. Ein wesentlicher Beitrag ist die Entwicklung eines umfangreichen, reproduzierbaren mehrsprachigen Datensatzes (ca. 1 Million Beispiele) mit 12 verschiedenen Sprachen, der von QALD und anderen Wissensextraktions-Wettbewerben abgeleitet und um deutsche Übersetzungen sowie Wikidata-Entitäts-/Beziehungszuordnungen erweitert wurde. Es wurden Experimente zur Feinabstimmung von acht Modellvarianten durchgeführt (jeweils zwei Versionen jedes Modells für beide Sprachen, mit und ohne kontextuelle Zuordnungen – v1- bzw. v2-Experimente).
+
+Die Ergebnisse deuten darauf hin, dass kontinuierliches mehrsprachiges Vortraining die Leistung von Occiglot im Deutschen signifikant verbessert, wenn kontextuelle Zuordnungen fehlen (v1), was die erhebliche Verbesserungslücke angesichts des neuen mehrsprachigen Vortrainings verdeutlicht. Die Bereitstellung deutscher Entitäts-/Beziehungszuordnungen für Mistral (v2) verringert diesen Leistungsunterschied jedoch erheblich. Umgekehrt übertraf Mistral bei Englisch Occiglot signifikant im F1-Score, wenn beiden englische kontextuelle Zuordnungen zur Verfügung gestellt wurden (v2), obwohl Occiglot vergleichbare oder bessere Raten ausführbarer Abfragen beibehielt. Dies deutet auf einen potenziellen Kompromiss hin, bei dem die mehrsprachige Anpassung die Handhabung von Nuancen in der Originalsprache geringfügig beeinträchtigen könnte.
+
+Ein primärer Engpass, der bei v1-Modellen identifiziert wurde, ist die Entitäts-/Beziehungsverknüpfung, wobei sich die Leistung bei Bereitstellung kontextueller Zuordnungen (v2) ungefähr vervierfacht. Interessanterweise war diese Verbesserung beim QALD10-Validierungsdatensatz weniger ausgeprägt, was darauf hindeutet, dass dessen inhärente Abfragekomplexität ebenfalls eine zweite signifikante Herausforderung darstellt, die in den anderen Testdatensätzen weitgehend nicht vorhanden ist. Dennoch wurden durch die Einbeziehung kontextueller Zuordnungen wettbewerbsfähige F1-Scores auf QALD10 (~ 0,25) erzielt, die mit Systemen im QALD-10-Benchmark (0,1-0,5 F1) vergleichbar sind \cite{usbeck2024qald}. Dieses Ergebnis legt auch nahe, dass ein direktes Vortraining auf Wikidata-Entitäts-/Beziehungsidentifikatoren, eine in Betracht gezogene Hypothese, ähnliche Ergebnisse wie deren Bereitstellung als expliziter Kontext liefern könnte.
+Schließlich zeigte Occiglot im Vergleich zu Mistral im Allgemeinen einen höheren Prozentsatz an ausführbarer Abfragegenerierung in Englisch, was auf Vorteile der mehrsprachigen Exposition für die korrekte Syntaxgenerierung in anderen Sprachen hindeutet.
+\clearpage
 
 \input{Institutsvorlage}
 
