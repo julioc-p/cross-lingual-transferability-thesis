@@ -382,12 +382,6 @@ To further refine the training process and model selection, the following techni
     \item \textbf{NEFTune for Regularization:} Noisy Embedding Fine-Tuning (NEFTune) \cite{jain2023neftunenoisyembeddingsimprove} was applied by setting a \texttt{noise\_alpha} value (5). NEFTune introduces noise to the embedding vectors during training, acting as a regularizer. This technique, though often highlighted for instruction tuning, was incorporated with the rationale that it could improve model generalization and mitigate sensitivity to the training data, an issue observed particularly with Mistral in v1 experiments, technique also explored by Yang et al. in a non uniquely instruction tuning context \cite{10.1145/3675249.3675339}.
 \end{itemize}
 
-\todo{training duration}
-
-\todo{show the training logs picture for training and validation loss}
-
-\todo{refer to the better stability observed during training}
-
 \subsubsection{v2 Training Dynamics and Observations}\label{sec:v2_training_dynamics_revised}
 
 \paragraph{Training Durations} \mbox{}\\
@@ -429,8 +423,89 @@ Generally, the gradient magnitudes remained within a stable range throughout tra
 
 \todo{refer to challenges in output and possible packing consequence}
 
-\iffalse
-
-\fi
 \subsection{Evaluation}
 
+\todo{picking of QALD10 and why}
+
+\iffalse
+The performance of the fine-tuned text-to-SPARQL models was assessed through an iterative process, beginning with basic indicators of functionality and progressing to more formal, established metrics from the Question Answering over Linked Data (QALD) challenges. All evaluations involved executing both the gold standard SPARQL queries and the model-generated SPARQL queries against the live public Wikidata SPARQL endpoint (\url{https://query.wikidata.org/}). The results of these executions were then compared to determine query correctness and to calculate performance metrics. Further details on the implementation of the evaluation script, \texttt{sparql\_validator.py}, can be found in Appendix~\ref{appendix:github_repository} and the project's GitHub repository.
+\fi
+
+\paragraph{Initial Ad-hoc Metrics} \mbox{}\\
+In the early stages of experimentation, particularly with the v1 models which exhibited lower initial performance, basic metrics were employed to gain a sensitive understanding of model learning. These included:
+\begin{itemize}
+    \item \textbf{Number of Executable Queries:} Counting how many generated SPARQL queries could be successfully executed against the endpoint without syntax errors or other execution failures.
+    \item \textbf{Number of Exact Match Answers:} Counting instances where the set of results retrieved by the generated query was identical to the set of results retrieved by the gold standard query.
+\end{itemize}
+These simple counts provided an immediate signal of model improvement. 
+For example, the baseline Mistral 7B Instruct v0.1 model (prior to fine-tuning for this task) when evaluated on the QALD-10 test set, produced only 34 valid (executable) queries and 3 correct answers out of 391 questions. 
+After initial fine-tuning (v1.0 English), this improved to 366 valid queries and 23 correct answers, indicating that learning was occurring, even if overall correctness remained low. 
+The "Executable Queries" metric was particularly useful as it offered a more granular view of progress when exact answer matches were still infrequent. 
+An early overall summary looked like:
+\begin{verbatim}
+--- Evaluation Summary (Early v1 Example) ---
+Total Queries Evaluated: 3500
+Executable Queries: 2125 (60.71%)
+Exact Match Answers: 163 (4.66% of total, 7.67% of executable)
+Partial Match Answers: 1 (0.03% of total)
+\end{verbatim}
+
+\paragraph{Adoption of QALD Standard Metrics} \mbox{}\\
+To align with established practices in the field, the evaluation methodology was then formalized using the QALD macro-averaged F1-score, precision, and recall, as described by Usbeck et al. (2019) and utilized in the QALD challenges (e.g., QALD-10).
+The macro-F1 score is calculated as the average of the F1-scores for each individual question-answer pair.
+The calculation of per-question precision (P), recall (R), and F1-score (F1) follows specific rules defined in the QALD benchmarking framework:
+\begin{itemize}
+    \item If the gold answer set is empty and the system also responds with an empty answer set, then P, R, and F1 are set to 1.
+    \item If the gold answer set is empty but the system responds with a non-empty answer set, then P, R, and F1 are set to 0.
+    \item If the gold answer set is not empty but the system responds with an empty answer set, the original QALD guidelines state that precision is set to 1, and recall and F1 are set to 0 (assuming the system determined it could not answer).
+    \item In all other cases, standard precision, recall, and F1-measure are calculated based on the intersection and content of the retrieved answer sets.
+\end{itemize}
+
+\paragraph{Customizations and Refinements to Evaluation Metrics} \mbox{}\\
+While adopting the QALD framework, a slight modification was implemented:
+\begin{itemize}
+    \item \textbf{Penalizing Non-Executable Queries:} If a model-generated SPARQL query was syntactically invalid or failed to execute on the endpoint for reasons other than a timeout (which was handled separately, see below), its precision, recall, and F1-score for that question were set to 0. This ensures that models are penalized for producing non-functional queries.
+\end{itemize}
+Furthermore, to gain more nuanced insights beyond the aggregate F1-score, the evaluation script was designed to categorize correct answers:
+\begin{itemize}
+    \item \textbf{Correct (Exact Match):} The generated query executes and retrieves the exact same non-empty set of results as the gold query.
+    \item \textbf{Correct (Both Empty):} Both the generated query and the gold query correctly execute and return an empty result set. 
+    This distinction helps to understand if high correctness is due to accurately identifying unanswerable questions or accurately retrieving specific data.
+\end{itemize}
+The evaluation summary provided by the \texttt{sparql\_validator.py} script incorporates these categories alongside other classifications like "Incorrect (Generated Empty, Gold Not)", "Incorrect (No Overlap)", and various failure types. 
+An example of the final evaluation output format for a v1.1 Mistral English model on the QALD-10 test set is:
+\begin{verbatim}
+--- Evaluation Summary ---
+Total Entries Loaded: 394
+Filtered (Ignored Question): 3
+Total Entries Attempted Evaluation: 391
+
+--- Result Categories ---
+(Percentages based on 391 entries attempted after ignoring questions)
+  Correct (Exact Match)             :    22 (  5.63%)
+  Correct (Both Empty)              :     5 (  1.28%)
+  Incorrect (Gen Empty, Gold Not)   :   248 ( 63.43%)
+  Incorrect (No Overlap)            :   110 ( 28.13%)
+  Failure: Generated Query Execution:     6 (  1.53%)
+
+--- Derived Counts ---
+  Generated Query Non-Empty & Executable: 385 ( 98.47%)
+  Failure - Empty Generated Query       :   0 (  0.00%)
+  Failure - Generated Query Execution   :   6 (  1.53%)
+  Failure - Gold Query Execution        :   0 (  0.00%)
+  Correct (Exact + Both Empty)          :  27 (  6.91%)
+  Correct (Partial Match)               :   0 (  0.00%)
+
+--- Macro Averaged Metrics (QALD Variant) ---
+(Calculated over all 391 attempted entries)
+(Empty queries & execution failures contribute 0.0 to scores)
+Macro Precision: 0.70332481
+Macro Recall:    0.06905371
+Macro F1-Score:  0.06905371
+--------------------------
+\end{verbatim}
+
+\paragraph{Handling of Gold Query Execution Issues} \mbox{}\\
+During evaluation against the live Wikidata SPARQL endpoint, it was observed that a small number of gold standard queries from the QALD-10 dataset consistently timed out or failed due to their complexity and the operational limits of the public endpoint. An example is the question "What event killed the most people in the years 1910 to 1920?", whose gold SPARQL query involves extensive path traversals. In this work, such questions for which the gold query could not be successfully executed on the live endpoint (3 instances in QALD-10) were categorized as "Ignored Question" and excluded from the metric calculations for all models. This decision was made to ensure a fair comparison, as evaluating generated queries against an unresolvable gold standard would be problematic. While hosting a local Wikidata instance could circumvent public endpoint limitations, utilizing the live endpoint was preferred to provide a more readily transferable and accessible evaluation framework for the research community.
+
+The \texttt{sparql\_validator.py} script automates these calculations, including the set-based comparison of query results, and incorporates features such as multi-threading for parallel query execution, caching of results to speed up repeated evaluations, and retry logic to handle transient network issues or endpoint rate limits. This robust evaluation framework underpins the quantitative analysis presented in the next section.
