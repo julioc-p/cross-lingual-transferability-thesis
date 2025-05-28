@@ -425,11 +425,35 @@ Generally, the gradient magnitudes remained within a stable range throughout tra
 
 \subsection{Evaluation}
 
-\todo{picking of QALD10 and why}
+The performance of the fine-tuned text-to-SPARQL models developed in this thesis was assessed using a combination of custom-held-out test sets derived from the primary training data distribution and a standardized external benchmark.
+All evaluations involved executing both the gold standard SPARQL queries and the model-generated SPARQL queries against the live public Wikidata SPARQL endpoint (\url{https://query.wikidata.org/}).
+The results of these executions were then compared to determine query correctness and to calculate performance metrics.
+Further details on the implementation of the evaluation script, \texttt{sparql\_validator.py}, can be found in the project's GitHub repository Appendix~\ref{appendix:github_repository}.
 
-\iffalse
-The performance of the fine-tuned text-to-SPARQL models was assessed through an iterative process, beginning with basic indicators of functionality and progressing to more formal, established metrics from the Question Answering over Linked Data (QALD) challenges. All evaluations involved executing both the gold standard SPARQL queries and the model-generated SPARQL queries against the live public Wikidata SPARQL endpoint (\url{https://query.wikidata.org/}). The results of these executions were then compared to determine query correctness and to calculate performance metrics. Further details on the implementation of the evaluation script, \texttt{sparql\_validator.py}, can be found in Appendix~\ref{appendix:github_repository} and the project's GitHub repository.
-\fi
+\subsubsection{Evaluation Datasets}\label{sec:evaluation_datasets}
+
+Two types of datasets were employed for evaluating the fine-tuned models:
+
+\begin{enumerate}
+    \item \textbf{Test Sets:}
+    For each iteration of models (v1 and v2) and for each language (English and German), dedicated test sets were created. 
+    These were randomly sampled from the main multilingual dataset developed in this work (as described in Section~\ref{section::data_collection}) and were strictly excluded from any training or validation procedures to ensure an unbiased assessment of generalization to unseen data from the same general distribution.
+    \begin{itemize}
+        \item For the v1 models, the test sets comprised 3,500 examples per language.
+        \item For the v2 models, which were trained on a larger dataset, the test sets were expanded to 10,000 examples per language.
+    \end{itemize}
+
+    \item \textbf{QALD-10 Benchmark:}
+    To provide a standardized comparison against the broader field of Question Answering over Knowledge Graphs, the QALD-10 test set \cite{usbeck2024qald} was utilized as a key external benchmark. 
+    The Question Answering over Linked Data (QALD) challenge series is a well-established competition in the field of Semantic Web, whose datasets are often used for evaluating systems that translate natural language questions into formal queries over knowledge graphs \cite{brei2024leveraging}. 
+    QALD-10, the latest iteration at the time of these experiments, specifically focuses on Wikidata as the target knowledge graph and is notable for its multilingual nature, providing questions curated by native speakers in English, German, Chinese, and Russian, each paired with a corresponding gold standard SPARQL query \cite{usbeck2024qald}.
+
+    The QALD datasets, and QALD-10 in particular, are recognized for their challenging nature, often featuring complex query structures and requiring nuanced understanding \cite{usbeck2019benchmarking}. 
+    The decision to use QALD-10 was also influenced by related work, such as Brei et al. \cite{brei2024leveraging}, which highlighted its difficulty and used it to benchmark their systems.
+    Its focus on Wikidata aligns with the training data used in this thesis, providing a relevant yet demanding test of the models' capabilities.
+\end{enumerate}
+
+The subsequent paragraphs will detail the specific metrics and procedures used to evaluate model performance on these datasets.
 
 \paragraph{Initial Ad-hoc Metrics} \mbox{}\\
 In the early stages of experimentation, particularly with the v1 models which exhibited lower initial performance, basic metrics were employed to gain a sensitive understanding of model learning. These included:
@@ -508,4 +532,5 @@ Macro F1-Score:  0.06905371
 \paragraph{Handling of Gold Query Execution Issues} \mbox{}\\
 During evaluation against the live Wikidata SPARQL endpoint, it was observed that a small number of gold standard queries from the QALD-10 dataset consistently timed out or failed due to their complexity and the operational limits of the public endpoint. An example is the question "What event killed the most people in the years 1910 to 1920?", whose gold SPARQL query involves extensive path traversals. In this work, such questions for which the gold query could not be successfully executed on the live endpoint (3 instances in QALD-10) were categorized as "Ignored Question" and excluded from the metric calculations for all models. This decision was made to ensure a fair comparison, as evaluating generated queries against an unresolvable gold standard would be problematic. While hosting a local Wikidata instance could circumvent public endpoint limitations, utilizing the live endpoint was preferred to provide a more readily transferable and accessible evaluation framework for the research community.
 
-The \texttt{sparql\_validator.py} script automates these calculations, including the set-based comparison of query results, and incorporates features such as multi-threading for parallel query execution, caching of results to speed up repeated evaluations, and retry logic to handle transient network issues or endpoint rate limits. This robust evaluation framework underpins the quantitative analysis presented in the next section.
+The \texttt{sparql\_validator.py} script automates these calculations, including the set-based comparison of query results, and incorporates features such as multi-threading for parallel query execution, caching of results to speed up repeated evaluations, and retry logic to handle transient network issues or endpoint rate limits. 
+This evaluation framework underpins the quantitative analysis presented in the next section.
