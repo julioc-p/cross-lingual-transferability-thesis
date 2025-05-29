@@ -53,7 +53,7 @@ Ideally, such mappings would have been part of the pre-training data; however, g
 This also allowed for an investigation into the hypothesis that the base Mistral model might have already been exposed to such mappings.
 As will be discuss later, the performance increase (approximately fourfold in F1 score) suggest this exposure was likely minimal or incidental, something that cannot be asserted since by public statements from the Mistral AI team, the specifics of their training data are not disclosed due to the competitive nature of the field \cite{Arthurmensch_HF_MistralData_2023}.
 
-Another key difference in the v2 experiments was the use of the base, non-instruction-tuned versions of the LLMs.
+Another key difference in the v2 experiments was the use of the base, non instruction-tuned versions of the LLMs.
 This decision was made to allow for greater control over the input format, specifically to enable the inclusion of a custom system prompt for Mistral, as its instruction-tuned variant does not natively support it, and it was hypothesized that a well-crafted system prompt could guide the model more effectively during inference.
 In contrast, the v1 experiments utilized the instruction-tuned versions of both models.
 
@@ -421,7 +421,58 @@ Generally, the gradient magnitudes remained within a stable range throughout tra
     \label{fig:train_grad_norm_v2_all_final}
 \end{figure}
 
-\todo{refer to challenges in output and possible packing consequence}
+\subsubsection{Challenges in v2 Model Output Generation}\label{sec:v2_output_challenges}
+
+Despite the methodological enhancements in the v2 experiments leading to improved performance in SPARQL query generation (as will be detailed in Section~\ref{section::results}), a notable challenge emerged concerning the models' tendency to generate extraneous content after producing the target SPARQL query. 
+This issue was observed for both Mistral and Occiglot.
+
+While the v2 models often generated the correct SPARQL query structure and, with the provided contextual mappings, achieved significantly better entity/relationship ID accuracy than v1 models, their output did not consistently terminate after the query.
+Instead, they would often continue generating text that resembled other examples from the training set, including new user prompts and assistant responses. 
+An example from a v2 Mistral English model illustrates this (showing the full generated text after the prompt):
+\begin{lstlisting}[breaklines]
+{
+  "question": "What did 1:42.08 's director and cinematographer direct , write , produce , executive produce , and edit",
+  "generated_sparql_extracted": "SELECT DISTINCT ?x0 WHERE { ?x0 wdt:P57 ?x1 . ?x0 wdt:P1040 ?x1 . ?x0 wdt:P1431 ?x1 . ?x0 wdt:P162|wdt:P272 ?x1 . ?x0 wdt:P58 ?x1 . wd:Q208910 wdt:P344 ?x1 . wd:Q208910 wdt:P57 ?x1 }",
+  "full_generated_text": "\n```sparql SELECT DISTINCT ?x0 WHERE { ?x0 wdt:P57 ?x1 . ?x0 wdt:P1040 ?x1 . ?x0 wdt:P1431 ?x1 . ?x0 wdt:P162|wdt:P272 ?x1 . ?x0 wdt:P58 ?x1 . wd:Q208910 wdt:P344 ?x1 . wd:Q208910 wdt:P57 ?x1 }``` toget\n pal/user\nWhat did 1:42.08 's cinematographer and director produce , write , edit , direct , and executive produce a film of George Lucas and LucasArts.edu:\n\n\
+{\"entities\": {\"Star Wars: Episode I \\u2013 The Phantom Menace\": \"Q165713\", \"person\": \"Q5\"}, \"relationships\": {\"instance of\": \"P31\", \"director\": \"P57\", \"executive producer\": \"P1431\", \"writer\": \"P58\"}}t\nCharles Vidor\": \"Q149507\", \"actor\": \"Qx0\"}}4\ncharacters of the book Star Wars: Episode I \u2013 The Phantom Menace directed by , executive produced by , and written by a person that Charles Vidor was influenced by and was influenced by\n toget\n?:"
+}
+\end{lstlisting}
+Although the primary SPARQL query within the \texttt{```sparql ... ```} delimiters was often correct and showed good performance metrics upon extraction, the subsequent extraneous generation was a persistent artifact. 
+This issue was less pronounced in the v1 instruction-tuned models but became more apparent with the v2 base models, affecting both Mistral and Occiglot.
+
+Initial investigations ruled out incorrect application of the ChatML template.
+The core issue appeared to be the models' failure to consistently generate the End-Of-Sequence (EOS) token (e.g., \texttt{<|im\_end|>}) after completing the SPARQL query within the delimiters.
+
+One hypothesis for the inconsistent EOS generation was the use of \texttt{packing=True} in the `SFTTrainer` arguments for the v2 models. 
+Packing concatenates multiple short training examples into single sequences to improve training throughput by reducing padding \cite{kundu2024enhancing}.
+However, this might inadvertently teach the model that EOS tokens within a packed sequence are not necessarily terminal for the overall generation context it is currently in, but rather just another token before the next packed example begins.
+
+To test this, an experimental fine-tuning run (termed v2.1 for this investigation) was conducted for the Mistral English model with \texttt{packing=False}. 
+For this specific run, LoRA parameters were also adjusted to align with those used for the 7B Guanaco model in the QLoRA repository (\texttt{lora\_r=16}, \texttt{lora\_alpha=32}) \cite{artidoro_qlora_2023}, maintaining the \texttt{lora\_dropout=0.05} and \texttt{target\_modules="all-linear"}. The rationale for ``lora\_alpha'' being twice `r` followed common guidelines \cite{Raschka2023PracticalTips}.
+The model trained with \texttt{packing=False} (v2.1 Mistral English) exhibited a change in the nature of the extraneous output.
+ Instead of generating fragments of other training instances, it tended to produce repetitive phrases or statements related to the generated query itself after the closing ``` ``` delimiters, as shown in the example below:
+\begin{lstlisting}[breaklines]
+{
+  "question": "<|im_start|>system\nYou are an expert text to SparQL query translator. Users will ask you questions in English and you will generate a SparQL query based on \
+the provided context encloses in ```sparql <respose_query>```.\nCONTEXT:\n{\"entities\": {\"Harz\": \"Q4186\"}, \"relationships\": {\"label\": \"rdfs:label\", \"language\": \"langMatches\"}}<|im_end|>\n<|im_start|>user\nHow is the Harz called in Mandarin Chinese?<|im_end|>\n<|im_start|>assistant\n",
+ "gold_sparql": "SELECT DISTINCT ?result WHERE {wd:Q4186 rdfs:label ?result FILTER(langMatches(lang(?result),\"zh-cn\")) }",
+  "generated_sparql_v2.1_packing_false": "SELECT ?answer WHERE { wd:Q4186 wdt:P1705 ?answer . ?answer wdt:P407 wd:Q15860220}",
+  "full_generated_text_v2.1_packing_false": "\n```sparql SELECT ?answer WHERE { wd:Q4186 wdt:P1705 ?answer . ?answer wdt:P407 wd:Q15860220}``` &nbsp;\n?answer is the label for Harz in Mandarin Chinese. ?answer has the code wd:Q15860220. ?answer is the label for Harz in Mandarin Chinese. ?answer has the code wd:Q15860220. ..." 
+  % Repetitions continue
+}
+\end{lstlisting}
+This indicated that while `packing=True` might have contributed to the model "hallucinating" subsequent training examples, the fundamental issue of inconsistent EOS token generation after the structured SPARQL output remained.
+
+In terms of performance for this v2.1 Mistral English (\texttt{packing=False}) model:
+\begin{itemize}
+    \item On the QALD-10 test set, the macro F1-score was slightly lower (0.215) compared to the primary v2 Mistral English model (0.250, trained with \texttt{packing=True} and \texttt{r=256, alpha=128}).
+    \item On the custom 10,000-sample English test set (drawn from the same distribution as the training data), this v2.1 model achieved a slightly higher F1-score (0.863) compared to the primary v2 Mistral English model (0.827).
+\end{itemize}
+Despite the better performance on the test set with \texttt{packing=False}, the primary v2 models (trained with \texttt{packing=True} and the LoRA configuration detailed in Section~\ref{sec:v2_methodology}) were retained for the main comparative analysis presented in Section~\ref{section::results}. 
+This decision was based on their superior F1-score on the more challenging and diverse QALD-10 benchmark, which is considered a more stringent test of generalization for this task. 
+The extraneous text generation issue was managed post-hoc by extracting the content within the ```sparql ... ``` delimiters.
+
+This investigation into output generation highlights the complexities of fine-tuning non instruction tuned LLMs for structured generation tasks and suggests that factors like dataset packing and EOS token generation warrant careful consideration in future work.
 
 \subsection{Evaluation}
 
