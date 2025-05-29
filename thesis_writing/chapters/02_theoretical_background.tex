@@ -1,75 +1,81 @@
 \section{Theoretical Background}\label{section::theoretical_background}
 
 \subsection{Machine Learning}
-\footnote{
-Note that this section is based on the lecture materials of \textit{6.036 Introduction to Machine Learning} course by MIT \cite{MITx6.036}, unless stated otherwise.}
+Note that this section is based on the book \textit{Deep learning} by Goodfellow et al. \cite{goodfellow2016deep} unless stated otherwise.
 
-Machine Learning is largely regarded as a subfield of AI. As its name suggests, the central concept is learning from data, through a process called training. Although the techniques are abundant, they all mostly draw their foundations from the fields of optimization and probabilistic inference. 
+\begin{definition}
+A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.
+\end{definition}
+The subsequent sections will explain these components (Task, Experience, Performance Measure) and other foundational concepts that underpin machine learning systems, contextualizing them broadly within the scope of this thesis. Although the techniques are abundant, they all mostly draw their foundations from the fields of optimization and probabilistic inference.
 
-When describing a machine learning system, there are some foundational concepts which they all share:
+\subsubsection{Task, T}
+The task refers to the specific problem the machine learning system is designed to solve.
+Machine learning tasks are typically described in terms of how the system should process an \textit{example}, which is a collection of \textit{features} from an object or event. 
+An example is usually represented as a vector $x \in \mathbb{R}^n$ with each component $x_i$ representing a feature.
+Some of the most common classes of tasks include:
+\begin{itemize}
+    \item \textbf{Classification:} Assigning an input to one of a set of predefined categories. For example, determining if an email is spam or not spam.
+    \item \textbf{Regression:} Predicting a continuous numerical value. For instance, forecasting the price of a stock.
+    \item \textbf{Clustering:} Grouping similar data points together without predefined labels. An example is segmenting customers based on purchasing behavior.
+    \item \textbf{Dimensionality Reduction:} Reducing the number of features while preserving important information. This can be used for data visualization or to simplify subsequent processing.
+    \item \textbf{Summarization:} Creating a concise summary of a larger body of text or data.
+    \item \textbf{Translation:} Converting text from one language to another.
+    \item \textbf{Structured output:} Output is a data structure with multiple values that matain relationships between them.
+\end{itemize}
+For the purpose of this work, the term "prediction" and the verb "predict" will often be used in a general sense to encompass the output generation aspect of these various tasks.
+In the context of this thesis, the primary task (T) falls under structured output generation, where the goal is to translate natural language questions into formal SPARQL queries. 
+This task shares conceptual similarities with machine translation, involving the conversion from one linguistic representation (natural language) to another (a formal query language).
+
+\subsubsection{Experience, E}
+Experience refers to the data from which the system learns. A crucial assumption in most machine learning experiments is that past data, or a subset of it (referred to as training data), contains patterns that can generalize to new, unseen data. 
+More formally, it is assumed that the training data and any future data the model encounters are sampled from the same underlying probability distribution. Other assumptions might be made depending on the specific problem and model, such as the independence of features or the existence of linear relationships between variables.
+The experience (E) in this research is embodied by a large-scale, multilingual dataset composed of natural language question-SPARQL query pairs. This data, sourced from various knowledge extraction challenges, enables the models to learn the patterns required for the translation task. 
+The study also explores the impact of different types of prior experience, such as that gained through continual pre-training of language models, which will be explained further down this chapter.
+
+\subsubsection{Performance Measure, P}
+The performance measure quantifies how well the model is performing the task T, based on the experience E. This is critical for both guiding the learning process and for evaluating the final model. 
+
+The ones used in this work are:
 
 \begin{itemize}
-    \item \textbf{Problem Class:}
-    Refers to the type of problem we are trying to solve. Some of the most common problem classes are: classification, prediction, clustering, dimensionality reduction, summarization, and translation. This will all be encompassed by the word "prediction" and the verb "predict" from this point onwards.
-    \item \textbf{Assumptions:}
-    It is assumed that previous data, or a subset of the data will help us to learn patterns from it that generalize to unseen data. More formally, we assume that the data we use for the learning algorithm (training data), and the rest of the data were sampled from the same probability distribution. Other assumptions that could be made depending on the problem are independence of features (characteristics of the data) and linear relationships.
-    \item \textbf{Generalization:}
-    As mentioned previously, the algorithm should perform well on non-training data. This is called generalization.
-    \item \textbf{Learning Algorithm:}
-    The learning algorithm is used to learn from data and make predictions, strongly linked to the problem class and the nature of the available training data like quantity.
-    \item \textbf{Parameters:}
-    Refers to the learnable part of the system. It is the piece that is used for the prediction after training, along with the architecture of the system. This vector is also called the weights of the model.
-    \item \textbf{Hyperpameters:}
-    These refer to adjustable values used in the learning function. Their tuning to perform better is highly coupled with the training data and the problem class. This process is usually called hyperparameter tuning.
-    \item \textbf{Loss Function:}
-    A mathematical function that quantifies the difference between model predictions and actual target values. It guides the training process by providing a measure to minimize.
-    
-    \item \textbf{Model:}
-    Refers to the mathematical model comprising the architecture, and the parameters.
-    
-    \item \textbf{Evaluation Function:}
-    Similar to the loss function, it receives the output of the model for a subset of data points (non-training data) and the target values, outputting a number signifying the distance between them. It is used to assess the performance of the model on unseen data. Some of the most common evaluation functions are the F1-score and the BLEU score, commonly used in binary classification tasks \cite{lipton2014thresholding} and translations \cite{ghassemiazghandi2024evaluation} respectively.
-
-    The F1-score  is based on precision and recall, which are defined as follows \cite{lipton2014thresholding}:
-
-    \begin{equation}
-    \text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}
-    \end{equation}
-
-    \begin{equation}
-    \text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}
-    \end{equation}
-
-    The F1-score is given by:
-
-    \begin{equation}
-    F_1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
-    \end{equation}
-
-    The F1-score is useful because it penalizes imbalances between precision and recall, ensuring that a model is not rewarded for excelling in one while failing in the other. For example, a classifier that labels all instances as positive may achieve high recall but low precision, making it ineffective. The F1-score prevents such misleading results by considering both metrics together.
-
-    \item \textbf{Overfitting:}
-    This is the opposite of generalizing. When a model overfits, it means it performs well on the training data, but not on unseen data. It is conventionally said that the model memorized the training data.
-
-    \item \textbf{Underfitting:}
-    The model does not perform well on the training data or unseen data. It is usually assumed that the model either needs further training, or the nature of the data is more complex than what the model can capture (e.g., using a linear separator to classify non-linearly separable data).
-    
+    \item \textbf{Cross-entropy loss}:  For a single example, if $y$ is a one-hot encoded vector representing the true target class (or token) and $\hat{y}$ is the vector of predicted probabilities from the model, the cross-entropy loss can be generally expressed as $L_{CE}(y, \hat{y}) = - \sum_i y_i \log(\hat{y}_i)$. This penalizes the model heavily when it confidently makes an incorrect prediction.
+    \item \textbf{F1-score} \cite{lipton2014thresholding}: It is frequently used for classification and structured output tasks where both precision and recall are important. It is the harmonic mean of precision (P) and recall (R): $F_1 = 2 \times \frac{P \times R}{P + R}$. Precision measures the proportion of positive identifications that were actually correct, $P = \frac{\text{True Positives (TP)}}{\text{TP} + \text{False Positives (FP)}}$, while recall measures the proportion of actual positives that were correctly identified, $R = \frac{\text{TP}}{\text{TP} + \text{False Negatives (FN)}}$.
+    \item \textbf{BLEU (Bilingual Evaluation Understudy) score} is commonly used in machine translation and other sequence generation tasks to measure the similarity between a candidate translation (model output) and one or more reference translations (gold standard) \cite{papineni2002bleu}. It calculates a score based on the precision of n-grams (contiguous sequences of n items, typically words) common to both the candidate and reference(s), with a penalty for overly short candidate sequences.
 \end{itemize}
-    Approaches in the field for training models can usually be categorized into supervised learning, unsupervised learning, semi-supervised learning and reinforcement learning. Supervised learning is the method used in this work and its core is using the labels of the data in the training process to continuously reduce the output of the loss function.
-    
-    One of the most common models in machine learning is the neural network. Because of their high number of parameters, they provide great flexibility for complex tasks, a characteristic that also makes them usually require greater volumes of data than other classical machine learning algorithms such as Naive Bayes \cite{osisanwo2017supervised}, a statistical model based on the Bayes Theorem \cite{webb2010naive},
+
+\subsubsection{Model}
+The model refers to the specific mathematical or computational structure that is learned from the data.
+
+\subsubsection{Hyperparameters}
+Hyperparameters are configuration settings that are not learned directly from the data but are set prior to the commencement of the learning process. Examples include the learning rate in an optimization algorithm or the number of layers in a neural network. The process of finding the optimal set of hyperparameters for a given problem and dataset.
+
+
+\subsubsection{Generalization, Overfitting, and Underfitting}
+A primary goal of machine learning is generalization: the ability of a model to perform well on previously unseen data, after having been trained on a finite dataset.
+Two related common problems are:
+\begin{itemize}
+    \item \textbf{Overfitting:} This occurs when a model learns the training data too well, capturing noise and specific idiosyncrasies of the training set rather than the underlying patterns. An overfit model performs well on training data but poorly on unseen data. It is often said that the model has "memorized" the training data.
+    \item \textbf{Underfitting:} This occurs when a model is too simple to capture the underlying structure of the data. An underfit model performs poorly on both the training data and unseen data. This might indicate that the model needs further training, a more complex architecture, or that the features used are not sufficiently informative.
+\end{itemize}
+In this work, generalization is assessed by the models' proficiency in generating correct SPARQL queries for previously unseen natural language questions.
+
+One technique used to avoid overfitting in this work is early stopping, which monitores performance on a validation set and halts training when this performance begins to degrade.
+Approaches in the field for training models can usually be categorized into supervised learning, unsupervised learning, semi-supervised learning, and reinforcement learning. 
+Supervised learning is the method used in this work, and its core principle involves using labeled data (i.e., data where each example is paired with a correct output or target) in the training process to continuously minimize the errors. 
+
+One of the most common and powerful types of models in machine learning is the neural network. Because of their potential for a high number of variables, they offer great flexibility for complex tasks. This characteristic also means they usually require greater volumes of data for effective training compared to some classical machine learning algorithms, such as Decision Trees, which branches data depending on feature values. 
+The models explored in this thesis are instances of large-scale \textbf{neural networks}, and the methodologies employed are rooted in the field of Deep Learning.
 
 \subsection{Deep Learning}
-\footnote{
-Note that this section is based on the lecture materials of \textit{6.036 Introduction to Machine Learning} course by MIT \cite{MITx6.036}, unless stated otherwise.}
+Note that this section is based on the lecture materials of \textit{6.036 Introduction to Machine Learning} course by MIT \cite{MITx6.036}
 
 As explained in \textit{Deep Learning} \cite{goodfellow2016deep}, modern deep learning is defined as a class of machine learning algorithms that construct complex architectures by composing simpler structures. However, most contemporary interpretations focus on neural networks \cite{goodfellow2016deep}.
      
-    Neural networks, because of their aforementioned properties, are suitable for learning patterns from complex high-dimensional data. Before starting with them, some machine learning concepts need to be defined more formally:
+    Neural networks, because of their aforementioned properties, are suitable for learning patterns from complex high-dimensional data. Before starting with them, some machine learning concepts need to be defined more formally in the context of deep learning:
 
     \textbf{Data point}
 
-    A mapping from data point to vector is needed for neural networks since most operations involve vector products. There are several ways to do this, but to illustrate this concept, and the next ones, a data point x with D features will be mapped to ${\mathbb{R} ^ {D, 1}}$ (i.e. a column vector with D dimensions).
+    As mentioned, data points (examples) x are typically represented as vectors. For neural network operations, we can consider these as column vectors, a data point x with D features will ${\mathbb{R} ^ {D, 1}}$.
 
     \textbf{Loss Function}
 
@@ -81,37 +87,14 @@ A loss function measures the discrepancy between the predicted output and the tr
 
 where \( D \) is the dimension of the data and the labels.
 
-One of the most commonly used loss functions for classification tasks is the cross-entropy loss, which measures the difference between the predicted probabilities for each class and the actual class labels. Cross-entropy is especially useful in tasks where the model outputs a probability distribution over multiple classes.
-
-In the multiclass setting, the cross-entropy loss is defined as:
-\begin{equation}
-    L_{\text{CE}} = - \sum_{c=1}^{C} y_c \log(p_c)
-\end{equation}
-
-where:
-\begin{itemize}
-    \item \( C \) is the total number of classes,
-    \item \( y_c \) is a binary indicator (0 or 1) that denotes whether class \( c \) is the true label for the input, and
-    \item \( p_c \) is the predicted probability that the input belongs to class \( c \).
-\end{itemize}
-
-For binary classification, where the task is to distinguish between two classes (e.g., positive and negative), the cross-entropy loss simplifies to:
-\begin{equation}
-L_{\text{CE}}(p, y) = - \left( y \log(p) + (1 - y) \log(1 - p) \right)
-\end{equation}
-
-
-where:
-\begin{itemize}
-    \item \( y \in \{0, 1\} \) is the actual label (0 for the negative class and 1 for the positive class),
-    \item \( p \) is the predicted probability for the positive class.
-\end{itemize}
-
+As introduced in the last section, the cross-entropy loss is a prevalent choice for classification tasks and sequence generation, and often used as a loss function within deep learning models.
     
-    \textbf{Parameters}
+    \textbf{Parameters or weights}
     
-    They are learned from data by the learning algorithm and are the main characters in making predictions after training. From this point on, every time the parameters are mentioned, it refers to a vector $\theta \in \mathbb{R} ^ {D, 1}$, with D being the dimension of the data point.
-    
+    They are learned from data by the learning algorithm and are the main characters in making predictions after training.
+    The parameters θ of a neural network layer or model are often high-dimensional vectors or matrices. 
+    For instance, the weights for a layer processing D-dimensional input might be conceptualized as part of a parameter vector $\theta \in \mathbb{R}^M$ (where M can be very large, encompassing all learnable weights and biases).
+
     \textbf{Gradient Descent}
 
     An optimization algorithm, in which the gradient of the loss function is used to update the parameters to minimize the loss (output of the loss function). It can be pictured as going in the opposite direction of the gradient (the steepest descent). More formally, having  $\nabla_\theta \mathcal{L}$, the update of the parameters can be thought of as 
