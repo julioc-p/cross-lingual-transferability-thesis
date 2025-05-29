@@ -231,9 +231,7 @@ For complex tasks usually many hidden layers are required in neural networks, wh
 
 \textbf{Training}
 
-The following explanation refers specifically to supervised training and we take the Feed Forward Neural Network architecture as a reference for brevity, although the process with slight modifications is also applied with the next neural networks architectures presented.
-
-Training a model can be viewed as a minimization problem where the goal is to minimize this loss function over time. This process of minimization is what enables the model to improve its predictions.
+The following explanation refers specifically to the Feed Forward Neural Network architecture as a reference for brevity, although the process with slight modifications is also applied with the next neural networks architectures presented.
 
 There are typically two stages in a training loop: forward pass and backpropagation.
 
@@ -490,9 +488,11 @@ Resource Description Framework (RDF) is one of the most popular frameworks for s
 \subsection{Large Language Models}
 \textit{This section is based on the book Designing Large Language Model Applications by Suhas Pai \cite{pai2025designing} unless stated otherwise.}
 
-A model is a mathematical representation of a system designed to perform tasks related to the underlying concepts of that system. In the field of NLP, this usually involves machine translation, text classification, and text completion. 
+Building upon the general definition of a model, in the field of NLP, they usually involve machine translation, text classification, and text completion. 
 
-Large Language Models (LLMs) are deep learning models pre-trained on vast amounts of text data \cite{AWS_LLM}. 
+\begin{definition}
+    Large Language Models (LLMs) are deep learning models pre-trained on vast amounts of text data \cite{AWS_LLM}. 
+\end{definition}
 These models leverage these datasets to capture linguistic structures, cultural references, and nuances. Through their specific architecture and contextual embeddings, they recognize complex relationships between words, enabling a deeper understanding of syntax and semantic.
 
 There is no universally accepted definition of what qualifies a language model as ``large''. The threshold for this classification has evolved over time as models have increased in size. Models that were previously considered large, such as GPT-2 with its 1.5 billion parameters, are now considered small \cite{vannguyen2024surveysmalllanguagemodels}. In his book, \textit{Designing Large Language Model Applications}, Suhai Pai defines ``large'' as having over a billion parameters. However, in this work, a language model is considered large starting from the size of the first BERT model (110 million parameters), as it was the first general-purpose language model that could be fine-tuned for various NLP tasks without architectural changes, representing a turning point in the field of NLP \cite{devlin2019bert}. This characteristic, along with their vast knowledge base derived from massive training corpora, is what makes them the state-of-the-art solution in NLP.
