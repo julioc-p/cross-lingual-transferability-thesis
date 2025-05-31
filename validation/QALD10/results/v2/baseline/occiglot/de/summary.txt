@@ -1,0 +1,29 @@
+Total Entries Loaded: 394
+Filtered (Ignored Question): 3
+Total Entries Attempted Evaluation: 391
+
+--- Result Categories ---
+(Percentages based on 391 entries attempted after ignoring questions)
+  Correct (Exact Match)                   :     2 (  0.51%)
+  Correct (Partial Match)                 :     1 (  0.26%)
+  Incorrect (Gen Empty, Gold Not)         :    57 ( 14.58%)
+  Incorrect (Gold Empty, Gen Not)         :     1 (  0.26%)
+  Incorrect (No Overlap)                  :    12 (  3.07%)
+  Failure: Generated Query Execution      :   314 ( 80.31%)
+  Failure: Empty Generated Query String   :     4 (  1.02%)
+
+--- Derived Counts ---
+  Generated Query Non-Empty & Executable:    73 ( 18.67%)
+  Failure - Empty Generated Query       :     4 (  1.02%)
+  Failure - Generated Query Execution   :   314 ( 80.31%)
+  Failure - Gold Query Execution        :     0 (  0.00%)
+  Correct (Exact + Both Empty)      :     2 (  0.51%)
+  Correct (Partial Match)           :     1 (  0.26%)
+
+--- Macro Averaged Metrics (QALD Variant) ---
+(Calculated over all 391 attempted entries)
+(Empty queries & execution failures contribute 0.0 to scores)
+Macro Precision: 0.15100171
+Macro Recall:    0.00767263
+Macro F1-Score:  0.00531969
+--------------------------
