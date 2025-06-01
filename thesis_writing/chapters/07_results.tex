@@ -111,3 +111,100 @@ This set comprised 10,000 examples per language.
 \end{itemize}
 
 \subsection{Comparison}\label{sec:comparison_results}\mbox{}\\
+This section provides a comparative analysis of the baseline and fine-tuned model performances across the various test sets. The objective is to highlight empirical trends and significant differences observed in F1-score, precision, recall, and the percentage of executable queries, supported by visual data presented in Figures \ref{fig:f1_score_results}, \ref{fig:precision_results}, \ref{fig:recall_results}, and \ref{fig:executable_queries_results}, as well as detailed results in Appendix~\ref{appendixbaselinedetailedresults} and Appendix~\ref{appendixfinetunedresults}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{f1_score_comparison_subplots.png}
+    \caption{F1-Score Comparison: Mistral vs. Occiglot across all test sets and model versions.}
+    \label{fig:f1_score_results}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{precision_comparison_subplots.png}
+    \caption{Precision Comparison: Mistral vs. Occiglot across all test sets and model versions.}
+    \label{fig:precision_results}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{recall_comparison_subplots.png}
+    \caption{Recall Comparison: Mistral vs. Occiglot across all test sets and model versions.}
+    \label{fig:recall_results}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{executable_queries__comparison_subplots.png}
+    \caption{Percentage of Executable Queries Comparison: Mistral vs. Occiglot across all test sets and model versions.}
+    \label{fig:executable_queries_results}
+\end{figure}
+
+\subsubsection{Baseline Models}
+An initial review of the baseline models (prior to fine-tuning, detailed in Appendix~\ref{appendixbaselinedetailedresults}) reveals generally low performance.
+
+\paragraph{QALD-10} \mbox{}\\
+On the QALD-10 English benchmark (Table~\ref{tab:baseline_qald_model_metrics_english}), providing entity/relationship ID mappings (v2 context) modestly improved F1-scores over the v1 context (no mappings). 
+Specifically, Mistral Instruct's F1-score increased from 0.0026 (v1) to 0.0138 (v2), an approximate 5.3-fold improvement. 
+Occiglot-instruct showed a larger relative gain, from an F1-score of 0.0026 (v1) to 0.0217 (v2), an approximate 8.3-fold increase. 
+With the v2 context, Occiglot-instruct (F1: 0.0217) performed about 1.57 times better than Mistral Instruct (F1: 0.0138) in terms of F1-score.
+
+The percentage of executable queries (Figure~\ref{fig:executable_queries_results}) proved to be a more sensitive metric for these low-performing baselines.
+For QALD-10 English, Occiglot-instruct (v2 context) achieved the highest rate at 28.90\% (113 out of 391 queries). 
+The improvement from v1 to v2 context was substantial: Mistral Instruct increased its executable queries from 5.12\% (20 queries) to 23.79\% (93 queries), a 4.65-fold increase, while Occiglot-instruct improved from 12.53\% (49 queries) to 28.90\% (113 queries), a 2.3-fold increase.
+
+Correctness (Exact Match + Both Empty) remained low for all QALD-10 English baselines, with total correct answers ranging from 1 to 8. 
+For the v1 context, the single correct answer for both Mistral and Occiglot was an instance where both generated and gold queries yielded empty results. 
+With the v2 context, Mistral Instruct produced 5 exact matches (non-empty) and Occiglot-instruct produced 7.
+
+For the QALD-10 German baselines (Table~\ref{tab:baseline_qald_model_metrics_german}), performance was even lower. 
+In the v1 version both models achieved an F1-score and Recall of 0.0000, indicating no correctly retrieved results.
+Non-zero Precision scores (Mistral: 0.0384, Occiglot: 0.0793) in this scenario are a consequence of QALD evaluation rules where a system returning empty for a non-empty gold query can still yields a perfect precision since there are theoretically no false positives. 
+With the v2 context, F1-scores improved slightly to 0.0130 for Mistral Instruct and 0.0053 for Occiglot-instruct, primarily constrained by very low recall. 
+Regarding executable queries on QALD-10 German, Occiglot-instruct (v1 context: 8.44\%) initially outperformed Mistral Instruct (v1 context: 4.09\%).
+However, with ID mappings (v2 context), Mistral Instruct (24.55\%, 96 queries) surpassed Occiglot-instruct (18.67\%, 73 queries), generating 23 more executable queries.
+
+\paragraph{Test Sets} \mbox{}\\
+On the larger v1 test set (Table~\ref{tab:v1_test_set_metrics}), which did not involve ID mappings, F1-scores remained low but generally higher than QALD-10 v1 baselines, with no macro metrics at absolute zero. 
+A notable observation is that for all baseline models on this v1 test set, all "Correct (Exact + Both Empty)" instances were due to "Correct (Both Empty)"; there were no exact matches of non-empty results. 
+The trend of English queries yielding better performance than German continued, although Occiglot-instruct showed comparable F1-scores for English (0.0160) and German (0.0146).
+
+Evaluating baselines on the v2 test set with ID mappings (Table~\ref{tab:v2_test_set_metrics}) showed improvements over the v1 test set baselines. 
+For instance, Mistral Instruct (German) saw its F1-score increase from 0.0123 (v1 test set) to 0.0422 (v2 test set), a 3.43-fold improvement.
+Other models showed F1-score increases in the range of 1.3-fold to 2.05-fold when comparing performance with the v2 context to the v1 test set.
+The "Correct (Exact + Both Empty)" percentages also increased, for example, from 2.23\% to 4.45\% for Mistral Instruct (English) and 1.23\% to 4.17\% for Mistral Instruct (German).
+
+\subsubsection{Fine-Tuned Models}
+Fine-tuning resulted in substantial performance gains across all models and test sets compared to their respective baselines.
+
+\paragraph{QALD-10} \mbox{}\\
+A dramatic improvement was observed in the percentage of executable queries (Figure~\ref{fig:executable_queries_results}).
+Baseline models on QALD-10 had executability rates between 4\% and 29\%, whereas all fine-tuned models (v1 and v2) consistently achieved rates of 94.88\% or higher (Tables~\ref{tab:finetuned_qald_model_metrics_english} and \ref{tab:finetuned_qald_model_metrics_german}).
+
+F1-scores (Figure~\ref{fig:f1_score_results}) also saw significant increases. 
+Comparing fine-tuned v1 models to their v1 baselines on QALD-10 English, Mistral's F1-score jumped approximately 26.5-fold (0.0026 to 0.0691) and Occiglot's about 16.9-fold (0.0026 to 0.0439).
+The improvements from v2 baselines to v2 fine-tuned models on QALD-10 were also marked:
+\begin{itemize}
+    \item Mistral English (v2): F1 from 0.0138 to 0.2846 (approx. 20.6-fold).
+    \item Mistral German (v2): F1 from 0.0130 to 0.2595 (approx. 19.9-fold).
+    \item Occiglot English (v2): F1 from 0.0217 to 0.1906 (approx. 8.8-fold).
+    \item Occiglot German (v2): F1 from 0.0053 to 0.2304 (approx. 43.5-fold).
+\end{itemize}
+
+\paragraph{Test Sets (Fine-Tuned)} \mbox{}\\
+On the custom test sets, the F1-score improvements from baseline to fine-tuned versions were also substantial. 
+For v1 models on the v1 test set (Table~\ref{tab:finetuned_v1_test_set_metrics} vs. Table~\ref{tab:v1_test_set_metrics}), F1-score increases ranged from approximately 8.15-fold (Mistral German) to 20.7-fold (Occiglot German).
+For v2 models on the v2 test set (Table~\ref{tab:finetuned_v2_test_set_metrics} vs. Table~\ref{tab:v2_test_set_metrics}), these F1-score jumps were even more pronounced for some models:
+\begin{itemize}
+    \item Mistral English: F1 from 0.0457 to 0.8285 (approx. 18.1-fold).
+    \item Mistral German: F1 from 0.0422 to 0.7183 (approx. 17.0-fold).
+    \item Occiglot English: F1 from 0.0210 to 0.8051 (approx. 38.3-fold).
+    \item Occiglot German: F1 from 0.0219 to 0.7268 (approx. 33.2-fold).
+\end{itemize}
+Models with the v2 fine-tuning possess the highest overall F1-scores, particularly on the v2 test set where Mistral English (v2) reached an F1 of 0.8285 and Occiglot English (v2) reached 0.8051.
+
+A key observation, particularly evident in Figure~\ref{fig:recall_results} and Table~\ref{tab:finetuned_v2_test_set_metrics}, is that on the custom v2 test set, the recall values for the v2 fine-tuned models are notably closer to their precision values compared to other test sets. 
+For instance, for Mistral English, precision was 0.9104 and recall was 0.8292 (a difference of approx. 8.9\% relative to precision). 
+For Occiglot English, precision was 0.8906 and recall was 0.8057 (a difference of approx. 9.5\% relative to precision). 
+This contrasts with the QALD-10 results (even for v2 fine-tuned models) and v1 fine-tuned results on the v1 test set, where precision often significantly exceeded recall (e.g., Mistral English (v1) on QALD-10 had P:0.7033 and R:0.0691, where P is approx. 10.2 times R).
