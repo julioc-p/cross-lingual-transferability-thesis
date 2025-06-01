@@ -94,3 +94,35 @@ Macro F1-Score                              & 0.22682206    & 0.10026190    & 0.
 \end{tabular}%
 }
 \end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Evaluation Metrics for Finetuned v2 Models on v2 Test Set}
+\label{tab:finetuned_v2_test_set_metrics}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+\textbf{Metric} & \textbf{Mistral English} & \textbf{Mistral German} & \textbf{Occiglot English} & \textbf{Occiglot German} \\
+& \textbf{(N=10000)} & \textbf{(N=10000)} & \textbf{(N=10000)} & \textbf{(N=10000)} \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{Result Categories}} \\
+Correct (Exact Match)                       & 7455 (74.55\%)& 6274 (62.74\%)& 7229 (72.29\%) & 6348 (63.48\%)  \\
+Correct (Both Empty)                        & 818 (8.18\%)  & 884 (8.84\%)  & 810 (8.10\%)   & 902 (9.02\%)    \\
+Correct (Partial Match)                     & 28 (0.28\%)   & 56 (0.56\%)   & 28 (0.28\%)    & 38 (0.38\%)     \\
+Incorrect (Gen Empty, Gold Not)             & 815 (8.15\%)  & 1173 (11.73\%)& 850 (8.50\%)   & 1242 (12.42\%)  \\
+Incorrect (Gold Empty, Gen Not)             & 22 (0.22\%)    & 30 (0.30\%)   & 35 (0.35\%)    & 25 (0.25\%)     \\
+Incorrect (No Overlap)                      & 825 (8.25\%)  & 1310 (13.10\%)& 1019 (10.19\%) & 1408 (14.08\%)  \\
+Failure: Generated Query Execution          & 26 (0.26\%)   & 271 (2.71\%)   & 10 (0.10\%)     & 32 (0.32\%)     \\
+Failure: Empty Generated Query String       & 11 (0.11\%)    & 2 (0.02\%)     & 19 (0.19\%)     & 5 (0.05\%)      \\
+Generated Query Non-Empty \& Executable     & 9963 (99.63\%)& 9727 (97.27\%)& 9971 (99.71\%) & 9963 (99.63\%)  \\
+Failure - Gold Query Execution              & 0 (0.00\%)     & 0 (0.00\%)     & 0 (0.00\%)      & 0 (0.00\%)       \\
+Correct (Exact + Both Empty)                & 8273 (82.73\%)& 7158 (71.58\%)& 8039 (80.39\%) & 7250 (72.50\%)   \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{Macro Averaged Metrics (QALD Variant)}} \\
+Macro Precision                             & 0.91036957    & 0.83616476    & 0.89060057     & 0.85147563      \\
+Macro Recall                                & 0.82922628    & 0.71984665    & 0.80568482     & 0.72777797      \\
+Macro F1-Score                              & 0.82845563    & 0.71827341    & 0.80514540     & 0.72682945      \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
