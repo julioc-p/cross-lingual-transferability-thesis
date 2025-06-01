@@ -63,15 +63,28 @@ Across all baseline conditions, the pre-trained instruction-tuned models, even w
 These initial low performance levels underscore the necessity of task-specific fine-tuning.
 
 
-\subsection{Performance of Fine-tuned Mistral Models}\label{sec:mistral_results}
+\subsection{Performance of Fine-tuned Models}
 
+This section outlines the performance of the v1 and v2 finetuned models. As explained in \ref{section::experimental_setup}, the v1 models are finetuned on the base of instruction tuned models while the v2 on raw base models or non instruction tuned ones.
+When a language is mentioned in this section it refers to both the language of the queries used as well as the Language used to finetune the model.
+It is important to remember that the v1 models did not have the entity/relationship mapping neither in the finetuning nor in the generation, while the v2 models had them in both.
 
-\fi
+\subsubsection{QALD-10}\label{sec:qald10_finetuned_results}
+
+\paragraph{v1} \mbox{}\\
+\begin{itemize}
+    \item \textbf{Mistral - English:} F1: 0.0691, P: 0.7033, R: 0.0691, Exec: 98.47\%. Correctness (Exact Match + Both Empty): 6.91\%.
+    \item \textbf{Mistral - German:} F1: 0.0563, P: 0.6726, R: 0.0563, Exec: 94.88\%. Correctness (Exact Match + Both Empty): 5.63\%.
+    \item \textbf{Occiglot - English:} F1: 0.0439, P: 0.7698, R: 0.0437, Exec: 95.40\%. Correctness (Exact Match + Both Empty): 4.35\%.
+    \item \textbf{Occiglot - German:} F1: 0.0691, P: 0.6957, R: 0.0691, Exec: 97.95\%. Correctness (Exact Match + Both Empty): 6.91\%.
+\end{itemize}
+
+\paragraph{v2} \mbox{}\\
+\begin{itemize}
+    \item \textbf{Mistral - English:} F1: 0.2846, P: 0.6612, R: 0.2844, Exec: 99.75\%. Correctness (Exact Match + Both Empty): 27.41\%.
+    \item \textbf{Mistral - German:} F1: 0.2595, P: 0.6419, R: 0.2632, Exec: 99.75\%. Correctness (Exact Match + Both Empty): 25.13\%.
+    \item \textbf{Occiglot - English:} F1: 0.1906, P: 0.5890, R: 0.1943, Exec: 99.24\%. Correctness (Exact Match + Both Empty): 18.27\%.
+    \item \textbf{Occiglot - German:} F1: 0.2304, P: 0.6920, R: 0.2340, Exec: 99.75\%. Correctness (Exact Match + Both Empty): 22.34\%.
+\end{itemize}
+
 \subsection{Comparison}\label{sec:comparison_results}\mbox{}\\
-\subsubsection{Performance on QALD-10 Benchmark}
-
-
-
-\subsubsection{Performance on Test Sets}
-
-\subsubsection{Impact of Methodological Changes (v1 vs. v2)}
