@@ -99,6 +99,15 @@ The v1 fine-tuned models were evaluated on a test set consisting of 3,500 exampl
     \item \textbf{Occiglot - German:} F1: 0.3021, P: 0.8827, R: 0.3065, Exec: 98.60\%. Correctness (Exact Match + Both Empty): 29.57\%.
 \end{itemize}
 
-\todo{test set v2}
+
+\subsubsection{v2 Test Set}\label{sec:custom_v2_test_set_results}
+The v2 fine-tuned models, which incorporated explicit Wikidata entity and relationship ID mappings during training, were evaluated on the corresponding v2 test set. 
+This set comprised 10,000 examples per language.
+\begin{itemize}
+    \item \textbf{Mistral - English (v2):} F1: 0.8285, P: 0.9104, R: 0.8292, Exec: 99.63\%. Correctness (Exact Match + Both Empty): 82.73\%.
+    \item \textbf{Mistral - German (v2):} F1: 0.7183, P: 0.8362, R: 0.7198, Exec: 97.27\%. Correctness (Exact Match + Both Empty): 71.58\%.
+    \item \textbf{Occiglot - English (v2):} F1: 0.8051, P: 0.8906, R: 0.8057, Exec: 99.71\%. Correctness (Exact Match + Both Empty): 80.39\%.
+    \item \textbf{Occiglot - German (v2):} F1: 0.7268, P: 0.8515, R: 0.7278, Exec: 99.63\%. Correctness (Exact Match + Both Empty): 72.50\%.
+\end{itemize}
 
 \subsection{Comparison}\label{sec:comparison_results}\mbox{}\\
