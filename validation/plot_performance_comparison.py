@@ -62,11 +62,10 @@ def parse_summary_file(file_path):
 
 
 def main():
-
     data = []
     patterns = [
         {
-            "regex": r"^(QALD10)/results/(v1)/(baseline|finetuned)/(mistral|occiglot)/(en|de)/summary\.txt$",
+            "regex": r"^(QALD10)/results/(v[12])/(baseline|finetuned)/(mistral|occiglot)/(en|de)/summary\.txt$",
             "groups": {
                 "dataset_raw": 1,
                 "version": 2,
@@ -78,13 +77,7 @@ def main():
             "training_status_override": None,
         },
         {
-            "regex": r"^(QALD10)/results/(v2)/(mistral|occiglot)/(en|de)/summary\.txt$",
-            "groups": {"dataset_raw": 1, "version": 2, "model": 3, "lang": 4},
-            "dataset_name_override": None,
-            "training_status_override": "Finetuned",
-        },
-        {
-            "regex": r"^(test_set)/(v[12])/results/(mistral|occiglot)/(en|de)/(baseline|finetuned)/summary\.txt$",
+            "regex": r"^(test_set)/(v1)/(mistral|occiglot)/(en|de)/(baseline|finetuned)/summary\.txt$",
             "groups": {
                 "dataset_raw": 1,
                 "version": 2,
@@ -96,7 +89,7 @@ def main():
             "training_status_override": None,
         },
         {
-            "regex": r"^(test_set)/(v[12])/(mistral|occiglot)/(en|de)/(baseline|finetuned)/summary\.txt$",
+            "regex": r"^(test_set)/(v2)/results/(mistral|occiglot)/(en|de)/(baseline|finetuned)/summary\.txt$",
             "groups": {
                 "dataset_raw": 1,
                 "version": 2,
@@ -224,48 +217,126 @@ def main():
 
     df = df.sort_values(by=["Dataset", "Language", "Training", "Model"])
 
-    metrics_to_plot = ["F1-Score", "Precision", "Recall", "Executable Queries (%)"]
-    for metric in metrics_to_plot:
-        plot_grid = sns.catplot(
-            x="Category",
-            y=metric,
-            hue="Model",
-            data=df,
-            kind="bar",
-            height=7,
-            aspect=max(1, len(df["Category"].unique()) * 0.3),
-            legend_out=True,
+
+    df_qald = df[df["Dataset"].str.startswith("Qald10")].copy()
+    df_test_v1 = df[df["Dataset"] == "Test Set v1"].copy()
+    df_test_v2 = df[df["Dataset"] == "Test Set v2"].copy()
+
+    if not df_qald.empty:
+        df_qald.loc[:, "SubCategory"] = (
+            df_qald["Language"]
+            + " - "
+            + df_qald["Training"]
+            + " ("
+            + df_qald["Dataset"].apply(lambda x: x.split()[-1])
+            + ")"
         )
-        plot_grid.set_xticklabels(rotation=45, ha="right", fontsize=10)
+    if not df_test_v1.empty:
+        df_test_v1.loc[:, "SubCategory"] = (
+            df_test_v1["Language"] + " - " + df_test_v1["Training"]
+        )
+    if not df_test_v2.empty:
+        df_test_v2.loc[:, "SubCategory"] = (
+            df_test_v2["Language"] + " - " + df_test_v2["Training"]
+        )
 
-        ax = plot_grid.ax
-        ax.set_title(f"{metric} Comparison: Mistral vs. Occiglot", fontsize=16)
-        ax.set_ylabel(metric, fontsize=12)
-        ax.set_xlabel("Experiment Category", fontsize=12)
+    metrics_to_plot = ["F1-Score", "Precision", "Recall", "Executable Queries (%)"]
 
-        for p_patch in ax.patches:
-            ax.annotate(
-                f"{p_patch.get_height():.3f}",
-                (p_patch.get_x() + p_patch.get_width() / 2.0, p_patch.get_height()),
-                ha="center",
-                va="center",
-                xytext=(0, 9),
-                textcoords="offset points",
-                fontsize=8,
+    for metric in metrics_to_plot:
+        fig = plt.figure(figsize=(16, 12))
+        gs = fig.add_gridspec(2, 2, height_ratios=[1, 1], width_ratios=[1, 1])
+
+        ax_qald = fig.add_subplot(gs[0, :])
+        ax_test_v1 = fig.add_subplot(gs[1, 0])
+        ax_test_v2 = fig.add_subplot(gs[1, 1])
+
+        subplot_config = [
+            (df_qald, ax_qald, "QALD10 Results"),
+            (df_test_v1, ax_test_v1, "Test Set v1 Results"),
+            (df_test_v2, ax_test_v2, "Test Set v2 Results"),
+        ]
+
+        figure_handles, figure_labels = [], []
+
+        for sub_df, ax, title_prefix in subplot_config:
+            if sub_df.empty:
+                ax.text(
+                    0.5,
+                    0.5,
+                    f"No data for\n{title_prefix}",
+                    horizontalalignment="center",
+                    verticalalignment="center",
+                    fontsize=12,
+                    transform=ax.transAxes,
+                )
+                ax.set_title(f"{title_prefix}\n({metric})", fontsize=14)
+                ax.set_xticks([])
+                ax.set_yticks([])
+                continue
+
+            sns.barplot(
+                x="SubCategory",
+                y=metric,
+                hue="Model",
+                data=sub_df,
+                ax=ax,
+                palette="viridis",
+                errorbar=None,
+            )
+            ax.set_title(f"{title_prefix}\n({metric})", fontsize=14)
+            ax.set_xlabel("Lang - Training", fontsize=10)
+            ax.set_ylabel(metric, fontsize=10)
+            ax.tick_params(axis="x", rotation=45, labelsize=9)
+            for label in ax.get_xticklabels():
+                label.set_horizontalalignment("right")
+            ax.tick_params(axis="y", labelsize=9)
+
+            for p_patch in ax.patches:
+                ax.annotate(
+                    f"{p_patch.get_height():.3f}",
+                    (p_patch.get_x() + p_patch.get_width() / 2.0, p_patch.get_height()),
+                    ha="center",
+                    va="center",
+                    xytext=(0, 5),
+                    textcoords="offset points",
+                    fontsize=7,
+                )
+
+            if not figure_handles:
+                handles, labels = ax.get_legend_handles_labels()
+                if handles:
+                    figure_handles.extend(handles)
+                    figure_labels.extend(labels)
+
+            if ax.get_legend() is not None:
+                ax.get_legend().remove()
+
+        if figure_handles:
+            unique_legend_items = dict(zip(figure_labels, figure_handles))
+            fig.legend(
+                unique_legend_items.values(),
+                unique_legend_items.keys(),
+                loc="upper right",
+                bbox_to_anchor=(0.99, 0.98),
+                title="Model",
+                fontsize=10,
             )
 
-        plot_grid.tight_layout()
+        fig.suptitle(f"{metric} Comparison: Mistral vs. Occiglot", fontsize=18, y=0.995)
+        plt.tight_layout(
+            rect=[0, 0.03, 0.95, 0.95]
+        )
 
         output_filename_metric_part = metric.lower().replace("-", "_").replace(" ", "_")
         output_filename_metric_part = re.sub(r"[^\w_]", "", output_filename_metric_part)
-        output_filename = f"{output_filename_metric_part}_comparison.png"
+        output_filename = f"{output_filename_metric_part}_comparison_subplots.png"
         try:
-            plot_grid.savefig(output_filename, dpi=300)
+            plt.savefig(output_filename, dpi=300)
             print(f"Saved plot: {output_filename}")
         except Exception as e:
             print(f"Error saving plot {output_filename}: {e}")
-
         plt.show()
+
 
     print("\n--- Summary of Data Used for Plotting ---")
     print(df)
