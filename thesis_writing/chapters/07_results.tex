@@ -11,9 +11,9 @@ These evaluations were conducted on the relevant test sets using prompting strat
 This approach allows for an assessment of the models' inherent capabilities under different input scenarios before the fine-tuning interventions. 
 For these baseline evaluations, the "English" or "German" designation refers to the language of the input queries from the respective test sets, not to different underlying base models. 
 The key metrics reported include Macro F1-Score (F1), Macro Precision (P), Macro Recall (R), and the percentage of Executable Queries (Exec.). 
-Full evaluation summaries are provided in Appendix~\ref{appendixbaselinedetailedresults}.
+Full evaluation summaries for the baseline models are provided in Appendix~\ref{appendixbaselinedetailedresults}.
 
-\subsubsection{Baselines in v1 Context (Instruction-Tuned Models without Explicit ID Mappings)}\label{sec:baseline_v1_context}
+\subsubsection{Baselines v1}\label{sec:baseline_v1_context}
 
 For the v1 context, the instruction-tuned models were prompted with the natural language question and the target knowledge graph, without any additional entity or relationship ID mappings.
 
@@ -27,7 +27,7 @@ Performance on the QALD-10 benchmark (391 questions attempted after filtering) w
 \end{itemize}
 Under this v1 prompting style, the base models demonstrated extremely limited capability on QALD-10, with F1-scores near zero and high rates of query execution failures (87-96\%).
 
-\paragraph{Custom v1 Test Set (v1 Context)} \mbox{}\\
+\paragraph{v1 Test Set} \mbox{}\\
 On the custom v1 test set (3,500 examples per language):
 \begin{itemize}
     \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0223, P: 0.2411, R: 0.0223, Exec: 24.26\%. Correctness (Exact Match + Both Empty) was 2.23\% (all "Correct (Both Empty)").
@@ -35,39 +35,42 @@ On the custom v1 test set (3,500 examples per language):
     \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0160, P: 0.1989, R: 0.0160, Exec: 21.60\%. Correctness was 1.60\% (all "Correct (Both Empty)").
     \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0146, P: 0.1977, R: 0.0146, Exec: 20.89\%. Correctness was 1.46\% (all "Correct (Both Empty)").
 \end{itemize}
-Performance on the custom v1 test sets also remained very low, with high query execution failure rates (76-84\%).
+Performance on the v1 test sets also remained very low, with high query execution failure rates (76-84\%).
 
-\subsubsection{Baselines in v2 Context (Instruction-Tuned Models with Explicit ID Mappings)}\label{sec:baseline_v2_context}
-
-For the v2 context baselines, the same instruction-tuned models (\texttt{mistralai/Mistral-7B-Instruct-v0.1} and \texttt{occiglot/occiglot-7b-eu5-instruct}) were evaluated. However, they were prompted using the v2 ChatML template, which includes the `CONTEXT` field providing explicit Wikidata entity and relationship ID mappings relevant to the natural language query.
+\subsubsection{Baselines v2 (Instruction-Tuned Models with Explicit ID Mappings)}\label{sec:baseline_v2_context}
 
 \paragraph{QALD-10 Test Set (v2 Context)} \mbox{}\\
-When evaluated on the QALD-10 benchmark using the v2 prompting style with contextual ID mappings:
 \begin{itemize}
-    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0138, P: 0.2202, R: 0.0157, Exec: 23.79\%. Correctness (Exact Match + Both Empty) was 1.28\% (1.28\% Exact Match, 0% Both Empty).
+    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0138, P: 0.2202, R: 0.0157, Exec: 23.79\%. Correctness (Exact Match + Both Empty) was 1.28\% (1.28\% Exact Match, 0\% Both Empty).
     \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0130, P: 0.2226, R: 0.0179, Exec: 24.55\%. Correctness was 1.28\% (0.77\% Exact Match, 0.51\% Both Empty).
     \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0217, P: 0.2540, R: 0.0230, Exec: 28.90\%. Correctness was 2.05\% (1.79\% Exact Match, 0.26\% Both Empty).
-    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0053, P: 0.1510, R: 0.0077, Exec: 18.67\%. Correctness was 0.51\% (0.51\% Exact Match, 0% Both Empty).
+    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0053, P: 0.1510, R: 0.0077, Exec: 18.67\%. Correctness was 0.51\% (0.51\% Exact Match, 0\% Both Empty).
 \end{itemize}
 Providing contextual ID mappings in the v2 prompt style led to a modest increase in the percentage of executable queries on QALD-10 for some configurations compared to the v1 context, but overall F1-scores remained very low (below 0.022), with query execution failure rates still high (71-81\%).
 
-\paragraph{Custom v2 Test Set (v2 Context)} \mbox{}\\
-On the custom v2 test set (10,000 examples per language) with v2 prompting including context:
+\paragraph{v2 Test Set} \mbox{}\\
+On the v2 test set (10,000 examples per language) with v2 prompting including context:
 \begin{itemize}
     \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0457, P: 0.3891, R: 0.0476, Exec: 42.93\%. Correctness (Exact Match + Both Empty) was 4.45\% (0.88\% Exact Match, 3.57\% Both Empty).
     \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0422, P: 0.3685, R: 0.0436, Exec: 40.54\%. Correctness was 4.17\% (0.75\% Exact Match, 3.42\% Both Empty).
-    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0210, P: 0.2043, R: 0.0217, Exec: 22.32\%. Correctness was 2.08\% (0.21\% Exact Match, 1.87\% Both Empty). (1 internal processing error noted).
-    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0219, P: 0.1889, R: 0.0223, Exec: 20.90\%. Correctness was 2.19\% (0.13\% Exact Match, 2.06\% Both Empty). (2 internal processing errors noted).
+    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0210, P: 0.2043, R: 0.0217, Exec: 22.32\%. Correctness was 2.08\% (0.21\% Exact Match, 1.87\% Both Empty).
+    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0219, P: 0.1889, R: 0.0223, Exec: 20.90\%. Correctness was 2.19\% (0.13\% Exact Match, 2.06\% Both Empty).
 \end{itemize}
-While the provision of explicit context in the v2 prompting style improved executability rates for Mistral Instruct on the Custom v2 test set compared to its v1 context performance on the Custom v1 test set (e.g., from 24.26\% to 42.93\% for English), the Macro F1-Scores remained very low (below 0.046). Query execution failures were still prevalent (57-80\%).
+While the provision of explicit context in the v2 prompting style improved executability rates for Mistral Instruct on the Custom v2 test set compared to its v1 context performance on the v1 test set (e.g., from 24.26\% to 42.93\% for English), the Macro F1-Scores remained very low (below 0.046). 
+Query execution failures were still prevalent (57-80\%).
 
-Across all baseline conditions, the pre-trained instruction-tuned models, even when provided with contextual entity/relationship mappings (v2 context), demonstrated limited inherent capability for the complex text-to-SPARQL generation task. These initial low performance levels underscore the necessity of task-specific fine-tuning. Full evaluation summaries for these baseline experiments are available in Appendix~\ref{appendixbaselinedetailedresults}.
+Across all baseline conditions, the pre-trained instruction-tuned models, even when provided with contextual entity/relationship mappings, demonstrated limited inherent capability for the complex text-to-SPARQL generation task. 
+These initial low performance levels underscore the necessity of task-specific fine-tuning.
 
 
 \subsection{Performance of Fine-tuned Mistral Models}\label{sec:mistral_results}
 
+
+\fi
 \subsection{Comparison}\label{sec:comparison_results}\mbox{}\\
 \subsubsection{Performance on QALD-10 Benchmark}
+
+
 
 \subsubsection{Performance on Test Sets}
 
