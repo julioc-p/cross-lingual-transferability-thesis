@@ -1,1 +1,46 @@
 \section{Discussion}\label{section::discussion}
+
+The results presented in Section~\ref{section::results} offer several insights into the impact of continual multilingual pre-training on an LLM's performance and cross-lingual transferability for text-to-SPARQL generation. 
+This work builds upon existing research in text-to-SPARQL generation \cite{avila2024experiments,zahera2024generating,emonet2024llm,LOPEZ20133}. 
+The primary research question addressed is how multilingual pre-training affects performance and cross-lingual transferability, and we take the Occiglot model series, which embody an instance of a said pretrained model and study its performance compared to its base model, Mistral, focusing on German (a language Occiglot was further trained on) and English (the primary language of Mistral and also part of Occiglot's additional training).
+
+\subsection{Performance in German}
+
+When contextual entity/relationship ID mappings were not provided (v1 models), Occiglot generally demonstrated superior or comparable performance to Mistral in German.
+This is evident in the F1-scores of the finetuned models on both the QALD-10 benchmark (Occiglot v1: 0.0691 vs. Mistral v1: 0.0563, see Table~\ref{tab:finetuned_qald_model_metrics_german}) and more strikingly on the v1 test set (Occiglot v1: 0.3021 vs. Mistral v1: 0.1003, see Table~\ref{tab:finetuned_v1_test_set_metrics} and Figure~\ref{fig:f1_score_results}). 
+This suggests that the additional German pre-training in Occiglot provided a tangible benefit for SPARQL generation from German natural language questions, likely by enhancing its lexical and semantic understanding of German.
+
+However, this advantage becomes less distinct when explicit Wikidata entity and relationship ID mappings are supplied as context during inference and fine-tuning (v2 models). 
+On the QALD-10 German benchmark, Mistral (v2) slightly outperformed Occiglot (v2) in both baseline (F1: 0.0130 vs. 0.0053, Table~\ref{tab:baseline_qald_model_metrics_german}) and fine-tuned scenarios (F1: 0.2595 vs. 0.2304, Table~\ref{tab:finetuned_qald_model_metrics_german}). 
+On the v2 test set for German, while Mistral (v2) baseline was notably better (F1: 0.0422 vs. 0.0219, Table~\ref{tab:v2_test_set_metrics}), the fine-tuned v2 models performed comparably, with Occiglot achieving a marginally higher F1-score (0.7268 vs. 0.7183, Table~\ref{tab:finetuned_v2_test_set_metrics}).
+
+This pattern suggests that the provision of entity/relationship mappings can significantly bridge the performance gap attributed to language-specific pre-training. 
+If the model can correctly link entities and relationships from the German question to their Wikidata identifiers via the provided context, the initial advantage conferred by Occiglot's German pre-training appears diminished for this task.
+This implies that a significant portion of the challenge in the v1 German scenario for Mistral was indeed this mapping. 
+The considerable expense of large-scale language pre-training might, for certain tasks like text-to-SPARQL, be partially offset by sophisticated prompting strategies or middlewares that handle entity/relationship linking effectively.
+This aligns with findings in other works, such as one on cross-lingual adaptation for low-resource language translation, where intermediate representations or mappings showed a reduction on the dependency on extensive target-language pre-training \cite{singh2024threeprongedapproachcrosslingualadaptation}.
+
+\subsection{Cross-Lingual Transferability and Performance in English}
+
+The investigation into Occiglot's continual pre-training on multiple European languages, including English, and its effect on English performance yields nuanced results. 
+A common expectation might be that additional relevant pre-training would consistently improve performance. 
+However, the data does not unequivocally support this for Occiglot in English when compared to Mistral.
+
+In baseline evaluations for English (without fine-tuning), Mistral Instruct and Occiglot-instruct showed comparable, though generally low, performance. 
+For instance, on the QALD-10 v2 context, Occiglot-instruct (F1: 0.0217) was slightly better than Mistral Instruct (F1: 0.0138) (Table~\ref{tab:baseline_qald_model_metrics_english}), while on the v2 test set, Mistral Instruct (F1: 0.0457) outperformed Occiglot-instruct (F1: 0.0210) (Table~\ref{tab:v2_test_set_metrics}).
+
+Among the fine-tuned models, a notable divergence appeared on the QALD-10 benchmark with v2 fine-tuning (with ID mappings): Mistral (v2) achieved an F1-score of 0.2846, significantly outperforming Occiglot (v2) (F1: 0.1906) by approximately 49.3\% (Table~\ref{tab:finetuned_qald_model_metrics_english}, Figure~\ref{fig:f1_score_results}). 
+On the test sets, however, the fine-tuned Occiglot models were either better (v1 English test set: Occiglot F1 0.2998 vs. Mistral F1 0.2268, Table~\ref{tab:finetuned_v1_test_set_metrics}) or comparable (v2 English test set: Mistral F1 0.8285 vs. Occiglot F1 0.8051, Table~\ref{tab:finetuned_v2_test_set_metrics}).
+
+This discrepancy, particularly Mistral's finetuned version lead on QALD-10 v2 English, warrants closer examination. 
+The precision scores for Mistral (0.6612) and Occiglot (0.5890) on this set were relatively close (Figure~\ref{fig:precision_results}). 
+The primary difference stems from recall (Mistral: 0.2844 vs. Occiglot: 0.1943, Figure~\ref{fig:recall_results}, Table~\ref{tab:finetuned_qald_model_metrics_english}).
+A similar trend in recall was observed for the v1 fine-tuned English models on QALD-10 (Mistral Recall: 0.0691 vs. Occiglot Recall: 0.0437, Table~\ref{tab:finetuned_qald_model_metrics_english}). 
+This suggests that Occiglot, in these more complex QALD-10 English scenarios, struggled more with retrieving all relevant correct information compared to Mistral. 
+The percentage of executable queries for both models on QALD-10 v2 English was very high and comparable (Mistral: 99.75\%, Occiglot: 99.24\%, Figure~\ref{fig:executable_queries_results}), indicating that the issue is not syntactic correctness but rather the semantic accuracy and completeness of the generated queries leading to correct data retrieval.
+
+One hypothesis is that the extensive multilingual pre-training of Occiglot might have led to a slight dilution or trade-off in its nuanced understanding of complex English structures, which becomes apparent when faced with the more intricate queries characteristic of QALD-10.
+While this multilingual exposure benefits German (as seen in v1) and allows for competitive performance on simpler English queries (as seen in the both v1 and v2 test sets), it might subtly impair its ability to handle the deeper semantic challenges in its original primary language (English, for the Mistral base). 
+This observation aligns with findings from the Occiglot research team, who noted that their initial multilingual models sometimes showed a slight decrease in English performance on certain benchmarks compared to the original Mistral models, possibly as an artifact of the continual pre-training process \cite{OcciglotResearchCollective2024Occiglot7BEU5Instruct,avramidis-etal-2024-occiglot}.
+
+\todo{limitations}
