@@ -43,4 +43,28 @@ One hypothesis is that the extensive multilingual pre-training of Occiglot might
 While this multilingual exposure benefits German (as seen in v1) and allows for competitive performance on simpler English queries (as seen in the both v1 and v2 test sets), it might subtly impair its ability to handle the deeper semantic challenges in its original primary language (English, for the Mistral base). 
 This observation aligns with findings from the Occiglot research team, who noted that their initial multilingual models sometimes showed a slight decrease in English performance on certain benchmarks compared to the original Mistral models, possibly as an artifact of the continual pre-training process \cite{OcciglotResearchCollective2024Occiglot7BEU5Instruct,avramidis-etal-2024-occiglot}.
 
+\subsection{The Role of Task and Dataset Complexity}
+
+The differing performance patterns between the QALD-10 benchmark and the v1 and v2 test sets suggest that dataset characteristics and inherent query complexity play a significant role. 
+The QALD-10 benchmark is known for its challenging queries, often requiring understanding of complex relationships and query structures, including multiple join operators \cite{usbeck2024qald}.
+
+The results suggest that for QALD-10, a primary bottleneck might be this inherent structural complexity of generating the correct SPARQL patterns, rather than solely lexical understanding. 
+This is supported by the observation that even without ID mappings (v1 fine-tuned German), fine-tuned Mistral and Occiglot performed comparably on QALD-10 (F1 scores 0.0563 and 0.0691 respectively, Table~\ref{tab:finetuned_qald_model_metrics_german}).
+In contrast, on the v1 test set for German, Occiglot achieved a three-fold higher F1-score than Mistral (0.3021 vs. 0.1003, Table~\ref{tab:finetuned_v1_test_set_metrics}). 
+When this lexical/mapping challenge was addressed by providing ID mappings in the v2 context, the performance gap on the German v1 and v2 test sets largely closed for fine-tuned models (Figure~\ref{fig:f1_score_results}). 
+On QALD-10, with mappings (v2), results remained comparable for both model, although performance improved significantly over v1.
+
+This implies that while multilingual pre-training or explicit ID mappings can address challenges related to language understanding and entity linking, they may be insufficient alone to overcome bottlenecks related to complex query construction if the model hasn't adequately learned these deeper structural patterns. 
+The perfomance gain of multilingual pre-training is thus modulated by the nature of the linguistic challenge.
+Principles of cross-lingual transfer often rely on shared representations facilitated by commonalities like alphabet and anchor tokens (e.g., digits, proper nouns) \cite{conneau2019cross}, which exist between English and German.
+The surprising aspect is when this expected transfer or enhancement (e.g., Occiglot in English from English and German further pretraining) is less evident or even negative on complex tasks for the primary base language, suggesting that the pre-training might optimize for a broader but potentially shallower understanding.
+
+\subsection{Observations on Query Executability}
+
+The percentage of executable queries (Figure~\ref{fig:executable_queries_results}) served as a sensitive indicator of learning, especially for baseline models where F1-scores were often near zero.
+Fine-tuning dramatically improved executability across all models and test sets, generally pushing rates above 95\%. 
+Interestingly, in the v1 fine-tuned scenarios (without ID mappings), Occiglot models tended to produce a higher percentage of executable queries than their Mistral counterparts, particularly on the custom v1 test set (e.g., Occiglot English v1: 99.57\% vs. Mistral English v1: 86.54\%, Table~\ref{tab:finetuned_v1_test_set_metrics}). 
+This advantage was less apparent in the baseline comparisons. 
+This could tentatively be attributed to Occiglot's additional pre-training on code, which might instill a latent understanding of formal syntax that becomes more effectively leveraged during fine-tuning on the structured task of SPARQL generation.
+
 \todo{limitations}
