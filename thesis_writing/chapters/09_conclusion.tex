@@ -1,1 +1,32 @@
 \section{Conclusion}\label{section::conclusion}
+
+This thesis investigated the impact of continual multilingual pre-training on the cross-lingual transferability and task-specific performance of Large Language Models (LLMs) for text-to-SPARQL query generation, with a specific focus on the source languages English and German. 
+By comparing the Occiglot-7b-eu5 model, a result of continual pre-training of Mistral 7B v0.1 on five European languages \cite{avramidis-etal-2024-occiglot}, against the original Mistral model, this work sought to elucidate the nuanced effects of such pre-training strategies.
+
+A primary contribution of this research was the development and public release of a substantial, reproducible multilingual dataset for text-to-SPARQL generation, comprising 895,954 examples across 12 languages. 
+This dataset, derived from established benchmarks like QALD \cite{usbeck2024qald} and other knowledge extraction challenges \cite{jiang2022knowledge}, and augmented with German translations and Wikidata entity/relationship mappings, facilitated the fine-tuning and evaluation of eight distinct model variants. 
+The study also contributed these fine-tuned models and an custom evaluation framework to the research community.
+
+The experimental findings reveal a complex interplay between multilingual pre-training, task characteristics, and the availability of contextual information. 
+
+Key conclusions drawn are:
+
+\begin{itemize}
+    \item Continual multilingual pre-training, as embodied by Occiglot, demonstrably enhances performance in newly introduced languages (German) when explicit entity/relationship mappings are absent (v1 models). 
+    This underscores the value of targeted pre-training for improving lexical and semantic understanding in specific languages.
+    \item The provision of explicit entity/relationship ID mappings (v2 models) substantially mitigates the performance differences attributable to language-specific pre-training. 
+    This suggests that contextual grounding can compensate for a lack of extensive target-language pre-training.
+    The entity/relationship linking was identified as the primary bottleneck for v1 models, with v2 models showing approximately fourfold performance increases when mappings were supplied.
+    \item The impact of Occiglot's multilingual pre-training on its English performance is nuanced. 
+    While Occiglot maintained comparable or sometimes superior executable query generation rates in English, Mistral significantly outperformed it in F1-score on the complex QALD-10 benchmark when both were provided with English contextual mappings (v2) and also on the v1 test set. 
+    This points to a potential trade-off where multilingual adaptation might affect nuanced handling of the original language, an observation that finds resonance with reports from the Occiglot research team \cite{avramidis-etal-2024-occiglot, OcciglotResearchCollective2024Occiglot7BEU5Instruct}.
+    \item The nature of the test dataset significantly influences observed performance. 
+    The QALD-10 benchmark, with its inherent query complexity \cite{usbeck2024qald}, posed challenges distinct from the other test sets. 
+    Nevertheless, competitive F1-scores (around 0.25) were achieved on QALD-10 with v2 models, comparable to other systems in the QALD-10 benchmark \cite{usbeck2024qald}.
+\end{itemize}
+
+This research frames text-to-SPARQL generation as a structured output task \cite{goodfellow2016deep}, and the findings contribute to understanding the conditions under which multilingual pre-training is most beneficial. 
+While this study faced limitations, including its focus on high-resource languages and the reliance on LLMs for certain data processing steps (as detailed in Section 8.2), it extends the work of Rangel et al. \cite{rangel2024sparqlgenerationanalysisfinetuning} by exploring the dynamics of the task in a multilingual setting.
+
+Ultimately, this work underscores that enhancing LLM performance across diverse languages involves more than just increasing multilingual data; it requires careful consideration of task complexity, linguistic challenges, and potential capability trade-offs. 
+The datasets, models, and insights presented herein aim to provide a foundation for future research directed at creating more equitable and effective LLMs, thereby helping to bridge the linguistic divide in access to information and AI-driven efficiencies.
