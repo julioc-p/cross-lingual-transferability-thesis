@@ -1,0 +1,18 @@
+\section{Dataset: Question-Sparql}
+This section provides details about the Question-Sparql dataset developed in this work, including the url.
+
+\begin{description}
+    \item[Dataset Name:] Question-Sparql
+    \item[URL:] \url{https://huggingface.co/datasets/julioc-p/Question-Sparql}
+    \item[Description:] A multilingual dataset for text-to-SPARQL generation, containing question and corresponding SPARQL query pairs.
+    \item[Size:] Total 895,954 rows.
+    \item[Features:]\mbox{}\\
+    
+        \begin{itemize}
+            \item \texttt{text\_query}: The natural language question (string).
+            \item \texttt{language}: Language code of the text query (string, 12 distinct values).
+            \item \texttt{sparql\_query}: The corresponding SPARQL query (string).
+            \item \texttt{knowledge\_graphs}: The knowledge graph targeted by the query (string, 15 distinct values).
+            \item \texttt{context}: Entities/Relationship mappings.
+        \end{itemize}
+\end{description}
