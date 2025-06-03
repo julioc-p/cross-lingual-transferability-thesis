@@ -67,4 +67,8 @@ Interestingly, in the v1 fine-tuned scenarios (without ID mappings), Occiglot mo
 This advantage was less apparent in the baseline comparisons. 
 This could tentatively be attributed to Occiglot's additional pre-training on code, which might instill a latent understanding of formal syntax that becomes more effectively leveraged during fine-tuning on the structured task of SPARQL generation.
 
+\subsection{Concluding Remarks}
+This work contributes to the understanding of multilingual pre-training's effects on text-to-SPARQL generation by providing a detailed empirical study using Mistral and Occiglot models. The development of a large, multilingual dataset and the comprehensive evaluation across different conditions and languages extend the type of analysis performed by Rangel et al. \cite{rangel2024sparqlgenerationanalysisfinetuning} into a multilingual context, revealing complex interactions between pre-training, task complexity, and the utility of contextual information like entity mappings. 
+The nuanced findings highlight that while multilingual pre-training can offer significant advantages, particularly when an explicit bridge between the source and target language is not present, it does not guarantee superior performance across languages, and may involve trade-offs, particularly for complex reasoning in the model's original primary language.
+
 \todo{limitations}
