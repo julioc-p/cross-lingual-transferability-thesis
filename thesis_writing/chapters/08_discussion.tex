@@ -4,7 +4,8 @@ The results presented in Section~\ref{section::results} offer several insights i
 This work builds upon existing research in text-to-SPARQL generation \cite{avila2024experiments,zahera2024generating,emonet2024llm,LOPEZ20133}. 
 The primary research question addressed is how multilingual pre-training affects performance and cross-lingual transferability, and we take the Occiglot model series, which embody an instance of a said pretrained model and study its performance compared to its base model, Mistral, focusing on German (a language Occiglot was further trained on) and English (the primary language of Mistral and also part of Occiglot's additional training).
 
-\subsection{Performance in German}
+\subsection{Results}
+\subsubsection{Performance in German}
 
 When contextual entity/relationship ID mappings were not provided (v1 models), Occiglot generally demonstrated superior or comparable performance to Mistral in German.
 This is evident in the F1-scores of the finetuned models on both the QALD-10 benchmark (Occiglot v1: 0.0691 vs. Mistral v1: 0.0563, see Table~\ref{tab:finetuned_qald_model_metrics_german}) and more strikingly on the v1 test set (Occiglot v1: 0.3021 vs. Mistral v1: 0.1003, see Table~\ref{tab:finetuned_v1_test_set_metrics} and Figure~\ref{fig:f1_score_results}). 
@@ -20,7 +21,7 @@ This implies that a significant portion of the challenge in the v1 German scenar
 The considerable expense of large-scale language pre-training might, for certain tasks like text-to-SPARQL, be partially offset by sophisticated prompting strategies or middlewares that handle entity/relationship linking effectively.
 This aligns with findings in other works, such as one on cross-lingual adaptation for low-resource language translation, where intermediate representations or mappings showed a reduction on the dependency on extensive target-language pre-training \cite{singh2024threeprongedapproachcrosslingualadaptation}.
 
-\subsection{Cross-Lingual Transferability and Performance in English}
+\subsubsection{Cross-Lingual Transferability and Performance in English}
 
 The investigation into Occiglot's continual pre-training on multiple European languages, including English, and its effect on English performance yields nuanced results. 
 A common expectation might be that additional relevant pre-training would consistently improve performance. 
@@ -43,7 +44,7 @@ One hypothesis is that the extensive multilingual pre-training of Occiglot might
 While this multilingual exposure benefits German (as seen in v1) and allows for competitive performance on simpler English queries (as seen in the both v1 and v2 test sets), it might subtly impair its ability to handle the deeper semantic challenges in its original primary language (English, for the Mistral base). 
 This observation aligns with findings from the Occiglot research team, who noted that their initial multilingual models sometimes showed a slight decrease in English performance on certain benchmarks compared to the original Mistral models, possibly as an artifact of the continual pre-training process \cite{OcciglotResearchCollective2024Occiglot7BEU5Instruct,avramidis-etal-2024-occiglot}.
 
-\subsection{The Role of Task and Dataset Complexity}
+\subsubsection{Dataset Complexity}
 
 The differing performance patterns between the QALD-10 benchmark and the v1 and v2 test sets suggest that dataset characteristics and inherent query complexity play a significant role. 
 The QALD-10 benchmark is known for its challenging queries, often requiring understanding of complex relationships and query structures, including multiple join operators \cite{usbeck2024qald}.
@@ -59,7 +60,7 @@ The perfomance gain of multilingual pre-training is thus modulated by the nature
 Principles of cross-lingual transfer often rely on shared representations facilitated by commonalities like alphabet and anchor tokens (e.g., digits, proper nouns) \cite{conneau2019cross}, which exist between English and German.
 The surprising aspect is when this expected transfer or enhancement (e.g., Occiglot in English from English and German further pretraining) is less evident or even negative on complex tasks for the primary base language, suggesting that the pre-training might optimize for a broader but potentially shallower understanding.
 
-\subsection{Observations on Query Executability}
+\subsubsection{Observations on Query Executability}
 
 The percentage of executable queries (Figure~\ref{fig:executable_queries_results}) served as a sensitive indicator of learning, especially for baseline models where F1-scores were often near zero.
 Fine-tuning dramatically improved executability across all models and test sets, generally pushing rates above 95\%. 
@@ -67,8 +68,32 @@ Interestingly, in the v1 fine-tuned scenarios (without ID mappings), Occiglot mo
 This advantage was less apparent in the baseline comparisons. 
 This could tentatively be attributed to Occiglot's additional pre-training on code, which might instill a latent understanding of formal syntax that becomes more effectively leveraged during fine-tuning on the structured task of SPARQL generation.
 
-\subsection{Concluding Remarks}
+\subsubsection{Concluding Remarks}
 This work contributes to the understanding of multilingual pre-training's effects on text-to-SPARQL generation by providing a detailed empirical study using Mistral and Occiglot models. The development of a large, multilingual dataset and the comprehensive evaluation across different conditions and languages extend the type of analysis performed by Rangel et al. \cite{rangel2024sparqlgenerationanalysisfinetuning} into a multilingual context, revealing complex interactions between pre-training, task complexity, and the utility of contextual information like entity mappings. 
 The nuanced findings highlight that while multilingual pre-training can offer significant advantages, particularly when an explicit bridge between the source and target language is not present, it does not guarantee superior performance across languages, and may involve trade-offs, particularly for complex reasoning in the model's original primary language.
 
-\todo{limitations}
+\subsection{Limitations of the Study}\label{sec:limitations}
+
+While this research provides valuable insights into the effects of multilingual pre-training on text-to-SPARQL generation, several limitations should be acknowledged:
+
+\begin{itemize}
+    \item \textbf{Focus on High-Resource Languages:} The empirical evaluation in this thesis primarily concentrated on English and German. 
+    These are high-resource languages with substantial data availability, which facilitated the creation of large-scale datasets for fine-tuning and testing. 
+    Consequently, the findings, particularly regarding the degree of performance improvement and the specific challenges encountered, may not directly generalize to low-resource or underrepresented languages. 
+    These languages often present distinct linguistic challenges and suffer from greater data scarcity, potentially leading to different performance dynamics \cite{neupane2025generativeainamedentity}. 
+    However, the methodologies and insights gained from this study should serve as a foundational step for future investigations into less-resourced linguistic contexts.
+
+    \item \textbf{Scope of Statistical Analysis:} Although experiments were conducted with a consistent seed (42) and key evaluations were based on established metrics, a more comprehensive statistical analysis employing confidence intervals or p-values was not undertaken. 
+    While major performance trends were generally consistent across test sets, the absence of more rigorous statistical testing limits the strength of claims, in particular regarding smaller observed differences. 
+    Future work could incorporate such analyses to provide a more robust quantitative underpinning to the comparative findings.
+
+    \item \textbf{Reliance on LLMs for Data Augmentation and Preprocessing:} Several stages of the dataset creation and experimental setup, including the translation of questions, classification of text as statements or queries, and the generation of entity/relationship mappings for the v2 context, relied on the capabilities of other LLMs.
+    While these methods enabled the processing and augmentation of a large dataset, they also introduce the potential for LLM-generated errors, biases, or inconsistencies in the training, evaluation and test data. 
+    Manual verification of the nearly 900,000 data points was not feasible. 
+    The quality of training data is known to be a critical factor in the fine-tuning performance of LLMs \cite{dettmers2023qlora}, and while efforts were made to clean and filter the data, residual imperfections woud influence the outcomes. 
+    Alternative, more deterministic methods for certain tasks, such as directly deriving all entity/relationship mappings from Wikidata's API for the v2 context with the respective identifiers, might have yielded a dataset with different characteristics, though potentially at a higher cost of implementation complexity or coverage.
+
+    \item \textbf{Dataset-Specific Bottlenecks:} The discussion highlighted that performance bottlenecks can be dataset-specific, with QALD-10 posing different challenges (e.g., structural query complexity) than the other test sets (where lexical understanding and entity mapping appeared more dominant in the improvement, especially in v1 scenarios). 
+    While this distinction provided valuable insights, the exact nature and relative contributions of these different types of complexities were inferred from performance differences rather than being directly measured or controlled for.
+
+\end{itemize}
