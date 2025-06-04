@@ -183,15 +183,15 @@ A key contribution is the development of a large-scale, reproducible multilingua
 Experiments fine-tuning eight model variants (two versions of each model for both languages, with and without contextual aid -- v1 and v2 experiments respectively) were conducted.
 
 The findings indicate that continual multilingual pre-training significantly benefits Occiglot's performance in German when contextual aid is absent (v1).
-However, providing German entity/relationship mappings to Mistral (v2) substantially reduces this performance gap.
+However, providing entity/relationship mappings for Wikidata to Mistral (v2) substantially reduces this performance gap.
 Conversely, for English on the QALD-10 test set \cite{usbeck2024qald}, while Occiglot maintained comparable executable query rates, Mistral outperformed Occiglot in both finetuned v1 and v2 models in terms of F1 score.
 This suggests a potential trade-off where multilingual adaptation might diminish the capability of handling nuance in the original language for Occiglot.
 
-A primary bottleneck identified in v1 models is entity/relationship linking, with performance increasing approximately fourfold when contextual mappings are supplied (v2). 
+A primary bottleneck identified in v1 experiments is entity/relationship linking, with performance increasing approximately fourfold when contextual mappings are supplied (v2). 
 Interestingly, this improvement was less pronounced on the QALD-10 test set, suggesting that its inherent query complexity also poses a second significant challenge, largely not present in the other test sets.
 Nevertheless, by incorporating contextual mappings, competitive F1-scores were achieved on QALD-10 (around 0.25), comparable to systems in the QALD-10 benchmark (0.1-0.5 F1) \cite{usbeck2024qald}.
-This result also suggests that direct pre-training on Wikidata entity/relationship identifiers, a hypothesis considered, might yield similar outcomes.
-Finally, finetuned Occiglot generally demonstrated slightly superior percentage of executable query generation in English in comparison to fine-tuned Mistral, hinting at benefits of multilingual exposure for correct syntax generation.
+This result also suggests that pre-training on Wikidata entity/relationship identifiers might yield similar outcomes.
+Finally, the finetuned Occiglot generally demonstrated slightly superior percentage of executable query generation in English in comparison to fine-tuned Mistral, hinting at benefits of multilingual exposure for correct syntax generation.
 \end{abstract}
 \newpage
 
