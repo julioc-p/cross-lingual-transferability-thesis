@@ -198,8 +198,6 @@ f(z) =
 \end{equation}
 
 
-The neurons are arranged in layers. Each layer uses the previous layer's outputs for its calculations and then forwards its outputs to the next layer.
-
 Neurons are arranged in layers. Each layer uses the previous layer's outputs for its calculations and then forwards its outputs to the next layer.  For a given layer \( l \), the computation follows:
 
 \begin{equation}
@@ -254,13 +252,7 @@ After the forward pass, the model's predicted output is compared to the true lab
 
 Training a neural network requires adjusting its weights to minimize a loss function. This is achieved through gradient descent, which updates weights based on the gradient of the loss function. The gradient can be computed using batch gradient descent, which sums gradients over all data points, or stochastic gradient descent (SGD), which updates weights with a subset of the data.
 
-For a given training example \((x, y)\), with x being the prediction and y being the actual value, we compute the gradient of the loss function with respect to the weights:
-
-\begin{equation}
-\nabla_W \text{Loss}(NN(x; W), y),
-\end{equation}
-
-where \( W \) includes all weight matrices \( W^l \) in layers \( l = 1, \dots, L \). Using the chain rule, the gradient for the final layer \( L \) is:
+For a given training example, consisting of an input $x$ and its corresponding true label $y$, the model produces a prediction $NN(x;W)$. We compute the gradient of the loss function, which measures the discrepancy between this prediction and the true label $y$, with respect to the weights $W$: $\nabla_{W}Loss(NN(x;W),y)$, where \( W \) includes all weight matrices \( W^l \) in layers \( l = 1, \dots, L \). Using the chain rule, the gradient for the final layer \( L \) is:
 
 \begin{equation}
 \frac{\partial \text{Loss}}{\partial W^L} = \frac{\partial \text{Loss}}{\partial A^L} \cdot \frac{\partial A^L}{\partial Z^L} \cdot \frac{\partial Z^L}{\partial W^L}.
