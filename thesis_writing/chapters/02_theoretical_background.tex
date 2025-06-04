@@ -365,7 +365,7 @@ One of the most common techniques to tackle these problems is dynamically adjust
 \end{definition}  
     
     Unlike FNNs, which process inputs independently, RNNs introduce loops within the network to allow information persistence. This structure enables them to model temporal dependencies, making them suitable for tasks such as time-series forecasting, speech recognition, and in general tasks depending on previous states such as machine translation.
-    RNNs are in its core state machines of FNNs \ref{fig:RNN}.
+    RNNs are in its core state machines of FNNs, as seen in Figure \ref{fig:RNN}.
 
 
     \begin{figure}
@@ -450,9 +450,8 @@ The core idea is that LSTMs introduce a dedicated memory cell, essentially anoth
     \item The \textbf{output gate} controls which parts of the memory cell contribute to the network’s output.
 \end{itemize}
 
-Like simple gated recurrent networks, these gating mechanisms perform weighted selection, allowing the network to regulate information flow effectively. LSTMs have been widely used in tasks such as language translation and speech recognition, being the stat-of-the-art solution for handling long-range dependencies in 2015.
-The architecture as a reference is \ref{fig:LSTM}
-  
+Like simple gated recurrent networks, these gating mechanisms perform weighted selection, allowing the network to regulate information flow effectively. LSTMs have been widely used in tasks such as language translation and speech recognition, being the state-of-the-art solution for handling long-range dependencies in 2015.
+The architecture is shown for reference in Figure \ref{fig:LSTM}.
     \begin{figure}
         \centering
         \includegraphics[scale=0.5]{LSTM_recurrent_Cell.png}
@@ -558,8 +557,6 @@ in another setting (say distribution P2) \cite{goodfellow2016deep}.
 In simple terms, it involves leveraging training from one task to improve a machine learning model’s performance on another task.
 
 A special kind of transfer learning, called cross-lingual transfer, revolves around leveraging training in one language to improve the results of training in another language \cite{cross_lingual_transfer}.
-
-Although the idea of transfer learning was already introduced in neural networks in the 1970s \cite{bozinovski2020reminder}, the first successful case of using it in NLP in the context of pre-trained LLMs was in 2015 \cite{HAN2021225}.
 
 In 2018, the introduction of BERT and GPT-1 demonstrated that it was possible to train a general-purpose LLM for various downstream tasks with minimal architectural modifications \cite{devlin2019bert,lee2018pre}. Since then, transformer-based LLMs have been gaining in popularity and in performance because of the flexibility and relatively small set of data required to effectively train for the downstream tasks.
 
