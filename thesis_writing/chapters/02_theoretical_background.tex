@@ -510,43 +510,63 @@ Finally, additional contextual information is embedded into the IDS during train
 
 
 \subsection{Transformer Architecture}
-This section is entirely based on the paper \textit{Attention is All You Need} by Vaswani et al. \cite{vaswani2017attention} unless stated otherwise.
+\textit{This section is entirely based on the paper ``Attention is All You Need'' by Vaswani et al. \cite{vaswani2017attention} unless stated otherwise.}
 
-\begin{figure}
+\begin{figure}[h!] % Added [h!] for better placement, adjust as needed
     \centering
-    \includegraphics{transformer_architecture.png}
+    \includegraphics[width=0.8\textwidth]{transformer_architecture.png} % Consider adjusting width
     \caption{Transformer Architecture \cite{vaswani2017attention}}
     \label{fig:transformer}
 \end{figure}
+
 The Transformer architecture consists of two main components: the encoder and the decoder. The overall structure is illustrated in Figure \ref{fig:transformer}.
 
 \textbf{Encoder}:
-The encoder is composed of 6 identical layers. Each encoder layer consists of two sublayers:  
+The encoder is composed of N=6 identical layers. Each encoder layer consists of two sublayers:  
 
 \begin{itemize}
-    \item \textbf{Multi-Head Self-Attention}: This mechanism allows each token in the input sequence to attend to all other tokens, enabling global context awareness.  
-    \item \textbf{Feed-Forward Neural Network (FFN)}: A position-wise fully connected network applied independently to each token.  
+    \item \textbf{Multi-Head Self-Attention}: This is the first sub-layer. Generally, an attention function maps a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is a weighted sum of the values, where the weight for each value is determined by a compatibility function of the query with the corresponding key \cite{vaswani2017attention}.
+
+    The specific attention mechanism prominently used in the Transformer is called ``Scaled Dot-Product Attention''. 
+    For this mechanism, the input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. 
+    The attention is calculated by taking the dot product of the query with all keys, scaling this by dividing by $\sqrt{d_k}$, and then applying a softmax function to obtain the weights for the values. 
+    This scaling factor $\frac{1}{\sqrt{d_k}}$ is used to counteract the effect of dot products growing large in magnitude for large values of $d_k$, which could push the softmax function into regions with extremely small. 
+    When computed for a set of queries (packed into matrix $Q$), keys (matrix $K$), and values (matrix $V$), the output is given by the formula \ref{eq:scaled_dot_product_attention}.
+    \begin{equation}
+    \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+    \label{eq:scaled_dot_product_attention} 
+    \end{equation}
+    The Transformer then employs \textbf{Multi-Head Self-Attention}. Instead of performing a single attention function with $d_{\text{model}}$-dimensional keys, values and queries, this mechanism linearly projects the queries, keys, and values $h$ times with different, learned linear projections to $d_k$, $d_k$ and $d_v$ dimensions, respectively. 
+    The Scaled Dot-Product Attention function (as defined in Equation~\ref{eq:scaled_dot_product_attention}) is then applied in parallel to each of these $h$ projected versions (or ``heads''). The $d_v$-dimensional output values from these heads are concatenated and once again projected, resulting in the final values. 
+    This multi-head approach allows the model to jointly attend to information from different representation subspaces at different positions, enabling global context awareness.
+
+    \item \textbf{Feed-Forward Neural Network (FFN)}: A position-wise fully connected network applied independently to each token. This consists of two linear transformations with a ReLU activation in between.
 \end{itemize}
 
-Each sublayer has a residual (skip) connection followed by layer normalization. This residual connection helps mitigate the vanishing gradient problem by preserving gradient flow during backpropagation.
+Each sublayer in the encoder (and decoder) has a residual (skip) connection around it, followed by layer normalization. 
+That is, the output of each sub-layer is $\text{LayerNorm}(x + \text{Sublayer}(x))$, where $\text{Sublayer}(x)$ is the function implemented by the sub-layer itself. 
+To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $d_{\text{model}} = 512$.
 
 \textbf{Decoder}:
-The decoder also consists of 6 layers, each containing three sublayers:  
+The decoder is also composed of N=6 identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack. 
+Similar to the encoder, residual connections are employed around each of the sub-layers, followed by layer normalization \cite{vaswani2017attention}. 
+The sublayers are:
 
 \begin{itemize}
-    \item \textbf{Masked Multi-Head Self-Attention}: Unlike the encoder, self-attention in the decoder is masked to ensure that the prediction for a given position can only depend on previously generated tokens. This prevents information from future tokens from leaking.  
-    \item \textbf{Multi-Head Cross-Attention}: This sublayer processes the encoder’s output along with the decoders output of the first masked attention sublayer, allowing the decoder to leverage the full context of the input sequence.  
-    \item \textbf{Feed-Forward Neural Network (FFN)}: Similar to the encoder, a position-wise feed-forward network is applied.  
+    \item \textbf{Masked Multi-Head Self-Attention}: The self-attention sub-layer in the decoder stack is modified to prevent positions from attending to subsequent positions. This masking, combined with the fact that the output embeddings are offset by one position, ensures that the predictions for position $i$ can depend only on the known outputs at positions less than $i$, thus preserving the auto-regressive property.
+    \item \textbf{Multi-Head Cross-Attention}: This third sub-layer performs multi-head attention over the output of the encoder stack. The queries come from the previous decoder layer, and the keys and values come from the output of the encoder. This allows every position in the decoder to attend over all positions in the input sequence.
+    \item \textbf{Feed-Forward Neural Network (FFN)}: Similar to the encoder, a position-wise fully connected network is applied.  
 \end{itemize}
 
-Each sublayer in both the encoder and the decoder is followed by an add-and-normalize operation, which means adding the output of the residual connection (input of the sublayer) with the ouput of the FNN or the attention mechanism to then normalize it across the features.
+Each sublayer in both the encoder and the decoder is followed by an add-and-normalize operation (as described above with residual connections and layer normalization).
 
-After the final decoder layer, a linear transformation projects the output into the vocabulary space. A softmax function then converts this output into a probability distribution over possible next tokens.
+After the final decoder layer, a linear transformation projects the decoder output to predicted next-token probabilities using a softmax function.
 
-Unlike recurrent neural networks (RNNs), which process input sequentially, Transformers process all input tokens in parallel. To preserve positional information, positional encodings are added to the input embeddings before passing them through the encoder.
+Unlike recurrent neural networks (RNNs), which process input sequentially, Transformers process all input tokens in parallel (within the constraints of the attention mechanism's reach). 
+To preserve positional information, since the model contains no recurrence or convolution that inherently process order, ``positional encodings'' are added to the input embeddings at the bottoms of the encoder and decoder stacks.
 
-The main new breakthrough coming with the transformer architecture is the ability to process tokens in parallel while also keeping the dependencies of the ones far apart in the text input and leveraging this information. This provides both a significant speed up in training as well as an increase in performance in certain tasks such as machine translation from English to German \cite{vaswani2017attention}.
-
+The main new breakthrough coming with the transformer architecture is the ability to process tokens in parallel while also drawing global dependencies between input and output, effectively modeling dependencies regardless of their distance in the input or output sequences.
+This provides both a significant speed up in training, due to increased parallelizability, as well as an increase in performance in certain tasks such as machine translation from English to German.
 \subsection{Mistral Architecture}
 \textit{This section is based on the paper ``Mistral 7B'' by Jiang et al. \cite{jiang2023mistral7b} unless stated otherwise.}
 
