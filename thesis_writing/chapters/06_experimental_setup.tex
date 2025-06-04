@@ -28,9 +28,50 @@ The following data processing steps were applied to ensure the quality and relev
     "Hatte der Goldrausch Charlie Chaplin bearbeitet, geschrieben und für Charlie Chaplin, Charlie Chaplin Charlie Chaplin und Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie Chaplin Charlie ..."
     \end{quote}
     Due to such issues, we applied length-based filtering to remove problematic translations.
+
+      \item \textbf{Generation of Contextual Entity/Relationship Mappings:} \label{item:context_generation}
+    A key step for augmenting the dataset, particularly for English and German examples targeting Wikidata, and for preparing the input for the v2 model fine-tuning, was the generation of contextual entity and relationship mappings. 
+    The goal was to provide the models with explicit Wikidata QIDs and PIDs corresponding to entities and relationships mentioned in the natural language questions, formatted as a JSON string.
+    
+    For an English question such as "Did United States Army employ a spouse of a character", the generated context would be:
+    \begin{verbatim}
+    {"entities": {"United States Army": "Q9212", "character": "Q95074"}, 
+     "relationships": {"spouse": "P26", "instance of": "P31", 
+                      "employer": "P108"}}
+    \end{verbatim}
+    Similarly, for a German question like "Hatte das United States Army eine Ehefrau eines Charakters eingestellt?", the corresponding German context, with localized keys, would be:
+    \begin{verbatim}
+    {"entitäten": {"United States Army": "Q9212", "Figur": "Q95074"}, 
+     "beziehungen": {"Ehefrau": "P26", "Arbeitgeber": "P108", 
+                     "Instanz von": "P31"}}
+    \end{verbatim}
+    This process leveraged large language models in a few-shot learning paradigm to extract these mappings by correlating the natural language question with its gold standard SPARQL query, which explicitly contains the QIDs and PIDs. 
+    
+    Two primary LLMs were employed for this task, selected based on their performance on public benchmarks (e.g., the Hugging Face LLM Leaderboard \cite{chiang2024chatbotarenaopenplatform}) and computational feasibility (models up to 70B parameters):
+    \begin{itemize}
+        \item For English examples: \textit{NousResearch/Hermes-3-Llama-3.1-70B} \cite{teknium2024hermes}.
+        \item For German examples: \textit{meta-llama/Llama-3.3-70B-Instruct} \cite{grattafiori2024llama3herdmodels}. While the Hermes model showed strong performance in English, its German output for this task was found to be less reliable, prompting the use of the Llama-3.3 model for German, which demonstrated better results.
+    \end{itemize}
+    These operations were performed on NVIDIA A100-80GB GPUs.
+
+    The models were prompted with a system message defining the task and the desired JSON output format, followed by one (for English) or three (for German) few-shot examples. An example of the system prompt used for English context generation is:
+\begin{lstlisting}[breaklines=true, basicstyle=\ttfamily\scriptsize, frame=single, title=System Prompt (English Context Generation)]
+You are a helpful assistant that extracts Wikidata entities and properties from SPARQL queries.
+Output a valid JSON dictionary with no trailing characters. Format:
+{
+  "entities": {"ENTITY_LABEL_IN_QUESTION": "QID"},
+  "relationships": {"RELATIONSHIP_LABEL_IN_QUESTION": "PID"}
+}
+Only use what you see in the SPARQL, no inferred knowledge. The labels in the JSON should correspond to how they are expressed or implied in the question.
+\end{lstlisting}
+    Each few-shot example consisted of a natural language question, its gold SPARQL query, and the target JSON output containing the entity/relationship mappings with natural language labels as keys. The model was then provided with the new question and its SPARQL query to generate the corresponding JSON mapping.
+    
+    The generated output from the LLM was validated for correct JSON formatting. If valid, the JSON string was added to a new `context` column in the dataset. This method was chosen for its pragmatic approach to leveraging existing gold SPARQL queries, rather than relying on more complex Named Entity Recognition (NER) and Relation Extraction techniques that might require separate model training.
+    
+    Through this process, 318,161 contextual annotations were generated for the training set (160,915 for English and 157,246 for German). Additionally, 784 context mappings were generated for the QALD-10 test set examples (English and German). While extensive manual verification of all generated contexts was not feasible, spot-checks indicated a generally high quality of mappings. The complete scripts and further details of this annotation process are available in the project's GitHub repository (see Appendix \ref{appendix:github_repository}).
 \end{enumerate}
 
-These preprocessing steps significantly improved the overall quality of the dataset by removing incomplete, irrelevant, and low-quality queries while expanding it with translated data.
+These preprocessing steps significantly improved the overall quality of the dataset by removing incomplete, irrelevant, and low-quality queries while expanding it with translated data and context.
 \subsection{Training}
 \subsubsection{Training Overview and Model Versions}
 
