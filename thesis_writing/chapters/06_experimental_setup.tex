@@ -287,7 +287,7 @@ While the german variant of Mistral shows higher variability in gradient norms, 
 \end{figure}
 
 An incidental finding during this writing in the v1.1 training was that the Occiglot German model was unintentionally first trained for 10 epochs instead of the standard 5 epochs used for all other v1.1 models (which were set conservatively to avoid overfitting in the absence of an early stopping mechanism). 
-Interestingly, this extended training did not yield a significant performance difference on the QALD-10 benchmark compared to the 5-epoch run (the one showcased previously), but it did result in a higher F1 score on the held-out test split from our primary dataset (from 0.4 to 0.3).
+Interestingly, this extended training did not yield a significant performance difference on the QALD-10 benchmark compared to the 5-epoch run (the one showcased previously), but it did result in a higher F1 score on the held-out test split from our primary dataset (0.3 vs 0.4).
 This observation hints at potential overfitting to the training set distribution with prolonged training.
 
 \subsubsection{v2: Addressing v1 Limitations}\label{sec:v2_methodology}
@@ -371,7 +371,7 @@ The general training arguments were also updated, drawing from best practices an
     \item \texttt{learning\_rate}: 2e-4 (aligned with QLoRA paper settings for similar-sized models).
     \item \texttt{max\_grad\_norm}: 0.3 (aligned with QLoRA paper).
     \item \texttt{warmup\_ratio}: 0.03 (aligned with QLoRA paper).
-    \item \texttt{lr\_scheduler\_type}: (aligned with QLoRA paper)).
+    \item \texttt{lr\_scheduler\_type}: (aligned with QLoRA paper).
 \end{itemize}
 
 \paragraph{Enhanced Training Loop Features for v2} \mbox{}\\
@@ -450,7 +450,7 @@ However, this might inadvertently teach the model that EOS tokens within a packe
 To test this, an experimental fine-tuning run (termed v2.1 for this investigation) was conducted for the Mistral English model with \texttt{packing=False}. 
 For this specific run, LoRA parameters were also adjusted to align with those used for the 7B Guanaco model in the QLoRA repository (\texttt{lora\_r=16}, \texttt{lora\_alpha=32}) \cite{artidoro_qlora_2023}, maintaining the \texttt{lora\_dropout=0.05} and \texttt{target\_modules="all-linear"}. The rationale for ``lora\_alpha'' being twice `r` followed common guidelines \cite{Raschka2023PracticalTips}.
 The model trained with \texttt{packing=False} (v2.1 Mistral English) exhibited a change in the nature of the extraneous output.
- Instead of generating fragments of other training instances, it tended to produce repetitive phrases or statements related to the generated query itself after the closing ``` ``` delimiters, as shown in the example below:
+Instead of generating fragments of other training instances, it tended to produce repetitive phrases or statements related to the generated query itself after the closing ``` delimiters, as shown in the example below:
 \begin{lstlisting}[breaklines]
 {
   "question": "<|im_start|>system\nYou are an expert text to SparQL query translator. Users will ask you questions in English and you will generate a SparQL query based on \
