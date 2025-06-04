@@ -1,7 +1,7 @@
 \section{Theoretical Background}\label{section::theoretical_background}
 
 \subsection{Machine Learning}
-Note that this section is based on the book \textit{Deep learning} by Goodfellow et al. \cite{goodfellow2016deep} unless stated otherwise.
+\textit{Note that this section is based on the book ``Deep learning'' by Goodfellow et al. \cite{goodfellow2016deep} unless stated otherwise.}
 
 \begin{definition}
 A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.
@@ -547,6 +547,27 @@ Unlike recurrent neural networks (RNNs), which process input sequentially, Trans
 
 The main new breakthrough coming with the transformer architecture is the ability to process tokens in parallel while also keeping the dependencies of the ones far apart in the text input and leveraging this information. This provides both a significant speed up in training as well as an increase in performance in certain tasks such as machine translation from English to German \cite{vaswani2017attention}.
 
+\subsection{Mistral Architecture}
+\textit{This section is based on the paper ``Mistral 7B'' by Jiang et al. \cite{jiang2023mistral7b} unless stated otherwise.}
+
+The Mistral 7B model is a 7.3-billion-parameter language model that builds upon the foundational Transformer architecture \cite{vaswani2017attention} but introduces several key modifications to enhance efficiency and performance, particularly for long sequence handling and faster inference. 
+While it retains the core decoder-only transformer blocks, it incorporates novel attention mechanisms. 
+The primary architectural innovations in Mistral 7B are Grouped-Query Attention (GQA) and Sliding Window Attention (SWA).
+
+\textbf{Grouped-Query Attention (GQA)}:
+In the standard Multi-Head Attention (MHA) mechanism described by Vaswani et al. \cite{vaswani2017attention}, each attention head has its own query (Q), key (K), and value (V) projections. 
+GQA modifies this by having multiple query heads share a single key and value head. 
+This approach significantly reduces the number of parameters and computational overhead associated with projecting and storing keys and values, especially during autoregressive decoding where the K and V tensors (KV cache) from previous tokens are cached and reused. 
+By grouping query heads, GQA aims to strike a balance between the quality of MHA and the speed of Multi-Query Attention (MQA), where all query heads share a single K and V head \cite{shazeer2019fast}. This design leads to faster inference times and reduced memory usage compared to traditional MHA, without a substantial loss in model quality.
+
+\textbf{Sliding Window Attention (SWA)}:
+To handle longer sequences more efficiently and mitigate the quadratic complexity of full self-attention with respect to sequence length, Mistral 7B employs Sliding Window Attention. In SWA, each token does not attend to all other tokens in the sequence. Instead, attention for each token is restricted to a fixed-size window of preceding tokens. For example, with a sliding window of size $W$, a token at position $i$ can attend to tokens in the range $[i-W, i]$. This significantly reduces computation since each token only processes a subset of the sequence.
+
+Despite the limited attention span at each layer, information can propagate beyond the window size $W$ through the stacking of multiple transformer layers. A token at layer $k$ can indirectly incorporate information from tokens beyond $W$ steps away at layer $k-1$ due to the receptive field expanding with network depth. For instance, after $L$ layers, the effective attention span can be much larger than $W \times L$. Mistral 7B uses a sliding window size of 4096 tokens. This mechanism, combined with optimizations like FlashAttention \cite{dao2022flashattention} and xFormers, allows for efficient processing of longer sequences and a linear computational cost with respect to sequence length, $O(W \cdot \text{seq\_len})$.
+
+Furthermore, SWA enables a more memory-efficient KV cache management. With a fixed attention span, the cache size can be limited to $W$ tokens using a rotating buffer (also referred to as a rolling buffer cache). As new tokens are processed, older KV pairs beyond the window size are evicted from the cache. This can lead to significant memory savings during inference for long sequences without a notable degradation in model performance for tasks that do not strictly require attention over extremely long dependencies at every layer.
+
+These architectural choices allow Mistral 7B to outperform larger models on various benchmarks while being more computationally efficient for inference and requiring less memory.
 \subsection{Transfer Learning}
 \begin{definition}
     Transfer learning refer to the situation where what has been
