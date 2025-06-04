@@ -603,6 +603,24 @@ In 2018, the introduction of BERT and GPT-1 demonstrated that it was possible to
 
 Different methods have been developed to cater to small datasets and low hardware resources, by lowering the tunable parameters and the model's precision \cite{parthasarathy2024ultimate}.
 
+\subsubsection{QLoRA: Quantized Low-Rank Adaptation}
+\textit{This section is based on the paper "QLoRA: Efficient Finetuning of Quantized LLMs" by Dettmers et al. \cite{dettmers2023qlora} unless stated otherwise.}
+
+As Large Language Models (LLMs) continue to grow in size, fine-tuning them for specific tasks demands substantial computational resources, particularly GPU memory. To address this challenge, QLoRA was introduced as a highly efficient fine-tuning approach that significantly reduces memory usage while maintaining performance comparable to full fine-tuning of 16-bit models. 
+QLoRA enables the fine-tuning of very large models (up to 65B parameters in the original paper) on a single, more accessible GPU.
+
+The core idea behind QLoRA is to backpropagate gradients through a frozen, 4-bit quantized pretrained language model into Low-Rank Adapters (LoRA). 
+Several innovations contribute to QLoRA's efficiency:
+
+\begin{itemize}
+    \item \textbf{4-bit NormalFloat (NF4)}: This is a theoretically optimal quantization data type for normally distributed weights. The pretrained model's weights are quantized to 4-bit NF4, drastically reducing the memory footprint of the base model. Crucially, these weights remain frozen during fine-tuning.
+    \item \textbf{Double Quantization (DQ)}: To further reduce the memory overhead, the quantization constants themselves are quantized. This second quantization step saves additional memory without significantly impacting performance.
+    \item \textbf{Paged Optimizers}: GPU memory spikes can occur during training when optimizer states need to be managed. QLoRA utilizes paged optimizers with NVIDIA unified memory to automatically page optimizer states between CPU RAM and GPU VRAM, preventing out-of-memory errors that can occur during long training runs with large models or batch sizes.
+    \item \textbf{Low-Rank Adapters (LoRA)}: Instead of fine-tuning all the weights of the LLM, QLoRA, building upon the LoRA technique \cite{hu2021lora}, injects trainable low-rank matrices into each layer of the Transformer architecture. Only these adapter weights (and typically the layer normalization layers) are updated during fine-tuning. Since the number of parameters in these adapters is significantly smaller than the total number of model parameters, the memory required for gradients and optimizer states is greatly reduced. The gradients are backpropagated through the 4-bit quantized base model to these LoRA modules.
+\end{itemize}
+
+The original research demonstrated that a QLoRA-fine-tuned 65B parameter model could match or exceed the performance of models like ChatGPT on benchmarks like Vicuna, using only 24 hours of fine-tuning on a single GPU. 
+In this work, QLoRA is the chosen method for fine-tuning the LLMs.
 \subsection{Continual Pre-training of Large Language Models}
 Refers to the addition of new data as knowledge base to an already trained large language model without merging the old dataset and the new one to start the training from scratch \cite{gupta2023continual}.
 

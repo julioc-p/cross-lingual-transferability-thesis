@@ -84,7 +84,7 @@ After gathering and merging the data from all of these sources, we compiled the 
 
 The final dataset is structured with the following columns: \texttt{text\_query}, \texttt{language}, \texttt{sparql\_query}, and \texttt{knowledge\_graphs}. We believe that the inclusion of the \texttt{knowledge\_graphs} column is essential, as it provides valuable context to understand the questions better and also helps in determining whether a question is answerable based on the referenced knowledge graph.
 
-The resulting dataset contains 638,098 data points across 13 languages and 15 distinct knowledge graphs. This dataset, made available on Huggingface \url{https://huggingface.co/datasets/julioc-p/Question-Sparql}, is, to the best of our knowledge, the largest multilingual dataset for text-to-SPARQL generation in one single ``place''.
+The resulting dataset contains 638,098 data points across 13 languages and 15 distinct knowledge graphs. This dataset, made available on Huggingface \ref{appendix:dataset_question_sparql}, is, to the best of our knowledge, the largest multilingual dataset for text-to-SPARQL generation in one single ``place''.
 
 The \texttt{text\_query} entries in the dataset vary significantly in length, ranging from short queries like \textquotedblleft Wo ist Rom?\textquotedblright{} (11 characters) to much longer and more complex questions that span up to 956 characters.
 
