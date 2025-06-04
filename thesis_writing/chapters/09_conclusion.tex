@@ -18,7 +18,7 @@ Key conclusions drawn are:
     This suggests that contextual grounding can compensate for a lack of extensive target-language pre-training.
     The entity/relationship linking was identified as the primary bottleneck for v1 models, with v2 models showing approximately fourfold performance increases when mappings were supplied.
     \item The impact of Occiglot's multilingual pre-training on its English performance is nuanced. 
-    While Occiglot maintained comparable or sometimes superior executable query generation rates in English, Mistral significantly outperformed it in F1-score on the complex QALD-10 benchmark when both were provided with English contextual mappings (v2) and also on the v1 test set. 
+    While Occiglot maintained comparable or sometimes superior executable query generation rates in English, Mistral significantly outperformed it in F1-score on the complex QALD-10 English benchmark under both fine-tuning conditions (v1 and v2).
     This points to a potential trade-off where multilingual adaptation might affect nuanced handling of the original language, an observation that finds resonance with reports from the Occiglot research team \cite{avramidis-etal-2024-occiglot, OcciglotResearchCollective2024Occiglot7BEU5Instruct}.
     \item The nature of the test dataset significantly influences observed performance. 
     The QALD-10 benchmark, with its inherent query complexity \cite{usbeck2024qald}, posed challenges distinct from the other test sets. 
