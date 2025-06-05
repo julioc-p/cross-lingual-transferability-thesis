@@ -1,0 +1,9 @@
+\section{Version 2 Models} \label{appendix:v2_huggingface}
+These are the updated fine-tuned models, explicitly marked with "v2" in their names.
+
+\begin{description}
+    \item[Mistral:] \url{https://huggingface.co/julioc-p/mistral_txt_sparql_de_v2}
+    \item[Occiglot:] \url{https://huggingface.co/julioc-p/occiglot_txt_sparql_en_v2}
+    \item[Mistral:] \url{https://huggingface.co/julioc-p/mistral_txt_sparql_en_v2}
+    \item[Occiglot:] \url{https://huggingface.co/julioc-p/occiglot_txt_sparql_de_v2}
+\end{description}

@@ -1,0 +1,9 @@
+\section{Version 1 Models} \label{appendix:v1_huggingface}
+These are the initial fine-tuned models. The URLs for the Occiglot fine-tuned v1 models and Mistral v1 models are provided below. These models do not have "v2" in their designation.
+
+\begin{description}
+    \item[Occiglot (English):] \url{https://huggingface.co/julioc-p/occiglot-7b-eu5-instruct-txt-sparql-en-Instruct-txt-sparql_4bit}
+    \item[Occiglot (German):] \url{https://huggingface.co/julioc-p/occiglot-7b-eu5-instruct-txt-de-sparql_4bit}
+    \item[Mistral (German):] \url{https://huggingface.co/julioc-p/mistral_de_txt_sparql_4bit}
+    \item[Mistral (English):] \url{https://huggingface.co/julioc-p/mistral_en_txt_sparql_4bit}
+\end{description}
