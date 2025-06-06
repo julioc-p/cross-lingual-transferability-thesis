@@ -83,9 +83,11 @@ While this research provides valuable insights into the effects of multilingual 
     These languages often present distinct linguistic challenges and suffer from greater data scarcity, potentially leading to different performance dynamics \cite{neupane2025generativeainamedentity}. 
     However, the methodologies and insights gained from this study should serve as a foundational step for future investigations into less-resourced linguistic contexts.
 
-    \item \textbf{Scope of Statistical Analysis:} Although experiments were conducted with a consistent seed (42), repeated 3 times and metrics averaged, a more comprehensive statistical analysis employing confidence intervals or p-values was not undertaken. 
-    While major performance trends were generally consistent across test sets, the absence of more rigorous statistical testing limits the strength of claims, in particular regarding smaller observed differences. 
-    Future work could incorporate such analyses to provide a more robust quantitative underpinning to the comparative findings.
+    \item \textbf{Scope of Statistical Analysis:} Although experiments were conducted with a consistent seed (42), and some of them repeated 3 times, a more comprehensive statistical analysis employing confidence intervals or p-values, potentially with paired t-tests, was not undertaken. 
+    This was primarily due to time and computational resource constraints inherent to the project's six-month timeframe. 
+    The research involved numerous long-running computational tasks, including over a dozen model training runs, large-scale data generation, and multiple LLM-driven dataset preprocessing steps (classification, translation, and annotation). 
+    Each of these steps, compounded by significant queue times on the shared High-Performance Computing cluster, made the systematic repetition of every experiment—essential for robust statistical analysis—infeasible. 
+    Consequently, while major performance trends were generally consistent across test sets, the absence of more rigorous statistical testing limits the strength of claims, in particular regarding smaller observed differences. Future work could incorporate such analyses to provide a more robust quantitative underpinning to the comparative findings.
 
     \item \textbf{Reliance on LLMs for Data Augmentation and Preprocessing:} Several stages of the dataset creation and experimental setup, including the translation of questions, classification of text as statements or queries, and the generation of entity/relationship mappings for the v2 context, relied on the capabilities of other LLMs.
     While these methods enabled the processing and augmentation of a large dataset, they also introduce the potential for LLM-generated errors, biases, or inconsistencies in the training, evaluation and test data. 
