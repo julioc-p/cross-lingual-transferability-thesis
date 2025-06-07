@@ -1,4 +1,3 @@
-
 import json
 import torch
 from datasets import load_dataset
@@ -27,9 +26,7 @@ model = AutoModelForCausalLM.from_pretrained(
 ).to(device)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-tokenizer.pad_token = (
-    tokenizer.eos_token
-) 
+tokenizer.pad_token = tokenizer.eos_token
 
 dataset = load_dataset("julioc-p/Question-Sparql", split="validation")
 
@@ -39,16 +36,16 @@ def extract_sparql(text):
         r"(SELECT|ASK|CONSTRUCT|DESCRIBE).*?\}", text, re.DOTALL | re.IGNORECASE
     )
     if match:
-        return match.group(0).strip() 
-    return "" 
+        return match.group(0).strip()
+    return ""
 
 
 output_data = []
 
 for example in dataset:
-    question = example["text_query"] 
-    gold_sparql = example["sparql_query"] 
-    knowledge_graph = example["knowledge_graphs"] 
+    question = example["text_query"]
+    gold_sparql = example["sparql_query"]
+    knowledge_graph = example["knowledge_graphs"]
 
     prompt = [
         {
@@ -60,7 +57,7 @@ for example in dataset:
     input_ids = tokenizer.apply_chat_template(prompt, return_tensors="pt").to(device)
 
     with torch.no_grad():
-        output_ids = model.generate(input_ids, max_new_tokens=10000, do_sample=True)
+        output_ids = model.generate(input_ids, max_new_tokens=10000, do_sample=False)
 
     generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
     cleaned_sparql = extract_sparql(generated_text)
