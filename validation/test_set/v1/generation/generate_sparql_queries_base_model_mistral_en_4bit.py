@@ -112,9 +112,7 @@ else:
                 input_ids=inputs["input_ids"],
                 attention_mask=inputs["attention_mask"],
                 max_new_tokens=max_new_tokens_generate,
-                do_sample=True,
-                temperature=0.7,
-                top_p=0.9,
+                do_sample=False,
                 pad_token_id=tokenizer.pad_token_id,
             )
         generated_texts = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
