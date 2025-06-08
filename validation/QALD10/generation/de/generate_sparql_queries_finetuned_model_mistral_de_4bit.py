@@ -41,7 +41,7 @@ dataset = dataset.filter(lambda x: x["language"] == "de")
 print(f"Dataset loaded with {len(dataset)} examples.")
 BATCH_SIZE = 256
 MAX_NEW_TOKENS = 512
-DO_SAMPLE = True
+DO_SAMPLE = False
 sparql_pattern_strict = re.compile(
     r"""
     (SELECT|ASK|CONSTRUCT|DESCRIBE)

@@ -1,4 +1,3 @@
-
 import json
 import torch
 from datasets import load_dataset
@@ -9,7 +8,7 @@ import re
 use_4bit = True
 bnb_4bit_compute_dtype = "float16"
 bnb_4bit_quant_type = "nf4"
-use_nested_quant = False 
+use_nested_quant = False
 
 compute_dtype = getattr(torch, bnb_4bit_compute_dtype)
 
@@ -29,7 +28,7 @@ print("Loading model...")
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
     quantization_config=bnb_config,
-    device_map="cuda", 
+    device_map="cuda",
 )
 print("Model loaded.")
 
@@ -51,7 +50,7 @@ print(f"Dataset loaded with {len(dataset)} examples.")
 
 BATCH_SIZE = 64
 MAX_NEW_TOKENS = 512
-DO_SAMPLE = True
+DO_SAMPLE = False
 
 
 def extract_sparql(text):
@@ -79,11 +78,11 @@ def extract_sparql(text):
         return match_simple.group(0).strip()
 
     print(f"Warning: Could not extract SPARQL query from text:\n---\n{text}\n---")
-    return "" 
+    return ""
 
 
 output_data = []
-processed_indices = set() 
+processed_indices = set()
 
 print(
     f"Starting inference with Batch Size: {BATCH_SIZE}, Max New Tokens: {MAX_NEW_TOKENS}"
