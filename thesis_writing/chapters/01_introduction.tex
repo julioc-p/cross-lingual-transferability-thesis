@@ -47,9 +47,30 @@ The task chosen to explore some of these nuances in this thesis, text-to-SPARQL 
 The Semantic Web initiative, envisioned as an extension of the current web, aims to make online data machine-readable and interoperable, thereby enabling more intelligent data discovery, integration, and reuse \cite{lassila2001semantic, vanharmelen2004semantic}.
 Central to this vision are technologies like the Resource Description Framework (RDF) for data modeling and the SPARQL Protocol and RDF Query Language (SPARQL) for querying this structured data \cite{dataeuropa_rdf_sparql}.
 Knowledge Graphs, one of the main characters in the Semantic Web technologies, represent vast networks of interconnected entities and relationships, offering rich, structured information sources across diverse domains \cite{hogan2021knowledge}.
-While the Semantic Web provides powerful mechanisms for data representation and access, querying this data directly using SPARQL requires specialized knowledge, creating a barrier for non-expert users \cite{KAUFMANN2010377}. LLMs present a promising avenue to democratize access to this structured data by translating natural language questions, potentially from various source languages, into formal SPARQL queries. This capability is particularly relevant as the web contains a wealth of information in numerous languages, and enabling users to query knowledge graphs in their native tongue significantly lowers the barrier to information access.
-The primary aim of this thesis is to investigate the impact of continual multilingual pre-training on the cross-lingual transferability and task-specific performance of LLMs, specifically for generating SPARQL queries from natural language questions in English and German. This research compares the Occiglot-7b-eu5 model, which underwent continual pre-training on several European languages including German, against its base model, Mistral 7B v0.1.
-With this, we want to expand the work of Rangel et al. in a multilingual setting leaving many new artifacts as a base for current research such as a large multilingual dataset.
-An initial hypothesis is that the more languages we pre-train a model with, the better performance we will have in those languages.
-We will see that the results are more nuanced than that hinting at structural and lexical complexities being a major factor in the performance. 
-The models developed herein achieve results competitive with state-of-the-art systems on established benchmarks, and are intended to form the basis of a future publication.
+While the Semantic Web provides powerful mechanisms for data representation and access, querying this data directly using SPARQL requires specialized knowledge, creating a barrier for non-expert users \cite{KAUFMANN2010377}. 
+LLMs present a promising avenue to democratize access to this structured data by translating natural language questions, potentially from various source languages, into formal SPARQL queries. 
+This capability is particularly relevant as the web contains a wealth of information in numerous languages, and enabling users to query knowledge graphs in their native tongue significantly lowers the barrier to information access.
+
+\subsection{Overarching Research Questions}
+
+The central research question that this thesis seeks to answer, is:
+\begin{quote}
+\textit{How does continual multilingual pre-training affect an LLM's cross-lingual transferability and performance on the task of SPARQL generation from text?}
+\end{quote}
+
+The main research question is distilled into two specific sub-questions that address the different facets of the problem:
+
+\begin{enumerate}
+    \item \textbf{How does continual multilingual pre-training impact performance on a newly introduced language?}
+    
+    This question specifically examines whether the additional pretraining on German and other European languages allows the Occiglot-7b-eu5 model to achieve superior performance in German text-to-SPARQL generation compared to its base model.
+
+    \item \textbf{What is the corresponding impact of this multilingual adaptation on the model's original primary language?}
+    
+    This question investigates the other side of the transferability coin. We analyze whether the multilingual pre-training, which includes English, leads to a performance gain or a potential trade-off in the English language. 
+\end{enumerate}
+
+This way, the factors contributing to performance changes can be better isolated.
+
+An initial hypothesis is that the more languages we pre-train a model with, the better the performance we will have in those languages and in the original one. 
+However, as the results of this thesis will demonstrate, the reality is more nuanced, hinting at structural and lexical complexities being major factors in the final performance.
