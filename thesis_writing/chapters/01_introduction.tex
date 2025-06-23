@@ -74,3 +74,26 @@ This way, the factors contributing to performance changes can be better isolated
 
 An initial hypothesis is that the more languages we pre-train a model with, the better the performance we will have in those languages and in the original one. 
 However, as the results of this thesis will demonstrate, the reality is more nuanced, hinting at structural and lexical complexities being major factors in the final performance.
+
+
+\subsection{Research Contribution}
+
+The contributions of this thesis to the field of multilingual natural language processing and its interface with the Semantic Web can be broken down in three parts. 
+They span the creation of a large-scale dataset, the development and release of high-performing models, and new empirical insights into the effects of multilingual pre-training.
+
+\paragraph{\textbf{A Large-Scale Multilingual Dataset and ETL Toolkit.}} \mbox{}\\
+A cornerstone of this work is the development and public release of a large-scale multilingual dataset specifically structured for the text-to-SPARQL generation task. 
+Comprising approximately 900000 examples across 12 languages, the dataset is derived from established benchmarks like the QALD series \cite{usbeck2024qald} and is augmented with German translations and Wikidata entity/relationship mappings to address the known challenge of entity linking \cite{brei2024leveraging}. 
+To ensure transparency and foster future research, the complete dataset is available on the Hugging Face Hub \cite{lhoest2021datasets}, and is complemented by a publicly available ETL (Extract, Transform, Load) toolkit on GitHub that documents and automates the entire data lifecycle \cite{QALD_repository, jiang2022knowledge}.
+
+\paragraph{\textbf{High-Performing Models and a Public Evaluation Framework.}} \mbox{}\\
+Beyond datasets, this thesis contributes eight fine-tuned LLM variants to the research community, available on the Hugging Face Hub. 
+The best-performing of these models (the v2 variants) demonstrate performance competitive with state-of-the-art systems, achieving an F1 score of around 0.25 on the challenging QALD-10 benchmark. 
+To support these claims and facilitate future evaluations, we also provide a Python evaluation framework. This tool enables rigorous, reproducible evaluation by executing queries against the live Wikidata SPARQL endpoint and providing detailed, categorized performance metrics using a modified version of the QALD evaluation standard \cite{usbeck2019benchmarking}.
+
+\paragraph{\textbf{Empirical Findings on Multilingual Pre-training in Text-to-SPARQL.}} \mbox{}\\
+Another core contribution of this thesis is the set of new empirical findings that extend the work of Rangel et al.~\cite{rangel2024sparqlgenerationanalysisfinetuning} into a multilingual context. 
+Through a detailed analysis of the eight model variants across three benchmarks, this work provides several key insights. 
+Firstly, it shows that entity/relationship linking is a primary performance bottleneck in this task for the knowledge graph Wikidata. 
+Secondly, it shows that this bottleneck can be effectively addressed by supplying contextual mappings, which improved performance by approximately fourfold. 
+Finally, the results uncover a nuanced performance trade-off, suggesting that while multilingual adaptation benefits new languages, it may slightly diminish the model's capability to handle complex nuances in its original primary language, as discussed in more detailed further down.
