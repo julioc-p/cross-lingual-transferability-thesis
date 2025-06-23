@@ -119,22 +119,14 @@ Unterschrift
     \Large\textbf{Zusammenfassung}
     \vspace{1.5cm}
 \end{center}
-Diese Arbeit untersucht den Einfluss kontinuierlicher mehrsprachiger Vorabtrainings auf die sprachübergreifende Übertragbarkeit und Leistung eines LLM für die Text-zu-SPARQL-Generierung, wobei der Schwerpunkt auf den Ausgangssprachen Englisch und Deutsch sowie dem Wissensgraphen Wikidata liegt.
-Es vergleicht Occiglot-7b-eu5, ein Modell, das aus dem kontinuierlichen Vortraining von Mistral 7B v0.1 in fünf europäischen Hauptsprachen (Englisch, Spanisch, Deutsch, Italienisch, Französisch) hervorgegangen ist, mit dem Basis-Mistral-Modell.
-Ein wichtiger Beitrag ist die Entwicklung eines groß angelegten, reproduzierbaren und öffentlich zugänglichen mehrsprachigen Datensatzes (895.954 Beispiele) mit 12 verschiedenen Sprachen, der aus QALD und anderen Wissensgewinnungsaufgaben stammt und durch deutsche Übersetzungen und Wikidata-Entitäts-/Beziehungszuordnungen ergänzt wurde.
-Es wurden Experimente zur Feinabstimmung von acht Modellvarianten durchgeführt (zwei Versionen jedes Modells für beide Sprachen, mit und ohne Kontextunterstützung – v1- bzw. v2-Experimente).
+Diese Arbeit untersucht den Einfluss kontinuierlicher mehrsprachiger Vorabtrainings auf die sprachübergreifende Übertragbarkeit und Leistung eines LLM für die Text-zu-SPARQL-Generierung über den Wissensgraphen Wikidata, wobei der Schwerpunkt auf Englisch und Deutsch liegt. 
+Es vergleicht das Basismodell Mistral 7B v0.1 mit Occiglot-7b-eu5, das das Ergebnis eines kontinuierlichen Vortrainings von Mistral 7B v0.1 in fünf wichtigen europäischen Sprachen ist: Englisch, Spanisch, Deutsch, Italienisch und Französisch.
+Die Untersuchung umfasste die Feinabstimmung von acht Modellvarianten, die durch die Anpassung jedes Basismodells für Englisch und Deutsch und deren Bewertung unter zwei unterschiedlichen Bedingungen erstellt wurden: ohne Kontextunterstützung (v1) und mit Kontextunterstützung (v2).
+Die wichtigsten Beiträge sind dreifach: \textbf{(1)} Die Entwicklung eines groß angelegten, reproduzierbaren und öffentlich zugänglichen mehrsprachigen Datensatzes mit mehr als 890.000 Beispielen in 12 Sprachen. \textbf{(2)} Eine Basisuntersuchung (v1-Experimente), die zeigt, dass ohne kontextuelle Hilfe ein kontinuierliches mehrsprachiges Vortraining die Leistung von Occiglot in Deutsch verbessert. \textbf{(3)} Ein verfeinerter Ansatz (v2-Experimente), der Modelle mit kontextuellen Entitäts-/Beziehungszuordnungen versorgt, wodurch die Leistung etwa um das Vierfache verbessert wurde, indem der primäre Engpass von v1 bei der Verknüpfung von Entitäten/Beziehungen behoben wurde.
 
-Die Ergebnisse zeigen, dass kontinuierliches mehrsprachiges Vorabtraining die Leistung von Occiglot in Deutsch erheblich verbessert, wenn keine Kontextunterstützung vorhanden ist (v1).
-Die Bereitstellung von Entitäts-/Beziehungszuordnungen für Wikidata an Mistral (v2) verringert diesen Leistungsunterschied jedoch erheblich.
-Umgekehrt erzielte Mistral beim QALD-10-Testsatz für Englisch zwar vergleichbare Ausführungsraten für Abfragen, übertraf Occiglot jedoch sowohl beim feinabgestimmten v1- als auch beim v2-Modell in Bezug auf den F1-Score.
-Dies deutet auf einen möglichen Kompromiss hin, bei dem die mehrsprachige Anpassung die Fähigkeit von Occiglot zur Verarbeitung von Nuancen in der Originalsprache beeinträchtigen könnte.
-
-Die Verknüpfung von Entitäten/Beziehungen war ein primärer Engpass in v1; durch die Bereitstellung von Kontextzuordnungen (v2) konnte die Leistung um etwa das Vierfache verbessert werden. 
-Während dieser Vorteil beim komplexen QALD-10-Testsatz weniger ausgeprägt war – was auf die inhärente Schwierigkeit der Abfragen als weitere zentrale Herausforderung hindeutet –, erzielten die v2-Modelle dennoch wettbewerbsfähige QALD-10-F1-Werte (~0,25), die mit denen der Konkurrenzsysteme aus der QALD-10-Challenge vergleichbar sind. Diese Ergebnisse werden die Grundlage für eine zukünftige Veröffentlichung bilden. 
-Dies deutet darauf hin, dass ein direktes Vortraining mit Wikidata-Identifikatoren zu ähnlichen Ergebnissen führen könnte. Schließlich deutet die etwas überlegene Ausführung der Abfragegenerierung in Englisch durch Occiglot auf Vorteile einer mehrsprachigen Exposition für die syntaktische Korrektheit hin.
-\\
-
-\textbf{Translated with DeepL.com}
+Die v2-Modelle erzielten wettbewerbsfähige Werte von 0,25 F1 für QALD-10, vergleichbar mit dem aktuellen SOTA. Dies deutet darauf hin, dass ein direktes Vorabtraining mit Wikidata-Identifikatoren zu ähnlichen Ergebnissen führen könnte. 
+Für Englisch übertraf Mistral Occiglot im QALD-10-Testset in beiden fein abgestimmten Modellen, was auf einen möglichen Kompromiss hindeutet, bei dem die mehrsprachige Anpassung die Fähigkeit zur Verarbeitung von Nuancen in der Originalsprache beeinträchtigen könnte, wie in dieser Arbeit weiter ausgeführt wird.
+Schließlich deutet die leicht überlegene Ausführung von Abfragen in Englisch durch Occiglot auf Vorteile der mehrsprachigen Exposition für die syntaktische Korrektheit hin.
 
 \input{Institutsvorlage}
 
@@ -154,19 +146,15 @@ Transferability for Source Languages} % Titel der Arbeit
 \begin{abstract}
 \textbf{Abstract.}
 
-This work investigates the impact of continual multilingual pretraining on an LLM's cross-lingual transferability and performance for text-to-SPARQL generation, focusing on the source languages English and German and the knowledge graph Wikidata.
-It compares Occiglot-7b-eu5, a model resulting from continually pretraining Mistral 7B v0.1 on five major European languages (English, Spanish, German, Italian, French), against the base Mistral model.
-A key contribution is the development of a large-scale, reproducible, and publicly available multilingual dataset (895,954 examples) with 12 different languages derived from QALD and other knowledge extraction challenges, augmented with German translations and Wikidata entity/relationship mappings.
-Experiments fine-tuning eight model variants (two versions of each model for both languages, with and without contextual aid -- v1 and v2 experiments respectively) were conducted.
+This work investigates the impact of continual multilingual pre-training on an LLM's cross-lingual transferability and performance for text-to-SPARQL generation over the knowledge graph Wikidata, focusing on English and German. 
+It compares the base Mistral 7B v0.1 model with Occiglot-7b-eu5, which was the result of continually pretraining Mistral 7B v0.1 on five major European languages: English, Spanish, German, Italian, and French.
+The investigation involved fine-tuning eight model variants, created by adapting each base model for both English and German and evaluating them under two distinct conditions: without contextual aid (v1) and with it (v2).
+The key contributions are threefold: \textbf{(1)} The development of a large-scale, reproducible, and publicly available multilingual dataset of more than 890,000 samples in 12 languages. \textbf{(2)} A baseline investigation (v1 experiments) which shows that without contextual aid, continual multilingual pre-training benefits the performance of Occiglot in German. \textbf{(3)} A refined approach (v2 experiments) that provides models with contextual entity/relationship mappings, which improved performance approximately fourfold by addressing the primary v1 bottleneck of entity/relationship linking.
 
-The findings indicate that continual multilingual pre-training significantly benefits Occiglot's performance in German when contextual aid is absent (v1).
-However, providing entity/relationship mappings for Wikidata to Mistral (v2) substantially reduces this performance gap.
-Conversely, for English on the QALD-10 test set, while Occiglot maintained comparable executable query rates, Mistral outperformed Occiglot in both finetuned v1 and v2 models in terms of F1 score.
-This suggests a potential trade-off where multilingual adaptation might diminish the capability of handling nuance in the original language for Occiglot.
+The v2 models achieved competitive scores of 0.25 F1 for QALD-10, comparable to current SOTA. This suggests that direct pre-training on Wikidata identifiers could yield similar outcomes. 
+For English, Mistral outperformed Occiglot on the QALD-10 test set in both fine-tuned models, suggesting a potential trade-off where multilingual adaptation might diminish the capability of handling nuance in the original language, as discussed further in this thesis.
+Finally, Occiglot's slightly superior executable query generation in English hints at multilingual exposure benefits for syntactic correctness.
 
-Entity/relationship linking was a primary v1 bottleneck; supplying contextual mappings (v2) improved performance approximately fourfold. 
-While this benefit was less pronounced on the complex QALD-10 test set—indicating its inherent query difficulty as another key challenge—v2 models still achieved competitive QALD-10 F1-scores (~0.25), comparable to competitor systems from the QALD-10 challenge, results which will form the basis of a future publication. 
-This suggests that direct pre-training on Wikidata identifiers could yield similar outcomes. Finally, Occiglot's slightly superior executable query generation in English hints at multilingual exposure benefits for syntactic correctness.
 \end{abstract}
 \newpage
 
