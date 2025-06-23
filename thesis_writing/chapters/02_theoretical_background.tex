@@ -29,7 +29,7 @@ This task shares conceptual similarities with machine translation, involving the
 \subsubsection{Experience, E}
 Experience refers to the data from which the system learns. A crucial assumption in most machine learning experiments is that past data, or a subset of it (referred to as training data), contains patterns that can generalize to new, unseen data. 
 More formally, it is assumed that the training data and any future data the model encounters are sampled from the same underlying probability distribution. Other assumptions might be made depending on the specific problem and model, such as the independence of features or the existence of linear relationships between variables.
-The experience (E) in this research is embodied by a large-scale, multilingual dataset composed of natural language question-SPARQL query pairs. This data, sourced from various knowledge extraction challenges, enables the models to learn the patterns required for the translation task. 
+The experience \textit{E} in this research is embodied by a large-scale, multilingual dataset composed of natural language question-SPARQL query pairs. This data, sourced from various knowledge extraction challenges, enables the models to learn the patterns required for the translation task. 
 The study also explores the impact of different types of prior experience, such as that gained through continual pre-training of language models, which will be explained further down this chapter.
 
 \subsubsection{Performance Measure, P}
@@ -250,7 +250,8 @@ After the forward pass, the model's predicted output is compared to the true lab
 
 \textbf{Backpropagation}
 
-Training a neural network requires adjusting its weights to minimize a loss function. This is achieved through gradient descent, which updates weights based on the gradient of the loss function. The gradient can be computed using batch gradient descent, which sums gradients over all data points, or stochastic gradient descent (SGD), which updates weights with a subset of the data.
+Training a neural network requires adjusting its weights to minimize a loss function. This is achieved through gradient descent, which updates weights based on the gradient of the loss function. Gradients are calculated based on the loss value of the loss function. 
+The gradient can be computed using batch gradient descent, which sums gradients over all data points, or stochastic gradient descent (SGD), which updates weights with a subset of the data.
 
 For a given training example, consisting of an input $x$ and its corresponding true label $y$, the model produces a prediction $NN(x;W)$. We compute the gradient of the loss function, which measures the discrepancy between this prediction and the true label $y$, with respect to the weights $W$: $\nabla_{W}Loss(NN(x;W),y)$, where \( W \) includes all weight matrices \( W^l \) in layers \( l = 1, \dots, L \). Using the chain rule, the gradient for the final layer \( L \) is:
 
@@ -371,7 +372,7 @@ One of the most common techniques to tackle these problems is dynamically adjust
     \begin{figure}
         \centering
         \includegraphics{recurrent_neural_network.png}
-        \caption{Recurrent Neural Network Architecture \cite[Chapter 12]{MITx6.036}}
+        \caption{Recurrent Neural Network Architecture \cite[Chapter 11]{MITx6.036}}
         \label{fig:RNN}
     \end{figure} 
     
@@ -407,9 +408,9 @@ One of the most common techniques to tackle these problems is dynamically adjust
     \bigskip
 
     \subsubsection{Simple Gated Recurrent Neural Network}
-    This section is based on Chapter 8 of the notes from the MIT course \textit{Introduction to Machine Learning} \cite[Chapter 12]{MITx6.036}, unless stated otherwise.
+    This section is based on Chapter 12 of the notes from the MIT course \textit{Introduction to Machine Learning} \cite[Chapter 12]{MITx6.036}, unless stated otherwise.
     
-    In simple gated recurrent networks, we want to control which parts of the last state we keep and in what proportion. Therefore, a new term, the gating value, is introduced, along with a new way of calculating the states. At each time step \( t \), the gating value \( g_t \) is computed as:
+    In simple gated recurrent networks, we want to control which parts of the last state we keep and in what proportion. Let the hidden state vector \(s_t\) have a dimensionality of \(m\). Therefore, a new term, the gating value, is introduced, along with a new way of calculating the states. At each time step \( t \), the gating value \( g_t \) is computed as:
     
     \begin{equation}
     g_t = \sigma(W_{gx} x_t + W_{gs} s_{t-1}),
@@ -522,7 +523,7 @@ Finally, additional contextual information is embedded into the IDS during train
 The Transformer architecture consists of two main components: the encoder and the decoder. The overall structure is illustrated in Figure \ref{fig:transformer}.
 
 \textbf{Encoder}:
-The encoder is composed of N=6 identical layers. Each encoder layer consists of two sublayers:  
+The encoder is composed of N identical layers. Each encoder layer consists of two sublayers:  
 
 \begin{itemize}
     \item \textbf{Multi-Head Self-Attention}: This is the first sub-layer. Generally, an attention function maps a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is a weighted sum of the values, where the weight for each value is determined by a compatibility function of the query with the corresponding key \cite{vaswani2017attention}.
@@ -545,10 +546,10 @@ The encoder is composed of N=6 identical layers. Each encoder layer consists of 
 
 Each sublayer in the encoder (and decoder) has a residual (skip) connection around it, followed by layer normalization. 
 That is, the output of each sub-layer is $\text{LayerNorm}(x + \text{Sublayer}(x))$, where $\text{Sublayer}(x)$ is the function implemented by the sub-layer itself. 
-To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $d_{\text{model}} = 512$.
+To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $d_{\text{model}}$.
 
 \textbf{Decoder}:
-The decoder is also composed of N=6 identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack. 
+The decoder is also composed of N identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack. 
 Similar to the encoder, residual connections are employed around each of the sub-layers, followed by layer normalization \cite{vaswani2017attention}. 
 The sublayers are:
 
@@ -578,7 +579,7 @@ The primary architectural innovations in Mistral 7B are Grouped-Query Attention 
 In the standard Multi-Head Attention (MHA) mechanism described by Vaswani et al. \cite{vaswani2017attention}, each attention head has its own query (Q), key (K), and value (V) projections. 
 GQA modifies this by having multiple query heads share a single key and value head. 
 This approach significantly reduces the number of parameters and computational overhead associated with projecting and storing keys and values, especially during autoregressive decoding where the K and V tensors (KV cache) from previous tokens are cached and reused. 
-By grouping query heads, GQA aims to strike a balance between the quality of MHA and the speed of Multi-Query Attention (MQA), where all query heads share a single K and V head \cite{shazeer2019fast}. This design leads to faster inference times and reduced memory usage compared to traditional MHA, without a substantial loss in model quality.
+By grouping query heads, GQA aims to strike a balance between the quality of MHA and the speed of Multi-Query Attention (MQA), where all query heads share a single K and V head \cite{shazeer2019fast}. This design leads to faster inference times and reduced memory usage compared to traditional MHA, without a substantial loss in model quality \cite{ainslie2023gqatraininggeneralizedmultiquery}.
 
 \textbf{Sliding Window Attention (SWA)}:
 To handle longer sequences more efficiently and mitigate the quadratic complexity of full self-attention with respect to sequence length, Mistral 7B employs Sliding Window Attention. In SWA, each token does not attend to all other tokens in the sequence. Instead, attention for each token is restricted to a fixed-size window of preceding tokens. For example, with a sliding window of size $W$, a token at position $i$ can attend to tokens in the range $[i-W, i]$. This significantly reduces computation since each token only processes a subset of the sequence.
@@ -603,6 +604,24 @@ In 2018, the introduction of BERT and GPT-1 demonstrated that it was possible to
 
 Different methods have been developed to cater to small datasets and low hardware resources, by lowering the tunable parameters and the model's precision \cite{parthasarathy2024ultimate}.
 
+\subsubsection{LoRA: Low-Rank Adaptation}
+\textit{This section is based on the paper "LoRA: Low-Rank Adaptation of Large Language Models" by Hu et al. \cite{hu2021lora} unless stated otherwise.}
+
+While transfer learning by fine-tuning an entire Large Language Model (LLM) is effective, it is also computationally expensive. 
+Full fine-tuning requires updating all the weights of the model, which can have billions of parameters. T
+his process demands significant GPU memory to store not only the model weights but also the optimizer states and gradients, making it inaccessible for researchers and practitioners with limited hardware resources.
+
+To address this challenge, Low-Rank Adaptation (LoRA) was introduced as a popular and effective Parameter-Efficient Fine-Tuning (PEFT) method. 
+The core idea behind LoRA is to freeze the vast number of pre-trained model weights and inject a small number of new, trainable parameters into the model instead. 
+This dramatically reduces the number of parameters that need to be updated during training.
+
+Specifically, for a given pre-trained weight matrix \(W_0\) in a Transformer layer (e.g., in an attention mechanism), LoRA represents the update to this matrix with a low-rank decomposition. 
+It introduces two smaller matrices, \(A\) and \(B\), such that the updated weight matrix \(W\) is represented as \(W = W_0 + \Delta W = W_0 + BA\). 
+During fine-tuning, the original weights \(W_0\) remain frozen and only the parameters of matrices \(A\) and \(B\) are trained. 
+The dimension of these matrices is controlled by a hyperparameter known as the rank, \(r\), which is typically much smaller than the original dimensions of \(W_0\). 
+A lower rank results in fewer trainable parameters, creating a trade-off between model expressiveness and computational efficiency.
+
+This approach yields several key benefits. Firstly, it drastically reduces the memory required for fine-tuning, as the number of trainable parameters is only a small fraction of the total model size. Secondly, the trained LoRA weights (matrices \(A\) and \(B\)) are very small, making it easy to store and swap different adapters for different downstream tasks without needing to save multiple copies of the full LLM. Finally, once training is complete, the matrix product \(BA\) can be merged with the original weights \(W_0\). This means that during inference, the model has the exact same architecture and size as the original fully fine-tuned model, incurring no additional latency. LoRA provides the foundational technique upon which more advanced methods, such as QLoRA, are built.
 \subsubsection{QLoRA: Quantized Low-Rank Adaptation}
 \textit{This section is based on the paper "QLoRA: Efficient Finetuning of Quantized LLMs" by Dettmers et al. \cite{dettmers2023qlora} unless stated otherwise.}
 
@@ -610,13 +629,12 @@ As Large Language Models (LLMs) continue to grow in size, fine-tuning them for s
 QLoRA enables the fine-tuning of very large models (up to 65B parameters in the original paper) on a single, more accessible GPU.
 
 The core idea behind QLoRA is to backpropagate gradients through a frozen, 4-bit quantized pretrained language model into Low-Rank Adapters (LoRA). 
-Several innovations contribute to QLoRA's efficiency:
+Three innovations contribute to QLoRA's efficiency:
 
 \begin{itemize}
     \item \textbf{4-bit NormalFloat (NF4)}: This is a theoretically optimal quantization data type for normally distributed weights. The pretrained model's weights are quantized to 4-bit NF4, drastically reducing the memory footprint of the base model. Crucially, these weights remain frozen during fine-tuning.
     \item \textbf{Double Quantization (DQ)}: To further reduce the memory overhead, the quantization constants themselves are quantized. This second quantization step saves additional memory without significantly impacting performance.
     \item \textbf{Paged Optimizers}: GPU memory spikes can occur during training when optimizer states need to be managed. QLoRA utilizes paged optimizers with NVIDIA unified memory to automatically page optimizer states between CPU RAM and GPU VRAM, preventing out-of-memory errors that can occur during long training runs with large models or batch sizes.
-    \item \textbf{Low-Rank Adapters (LoRA)}: Instead of fine-tuning all the weights of the LLM, QLoRA, building upon the LoRA technique \cite{hu2021lora}, injects trainable low-rank matrices into each layer of the Transformer architecture. Only these adapter weights (and typically the layer normalization layers) are updated during fine-tuning. Since the number of parameters in these adapters is significantly smaller than the total number of model parameters, the memory required for gradients and optimizer states is greatly reduced. The gradients are backpropagated through the 4-bit quantized base model to these LoRA modules.
 \end{itemize}
 
 The original research demonstrated that a QLoRA-fine-tuned 65B parameter model could match or exceed the performance of models like ChatGPT on benchmarks like Vicuna, using only 24 hours of fine-tuning on a single GPU. 
