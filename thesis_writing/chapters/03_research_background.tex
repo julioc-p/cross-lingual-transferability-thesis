@@ -23,6 +23,29 @@ Factors surrounding the degree of cross-lingual transfer developed by LLMs with 
 
 \subsection{Text-to-SPARQL}
 
+The process of Text-to-SPARQL generation aims to bridge the gap between human language and the structured data of the Semantic Web. It automates the task of converting a user's question, posed in a natural language like English or German, into a formal SPARQL query that can be executed against a knowledge graph. 
+This allows non-experts to retrieve complex information without needing to learn the technical syntax of SPARQL. Figure~\ref{fig:text_to_sparql_example} provides a simple illustration of this translation task.
+
+\begin{figure}[h!]
+\centering 
+\textbf{Natural Language Question:} \\[0.5em]
+Was Google founded by Bill Gates?
+\\[1em]
+$\downarrow$
+\\[1em]
+
+\begin{minipage}{\linewidth}
+\centering
+\textbf{Generated SPARQL Query:}
+\begin{verbatim}
+                ASK WHERE { wd:Q95 wdt:P112 wd:Q2283 . }
+\end{verbatim}
+\end{minipage}
+
+\caption{An example of the Text-to-SPARQL task for the knowledge graph Wikidata.}
+\label{fig:text_to_sparql_example}
+\end{figure}
+
 There are in general three approaches used for LLMs to extract knowledge from data in RDF format to answer questions in natural language \cite{avila2024experiments}:
 
 \begin{itemize}
