@@ -291,7 +291,7 @@ def standardize_sparql(query):
     query = re.sub(r'#.*', '', query).strip() 
     return query
 \end{verbatim}
-Interestingly, Occiglot models generally produced cleaner queries with fewer such artifacts compared to Mistral before these changes, potentially due to Occiglot's continual pre-training on code \cite{avramidis-etal-2024-occiglot} and the use of a system prompt during its fine-tuning.
+Interestingly, Occiglot models generally produced cleaner queries with fewer such newlines and whitespaces compared to Mistral before these changes, potentially due to Occiglot's continual pre-training on code \cite{avramidis-etal-2024-occiglot} and the use of a system prompt during the fine-tuning for the v1.0 model.
 However, this did not translate to a higher number of executable or correct queries for Occiglot in these early v1 iterations.
 
 For the Mistral English model, the  \texttt{lm\_head} was removed from the target modules for LoRA.
@@ -310,8 +310,8 @@ After these refinements, the generated queries were also visibly cleaner:
 \paragraph{Training Observations for v1.1 Models} \mbox{}\\
 The training duration for each v1.1 model on the 35,000-sample subset was approximately 19-20 hours for 5 epochs. The training loss curves for the v1.1 models are presented in Figure~\ref{fig:train_loss_v1_1}.
 These curves generally show a more stable downward trend compared to the initial v1.0 runs (e.g., Figure~\ref{fig:loss_mistral_en_v1_0}), suggesting that the data standardization and refined LoRA configuration contributed to a more consistent learning process.
-The Occiglot models (English and German) typically exhibited smoother loss curves from the outset.
-Mistral fine-tuned on German data appeared to struggle more, reflected in a higher and more fluctuating loss, which aligns with its relative performance in the v1 evaluations.
+The Occiglot models (English and German) typically exhibited smoother loss curves since the first iteration of the trainings (v1.0).
+Mistral fine-tuned on German data appeared to struggle more, reflected in a higher and more fluctuating loss, which aligns with its worse performance  performance compared to Occiglot in the v1 evaluations.
 
 \begin{figure}[htbp]
     \centering
@@ -333,7 +333,7 @@ While the german variant of Mistral shows higher variability in gradient norms, 
 \end{figure}
 
 An incidental finding during this writing in the v1.1 training was that the Occiglot German model was unintentionally first trained for 10 epochs instead of the standard 5 epochs used for all other v1.1 models (which were set conservatively to avoid overfitting in the absence of an early stopping mechanism). 
-Interestingly, this extended training did not yield a significant performance difference on the QALD-10 benchmark compared to the 5-epoch run (the one showcased previously), but it did result in a higher F1 score on the held-out test split from our primary dataset (0.3 vs 0.4).
+Interestingly, this extended training did not yield a significant performance difference on the QALD-10 benchmark compared to the 5-epoch run (See Figure \ref{fig:train_loss_v1_1}), but it did result in an F1 score improvement of 0.1 percentage points on the held-out test split from our primary dataset (from 0.3 to 0.4 F1).
 This observation hints at potential overfitting to the training set distribution with prolonged training.
 
 \subsubsection{v2: Addressing v1 Limitations}\label{sec:v2_methodology}
@@ -343,24 +343,34 @@ This section details the methodological enhancements and refined configurations 
 
 \paragraph{The Entity Linking Bottleneck in v1} \mbox{}\\
 A consistent observation across all v1 model variants was a significant deficiency in mapping textual entities and relationships to their correct Wikidata identifiers, despite often generating structurally valid SPARQL queries. 
-For instance, evaluation of v1 Mistral English models on the QALD-10 test set revealed a macro recall score of approximately 0.069 (see example evaluation summary below). 
+For instance, evaluation of v1 Mistral English models on the QALD-10 test set revealed a macro recall score of approximately 0.069 (see Table \ref{tab:eval_summary_example}). 
 A substantial portion of the queries classified as "correct" achieved this status because both the generated query and the gold standard query correctly returned an empty result set, rather than through accurate data retrieval (5 of 27 correct matches).
-\begin{verbatim}
---- Evaluation Summary (Example from v1.0 Mistral English on QALD-10) ---
-Total Entries Attempted Evaluation: 391
-Correct (Exact Match)             :   22 (  5.63%)
-Correct (Both Empty)              :    5 (  1.28%)
-Incorrect (Gen Empty, Gold Not)   :  248 ( 63.43%)
-Incorrect (No Overlap)            :  110 ( 28.13%)
-...
-Macro Recall:     0.06905371
-Macro F1-Score:   0.06905371
---------------------------
-\end{verbatim}
+
+\begin{table}[h!]
+\centering
+\caption{Example evaluation summary for the v1 Mistral English model on QALD-10.}
+\label{tab:eval_summary_example}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\multicolumn{2}{@{}l}{\textbf{Total Entries Attempted Evaluation: 391}} \\
+\midrule
+\multicolumn{2}{@{}l}{\textit{Result Categories}} \\
+Correct (Exact Match) & 22 (5.63\%) \\
+Correct (Both Empty) & 5 (1.28\%) \\
+Incorrect (Gen Empty, Gold Not) & 248 (63.43\%) \\
+Incorrect (No Overlap) & 110 (28.13\%) \\
+\midrule
+\multicolumn{2}{@{}l}{\textit{Macro Averaged Metrics}} \\
+Macro Recall & 0.06905371 \\
+Macro F1-Score & 0.06905371 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 The hypothesis that guided the changes in this version of the model was that this low recall mainly driven by the models' inability to correctly link entities.
 For example, an early v1.0 Occiglot English model, when prompted with "Was Google founded by Bill Gates?" (targeting Wikidata), generated:
 \texttt{ASK WHERE \{ wd:Q95 wdt:P112 wd:Q2283 \}}.
-While correctly identifying Google (\texttt{wd:Q95}) and the "founded by" relationship (\texttt{wdt:P112}), it erroneously mapped "Bill Gates" to Microsoft's Wikidata ID (\texttt{wd:Q2283}). 
+While correctly identifying Google (\texttt{wd:Q95}) and the "founded by" relationship (\texttt{wdt:P112}), it falsely mapped "Bill Gates" to Microsoft's Wikidata ID (\texttt{wd:Q2283}). 
 Similarly, an early v1.0 Mistral English model for "Was Lionel Messi Italian?" produced:
 \texttt{ASK WHERE \{ wd:Q5421 wdt:P27 wd:Q38 \}}.
 Here, the first ID (\texttt{wd:Q5421}) corresponds to the year 1233, not Lionel Messi. 
@@ -370,7 +380,7 @@ These mapping errors persisted across all v1 iterations, even after data standar
 Significant changes were implemented in data preparation and prompting for the v2 models:
 \begin{itemize}
     \item \textbf{Base Model Selection:} The base (non-instruction-tuned) versions of Mistral 7B v0.1 and Occiglot-7b-eu5 were used. This decision facilitated the use of custom system prompts, which was hypothesized to be beneficial, in particular for Mistral, as its instruction-tuned version lacks native system prompt support.
-    \item \textbf{Dataset Construction:} For each language (English and German), a dataset of 100,000 examples was randomly sampled (using a consistent seed of 42) from the master dataset. This was then partitioned into 80,000 examples for training, 10,000 for validation, and 10,000 for testing.
+    \item \textbf{Dataset Construction:} For each language (English and German), a dataset of 100,000 examples was randomly sampled (using a consistent seed of 42) from the master dataset's Wikidata-specific entries. This subset size was chosen to provide a substantial yet manageable volume of data for the v2 experiments, given the time and computational resource constraints of the project, as detailed in Section~\ref{sec:limitations}. The selected 100,000 examples were then partitioned into 80,000 for training, 10,000 for validation, and 10,000 for testing.
     \item \textbf{Prompt Formatting with Context:} The ChatML format \cite{openai_python_v0_28_0}, also utilized by Occiglot, was adopted for structuring the input. 
     Crucially, the system prompt for v2 models was designed to include the Wikidata entity and relationship ID mappings extracted for the given natural language query.
      An example of the input structure is as follows:
@@ -410,6 +420,7 @@ The \texttt{lora\_dropout} was adjusted to 0.05, a value found effective for 7B 
 \paragraph{Revised Training Arguments for v2} \mbox{}\\
 The general training arguments were also updated, drawing from best practices and the QLoRA paper \cite{dettmers2023qlora}:
 \begin{itemize}
+    \sloppy
     \item \texttt{num\_train\_epochs}: 3. This was reduced from v1's 5 epochs, considering the larger 80,000-sample training set and indications from the QLoRA paper that further epochs yield marginal gains.
     \item Effective batch size: 6 (achieved with \texttt{per\_device\_train\_batch\_size=1} and \texttt{gradient\_accumulation\_steps=6}).
     \item \texttt{optim}: "adamw\_torch\_fused" was selected for potential training speed enhancements.
