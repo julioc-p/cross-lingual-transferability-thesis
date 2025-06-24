@@ -1,6 +1,21 @@
 \section{Contribution}\label{section::contribution}
+The contributions of this thesis span dataset creation, model development, evaluation methodologies, and experimental analysis. These can be best understood in relation to the central research question:
+\begin{quote}
+\textit{How does continual multilingual pre-training affect an LLM's cross-lingual transferability and performance on the task of SPARQL generation from text?}
+\end{quote}
+Answering this question required two categories of contributions. 
+The first category comprises the foundational artifacts that enable the empirical investigation: the large-scale multilingual dataset, the eight fine-tuned models, and the evaluation framework. 
+The second is the direct answer to the research question, the experimental analysis of the results of these artifacts and the process involved in creating them. 
+This analysis proceeds in a manner analogous to a biconditional proof, examining the effects of multilingual adaptation in two directions. It first addresses the question:
+\begin{itemize}
+    \item \textit{How does continual multilingual pre-training impact performance on a newly introduced language?}
+\end{itemize}
+It then investigates the other direction:
+\begin{itemize}
+    \item \textit{What is the corresponding impact of this multilingual adaptation on the model's original primary language?}
+\end{itemize}
 
-The contributions of this thesis span dataset creation, model development, evaluation methodologies, and experimental analysis, collectively aiming to provide a robust foundation for future research in this domain.
+\subsection{Dataset}
 
 A cornerstone of this work is the development and public release of a large-scale multilingual dataset, structured for the task of text-to-SPARQL generation.
 Comprising approximately 895,954 examples, this dataset spans 12 languages and is derived from established knowledge extraction challenges, including the well-known QALD series \cite{usbeck2024qald}. 
@@ -15,6 +30,7 @@ These scripts facilitate the extraction of data from diverse sources, including 
 The transformation phase is addressed through procedures for data cleaning, standardization into the consistent question-SPARQL schema, and the application of augmentations like German translations and Wikidata entity/relationship mappings, as detailed in Section~\ref{section::methodology}.
 The public availability of this ETL (Extract, Transform, Load) toolkit on GitHub for knowledge graph datasets offers a transparent and replicable methodology for the dataset's creation and adaptation, thereby enhancing the utility of the primary dataset by enabling researchers to understand, verify, improve, and potentially extend the data generation process.
 
+\subsection{Models}
 Beyond these data-centric contributions, this thesis also presents the release of eight fine-tuned LLM variants on the Hugging Face Hub. 
 Each base model, Mistral 7B v0.1 and Occiglot-7b-eu5, was fine-tuned for both English and German.
 For each language and base model combination, two distinct versions were trained: one without the inclusion of entity/relationship mappings during fine-tuning (referred to as v1), and another where these mappings were integrated into the training input (v2).
@@ -24,6 +40,7 @@ The intention is to formally publish these models and their benchmark results in
 Furthermore, to increase usefulness and share insights from the development process, this thesis not only describes the training specifics of the final models but also details the incremental changes and strategies explored along the way that influenced performance, as documented in Section~\ref{section::experimental_setup} and the accompanying GitHub repository.
 This documentation aims to provide a path for future researchers, allowing them to understand the decisions made during the training process and to avoid the pitfalls that were faced here.
 
+\subsection{Evaluation Framework}
 To facilitate rigorous evaluation of the generated SPARQL queries, this work introduces a custom Python evaluation framework, \texttt{sparql\_validator.py}.
 This script, publicly available in the project's \texttt{validation} directory on GitHub (see Appendix~\ref{appendix:github_repository}), is designed for the execution of generated SPARQL queries against gold standard queries and their comparison.
 A key feature of this script is its direct interaction with the live Wikidata SPARQL endpoint (\url{https://query.wikidata.org/}), thereby evaluating queries based on their real execution and the actual data retrieved.
@@ -32,8 +49,10 @@ To manage practical challenges, it incorporates threading and caching to acceler
 Moreover, the script categorizes query outcomes (e.g., exact match, partial match, execution failure, empty query generated), offering a detailed breakdown of model behavior.
 The detailed metrics and categorizations produced by this script provide the quantitative foundation for the performance analysis presented in Section~\ref{section::results} and enable the generation of comparative performance plots (e.g., using \texttt{plot\_performance\_comparison.py} from the same directory).
 
+\subsection{Analysis}
 Finally, a core contribution of this thesis is the presentation and in-depth analysis of experimental results for the eight fine-tuned model variants across three distinct benchmarks.
 Firstly, all models were evaluated on the challenging QALD-10 benchmark \cite{usbeck2024qald}, providing a standardized comparison against existing systems in the text-to-SPARQL domain.
 Secondly, to assess performance on the specific data distribution and linguistic characteristics of the primary dataset developed in this work, models were evaluated on two held-out test splits from this large-scale multilingual corpus, covering both English and German.
 
+\subsection{Foundation for Future Research}
 Collectively, with the insights, errors, and surprising findings documented throughout this research, this work serves as an initial yet solid foundation to further explore the effects of multilingual pre-training in this domain.
