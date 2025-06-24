@@ -219,7 +219,6 @@ The input prompt for the Mistral model was structured as:
 \begin{lstlisting}[breaklines]
 Write a SparQL query that answers this request: <txt> from the knowledge graph <knowledge_graph>
 \end{lstlisting}
-
 For the Occiglot model, a system prompt was added to provide general guidance:
 \begin{lstlisting}[breaklines]
 
@@ -254,8 +253,8 @@ This regex targets common SPARQL query keywords and extracts content up to the f
 \paragraph{Refinement 1: Lora Ranking Adjustment for Mistral (v1.0.1)} \mbox{}\\
 As seen in \ref{fig:v1_0_training_loss_en}, the training loss in Mistral has a very high variability.
 Thus, it was experimented with a lower LoRA Ranking from 64 to 16 to tackle the hypothesis that this could be caused by the high number of parameters in LoRA adjusting to the noise in the training data.
-It seems this was the case since the loss was far stabler \ref{fig:loss_mistral_en_v1_0_1} and the rest of the parameters and the training set were left as is.
-And the results for the QALD english test set show a slight improvement in generating executable queries going from 366 to 372.
+Figure \ref{fig:loss_mistral_en_v1_0_1} shows the second approach by only changing the rank to 16 which proofs the hypothesis.
+Also, the results for the QALD english test set show a slight improvement in generating executable queries going from 366 to 372.
 
 \begin{figure}[htbp]
     \centering
@@ -267,7 +266,13 @@ And the results for the QALD english test set show a slight improvement in gener
 Next refinements were applied all at once for the last v1 (v1.1) version referred in other sections.
 
 \paragraph{Refinement 2: Focusing on a Single Knowledge Graph (Wikidata)} \mbox{}\\
-To mitigate the KG generation confusion the next training focused on a 35,000-sample English subset filtered to include only Wikidata-related queries.
+The initial training data was a heterogeneous mix, containing queries from approximately 15 different knowledge graphs, many of which have distinct syntactic conventions. 
+For instance, knowledge graphs like DBpedia or Freebase often rely on explicit \texttt{PREFIX} declarations to define namespaces for their entities and properties. 
+In contrast, the Wikidata queries in the dataset almost exclusively use direct QID and PID identifiers (e.g., \texttt{wd:Q42}, \texttt{wdt:P31}) and typically omit formal prefix declarations.
+
+This syntactic inconsistency proved problematic. The models, when trained on the mixed data and then prompted to generate a query for Wikidata, would often produce hybrid outputs. 
+As noted in the initial challenges, they would include \texttt{PREFIX} declarations or use structural patterns learned from queries of other knowledge graphs, often leading to invalid queries. 
+To mitigate this, the next training iteration focused on a 35,000-sample English subset filtered to include only Wikidata-related queries.
 
 \paragraph{Refinement 3: SPARQL Query Standardization} \mbox{}\\
 Further analysis of the model outputs revealed a tendency to generate extraneous newlines, comments, and other non-executable artifacts within the SPARQL queries, as illustrated:
