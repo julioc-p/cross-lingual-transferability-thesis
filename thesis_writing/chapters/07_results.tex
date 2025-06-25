@@ -208,6 +208,11 @@ The improvements from v2 baselines to v2 fine-tuned models on QALD-10 were also 
     \item Occiglot German (v2): F1 from 0.0053 to 0.2304 (approx. 43.5-fold).
 \end{itemize}
 
+\paragraph{Comparison with QALD-10 State-of-the-Art} \mbox{}\\
+To contextualize these scores, we can compare them against the published results from the official QALD-10 challenge \cite{usbeck2024qald}. 
+The results table in the challenge overview paper show several competing systems, such as the one by Singh \& Gavrilev, which achieved a Macro F1-score of 0.195 on the English portion of the test set \cite[Table 2]{usbeck2024qald}.
+Notably, the v2 models developed in this thesis surpassed this benchmark, with the fine-tuned Mistral English model achieving an F1-score of 0.2846 and the Occiglot German model achieving 0.2304. 
+
 \paragraph{Test Sets (Fine-Tuned)} \mbox{}\\
 On the custom test sets, the F1-score improvements from baseline to fine-tuned versions were also substantial. 
 For v1 models on the v1 test set (Table~\ref{tab:finetuned_v1_test_set_metrics} vs. Table~\ref{tab:v1_test_set_metrics}), F1-score increases ranged from approximately 8.15-fold (Mistral German) to 20.7-fold (Occiglot German).
