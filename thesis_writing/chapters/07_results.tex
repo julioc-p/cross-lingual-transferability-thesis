@@ -175,7 +175,7 @@ For the v1 context, the single correct answer for both Mistral and Occiglot was 
 With the v2 context, Mistral Instruct produced 5 exact matches (non-empty) and Occiglot-instruct produced 7.
 
 For the QALD-10 German baselines (Table~\ref{tab:baseline_qald_model_metrics_german}), performance was even lower. 
-In the v1 version both models achieved an F1-score of 0.0000 and Recall of 0.00\%, indicating no correctly retrieved results.
+In the v1 version both models achieved an F1-score of 0.0000 and Recall of 0, indicating no correctly retrieved results.
 Non-zero Precision scores (Mistral: 3.84\%, Occiglot: 7.93\%) in this scenario are a consequence of QALD evaluation rules where a system returning empty for a non-empty gold query can still yields a perfect precision since there are theoretically no false positives. 
 With the v2 context, F1-scores improved slightly to 0.0130 for Mistral Instruct and 0.0053 for Occiglot-instruct, primarily constrained by very low recall. 
 Regarding executable queries on QALD-10 German, Occiglot-instruct (v1 context: 8.44\%) initially outperformed Mistral Instruct (v1 context: 4.09\%).
