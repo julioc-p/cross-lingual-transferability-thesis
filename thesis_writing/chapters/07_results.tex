@@ -20,20 +20,20 @@ For the v1 context, the instruction-tuned models were prompted with the natural 
 \paragraph{QALD-10 Test Set (v1 Context)} \mbox{}\\
 Performance on the QALD-10 benchmark (391 questions attempted after filtering) was as follows:
 \begin{itemize}
-    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0026, P: 0.0512, R: 0.0026, Exec: 5.12\%. One query (0.26\%) was correct (both empty).
-    \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0000, P: 0.0384, R: 0.0000, Exec: 4.09\%. No correct answers.
-    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0026, P: 0.1125, R: 0.0026, Exec: 12.53\%. One query (0.26\%) was correct (both empty).
-    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0000, P: 0.0793, R: 0.0000, Exec: 8.44\%. No correct answers.
+    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0026, P: 5.12\%, R: 0.26\%, Exec: 5.12\%. One query (0.26\%) was correct (both empty).
+    \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0000, P: 3.84\%, R: 0.00\%, Exec: 4.09\%. No correct answers.
+    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0026, P: 11.25\%, R: 0.26\%, Exec: 12.53\%. One query (0.26\%) was correct (both empty).
+    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0000, P: 7.93\%, R: 0.00\%, Exec: 8.44\%. No correct answers.
 \end{itemize}
 Under this v1 prompting style, the base models demonstrated extremely limited capability on QALD-10, with F1-scores near zero and high rates of query execution failures (87-96\%).
 
 \paragraph{v1 Test Set} \mbox{}\\
 On the custom v1 test set (3,500 examples per language):
 \begin{itemize}
-    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0223, P: 0.2411, R: 0.0223, Exec: 24.26\%. Correctness (Exact Match + Both Empty) was 2.23\% (all "Correct (Both Empty)").
-    \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0123, P: 0.1600, R: 0.0124, Exec: 16.26\%. Correctness was 1.23\% (all "Correct (Both Empty)").
-    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0160, P: 0.1989, R: 0.0160, Exec: 21.60\%. Correctness was 1.60\% (all "Correct (Both Empty)").
-    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0146, P: 0.1977, R: 0.0146, Exec: 20.89\%. Correctness was 1.46\% (all "Correct (Both Empty)").
+    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0223, P: 24.11\%, R: 2.23\%, Exec: 24.26\%. Correctness (Exact Match + Both Empty) was 2.23\% (all "Correct (Both Empty)").
+    \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0123, P: 16.00\%, R: 1.24\%, Exec: 16.26\%. Correctness was 1.23\% (all "Correct (Both Empty)").
+    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0160, P: 19.89\%, R: 1.60\%, Exec: 21.60\%. Correctness was 1.60\% (all "Correct (Both Empty)").
+    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0146, P: 19.77\%, R: 1.46\%, Exec: 20.89\%. Correctness was 1.46\% (all "Correct (Both Empty)").
 \end{itemize}
 Performance on the v1 test sets also remained very low, with high query execution failure rates (76-84\%).
 
@@ -41,20 +41,20 @@ Performance on the v1 test sets also remained very low, with high query executio
 
 \paragraph{QALD-10 Test Set (v2 Context)} \mbox{}\\
 \begin{itemize}
-    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0138, P: 0.2202, R: 0.0157, Exec: 23.79\%. Correctness (Exact Match + Both Empty) was 1.28\% (1.28\% Exact Match, 0\% Both Empty).
-    \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0130, P: 0.2226, R: 0.0179, Exec: 24.55\%. Correctness was 1.28\% (0.77\% Exact Match, 0.51\% Both Empty).
-    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0217, P: 0.2540, R: 0.0230, Exec: 28.90\%. Correctness was 2.05\% (1.79\% Exact Match, 0.26\% Both Empty).
-    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0053, P: 0.1510, R: 0.0077, Exec: 18.67\%. Correctness was 0.51\% (0.51\% Exact Match, 0\% Both Empty).
+    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0138, P: 22.02\%, R: 1.57\%, Exec: 23.79\%. Correctness (Exact Match + Both Empty) was 1.28\% (1.28\% Exact Match, 0\% Both Empty).
+    \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0130, P: 22.26\%, R: 1.79\%, Exec: 24.55\%. Correctness was 1.28\% (0.77\% Exact Match, 0.51\% Both Empty).
+    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0217, P: 25.40\%, R: 2.30\%, Exec: 28.90\%. Correctness was 2.05\% (1.79\% Exact Match, 0.26\% Both Empty).
+    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0053, P: 15.10\%, R: 0.77\%, Exec: 18.67\%. Correctness was 0.51\% (0.51\% Exact Match, 0\% Both Empty).
 \end{itemize}
 Providing contextual ID mappings in the v2 prompt style led to a modest increase in the percentage of executable queries on QALD-10 for some configurations compared to the v1 context, but overall F1-scores remained very low (below 0.022), with query execution failure rates still high (71-81\%).
 
 \paragraph{v2 Test Set} \mbox{}\\
 On the v2 test set (10,000 examples per language) with v2 prompting including context:
 \begin{itemize}
-    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0457, P: 0.3891, R: 0.0476, Exec: 42.93\%. Correctness (Exact Match + Both Empty) was 4.45\% (0.88\% Exact Match, 3.57\% Both Empty).
-    \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0422, P: 0.3685, R: 0.0436, Exec: 40.54\%. Correctness was 4.17\% (0.75\% Exact Match, 3.42\% Both Empty).
-    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0210, P: 0.2043, R: 0.0217, Exec: 22.32\%. Correctness was 2.08\% (0.21\% Exact Match, 1.87\% Both Empty).
-    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0219, P: 0.1889, R: 0.0223, Exec: 20.90\%. Correctness was 2.19\% (0.13\% Exact Match, 2.06\% Both Empty).
+    \item \textbf{Mistral 7B Instruct v0.1 (English queries):} F1: 0.0457, P: 38.91\%, R: 4.76\%, Exec: 42.93\%. Correctness (Exact Match + Both Empty) was 4.45\% (0.88\% Exact Match, 3.57\% Both Empty).
+    \item \textbf{Mistral 7B Instruct v0.1 (German queries):} F1: 0.0422, P: 36.85\%, R: 4.36\%, Exec: 40.54\%. Correctness was 4.17\% (0.75\% Exact Match, 3.42\% Both Empty).
+    \item \textbf{Occiglot-7b-eu5-instruct (English queries):} F1: 0.0210, P: 20.43\%, R: 2.17\%, Exec: 22.32\%. Correctness was 2.08\% (0.21\% Exact Match, 1.87\% Both Empty).
+    \item \textbf{Occiglot-7b-eu5-instruct (German queries):} F1: 0.0219, P: 18.89\%, R: 2.23\%, Exec: 20.90\%. Correctness was 2.19\% (0.13\% Exact Match, 2.06\% Both Empty).
 \end{itemize}
 While the provision of explicit context in the v2 prompting style improved executability rates for Mistral Instruct on the Custom v2 test set compared to its v1 context performance on the v1 test set (e.g., from 24.26\% to 42.93\% for English), the Macro F1-Scores remained very low (below 0.046). 
 Query execution failures were still prevalent (57-80\%).
@@ -75,28 +75,28 @@ The full evaluations of the fine-tuned models can be found in \ref{appendixfinet
 
 \paragraph{v1} \mbox{}\\
 \begin{itemize}
-    \item \textbf{Mistral - English:} F1: 0.0691, P: 0.7033, R: 0.0691, Exec: 98.47\%. Correctness (Exact Match + Both Empty): 6.91\%.
-    \item \textbf{Mistral - German:} F1: 0.0563, P: 0.6726, R: 0.0563, Exec: 94.88\%. Correctness (Exact Match + Both Empty): 5.63\%.
-    \item \textbf{Occiglot - English:} F1: 0.0439, P: 0.7698, R: 0.0437, Exec: 95.40\%. Correctness (Exact Match + Both Empty): 4.35\%.
-    \item \textbf{Occiglot - German:} F1: 0.0691, P: 0.6957, R: 0.0691, Exec: 97.95\%. Correctness (Exact Match + Both Empty): 6.91\%.
+    \item \textbf{Mistral - English:} F1: 0.0691, P: 70.33\%, R: 6.91\%, Exec: 98.47\%. Correctness (Exact Match + Both Empty): 6.91\%.
+    \item \textbf{Mistral - German:} F1: 0.0563, P: 67.26\%, R: 5.63\%, Exec: 94.88\%. Correctness (Exact Match + Both Empty): 5.63\%.
+    \item \textbf{Occiglot - English:} F1: 0.0439, P: 76.98\%, R: 4.37\%, Exec: 95.40\%. Correctness (Exact Match + Both Empty): 4.35\%.
+    \item \textbf{Occiglot - German:} F1: 0.0691, P: 69.57\%, R: 6.91\%, Exec: 97.95\%. Correctness (Exact Match + Both Empty): 6.91\%.
 \end{itemize}
 
 \paragraph{v2} \mbox{}\\
 \begin{itemize}
-    \item \textbf{Mistral - English:} F1: 0.2846, P: 0.6612, R: 0.2844, Exec: 99.75\%. Correctness (Exact Match + Both Empty): 27.41\%.
-    \item \textbf{Mistral - German:} F1: 0.2595, P: 0.6419, R: 0.2632, Exec: 99.75\%. Correctness (Exact Match + Both Empty): 25.13\%.
-    \item \textbf{Occiglot - English:} F1: 0.1906, P: 0.5890, R: 0.1943, Exec: 99.24\%. Correctness (Exact Match + Both Empty): 18.27\%.
-    \item \textbf{Occiglot - German:} F1: 0.2304, P: 0.6920, R: 0.2340, Exec: 99.75\%. Correctness (Exact Match + Both Empty): 22.34\%.
+    \item \textbf{Mistral - English:} F1: 0.2846, P: 66.12\%, R: 28.44\%, Exec: 99.75\%. Correctness (Exact Match + Both Empty): 27.41\%.
+    \item \textbf{Mistral - German:} F1: 0.2595, P: 64.19\%, R: 26.32\%, Exec: 99.75\%. Correctness (Exact Match + Both Empty): 25.13\%.
+    \item \textbf{Occiglot - English:} F1: 0.1906, P: 58.90\%, R: 19.43\%, Exec: 99.24\%. Correctness (Exact Match + Both Empty): 18.27\%.
+    \item \textbf{Occiglot - German:} F1: 0.2304, P: 69.20\%, R: 23.40\%, Exec: 99.75\%. Correctness (Exact Match + Both Empty): 22.34\%.
 \end{itemize}
 
 \subsubsection{v1 Test Set}\label{sec:custom_v1_test_set_results}
 The v1 fine-tuned models were evaluated on a test set consisting of 3,500 examples per language. 
 
 \begin{itemize}
-    \item \textbf{Mistral - English:} F1: 0.2268, P: 0.6244, R: 0.2269, Exec: 86.54\%. Correctness (Exact Match + Both Empty): 22.63\%.
-    \item \textbf{Mistral - German:} F1: 0.1003, P: 0.7481, R: 0.1006, Exec: 89.11\%. Correctness (Exact Match + Both Empty): 9.97\%.
-    \item \textbf{Occiglot - English:} F1: 0.2998, P: 0.9884, R: 0.3013, Exec: 99.57\%. Correctness (Exact Match + Both Empty): 29.80\%.
-    \item \textbf{Occiglot - German:} F1: 0.3021, P: 0.8827, R: 0.3065, Exec: 98.60\%. Correctness (Exact Match + Both Empty): 29.57\%.
+    \item \textbf{Mistral - English:} F1: 0.2268, P: 62.44\%, R: 22.69\%, Exec: 86.54\%. Correctness (Exact Match + Both Empty): 22.63\%.
+    \item \textbf{Mistral - German:} F1: 0.1003, P: 74.81\%, R: 10.06\%, Exec: 89.11\%. Correctness (Exact Match + Both Empty): 9.97\%.
+    \item \textbf{Occiglot - English:} F1: 0.2998, P: 98.84\%, R: 30.13\%, Exec: 99.57\%. Correctness (Exact Match + Both Empty): 29.80\%.
+    \item \textbf{Occiglot - German:} F1: 0.3021, P: 88.27\%, R: 30.65\%, Exec: 98.60\%. Correctness (Exact Match + Both Empty): 29.57\%.
 \end{itemize}
 
 
@@ -104,10 +104,10 @@ The v1 fine-tuned models were evaluated on a test set consisting of 3,500 exampl
 The v2 fine-tuned models, which incorporated explicit Wikidata entity and relationship ID mappings during training, were evaluated on the corresponding v2 test set. 
 This set comprised 10,000 examples per language.
 \begin{itemize}
-    \item \textbf{Mistral - English (v2):} F1: 0.8285, P: 0.9104, R: 0.8292, Exec: 99.63\%. Correctness (Exact Match + Both Empty): 82.73\%.
-    \item \textbf{Mistral - German (v2):} F1: 0.7183, P: 0.8362, R: 0.7198, Exec: 97.27\%. Correctness (Exact Match + Both Empty): 71.58\%.
-    \item \textbf{Occiglot - English (v2):} F1: 0.8051, P: 0.8906, R: 0.8057, Exec: 99.71\%. Correctness (Exact Match + Both Empty): 80.39\%.
-    \item \textbf{Occiglot - German (v2):} F1: 0.7268, P: 0.8515, R: 0.7278, Exec: 99.63\%. Correctness (Exact Match + Both Empty): 72.50\%.
+    \item \textbf{Mistral - English (v2):} F1: 0.8285, P: 91.04\%, R: 82.92\%, Exec: 99.63\%. Correctness (Exact Match + Both Empty): 82.73\%.
+    \item \textbf{Mistral - German (v2):} F1: 0.7183, P: 83.62\%, R: 71.98\%, Exec: 97.27\%. Correctness (Exact Match + Both Empty): 71.58\%.
+    \item \textbf{Occiglot - English (v2):} F1: 0.8051, P: 89.06\%, R: 80.57\%, Exec: 99.71\%. Correctness (Exact Match + Both Empty): 80.39\%.
+    \item \textbf{Occiglot - German (v2):} F1: 0.7268, P: 85.15\%, R: 72.78\%, Exec: 99.63\%. Correctness (Exact Match + Both Empty): 72.50\%.
 \end{itemize}
 
 \subsection{Comparison}\label{sec:comparison_results}\mbox{}\\
@@ -159,8 +159,8 @@ For the v1 context, the single correct answer for both Mistral and Occiglot was 
 With the v2 context, Mistral Instruct produced 5 exact matches (non-empty) and Occiglot-instruct produced 7.
 
 For the QALD-10 German baselines (Table~\ref{tab:baseline_qald_model_metrics_german}), performance was even lower. 
-In the v1 version both models achieved an F1-score and Recall of 0.0000, indicating no correctly retrieved results.
-Non-zero Precision scores (Mistral: 0.0384, Occiglot: 0.0793) in this scenario are a consequence of QALD evaluation rules where a system returning empty for a non-empty gold query can still yields a perfect precision since there are theoretically no false positives. 
+In the v1 version both models achieved an F1-score of 0.0000 and Recall of 0.00\%, indicating no correctly retrieved results.
+Non-zero Precision scores (Mistral: 3.84\%, Occiglot: 7.93\%) in this scenario are a consequence of QALD evaluation rules where a system returning empty for a non-empty gold query can still yields a perfect precision since there are theoretically no false positives. 
 With the v2 context, F1-scores improved slightly to 0.0130 for Mistral Instruct and 0.0053 for Occiglot-instruct, primarily constrained by very low recall. 
 Regarding executable queries on QALD-10 German, Occiglot-instruct (v1 context: 8.44\%) initially outperformed Mistral Instruct (v1 context: 4.09\%).
 However, with ID mappings (v2 context), Mistral Instruct (24.55\%, 96 queries) surpassed Occiglot-instruct (18.67\%, 73 queries), generating 23 more executable queries.
@@ -183,7 +183,7 @@ A dramatic improvement was observed in the percentage of executable queries (Fig
 Baseline models on QALD-10 had executability rates between 4\% and 29\%, whereas all fine-tuned models (v1 and v2) consistently achieved rates of 94.88\% or higher (Tables~\ref{tab:finetuned_qald_model_metrics_english} and \ref{tab:finetuned_qald_model_metrics_german}).
 
 F1-scores (Figure~\ref{fig:f1_score_results}) also saw significant increases. 
-Comparing fine-tuned v1 models to their v1 baselines on QALD-10 English, Mistral's F1-score jumped approximately 26.5-fold (0.0026 to 0.0691) and Occiglot's about 16.9-fold (0.0026 to 0.0439).
+Comparing fine-tuned v1 models to their v1 baselines on QALD-10 English, Mistral's F1-score jumped approximately 26.5-fold (from 0.0026 to 0.0691) and Occiglot's about 16.9-fold (from 0.0026 to 0.0439).
 The improvements from v2 baselines to v2 fine-tuned models on QALD-10 were also marked:
 \begin{itemize}
     \item Mistral English (v2): F1 from 0.0138 to 0.2846 (approx. 20.6-fold).
@@ -202,9 +202,9 @@ For v2 models on the v2 test set (Table~\ref{tab:finetuned_v2_test_set_metrics} 
     \item Occiglot English: F1 from 0.0210 to 0.8051 (approx. 38.3-fold).
     \item Occiglot German: F1 from 0.0219 to 0.7268 (approx. 33.2-fold).
 \end{itemize}
-Models with the v2 fine-tuning possess the highest overall F1-scores, particularly on the v2 test set where Mistral English (v2) reached an F1 of 0.8285 and Occiglot English (v2) reached 0.8051.
+Models with the v2 fine-tuning possess the highest overall F1-scores, particularly on the v2 test set where Mistral English (v2) reached an F1 of 0.8285 and Occiglot English (v2) reached an F1 of 0.8051.
 
 A key observation, particularly evident in Figure~\ref{fig:recall_results} and Table~\ref{tab:finetuned_v2_test_set_metrics}, is that on the custom v2 test set, the recall values for the v2 fine-tuned models are notably closer to their precision values compared to other test sets. 
-For instance, for Mistral English, precision was 0.9104 and recall was 0.8292 (a difference of approx. 8.9\% relative to precision). 
-For Occiglot English, precision was 0.8906 and recall was 0.8057 (a difference of approx. 9.5\% relative to precision). 
-This contrasts with the QALD-10 results (even for v2 fine-tuned models) and v1 fine-tuned results on the v1 test set, where precision often significantly exceeded recall (e.g., Mistral English (v1) on QALD-10 had P:0.7033 and R:0.0691, where P is approx. 10.2 times R).
+For instance, for Mistral English, precision was 91.04\% and recall was 82.92\% (a difference of approx. 8.9\% relative to precision). 
+For Occiglot English, precision was 89.06\% and recall was 80.57\% (a difference of approx. 9.5\% relative to precision). 
+This contrasts with the QALD-10 results (even for v2 fine-tuned models) and v1 fine-tuned results on the v1 test set, where precision often significantly exceeded recall (e.g., Mistral English (v1) on QALD-10 had P: 70.33\% and R: 6.91\%, where P is approx. 10.2 times R).
