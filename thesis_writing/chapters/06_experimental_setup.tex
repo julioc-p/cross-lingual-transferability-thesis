@@ -352,7 +352,7 @@ A substantial portion of the queries classified as "correct" achieved this statu
 \label{tab:eval_summary_example}
 \begin{tabular}{@{}ll@{}}
 \toprule
-\multicolumn{2}{@{}l}{\textbf{Total Entries Attempted Evaluation: 391}} \\
+\multicolumn{2}{@{}l}{\textbf{N: 391}} \\
 \midrule
 \multicolumn{2}{@{}l}{\textit{Result Categories}} \\
 Correct (Exact Match) & 22 (5.63\%) \\
@@ -366,6 +366,7 @@ Macro F1-Score & 0.06905371 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
 
 The hypothesis that guided the changes in this version of the model was that this low recall mainly driven by the models' inability to correctly link entities.
 For example, an early v1.0 Occiglot English model, when prompted with "Was Google founded by Bill Gates?" (targeting Wikidata), generated:
@@ -434,7 +435,7 @@ The general training arguments were also updated, drawing from best practices an
 \paragraph{Enhanced Training Loop Features for v2} \mbox{}\\
 To further refine the training process and model selection, the following techniques were integrated:
 \begin{itemize}
-    \item \textbf{Validation with BLEU Score:} A validation loop was incorporated, evaluating the models on the 10,000-sample validation set at regular intervals. The BLEU (Bilingual Evaluation Understudy) score \cite{papineni2002bleu} was employed as the evaluation metric. Given that text-to-SPARQL generation shares similarities with translation tasks (translating natural language to a formal language), BLEU was chosen as a practical proxy for generation quality. Real-time query execution against a SPARQL endpoint for validation was deemed too resource-intensive for frequent evaluation during training.
+    \item \textbf{Validation with BLEU Score:} A validation loop was incorporated, evaluating the models on the 10,000-sample validation set at regular intervals. The BLEU (Bilingual Evaluation Understudy) score \cite{papineni2002bleu} was used as the evaluation metric. Given that text-to-SPARQL generation shares similarities with translation tasks (translating natural language to a formal language), BLEU was chosen as a practical proxy for generation quality. Real-time query execution against a SPARQL endpoint for validation was deemed too resource-intensive for frequent evaluation during training.
     \item \textbf{Early Stopping and Best Model Selection:} Early stopping with a patience of 3 was implemented based on the validation BLEU score. If the BLEU score did not improve for three consecutive evaluation checkpoints, training was halted. The \texttt{load\_best\_model\_at\_end=True} argument ensured that the model checkpoint corresponding to the highest validation BLEU score was saved as the final v2 model.
     \item \textbf{NEFTune for Regularization:} Noisy Embedding Fine-Tuning (NEFTune) \cite{jain2023neftunenoisyembeddingsimprove} was applied by setting a \texttt{noise\_alpha} value (5). NEFTune introduces noise to the embedding vectors during training, acting as a regularizer. This technique, though often highlighted for instruction tuning, was incorporated with the rationale that it could improve model generalization and mitigate sensitivity to the training data, an issue observed particularly with Mistral in v1 experiments, technique also explored by Yang et al. in a non uniquely instruction tuning context \cite{10.1145/3675249.3675339}.
 \end{itemize}
@@ -443,7 +444,9 @@ To further refine the training process and model selection, the following techni
 
 \paragraph{Training Durations} \mbox{}\\
 The training duration for the v2 models varied. The Mistral 7B v0.1 models required approximately 19-20 hours to complete training on a single NVIDIA V100 GPU.
-The Occiglot-7b-eu5 models exhibited different training times: the German variant completed in approximately 6 hours, and the English variant in approximately 8 hours.
+The Occiglot-7b-eu5 models exhibited shorter training times: the German variant completed in approximately 6 hours, and the English variant in approximately 8 hours.
+Occiglot models converged on the task more quickly, triggering the early stopping condition sooner than the Mistral models. 
+This may be attributed to Occiglot's continual pre-training on code \cite{avramidis-etal-2024-occiglot}, which could have given the model an advantage in learning the formal syntax of SPARQL, reducing the learning required for the structural aspects of the generation compared to the Mistral model.
 
 \paragraph{Training Loss and Validation BLEU Scores} \mbox{}\\
 The training loss curves for all four final v2 models are presented in Figure~\ref{fig:train_loss_v2_all_final}. 
@@ -456,9 +459,9 @@ All models demonstrate a clear learning trend, with training losses generally co
     \label{fig:train_loss_v2_all_final}
 \end{figure}
 
-The validation BLEU scores, monitored during training for early stopping, are shown in Figure~\ref{fig:eval_bleu_v2_all_final}. 
-All models exhibited an increase in BLEU score. 
-The Mistral German v2 model showed a particularly notable improvement in its validation BLEU score.
+The validation BLEU scores, calculated during training for early stopping, are shown in Figure~\ref{fig:eval_bleu_v2_all_final}. 
+The BLEU score of all models increased.
+The Mistral German v2 model achieved a notable increase of 0.15 in its validation BLEU score, rising from approximately 0.625 to 0.775.
 
 \begin{figure}[htbp]
     \centering
@@ -468,8 +471,8 @@ The Mistral German v2 model showed a particularly notable improvement in its val
 \end{figure}
 
 \paragraph{Gradient Norm Observations} \mbox{}\\
-The training gradient norms for the final v2 models are displayed in Figure~\ref{fig:train_grad_norm_v2_all_final}. 
-Generally, the gradient magnitudes remained within a stable range throughout training for all models, without indications of widespread vanishing or exploding gradient issues in these final runs, eventhough an upward trend is noted.
+The training gradient norms for the final v2 models are shown in Figure~\ref{fig:train_grad_norm_v2_all_final}. 
+Generally, the gradient magnitudes remained within a stable range of 0.3 to 0.65 throughout training for all models, without indications of widespread vanishing or exploding gradient issues in these final runs, eventhough an upward trend is noted.
 
 \begin{figure}[htbp]
     \centering
@@ -522,8 +525,8 @@ This indicated that while `packing=True` might have contributed to the model "ha
 
 In terms of performance for this v2.1 Mistral English (\texttt{packing=False}) model:
 \begin{itemize}
-    \item On the QALD-10 test set, the macro F1-score was slightly lower (0.215) compared to the primary v2 Mistral English model (0.250, trained with \texttt{packing=True} and \texttt{r=256, alpha=128}).
-    \item On the custom 10,000-sample English test set (drawn from the same distribution as the training data), this v2.1 model achieved a slightly higher F1-score (0.863) compared to the primary v2 Mistral English model (0.827).
+    \item On the QALD-10 test set, the macro F1-score was slightly lower (F1 score of 0.215) compared to the primary v2 Mistral English model (0.250 F1, trained with \texttt{packing=True} and \texttt{r=256, alpha=128}).
+    \item On the custom 10,000-sample English test set (drawn from the same distribution as the training data), this v2.1 model achieved a slightly higher F1-score (0.863 F1) compared to the primary v2 Mistral English model (0.827 F1).
 \end{itemize}
 Despite the better performance on the test set with \texttt{packing=False}, the primary v2 models (trained with \texttt{packing=True} and the LoRA configuration detailed in Section~\ref{sec:v2_methodology}) were retained for the main comparative analysis presented in Section~\ref{section::results}. 
 This decision was based on their superior F1-score on the more challenging and diverse QALD-10 benchmark, which is considered a more stringent test of generalization for this task. 
@@ -536,7 +539,7 @@ This investigation into output generation highlights the complexities of fine-tu
 The performance of the fine-tuned text-to-SPARQL models developed in this thesis was assessed using a combination of custom-held-out test sets derived from the primary training data distribution and a standardized external benchmark.
 All evaluations involved executing both the gold standard SPARQL queries and the model-generated SPARQL queries against the live public Wikidata SPARQL endpoint (\url{https://query.wikidata.org/}).
 The results of these executions were then compared to determine query correctness and to calculate performance metrics.
-Further details on the implementation of the evaluation script, \texttt{sparql\_validator.py}, can be found in the project's GitHub repository Appendix~\ref{appendix:github_repository}.
+Further details on the implementation of the evaluation script, \texttt{sparql\_validator.py}, can be found in the project's GitHub repository in the Appendix~\ref{appendix:github_repository}.
 
 \subsubsection{Evaluation Datasets}\label{sec:evaluation_datasets}
 
@@ -564,7 +567,7 @@ Two types of datasets were employed for evaluating the fine-tuned models:
 The subsequent paragraphs will detail the specific metrics and procedures used to evaluate model performance on these datasets.
 
 \paragraph{Initial Ad-hoc Metrics} \mbox{}\\
-In the early stages of experimentation, particularly with the v1 models which exhibited lower initial performance, basic metrics were employed to gain a sensitive understanding of model learning. These included:
+In the early stages of experimentation, particularly with the v1 models which exhibited lower initial performance, basic metrics were used to gain a sensitive understanding of model learning. These included:
 \begin{itemize}
     \item \textbf{Number of Executable Queries:} Counting how many generated SPARQL queries could be successfully executed against the endpoint without syntax errors or other execution failures.
     \item \textbf{Number of Exact Match Answers:} Counting instances where the set of results retrieved by the generated query was identical to the set of results retrieved by the gold standard query.
@@ -573,14 +576,23 @@ These simple counts provided an immediate signal of model improvement.
 For example, the baseline Mistral 7B Instruct v0.1 model (prior to fine-tuning for this task) when evaluated on the QALD-10 test set, produced only 34 valid (executable) queries and 3 correct answers out of 391 questions. 
 After initial fine-tuning (v1.0 English), this improved to 366 valid queries and 23 correct answers, indicating that learning was occurring, even if overall correctness remained low. 
 The "Executable Queries" metric was particularly useful as it offered a more granular view of progress when exact answer matches were still infrequent. 
-An early overall summary looked like:
-\begin{verbatim}
---- Evaluation Summary (Early v1 Example) ---
-Total Queries Evaluated: 3500
-Executable Queries: 2125 (60.71%)
-Exact Match Answers: 163 (4.66% of total, 7.67% of executable)
-Partial Match Answers: 1 (0.03% of total)
-\end{verbatim}
+An early overall summary can b seen in table \ref{tab:early_v1_metrics}
+
+\begin{table}[h!]
+\centering
+\caption{Early performance metrics for the v1 model on a test set of 3,500 examples.}
+\label{tab:early_v1_metrics}
+\begin{tabular}{ll}
+\hline
+\textbf{Metric} & \textbf{Result} \\
+\hline
+Total Queries Evaluated & 3500 \\
+Executable Queries & 2125 (60.71\%) \\
+Exact Match Answers & 163 (4.66\% of total) \\
+Partial Match Answers & 1 (0.03\% of total) \\
+\hline
+\end{tabular}
+\end{table}
 
 \paragraph{Adoption of QALD Standard Metrics} \mbox{}\\
 To align with established practices in the field, the evaluation methodology was then formalized using the QALD macro-averaged F1-score, precision, and recall, as described by Usbeck et al. (2019) and utilized in the QALD challenges (e.g., QALD-10).
@@ -596,7 +608,7 @@ The calculation of per-question precision (P), recall (R), and F1-score (F1) fol
 \paragraph{Customizations and Refinements to Evaluation Metrics} \mbox{}\\
 While adopting the QALD framework, a slight modification was implemented:
 \begin{itemize}
-    \item \textbf{Penalizing Non-Executable Queries:} If a model-generated SPARQL query was syntactically invalid or failed to execute on the endpoint for reasons other than a timeout (which was handled separately, see below), its precision, recall, and F1-score for that question were set to 0. This ensures that models are penalized for producing non-functional queries.
+    \item \textbf{Penalizing Non-Executable Queries:} If a model-generated SPARQL query was syntactically invalid or failed to execute on the endpoint for reasons other than a timeout (which was handled separately, see \ref{par:gold_query_issues}), its precision, recall, and F1-score for that question were set to 0. This ensures that models are penalized for producing non-functional queries.
 \end{itemize}
 Furthermore, to gain more nuanced insights beyond the aggregate F1-score, the evaluation script was designed to categorize correct answers:
 \begin{itemize}
@@ -605,39 +617,37 @@ Furthermore, to gain more nuanced insights beyond the aggregate F1-score, the ev
     This distinction helps to understand if high correctness is due to accurately identifying unanswerable questions or accurately retrieving specific data.
 \end{itemize}
 The evaluation summary provided by the \texttt{sparql\_validator.py} script incorporates these categories alongside other classifications like "Incorrect (Generated Empty, Gold Not)", "Incorrect (No Overlap)", and various failure types. 
-An example of the final evaluation output format for a v1.1 Mistral English model on the QALD-10 test set is:
-\begin{verbatim}
---- Evaluation Summary ---
-Total Entries Loaded: 394
-Filtered (Ignored Question): 3
-Total Entries Attempted Evaluation: 391
+An example of the final evaluation output format for a v1.1 Mistral English model on the QALD-10 test set can be seen in Table \ref{tab:full_eval_summary_example_v1_1_mistral_english_qald10}:
+\begin{table}[h!]
+\centering
+\caption{Example evaluation summary for the v1.1 Mistral English model on the QALD-10 test set (N = 391).}
+\label{tab:full_eval_summary_example_v1_1_mistral_english_qald10}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\multicolumn{2}{@{}l}{\textbf{Result Categories}} \\
+\midrule
+Correct (Exact Match) & 22 (5.63\%) \\
+Correct (Both Empty) & 5 (1.28\%) \\
+Incorrect (Gen Empty, Gold Not) & 248 (63.43\%) \\
+Incorrect (No Overlap) & 110 (28.13\%) \\
+Failure: Generated Query Execution & 6 (1.53\%) \\
+Generated Query Non-Empty \& Executable & 385 (98.47\%) \\
+Failure - Empty Generated Query & 0 (0.00\%) \\
+Failure - Generated Query Execution & 6 (1.53\%) \\
+Failure - Gold Query Execution & 0 (0.00\%) \\
+Correct (Exact + Both Empty) & 27 (6.91\%) \\
+Correct (Partial Match) & 0 (0.00\%) \\
+\midrule
+\multicolumn{2}{@{}l}{\textbf{Macro Averaged Metrics}} \\
+\midrule
+Macro Precision & 0.70332481 \\
+Macro Recall & 0.06905371 \\
+Macro F1-Score & 0.06905371 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
---- Result Categories ---
-(Percentages based on 391 entries attempted after ignoring questions)
-  Correct (Exact Match)             :    22 (  5.63%)
-  Correct (Both Empty)              :     5 (  1.28%)
-  Incorrect (Gen Empty, Gold Not)   :   248 ( 63.43%)
-  Incorrect (No Overlap)            :   110 ( 28.13%)
-  Failure: Generated Query Execution:     6 (  1.53%)
-
---- Derived Counts ---
-  Generated Query Non-Empty & Executable: 385 ( 98.47%)
-  Failure - Empty Generated Query       :   0 (  0.00%)
-  Failure - Generated Query Execution   :   6 (  1.53%)
-  Failure - Gold Query Execution        :   0 (  0.00%)
-  Correct (Exact + Both Empty)          :  27 (  6.91%)
-  Correct (Partial Match)               :   0 (  0.00%)
-
---- Macro Averaged Metrics (QALD Variant) ---
-(Calculated over all 391 attempted entries)
-(Empty queries & execution failures contribute 0.0 to scores)
-Macro Precision: 0.70332481
-Macro Recall:    0.06905371
-Macro F1-Score:  0.06905371
---------------------------
-\end{verbatim}
-
-\paragraph{Handling of Gold Query Execution Issues} \mbox{}\\
+\paragraph{Handling of Gold Query Execution Issues} \label{par:gold_query_issues}\mbox{}\\
 During evaluation against the live Wikidata SPARQL endpoint, it was observed that a small number of gold standard queries from the QALD-10 dataset consistently timed out or failed due to their complexity and the operational limits of the public endpoint. An example is the question "What event killed the most people in the years 1910 to 1920?", whose gold SPARQL query involves extensive path traversals. In this work, such questions for which the gold query could not be successfully executed on the live endpoint (3 instances in QALD-10) were categorized as "Ignored Question" and excluded from the metric calculations for all models. This decision was made to ensure a fair comparison, as evaluating generated queries against an unresolvable gold standard would be problematic. While hosting a local Wikidata instance could circumvent public endpoint limitations, utilizing the live endpoint was preferred to provide a more readily transferable and accessible evaluation framework for the research community.
 
 The \texttt{sparql\_validator.py} script automates these calculations, including the set-based comparison of query results, and incorporates features such as multi-threading for parallel query execution, caching of results to speed up repeated evaluations, and retry logic to handle transient network issues or endpoint rate limits. 
