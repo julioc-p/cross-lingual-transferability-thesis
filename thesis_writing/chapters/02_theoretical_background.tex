@@ -20,7 +20,7 @@ Some of the most common classes of tasks include:
     \item \textbf{Dimensionality Reduction:} Reducing the number of features while preserving important information. This can be used for data visualization or to simplify subsequent processing.
     \item \textbf{Summarization:} Creating a concise summary of a larger body of text or data.
     \item \textbf{Translation:} Converting text from one language to another.
-    \item \textbf{Structured output:} Output is a data structure with multiple values that matain relationships between them.
+    \item \textbf{Structured output:} The output is a data structure with multiple values that mantain relationships between them.
 \end{itemize}
 For the purpose of this work, the term "prediction" and the verb "predict" will often be used in a general sense to encompass the output generation aspect of these various tasks.
 In the context of this thesis, the primary task (T) falls under structured output generation, where the goal is to translate natural language questions into formal SPARQL queries. 
@@ -47,7 +47,7 @@ The ones used in this work are:
 The model refers to the specific mathematical or computational structure that is learned from the data.
 
 \subsubsection{Hyperparameters}
-Hyperparameters are configuration settings that are not learned directly from the data but are set prior to the commencement of the learning process. Examples include the learning rate in an optimization algorithm or the number of layers in a neural network. The process of finding the optimal set of hyperparameters for a given problem and dataset.
+Hyperparameters are configuration settings that are not learned directly from the data but are set prior to the learning process. Examples include the learning rate in an optimization algorithm or the number of layers in a neural network. The process of finding the optimal set of hyperparameters for a given problem and dataset is called hyperparameter tuning.
 
 
 \subsubsection{Generalization, Overfitting, and Underfitting}
@@ -60,6 +60,7 @@ Two related common problems are:
 In this work, generalization is assessed by the models' proficiency in generating correct SPARQL queries for previously unseen natural language questions.
 
 One technique used to avoid overfitting in this work is early stopping, which monitores performance on a validation set and halts training when this performance begins to degrade.
+
 Approaches in the field for training models can usually be categorized into supervised learning, unsupervised learning, semi-supervised learning, and reinforcement learning. 
 Supervised learning is the method used in this work, and its core principle involves using labeled data (i.e., data where each example is paired with a correct output or target) in the training process to continuously minimize the errors. 
 
@@ -67,7 +68,7 @@ One of the most common and powerful types of models in machine learning is the n
 The models explored in this thesis are instances of large-scale \textbf{neural networks}, and the methodologies employed are rooted in the field of Deep Learning.
 
 \subsection{Deep Learning}
-Note that this section is based on the lecture materials of \textit{6.036 Introduction to Machine Learning} course by MIT \cite{MITx6.036}
+Note that this section is based on the lecture materials of \textit{6.036 Introduction to Machine Learning} course by MIT \cite{MITx6.036} unless stated otherwise.
 
 As explained in \textit{Deep Learning} \cite{goodfellow2016deep}, modern deep learning is defined as a class of machine learning algorithms that construct complex architectures by composing simpler structures. However, most contemporary interpretations focus on neural networks \cite{goodfellow2016deep}.
      
@@ -75,7 +76,7 @@ As explained in \textit{Deep Learning} \cite{goodfellow2016deep}, modern deep le
 
     \textbf{Data point}
 
-    As mentioned, data points (examples) x are typically represented as vectors. For neural network operations, we can consider these as column vectors, a data point x with D features will ${\mathbb{R} ^ {D, 1}}$.
+    As mentioned, data points (examples) x are typically represented as vectors. For neural network operations, we can consider these as column vectors, a data point x with D features will be ${\mathbb{R} ^ {D, 1}}$.
 
     \textbf{Loss Function}
 
@@ -111,7 +112,7 @@ As introduced in the last section, the cross-entropy loss is a prevalent choice 
 
     \subsubsection{Feed Forward Neural Network (FNN)}
 
-    In this section we introduce one of the simplest neural network which is the precursor for the more complex ones introduced in the following subchapters.
+    In this section we introduce one of the simplest neural networks which is the precursor for the more complex ones introduced in the following subchapters.
     
     The architecture looks like the figure \ref{fig:ffnn} and the figure \ref{fig:simulation_brain} is a computer simulation of the neural network structure in the brain. Both pictures show neurons or nodes propagating information.
 
@@ -218,18 +219,16 @@ The input layer is a symbolic name since it refers to the input data points, wit
 
 \textbf{Hidden Layer} 
 
-This is where the bulk of operations take place. They usually compose the majority of the layers.
+This is where the bulk of operations take place. They usually compose the majority of the layers. For complex tasks usually many hidden layers are required in neural networks, which define and give the name to the field of deep learning.
 
 \textbf{Output Layer}
 
 Aggregates the inputs of the last hidden layer making sense of the data to get an output, which should be interpretable as a result of the specific task (regression, classification).
 
 
-For complex tasks usually many hidden layers are required in neural networks, which define and give the name to the field of deep learning.
-
 \textbf{Training}
 
-The following explanation refers specifically to the Feed Forward Neural Network architecture as a reference for brevity, although the process with slight modifications is also applied with the next neural networks architectures presented.
+The following explanation refers specifically to the Feed Forward Neural Network architecture as a reference for brevity, although the process with slight modifications is also applied with the next neural network architectures presented.
 
 There are typically two stages in a training loop: forward pass and backpropagation.
 
@@ -251,7 +250,7 @@ After the forward pass, the model's predicted output is compared to the true lab
 \textbf{Backpropagation}
 
 Training a neural network requires adjusting its weights to minimize a loss function. This is achieved through gradient descent, which updates weights based on the gradient of the loss function. Gradients are calculated based on the loss value of the loss function. 
-The gradient can be computed using batch gradient descent, which sums gradients over all data points, or stochastic gradient descent (SGD), which updates weights with a subset of the data.
+The gradient can be computed using batch gradient descent, which averages gradients over all data points, or stochastic gradient descent (SGD), which updates weights with a subset of the data.
 
 For a given training example, consisting of an input $x$ and its corresponding true label $y$, the model produces a prediction $NN(x;W)$. We compute the gradient of the loss function, which measures the discrepancy between this prediction and the true label $y$, with respect to the weights $W$: $\nabla_{W}Loss(NN(x;W),y)$, where \( W \) includes all weight matrices \( W^l \) in layers \( l = 1, \dots, L \). Using the chain rule, the gradient for the final layer \( L \) is:
 
@@ -503,7 +502,7 @@ Since the operations involved in training and prediction of neural networks are 
 
 A token is a discrete unit of text, such as a word, a sub-word or even a character.
 
-The first step to process input text is breaking it up into tokens, which in modern approaches are usually sub-words, averaging about 4 characters in length in the English language in the SOTA model family of GPT are about 4 characters \cite{OpenAITokens}.
+The first step to process input text is breaking it up into tokens, which in modern approaches are usually sub-words, averaging about 4 characters in length in the English language in the SOTA model family of GPT \cite{OpenAITokens}.
 
 These tokens are then usually mapped to IDs through the vocabulary, which is a look-up table mapping text tokens to numeric IDs.
 
@@ -530,8 +529,8 @@ The encoder is composed of N identical layers. Each encoder layer consists of tw
 
     The specific attention mechanism prominently used in the Transformer is called ``Scaled Dot-Product Attention''. 
     For this mechanism, the input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. 
-    The attention is calculated by taking the dot product of the query with all keys, scaling this by dividing by $\sqrt{d_k}$, and then applying a softmax function to obtain the weights for the values. 
-    This scaling factor $\frac{1}{\sqrt{d_k}}$ is used to counteract the effect of dot products growing large in magnitude for large values of $d_k$, which could push the softmax function into regions with extremely small. 
+    The attention calculated by taking the dot product of the query with all keys, scaling this by dividing by $\sqrt{d_k}$, and then applying a softmax function to obtain the weights for the values. 
+    This scaling factor $\frac{1}{\sqrt{d_k}}$ is used to counteract the effect of dot products growing large in magnitude for large values of $d_k$, which could push the softmax function into regions with extremely small gradients, leading to the vanishing gradient problem during training. 
     When computed for a set of queries (packed into matrix $Q$), keys (matrix $K$), and values (matrix $V$), the output is given by the formula \ref{eq:scaled_dot_product_attention}.
     \begin{equation}
     \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
@@ -608,8 +607,7 @@ Different methods have been developed to cater to small datasets and low hardwar
 \textit{This section is based on the paper "LoRA: Low-Rank Adaptation of Large Language Models" by Hu et al. \cite{hu2021lora} unless stated otherwise.}
 
 While transfer learning by fine-tuning an entire Large Language Model (LLM) is effective, it is also computationally expensive. 
-Full fine-tuning requires updating all the weights of the model, which can have billions of parameters. T
-his process demands significant GPU memory to store not only the model weights but also the optimizer states and gradients, making it inaccessible for researchers and practitioners with limited hardware resources.
+Full fine-tuning requires updating all the weights of the model, which can have billions of parameters. This process demands significant GPU memory to store not only the model weights but also the optimizer states and gradients, making it inaccessible for researchers and practitioners with limited hardware resources.
 
 To address this challenge, Low-Rank Adaptation (LoRA) was introduced as a popular and effective Parameter-Efficient Fine-Tuning (PEFT) method. 
 The core idea behind LoRA is to freeze the vast number of pre-trained model weights and inject a small number of new, trainable parameters into the model instead. 
