@@ -15,9 +15,9 @@ However, this advantage becomes less distinct when explicit Wikidata entity and 
 On the QALD-10 German benchmark, Mistral (v2) slightly outperformed Occiglot (v2) in both baseline (F1: 0.0130 vs. 0.0053, Table~\ref{tab:baseline_qald_model_metrics_german}) and fine-tuned scenarios (F1: 0.2595 vs. 0.2304, Table~\ref{tab:finetuned_qald_model_metrics_german}). 
 On the v2 test set for German, while Mistral (v2) baseline was notably better (F1: 0.0422 vs. 0.0219, Table~\ref{tab:v2_test_set_metrics}), the fine-tuned v2 models performed comparably, with Occiglot achieving a marginally higher F1-score (0.7268 vs. 0.7183, Table~\ref{tab:finetuned_v2_test_set_metrics}).
 
-This pattern suggests that the provision of entity/relationship mappings can significantly bridge the performance gap attributed to language-specific pre-training. 
+This pattern suggests that the provision of entity/relationship mappings can bridge the performance gap attributed to language-specific pre-training. 
 If the model can correctly link entities and relationships from the German question to their Wikidata identifiers via the provided context, the initial advantage conferred by Occiglot's German pre-training appears diminished for this task.
-This implies that a significant portion of the challenge in the v1 German scenario for Mistral was indeed this mapping. 
+This implies that a large portion of the challenge in the v1 German scenario for Mistral was indeed this mapping. 
 The considerable expense of large-scale language pre-training might, for certain tasks like text-to-SPARQL, be partially offset by sophisticated prompting strategies or middlewares that handle entity/relationship linking effectively.
 This aligns with findings in other works, such as one on cross-lingual adaptation for low-resource language translation, where intermediate representations or mappings showed a reduction on the dependency on extensive target-language pre-training \cite{singh2024threeprongedapproachcrosslingualadaptation}.
 
@@ -55,8 +55,8 @@ In contrast, on the v1 test set for German, Occiglot achieved a three-fold highe
 When this lexical/mapping challenge was addressed by providing ID mappings in the v2 context, the performance gap on the German v1 and v2 test sets largely closed for fine-tuned models (Figure~\ref{fig:f1_score_results}). 
 On QALD-10, with mappings (v2), results remained comparable for both model, although performance improved significantly over v1.
 
-This implies that while multilingual pre-training or explicit ID mappings can address challenges related to language understanding and entity linking, they may be insufficient alone to overcome bottlenecks related to complex query construction if the model hasn't adequately learned these deeper structural patterns. 
-The perfomance gain of multilingual pre-training is thus modulated by the nature of the linguistic challenge.
+This implies that while multilingual pre-training or explicit ID mappings can address challenges related to language understanding and entity linking, they may be insufficient alone to overcome bottlenecks related to complex query construction if the model hasn't adequately learned these deeper structural patterns. A potential direction to address this would be to further enrich the training data with a higher concentration of examples that exhibit complex structural patterns, such as multi-hop reasoning. In essence, a naive but likely effective approach would be to augment the dataset with more questions of the same complexity as those found in the QALD-10 benchmark. However, as noted by the creators of QALD-10, the manual creation of such high-quality, complex question-query pairs is a non-trivial and resource-intensive effort \cite{usbeck2024qald}. 
+The perfomance gain of multilingual pre-training is modulated by the nature of the linguistic challenge.
 Principles of cross-lingual transfer often rely on shared representations facilitated by commonalities like alphabet and anchor tokens (e.g., digits, proper nouns) \cite{conneau2019cross}, which exist between English and German.
 The surprising aspect is when this expected transfer or enhancement (e.g., Occiglot in English from English and German further pretraining) is less evident or even negative on complex tasks for the primary base language, suggesting that the pre-training might optimize for a broader but potentially shallower understanding.
 
