@@ -79,7 +79,7 @@ The fine-tuning experiments in this thesis centered on two primary base models: 
 The training process and the resultant fine-tuned models can be broadly categorized into two main iterations, designated as v1 and v2.
 However, it is important to note that the development was an incremental process, with insights from earlier experiments informing subsequent refinements.
 
-The v1 iteration itself comprised two sub-versions (v1.0 and v1.1), leading to a total of 10 distinct, functional fine-tuned models when considering all languages and variations throughout variations v1 and v2.
+The v1 iteration itself comprised two sub-versions (v1.0 and v1.1), leading to a total of 10 distinct, functional fine-tuned models when considering all languages and variations throughout v1 and v2.
 For clarity and conciseness, when "v1" is referenced throughout this thesis without further specification, it pertains to the final v1.1 models, which demonstrated slightly improved performance compared to v1.0 as will be described in this chapter.
 The earlier v1.0 models and their configurations can be accessed through the commit history of the respective model repositories on the Hugging Face Hub (See Appendix \ref{appendix:v1_huggingface}).
 
@@ -88,11 +88,11 @@ Consequently, the optimization was less of a focus in v1, particularly in the v1
 
 The v2 iteration was developed to address the limitations observed in v1 and to achieve higher performance.
 A significant distinction was the incorporation of Wikidata entity and relationship ID mappings directly into the training input for the v2 models as context.
-This approach was adopted not to supply them with the necessary explicit grounding for entities and relationships mentioned in the natural language queries.
+This approach was adopted to supply them with the necessary explicit grounding for entities and relationships mentioned in the natural language queries.
 The rationale was that if a model has not encountered specific token-to-ID mappings during its pre-training, it cannot be expected to generate them correctly.
-Ideally, such mappings would have been part of the pre-training data; however, given the resource constraints of this thesis, providing them during fine-tuning and evaluation was an attempt to emulate the knowledge state of a model that had been pre-trained with this information.
+Ideally, such mappings would have been part of the pre-training data; however, given the resource constraints of this thesis, providing them during fine-tuning and evaluation was an attempt to emulate the knowledge state of a model that would have been pre-trained with this information.
 This also allowed for an investigation into the hypothesis that the base Mistral model might have already been exposed to such mappings.
-As will be discuss later, the performance increase (approximately fourfold in F1 score) suggest this exposure was likely minimal or incidental, something that cannot be asserted since by public statements from the Mistral AI team, the specifics of their training data are not disclosed due to the competitive nature of the field \cite{Arthurmensch_HF_MistralData_2023}.
+As will be discussed later, the performance increase (approximately fourfold in F1 score) suggests this exposure was likely minimal or incidental, something that cannot be asserted since by public statements from the Mistral AI team, the specifics of their training data are not disclosed due to the competitive nature of the field \cite{Arthurmensch_HF_MistralData_2023}.
 
 Another key difference in the v2 experiments was the use of the base, non instruction-tuned versions of the LLMs.
 This decision was made to allow for greater control over the input format, specifically to enable the inclusion of a custom system prompt for Mistral, as its instruction-tuned variant does not natively support it, and it was hypothesized that a well-crafted system prompt could guide the model more effectively during inference.
@@ -139,7 +139,7 @@ Quantization to 4-bit precision reduces the model's memory requirement substanti
 
 \textbf{Initial parameters (v1.0)}
 
-The first fine-tuning experiments commenced with a set of baseline hyperparameters for the LoRA configuration and the general training arguments.
+The first fine-tuning experiments started with a set of baseline hyperparameters for the LoRA configuration and the general training arguments.
 
 The initial LoRA setup was guided by a combination of values showcased in the hyperparameter search of the QLoRA paper \cite{dettmers2023qlora}.
 The first choice of layers  (specifically, \texttt{q\_proj, k\_proj, v\_proj, o\_proj, gate\_proj, up\_proj, down\_proj, lm\_head}) was mainly driven by the huggingface community suggestions on finetuning Mistral 7B models like \cite{roggendorff2024finetuning}.
@@ -311,7 +311,7 @@ After these refinements, the generated queries were also visibly cleaner:
 The training duration for each v1.1 model on the 35,000-sample subset was approximately 19-20 hours for 5 epochs. The training loss curves for the v1.1 models are presented in Figure~\ref{fig:train_loss_v1_1}.
 These curves generally show a more stable downward trend compared to the initial v1.0 runs (e.g., Figure~\ref{fig:loss_mistral_en_v1_0}), suggesting that the data standardization and refined LoRA configuration contributed to a more consistent learning process.
 The Occiglot models (English and German) typically exhibited smoother loss curves since the first iteration of the trainings (v1.0).
-Mistral fine-tuned on German data appeared to struggle more, reflected in a higher and more fluctuating loss, which aligns with its worse performance  performance compared to Occiglot in the v1 evaluations.
+Mistral fine-tuned on German data appeared to struggle more, reflected in a higher and more fluctuating loss, which aligns with its worse performance compared to Occiglot in the v1 evaluations.
 
 \begin{figure}[htbp]
     \centering
@@ -472,7 +472,7 @@ The Mistral German v2 model achieved a notable increase of 0.15 in its validatio
 
 \paragraph{Gradient Norm Observations} \mbox{}\\
 The training gradient norms for the final v2 models are shown in Figure~\ref{fig:train_grad_norm_v2_all_final}. 
-Generally, the gradient magnitudes remained within a stable range of 0.3 to 0.65 throughout training for all models, without indications of widespread vanishing or exploding gradient issues in these final runs, eventhough an upward trend is noted.
+Generally, the gradient magnitudes remained within a stable range from 0.3 to 0.65 throughout training for all models, without indications of widespread vanishing or exploding gradient issues in these final runs, eventhough an upward trend is noted.
 
 \begin{figure}[htbp]
     \centering
@@ -561,7 +561,7 @@ Two types of datasets were employed for evaluating the fine-tuned models:
 
     The QALD datasets, and QALD-10 in particular, are recognized for their challenging nature, often featuring complex query structures and requiring nuanced understanding \cite{usbeck2019benchmarking}. 
     The decision to use QALD-10 was also influenced by related work, such as Brei et al. \cite{brei2024leveraging}, which highlighted its difficulty and used it to benchmark their systems.
-    Its focus on Wikidata aligns with the training data used in this thesis, providing a relevant yet demanding test of the models' capabilities.
+    Its focus on Wikidata aligns with the training data used in this thesis, providing a relevant and demanding test of the models' capabilities.
 \end{enumerate}
 
 The subsequent paragraphs will detail the specific metrics and procedures used to evaluate model performance on these datasets.
@@ -576,7 +576,7 @@ These simple counts provided an immediate signal of model improvement.
 For example, the baseline Mistral 7B Instruct v0.1 model (prior to fine-tuning for this task) when evaluated on the QALD-10 test set, produced only 34 valid (executable) queries and 3 correct answers out of 391 questions. 
 After initial fine-tuning (v1.0 English), this improved to 366 valid queries and 23 correct answers, indicating that learning was occurring, even if overall correctness remained low. 
 The "Executable Queries" metric was particularly useful as it offered a more granular view of progress when exact answer matches were still infrequent. 
-An early overall summary can b seen in table \ref{tab:early_v1_metrics}
+An early overall summary can be seen in table \ref{tab:early_v1_metrics}
 
 \begin{table}[h!]
 \centering
