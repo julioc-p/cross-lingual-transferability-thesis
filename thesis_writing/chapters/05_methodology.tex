@@ -65,24 +65,24 @@ Finally, incomplete data was present, such as SPARQL queries with null values. T
 
 \cite{rybin2021rubq}.
 
-We also noticed that data quality significantly diminished at the extreme lengths of text queries.
+It was also noticed that data quality significantly diminished at the extreme lengths of text queries.
 \begin{itemize}
-  \item In the lower range, we found many data points consisting of a single letter or an incomplete sentence, as mentioned earlier.
-  \item In the higher range, many entries were not questions at all but rather statements or entirely unintelligible due to their structure. An example of this is: 
-  \begin{quote}
+    \item In the lower range, many data points consisting of a single letter or an incomplete sentence were found, as mentioned earlier.
+    \item In the higher range, many entries were not questions at all but rather statements or entirely unintelligible due to their structure. An example of this is:
+    \begin{quote}
     what is the source for quotation enter through the narrow gate. the gate that leads to damnation is wide, the road is clear, and many choose to travel it. but how narrow is the gate that leads to life, how rough the road, and how few there are who find it. -- mathew 7:13-14?
-  \end{quote}
+    \end{quote}
 \end{itemize}
 
-In general, datasets with a higher number of data points tended to have lower quality. The QALD datasets, each containing fewer than 1,000 data points, maintained very good quality, particularly in English.  
+In general, datasets with a higher number of data points tended to have lower quality. The QALD datasets, each containing fewer than 1,000 data points, maintained very good quality, particularly in English.
 
-Furthermore, the translations in the QALD-10 dataset were performed by native speakers, making their quality exceptionally high compared to other datasets. However, we cannot comment on the Russian translations since the author does not speak that language.
+Furthermore, the translations in the QALD-10 dataset were performed by native speakers, making their quality exceptionally high compared to other datasets. However, the author of this thesis cannot comment on the Russian translations since he does not speak that language.
 
 \subsubsection{Data Compilation}
+\sloppy
+After gathering and merging the data from all of these sources, datasets were compiled into a single large dataset. For some entries, the language was explicitly provided, while for others, the language was inferred based on context, particularly for English queries.
 
-After gathering and merging the data from all of these sources, we compiled the datasets into a single large dataset. For some entries, the language was explicitly provided, while for others, we inferred the language based on context, particularly for English queries.
-
-The final dataset is structured with the following columns: \texttt{text\_query}, \texttt{language}, \texttt{sparql\_query}, and \texttt{knowledge\_graphs}. We believe that the inclusion of the \texttt{knowledge\_graphs} column is essential, as it provides valuable context to understand the questions better and also helps in determining whether a question is answerable based on the referenced knowledge graph.
+The final dataset is structured with the following columns: \texttt{text\_query}, \texttt{language}, \texttt{sparql\_query}, and \texttt{knowledge\_graphs}. The inclusion of the \texttt{knowledge\_graphs} column is considered essential, as it provides valuable context to understand the questions better and also helps in determining whether a question is answerable based on the referenced knowledge graph.
 
 The resulting dataset contains 638,098 data points across 13 languages and 15 distinct knowledge graphs. This dataset, made available on Huggingface \ref{appendix:dataset_question_sparql}, is, to the best of our knowledge, the largest multilingual dataset for text-to-SPARQL generation in one single ``place''.
 
