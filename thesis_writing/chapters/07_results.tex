@@ -178,7 +178,7 @@ With the v2 context, Mistral Instruct produced 5 exact matches (non-empty) and O
 
 For the QALD-10 German baselines (Table~\ref{tab:baseline_qald_model_metrics_german}), performance was even lower. 
 In the v1 version both models achieved an F1-score of 0.0000 and Recall of 0, indicating no correctly retrieved results.
-Non-zero Precision scores (Mistral: 3.84\%, Occiglot: 7.93\%) in this scenario are a consequence of QALD evaluation rules where a system returning empty for a non-empty gold query can still yields a perfect precision since there are theoretically no false positives. 
+Non-zero Precision scores (Mistral: 3.84\%, Occiglot: 7.93\%) in this scenario are an artifact of the QALD evaluation rules. Specifically, when a system returns an empty answer for a query that has a non-empty gold standard, its precision is set to 1 because no incorrect results (false positives) were generated. 
 With the v2 context, F1-scores improved slightly to 0.0130 for Mistral Instruct and 0.0053 for Occiglot-instruct, primarily constrained by very low recall. 
 Regarding executable queries on QALD-10 German, Occiglot-instruct (v1 context: 8.44\%) initially outperformed Mistral Instruct (v1 context: 4.09\%).
 However, with ID mappings (v2 context), Mistral Instruct (24.55\%, 96 queries) surpassed Occiglot-instruct (18.67\%, 73 queries), generating 23 more executable queries.
@@ -212,7 +212,7 @@ The improvements from v2 baselines to v2 fine-tuned models on QALD-10 were also 
 
 \paragraph{Comparison with QALD-10 State-of-the-Art} \mbox{}\\
 To contextualize these scores, we can compare them against the published results from the official QALD-10 challenge \cite{usbeck2024qald}. 
-The results table in the challenge overview paper show several competing systems, such as the one by Singh \& Gavrilev, which achieved a Macro F1-score of 0.195 on the English portion of the test set \cite[Table 2]{usbeck2024qald}.
+The results table in the challenge overview paper shows several competing systems, such as the one by Singh \& Gavrilev, which achieved a Macro F1-score of 0.195 on the English portion of the test set \cite[Table 2]{usbeck2024qald}.
 Notably, the v2 models developed in this thesis surpassed this benchmark, with the fine-tuned Mistral English model achieving an F1-score of 0.2846 and the Occiglot German model achieving 0.2304. 
 
 \paragraph{Test Sets (Fine-Tuned)} \mbox{}\\
