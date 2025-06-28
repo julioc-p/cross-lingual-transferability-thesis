@@ -46,7 +46,7 @@ percentage of executable queries on QALD-10 for some configurations compared to 
 v1 context, but overall F1-scores remained very low (below 0.022), with query execution
 failure rates still high (71-81\%).
 
-While the provision of explicit context in the v2 prompting style improved executability rates for Mistral Instruct on the Custom v2 test set compared to its v1 context performance on the v1 test set (e.g., from 24.26\% to 42.93\% for English), the Macro F1-Scores remained very low (below 0.046) as depicted in Table~\ref{tab:baseline_v2_all}. 
+While the provision of explicit context in the v2 prompting style improved executability rates for Mistral Instruct on the v2 test set compared to its v1 context performance on the v1 test set (e.g., from 24.26\% to 42.93\% for English), the Macro F1-Scores remained very low (below 0.046) as depicted in Table~\ref{tab:baseline_v2_all}. 
 Query execution failures were still prevalent (57-80\%).
 
 Across all baseline conditions, the pre-trained instruction-tuned models, even when
@@ -227,7 +227,7 @@ For v2 models on the v2 test set (Table~\ref{tab:finetuned_v2_test_set_metrics} 
 \end{itemize}
 Models with the v2 fine-tuning possess the highest overall F1-scores, particularly on the v2 test set where Mistral English (v2) reached an F1 of 0.8285 and Occiglot English (v2) reached an F1 of 0.8051.
 
-A key observation, particularly evident in Figure~\ref{fig:recall_results} and Table~\ref{tab:finetuned_v2_test_set_metrics}, is that on the custom v2 test set, the recall values for the v2 fine-tuned models are notably closer to their precision values compared to other test sets. 
+A key observation, particularly evident in Figure~\ref{fig:recall_results} and Table~\ref{tab:finetuned_v2_test_set_metrics}, is that on the v2 test set, the recall values for the v2 fine-tuned models are notably closer to their precision values compared to other test sets. 
 For instance, for Mistral English, precision was 91.04\% and recall was 82.92\% (a difference of approx. 8.9\% relative to precision). 
 For Occiglot English, precision was 89.06\% and recall was 80.57\% (a difference of approx. 9.5\% relative to precision). 
 This contrasts with the QALD-10 results (even for v2 fine-tuned models) and v1 fine-tuned results on the v1 test set, where precision often significantly exceeded recall (e.g., Mistral English (v1) on QALD-10 had P: 70.33\% and R: 6.91\%, where P is approx. 10.2 times R).

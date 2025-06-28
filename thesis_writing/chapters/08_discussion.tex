@@ -64,7 +64,7 @@ The surprising aspect is when this expected transfer or enhancement (e.g., Occig
 
 The percentage of executable queries (Figure~\ref{fig:executable_queries_results}) served as a sensitive indicator of learning, especially for baseline models where F1-scores were often near zero.
 Fine-tuning dramatically improved executability across all models and test sets, generally pushing rates above 95\%. 
-Interestingly, in the v1 fine-tuned scenarios (without ID mappings), Occiglot models tended to produce a higher percentage of executable queries than their Mistral counterparts, particularly on the custom v1 test set (e.g., Occiglot English v1: 99.57\% vs. Mistral English v1: 86.54\%, Table~\ref{tab:finetuned_v1_test_set_metrics}). 
+Interestingly, in the v1 fine-tuned scenarios (without ID mappings), Occiglot models tended to produce a higher percentage of executable queries than their Mistral counterparts, particularly on the v1 test set (e.g., Occiglot English v1: 99.57\% vs. Mistral English v1: 86.54\%, Table~\ref{tab:finetuned_v1_test_set_metrics}). 
 This advantage was less apparent in the baseline comparisons. 
 This could tentatively be attributed to Occiglot's additional pre-training on code, which might instill a latent understanding of formal syntax that becomes more effectively leveraged during fine-tuning on the structured task of SPARQL generation.
 
