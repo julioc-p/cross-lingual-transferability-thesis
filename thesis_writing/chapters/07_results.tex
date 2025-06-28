@@ -1,9 +1,11 @@
 \section{Results}\label{section::results}
 
-This section presents the empirical findings obtained from the experimental setup detailed previously. The focus herein is on the objective presentation of the performance metrics. Each of the following subsections first consolidates the performance data into a single summary table, followed by a brief textual overview of the key outcomes. A detailed interpretation of these results and their broader implications is reserved for Section~\ref{section::discussion}.
+This section presents the empirical findings obtained from the experimental setup detailed previously. 
+The focus herein is on the objective presentation of the performance metrics. 
+A detailed interpretation of these results and their broader implications is reserved for Section~\ref{section::discussion}.
 
 \subsection{Baseline Performance}\label{sec:baseline_results}
-To establish a performance benchmark prior to fine-tuning, the instruction-tuned versions of the base models, specifically \url{mistralai/Mistral-7B-Instruct-v0.1} and \url{occiglot/occiglot-7b-eu5-instruct}, were evaluated.
+To establish a performance baseline prior to fine-tuning, the instruction-tuned versions of the base models, specifically \url{mistralai/Mistral-7B-Instruct-v0.1} and \url{occiglot/occiglot-7b-eu5-instruct}, were evaluated.
 These evaluations were conducted on the relevant test sets using prompting strategies consistent with both the v1 (without explicit entity/relationship ID mappings) and v2 (with explicit entity/relationship ID mappings provided as context) experimental conditions. 
 This approach allows for an assessment of the models' inherent capabilities under different input scenarios before the fine-tuning interventions. 
 For these baseline evaluations, the "English" or "German" designation refers to the language of the input queries from the respective test sets, not to different underlying base models. 
@@ -126,7 +128,7 @@ Occiglot - German (v2) & 0.7268 & 85.15 & 72.78 & 99.63 \\
 \end{tabular}
 \end{table}
 
-\subsection{Comparison}\label{sec:comparison_results}\mbox{}\\
+\subsection{Comparison with v2}\label{sec:comparison_results}\mbox{}\\
 This section provides a comparative analysis of the baseline and fine-tuned model performances across the various test sets. The objective is to highlight empirical trends and significant differences observed in F1-score, precision, recall, and the percentage of executable queries, supported by visual data presented in Figures \ref{fig:f1_score_results}, \ref{fig:precision_results}, \ref{fig:recall_results}, and \ref{fig:executable_queries_results}, as well as detailed results in Appendix~\ref{appendixbaselinedetailedresults} and Appendix~\ref{appendixfinetunedresults}.
 
 \begin{figure}[htbp]
