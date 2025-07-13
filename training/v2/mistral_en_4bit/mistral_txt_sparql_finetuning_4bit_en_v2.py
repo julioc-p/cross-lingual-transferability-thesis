@@ -51,9 +51,9 @@ if tokenizer.pad_token is None:
     model.resize_token_embeddings(len(tokenizer))
 model, tokenizer = setup_chat_format(model, tokenizer)
 peft_config = LoraConfig(
-    lora_alpha=128,
-    lora_dropout=0.05,
-    r=256,
+    lora_alpha=16,
+    lora_dropout=0.01,
+    r=64,
     bias="none",
     target_modules="all-linear",
     task_type="CAUSAL_LM",
