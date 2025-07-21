@@ -55,7 +55,7 @@ class LoraArguments:
 
     lora_alpha: int = field(default=16, metadata={"help": "Lora alpha."})
     lora_dropout: float = field(default=0.01, metadata={"help": "Lora dropout."})
-    r: int = field(default=32, metadata={"help": "Lora R dimension."})
+    r: int = field(default=64, metadata={"help": "Lora R dimension."})
     bias: str = field(
         default="none",
         metadata={"help": "Bias type for LoRA. Can be 'none', 'all' or 'lora_only'"},
