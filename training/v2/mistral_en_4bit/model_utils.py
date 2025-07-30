@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from trl import setup_chat_format
 
 
-def load_model_and_tokenizer(model_id, bnb_config, max_seq_length):
+def load_model_and_tokenizer(model_id, bnb_config):
     """Loads the model and tokenizer."""
     print("Setting up model and tokenizer...")
     model = AutoModelForCausalLM.from_pretrained(

@@ -22,7 +22,7 @@ def train_model(
         peft_config=peft_config,
         compute_metrics=compute_metrics,
         callbacks=[early_stopping_callback],
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
     )
     print("Starting training...")
     trainer.train()

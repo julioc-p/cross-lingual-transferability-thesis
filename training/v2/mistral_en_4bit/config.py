@@ -14,57 +14,39 @@ def get_bnb_config():
     )
 
 
-def get_peft_config():
+def get_peft_config(lora_args):
     """Returns the LoraConfig."""
     return LoraConfig(
-        lora_alpha=16,
-        lora_dropout=0.01,
-        r=32,
-        bias="none",
-        target_modules="all-linear",
-        task_type="CAUSAL_LM",
+        lora_alpha=lora_args.lora_alpha,
+        lora_dropout=lora_args.lora_dropout,
+        r=lora_args.r,
+        bias=lora_args.bias,
+        target_modules=lora_args.target_modules.split(","),
+        task_type=lora_args.task_type,
     )
 
 
-def get_sft_config(output_dir, max_seq_length):
-    """Returns the SFTConfig."""
-    return SFTConfig(
-        output_dir=output_dir,
-        num_train_epochs=3,
-        per_device_train_batch_size=1,
-        gradient_accumulation_steps=16,
-        gradient_checkpointing=True,
-        optim="paged_adamw_32bit",
-        logging_strategy="steps",
-        logging_steps=500,
-        save_strategy="steps",
-        save_steps=500,
-        save_total_limit=2,
-        eval_strategy="steps",
-        eval_steps=500,
-        learning_rate=2e-4,
-        eval_accumulation_steps=1,
-        warmup_ratio=0.03,
-        lr_scheduler_type="constant",
-        fp16=True,
-        max_grad_norm=0.3,
-        load_best_model_at_end=True,
-        metric_for_best_model="bleu",
-        greater_is_better=True,
-        push_to_hub=False,
-        report_to="tensorboard",
-        max_seq_length=max_seq_length,
-        packing=False,
-        dataset_kwargs={
-            "add_special_tokens": False,
-            "append_concat_token": False,
-        },
-        batch_eval_metrics=True,
-    )
+def get_sft_config(sft_config: SFTConfig, max_seq_length: int):
+    """Updates and returns the SFTConfig."""
+
+    # Set attributes that are derived from other arguments or are fixed
+    sft_config.max_seq_length = max_seq_length
+    sft_config.packing = False  # Or whatever fixed value you need
+    sft_config.dataset_kwargs = {
+        "add_special_tokens": False,
+        "append_concat_token": False,
+    }
+    sft_config.batch_eval_metrics = True
+
+    # The other arguments (learning_rate, epochs, etc.) are already set
+    # by HfArgumentParser from the command line or their defaults in SFTConfig.
+    # We don't need to redeclare them here.
+
+    return sft_config
 
 
-def get_early_stopping_callback():
+def get_early_stopping_callback(early_stopping_patience):
     """Returns the EarlyStoppingCallback."""
     return EarlyStoppingCallback(
-        early_stopping_patience=3,
+        early_stopping_patience=early_stopping_patience,
     )
