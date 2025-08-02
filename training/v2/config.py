@@ -21,7 +21,11 @@ def get_peft_config(lora_args):
         lora_dropout=lora_args.lora_dropout,
         r=lora_args.r,
         bias=lora_args.bias,
-        target_modules=lora_args.target_modules.split(","),
+        target_modules=(
+            lora_args.target_modules.split(",")
+            if lora_args.target_modules != "all-linear"
+            else lora_args.target_modules
+        ),
         task_type=lora_args.task_type,
     )
 
